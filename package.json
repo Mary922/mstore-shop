@@ -9,14 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "https://pkg.csb.dev/reduxjs/redux-toolkit/commit/436d29c1/@reduxjs/toolkit",
+    "axios": "^1.7.9",
+    "bootstrap-icons": "^1.11.3",
+    "next": "15.0.4",
     "react": "^19.0.0",
+    "react-bootstrap": "^2.10.6",
     "react-dom": "^19.0.0",
-    "next": "15.0.4"
+    "react-redux": "https://pkg.csb.dev/reduxjs/react-redux/commit/3271037e/react-redux"
   },
   "devDependencies": {
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
     "eslint": "^8",
-    "eslint-config-next": "15.0.4"
+    "eslint-config-next": "15.0.4",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
   }
 }
