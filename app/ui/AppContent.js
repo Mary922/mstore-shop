@@ -1,9 +1,9 @@
-import Category from "./Category";
+import Page from "@/app/category/[categoryId]/page";
 
 const AppContent = () => {
     return (
         <>
-            <main className={'main'}><Category/></main>
+            <main className={'main'}><Page/></main>
         </>
     )
 }
