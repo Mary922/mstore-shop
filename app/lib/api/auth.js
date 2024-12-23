@@ -8,9 +8,9 @@ export const Auth = (data) => {
 }
 
 export const authHeader = () => {
-    const client = JSON.parse(localStorage.getItem('client'));
+    const client = JSON.parse(window.localStorage.getItem('client'));
 
-    const tempClient = localStorage.getItem('temp-client')
+    const tempClient = window.localStorage.getItem('temp-client')
 
     // console.log('CLIENT & TOKEN from localstorage',client);
 

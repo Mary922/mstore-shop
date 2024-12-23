@@ -1,28 +1,27 @@
+//
 // import {useEffect, useState} from "react";
 // import {useDispatch, useSelector} from "react-redux";
-// import Button from 'react-bootstrap/Button';
-// import Card from 'react-bootstrap/Card';
-// import Table from 'react-bootstrap/Table';
-// import {getProductsByIds} from "../api/products";
-// import {
-//     getCartPreOrder,
-// } from "../api/cart";
-// import {useNavigate} from "react-router-dom";
-// import {Nav} from "react-bootstrap";
-// import {deleteProduct} from "../api/cart";
-// import {
-//     cartPreOrderThunk,
-//     clearCartThunk,
-//     decreaseCartThunk,
-//     getCartThunk,
-//     increaseCartThunk
-// } from "../slices/cartSlice";
-// import {changeCanvas} from "../slices/appCommonSlice";
+// import {getProductsByIds} from "@/app/lib/api/products";
+// import {decreaseCartThunk, getCartThunk, increaseCartThunk,clearCartThunk} from "@/app/store/slices/cartSlice";
+//
+//
+// // import {getProductsByIds} from "../api/products";
+// // import {
+// //     getCartPreOrder,
+// // } from "../api/cart";
+// // import {deleteProduct} from "../api/cart";
+// // import {
+// //     cartPreOrderThunk,
+// //     clearCartThunk,
+// //     decreaseCartThunk,
+// //     getCartThunk,
+// //     increaseCartThunk
+// // } from "../slices/cartSlice";
+// // import {changeCanvas} from "../slices/appCommonSlice";
 //
 //
 // const Cart = () => {
 //     const dispatch = useDispatch();
-//     const navigate = useNavigate();
 //
 //     let clientId;
 //     const tempClient = localStorage.getItem("temp-client");
@@ -32,8 +31,6 @@
 //     }
 //
 //     const [products, setProducts] = useState([]);
-//
-//     // const [show, setShow] = useState(false);
 //
 //     const cart = useSelector(state => state.cart.cart);
 //     console.log('cart', cart);
@@ -56,6 +53,7 @@
 //             return idsList;
 //         }
 //     }
+//
 //     useEffect(() => {
 //         if (cart && cart.length > 0) {
 //             (async () => {
@@ -78,9 +76,9 @@
 //     }
 //
 //
-//     const redirectToHome = () => {
-//         navigate('/home');
-//     }
+//     // const redirectToHome = () => {
+//     //     navigate('/home');
+//     // }
 //
 //     const deleteProductFromCart = async (id, size) => {
 //         const result = await deleteProduct(id, size);
@@ -187,11 +185,11 @@
 //
 //     return (
 //         <>
-//             <Card className={'cart-container'}>
+//             <div className={'cart-container'}>
 //                 {
 //                     cart && cart.length > 0 ?
-//                         <Card.Body>
-//                             <Card.Title>
+//                         <div>
+//                             <div>
 //                                 <div style={{display: "flex", justifyContent: "space-between"}}>
 //                                     <div>Сумма покупок: {sum} руб.</div>
 //                                     <div style={{color: 'red', fontWeight: 'bold', cursor: 'pointer'}}
@@ -205,34 +203,35 @@
 //                                 {/*    func={() => dispatch(clearCart())}*/}
 //                                 {/*/> : null}*/}
 //
-//                             </Card.Title>
+//                             </div>
 //
 //
-//                             <Table striped bordered hover>
-//                                 <thead>
-//                                 <tr>
-//                                     <th>id</th>
-//                                     <th>Товар</th>
-//                                     <th>Цена</th>
-//                                     <th>Размер</th>
-//                                     <th>Количество</th>
-//                                     <th>Сумма</th>
-//                                     <th>Удалить товар</th>
-//                                 </tr>
-//                                 </thead>
-//                                 <tbody>
-//                                 {productsListInCart}
-//                                 </tbody>
-//                             </Table>
+//                             {/*<Table striped bordered hover>*/}
+//                             {/*    <thead>*/}
+//                             {/*    <tr>*/}
+//                             {/*        <th>id</th>*/}
+//                             {/*        <th>Товар</th>*/}
+//                             {/*        <th>Цена</th>*/}
+//                             {/*        <th>Размер</th>*/}
+//                             {/*        <th>Количество</th>*/}
+//                             {/*        <th>Сумма</th>*/}
+//                             {/*        <th>Удалить товар</th>*/}
+//                             {/*    </tr>*/}
+//                             {/*    </thead>*/}
+//                             {/*    <tbody>*/}
+//                             {/*    {productsListInCart}*/}
+//                             {/*    </tbody>*/}
+//                             {/*</Table>*/}
 //
-//                             <Button variant="primary" onClick={() => checkIsAuthorized(sum)}>Оформить заказ</Button>
-//                         </Card.Body> :
+//                             <button onClick={() => checkIsAuthorized(sum)}>Оформить заказ</button>
+//                         </div> :
 //                         <>
 //                             <div>Добавьте товары в корзину</div>
-//                             <Nav><Nav.Item><Nav.Link onClick={redirectToHome}>За
-//                                 покупками</Nav.Link></Nav.Item></Nav></>
+//                             {/*<Nav><Nav.Item><Nav.Link onClick={redirectToHome}>За*/}
+//                             {/*    покупками</Nav.Link></Nav.Item></Nav>*/}
+//                         </>
 //                 }
-//             </Card>
+//             </div>
 //
 //
 //             {/*<Card className={'cart-container'}>*/}

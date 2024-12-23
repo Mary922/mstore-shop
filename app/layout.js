@@ -1,8 +1,10 @@
+// "use client"
 import localFont from "next/font/local";
 import "./globals.css";
 // import 'tailwindcss'
-import AppHeader from "@/app/ui/AppHeader";
+import AppHeader from "@/app/ui/navbars/AppHeader";
 import StoreProvider from "@/app/store/StoreProvider";
+import {useAppSelector} from "@/app/lib/hooks";
 
 
 const geistSans = localFont({
@@ -22,8 +24,11 @@ export const metadata = {
 };
 
 export default function RootLayout({children}) {
+
+  //      console.log('cart layout', cart);
+
     return (
-        <html lang="en" data-theme="fantasy">
+        <html lang="en" data-theme="corporate">
         <head>
             <meta charSet="UTF-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -35,6 +40,7 @@ export default function RootLayout({children}) {
             {/*<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png"/>*/}
 
             {/*<link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>*/}
+
         </head>
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -44,7 +50,7 @@ export default function RootLayout({children}) {
             <header className="flex flex-col border-y-green-900">
                     <AppHeader/>
                 </header>
-                <main className='content'>
+                <main className='content mx-10 mt-10 bg-pink-200'>
                     {children}
                 </main>
                 {/*<footer className={'footer'}>*/}

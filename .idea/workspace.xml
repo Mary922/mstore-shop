@@ -4,18 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="initial">
-      <change afterPath="$PROJECT_DIR$/app/category/[categoryId]/page.js" afterDir="false" />
+    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="set daisy &amp; registration page">
+      <change afterPath="$PROJECT_DIR$/app/ui/navbars/AppHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/category/[categoryId]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/category/[categoryId]/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/common/CarouselComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/CarouselComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AppContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AppContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AppHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AppHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/Authorization.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/Authorization.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/Category.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/hooks.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/hooks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/registration/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/registration/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/AppHeader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/Cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/Cart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postcss.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/postcss.config.mjs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,10 +61,12 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/Masha/react_projects/nextjs-mystore",
+    "last_opened_file_path": "/Users/Masha/react_projects/nextjs-mystore/app",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
@@ -69,17 +75,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/store" />
-      <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/lib" />
       <recent name="$PROJECT_DIR$/app/ui" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/ui/navbars" />
+      <recent name="$PROJECT_DIR$/app/ui" />
+      <recent name="$PROJECT_DIR$/app/common" />
       <recent name="$PROJECT_DIR$/app/category/[slug]" />
       <recent name="$PROJECT_DIR$/app" />
-      <recent name="$PROJECT_DIR$/app/ui/category" />
-      <recent name="$PROJECT_DIR$/app/store" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -98,7 +105,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733744227171</updated>
       <workItem from="1733744228404" duration="963000" />
-      <workItem from="1733745660628" duration="73659000" />
+      <workItem from="1733745660628" duration="118292000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -108,7 +115,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733763426058</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="set daisy &amp; registration page">
+      <option name="closed" value="true" />
+      <created>1734369474173</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1734369474173</updated>
+    </task>
+    <task id="LOCAL-00003" summary="set daisy &amp; registration page">
+      <option name="closed" value="true" />
+      <created>1734369600293</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1734369600293</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,6 +139,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial" />
+    <MESSAGE value="set daisy &amp; registration page" />
+    <option name="LAST_COMMIT_MESSAGE" value="set daisy &amp; registration page" />
   </component>
 </project>
