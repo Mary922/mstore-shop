@@ -83,3 +83,10 @@ body {
   /*padding: 0.625rem !important;*/
   /*border-bottom: 1px solid gray !important;*/
 }
+
+.scroll-card {
+  position: fixed;
+  right: 2.5rem;
+  transition: all .3s ease;
+  transform: translateY(0%);
+}

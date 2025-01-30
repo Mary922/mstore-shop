@@ -41,7 +41,7 @@ const CarouselComponent = ({paths, className, interval, width, height, index}) =
                 {/* Кнопки навигации */}
                 <button
                     type="button"
-                    className="absolute top-1/2 left-4 z-10 -translate-y-1/2 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 focus:outline-none"
+                    className="absolute top-1/2 left-4 z-1 -translate-y-1/2 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 focus:outline-none"
                     onClick={(event) => {
                         handlePrevClick();
                         event.preventDefault();
@@ -52,7 +52,7 @@ const CarouselComponent = ({paths, className, interval, width, height, index}) =
                 </button>
                 <button
                     type="button"
-                    className="absolute top-1/2 right-4 z-10 -translate-y-1/2 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 focus:outline-none"
+                    className="absolute top-1/2 right-4 z-1 -translate-y-1/2 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 focus:outline-none"
                     onClick={(event)=>{
                         handleNextClick();
                         event.preventDefault();

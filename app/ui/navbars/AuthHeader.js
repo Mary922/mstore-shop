@@ -11,23 +11,15 @@ import {logOut} from "@/config";
 import {getClient} from "../../lib/api/clients";
 import {getImagesStatic} from "../../lib/api/images";
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
-import {Auth} from "@/app/lib/api/auth";
+import {Auth, authTemp} from "@/app/lib/api/auth";
 import AuthorizationForm from "@/app/ui/AuthorizationForm";
-import NavbarHeader from "@/app/ui/navbars/NavbarHeader";
+import NavbarHeader from "./NavbarHeader";
+import AccountForm from "@/app/ui/AccountForm";
 
-const AppHeader = () => {
+const AuthHeader = () => {
 
     const dispatch = useAppDispatch();
     const cart = useAppSelector(state => state.cart.cart);
-
-
-    // const params = useParams();
-    // const currentId = params.categoryId;
-
-    const [isSearch, setIsSearching] = useState(false);
-    const [searchVal, setSearchVal] = useState("");
-    const [authMode, setAuthMode] = useState(false);
-
 
     const [catalogIsShowing, setCatalogIsShowing] = useState(false);
 
@@ -35,32 +27,55 @@ const AppHeader = () => {
     const [authLabel, setAuthLabel] = useState('');
     const [imageLogoPath, setImageLogoPath] = useState('');
 
+    const [authMode, setAuthMode] = useState(false);
 
+
+    let tempClient;
+    let client;
     let clientId;
-    let client = null;
-    let tempClient = localStorage.getItem("temp-client");
+    if (typeof window !== "undefined") {
+        tempClient = localStorage.getItem("temp-client");
+        client = localStorage.getItem("client");
+    }
+
+    if (typeof window !== "undefined" && client) {
+        clientId = JSON.parse(localStorage.getItem("client")).id;
+    }
+
+    // const tempClient = window.localStorage.getItem("temp-client");
+    // const client = window.localStorage.getItem("client");
+    // let clientId;
+    // if (client) {
+    //     clientId = JSON.parse(window.localStorage.getItem("client")).id;
+    // }
 
     useEffect(() => {
-        client = window.localStorage.getItem('client');
-        if (client) {
-            clientId = JSON.parse(client).id;
-        }
-    }, []);
-    console.log('tempClient header', tempClient);
-    console.log('client header', client);
+        (async () => {
+            if (!client) {
+                const result = await authTemp();
+                // console.log('result AUTH TEMP', result);
+                localStorage.setItem('temp-client', result.data.accessToken);
+            }
+            if (client) {
+                localStorage.removeItem('temp-client');
+                setAuthMode(true);
+            }
 
+            let clientRes;
+            if (client) {
+                clientRes = await getClient(clientId);
+            }
 
-    // const checkToken = async () => {
-    //     if (localStorage.getItem('client') === null) {
-    //         // setAuthLabel('Войти или зарегистрироваться');
-    //         console.log('gde auth?');
-    //         dispatch(changeCanvas(true))
-    //     }
-    //     } else {
-    //         navigate('/my-account');
-    //         // setAuthLabel('привет')
-    //     }
-    // }
+            if (localStorage.getItem('client') === null) {
+                // setAuthLabel('Войти или зарегистрироваться');
+                setAuthLabel('');
+
+            } else {
+                setAuthLabel(`привет ${clientRes.data.client_name}`)
+            }
+        })()
+    }, [])
+
 
     useEffect(() => {
         (async () => {
@@ -75,41 +90,20 @@ const AppHeader = () => {
     }, [])
 
 
-
-
-    // const cartList = useSelector((state) => state.cart.cart);
     const cartList = useAppSelector((state) => state.cart.cart);
-    console.log('cartList', cartList);
+    // console.log('cartList from header', cartList);
+
     const quantityInCart = useAppSelector((state) => state.cart.quantityInCart);
 
 
+    //
+    // const accountLogOut = async () => {
+    //     await dispatch(clearCartThunk(clientId));
+    //     logOut();
+    //     // navigate('/home');
+    //     // window.location.reload();
+    // }
 
-
-    const accountLogOut = async () => {
-        await dispatch(clearCartThunk(clientId));
-        logOut();
-        // navigate('/home');
-        // window.location.reload();
-    }
-    let accountLinks = [];
-
-    // accountLinks.push(<>
-    //     <NavLink key={'orders'} onClick={() => navigate('my-account/orders')}>Мои заказы</NavLink>
-    //     <NavLink key={'addresses'} onClick={() => navigate('my-account/edit-address')}>Мои адреса</NavLink>
-    //     <NavLink key={'my_profile'} onClick={() => navigate('my-account/edit-account')}>Мои данные</NavLink>
-    //     <NavLink key={'favorites'} onClick={() => navigate('my-account/wishlist')}>Избранное</NavLink>
-    //     <NavLink key={'logout'} onClick={accountLogOut}>Выйти</NavLink>
-    // </>)
-
-    const redirectToHome = () => {
-        <Link href={'/public'}></Link>
-    }
-    const redirectToCart = () => {
-        navigate(`cart`)
-    }
-    const toggleIsSearching = () => {
-        setIsSearching(!isSearch);
-    }
 
     // function removePunctuation(text) {
     //     const punctuation = ',.;:!?(){}[]^&*-_+=@#№$%"<>0123456789';
@@ -117,50 +111,16 @@ const AppHeader = () => {
     // }
     //
 
-    const handleSearch = (event) => {
-        const inputText = event.target.value;
-        setSearchVal(inputText);
-    }
-
-    const handleKeyDown = (event) => {
-        if (event.key === 'Enter' && searchVal !== '') {
-            console.log('enter pressed');
-            navigate(`/products/${searchVal.toLowerCase().trim()}`);
-            setIsSearching(false);
-            setSearchVal('');
-        }
-    }
-
-
-    const checkClient = async () => {
-        if (clientId || tempClient) {
-            const result = await Auth({email: email, password: password});
-            // console.log('TOKEN RESPONSE', result);
-
-            if (result.data?.accessToken) {
-                localStorage.setItem('client', JSON.stringify(result.data));
-                localStorage.removeItem('temp-client');
-                window.location.replace('/home');
-            }
-        }
-
-            // if (tempClient) {
-            //     console.log('i dont know who you are')
-        // }
-        else {
-            alert('No token')
-        }
-    }
-
 
     return (
         <>
             <div className="navbar h-2.5 bg-primary">
                 <div className="navbar-start">
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <Link href="/" className="link text-xl">Manyasha Store</Link>
                 </div>
 
                 <div className="navbar-end">
+                    <div>{authLabel}</div>
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="flex flex-row btn-circle avatar cursor-pointer">
                             <div className="w-10 rounded-full">
@@ -171,7 +131,13 @@ const AppHeader = () => {
                                           d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z"
                                           clipRule="evenodd"/>
                                 </svg>
-                                <AuthorizationForm/>
+                                {
+                                    authMode
+                                        ?
+                                        <AccountForm/>
+                                        :
+                                        <AuthorizationForm clientId={client} tempClient={tempClient}/>
+                                }
                             </div>
                         </div>
                     </div>
@@ -179,7 +145,7 @@ const AppHeader = () => {
             </div>
             <NavbarHeader/>
 
-            <div className='flex flex-row items-center bg-neutral-content text-black h-10 p-2.5 w-full'>
+            <div className='flex flex-row items-center bg-primary-content text-black h-10 p-2.5 w-full'>
                 <div>Бесплатная доставка от 2000 р</div>
             </div>
         </>
@@ -201,4 +167,4 @@ const AppHeader = () => {
     )
 }
 
-export default AppHeader;
+export default AuthHeader;

@@ -13,7 +13,6 @@ export default function CategoryPage() {
     const params = useParams();
     const dispatch = useAppDispatch();
     const categoryId = params.categoryId;
-    console.log('categoryId', categoryId);
 
 
     const [products, setProducts] = useState([]);
@@ -33,6 +32,7 @@ export default function CategoryPage() {
                     // console.log('responseRes',result);
                     const products = result.data;
                     setProducts(products);
+
                 } catch (error) {
                     console.log(error);
                 }
@@ -40,8 +40,6 @@ export default function CategoryPage() {
 
         })();
     },[categoryId])
-
-    console.log('productsproducts',products);
 
 
     let productName = '';

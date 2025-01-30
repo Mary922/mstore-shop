@@ -1,16 +1,34 @@
 "use client"
 import {useParams} from "next/navigation";
-import {useAppDispatch} from "@/app/lib/hooks";
-import {useEffect, useState} from "react";
+import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
+import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {decreaseCartThunk, getCartThunk, increaseCartThunk,clearCartThunk} from "@/app/store/slices/cartSlice";
+import {decreaseCartThunk, getCartThunk, increaseCartThunk, clearCartThunk} from "@/app/store/slices/cartSlice";
 import {deleteProduct} from "@/app/lib/api/cart";
 import {getProductsByIds} from "@/app/lib/api/products";
 
 
-export default function CategoryPage() {
+export default function CartPage() {
+    let baseUrl = 'http://localhost:3001/images';
     const params = useParams();
     const dispatch = useAppDispatch();
+
+    let clientId;
+    let client = null;
+    let tempClient;
+
+    if (typeof window !== "undefined") {
+        let tempClient = localStorage.getItem("temp-client");
+    }
+
+    useEffect(() => {
+        client = window.localStorage.getItem('client');
+        if (client) {
+            clientId = JSON.parse(client).id;
+        }
+    }, []);
+    console.log('tempClient header', tempClient);
+    console.log('client header', client);
 
     // let clientId, tempClient;
     // const client = JSON.parse(localStorage.getItem("client"));
@@ -20,24 +38,14 @@ export default function CategoryPage() {
     // }
 
     const [products, setProducts] = useState([]);
+    const [images, setImages] = useState([]);
+
 
     // const [show, setShow] = useState(false);
 
-    const cart = useSelector(state => state.cart.cart);
+    const cart = useAppSelector(state => state.cart.cart);
     console.log('cart', cart);
 
-
-    let clientId;
-    let tempClient = localStorage.getItem("temp-client");
-    let client = null;
-
-    useEffect(() => {
-        client = window.localStorage.getItem('client');
-        if (client) {
-            clientId = JSON.parse(client).id;
-        }
-    }, []);
-    console.log('tempClient', tempClient);
 
     const getIdsFromCart = () => {
         const idsList = [];
@@ -53,10 +61,17 @@ export default function CategoryPage() {
             (async () => {
                 let ids = getIdsFromCart();
                 const productsList = await getProductsByIds(ids);
+                console.log('productsList',productsList);
                 setProducts(productsList?.data);
+
+                if (productsList?.data?.Images) {
+                    setImages(productsList?.data.Images);
+                }
             })();
         }
     }, [cart]);
+    console.log('products', products);
+    console.log('images', images);
 
     let sum = 0;
     if (products && products.length > 0 && cart && cart.length > 0) {
@@ -116,7 +131,6 @@ export default function CategoryPage() {
             await dispatch(changeCanvas(true));
             console.log('hahah you are temp')
         }
-
     }
 
     let productsListInCart = [];
@@ -125,32 +139,36 @@ export default function CategoryPage() {
             const product = products.find((product) => product.product_id === item.product_id);
             if (product) {
                 return (
-                    <tr key={item.id}>
-                        <td>{product.product_id}</td>
-                        <td>{product.product_name}</td>
-                        <td>{product.price}</td>
-                        <td>{item.product_size}</td>
-                        <td>
-                            {/*<div className={'minus-zero-plus'}>*/}
-                            {/*    <div style={{cursor: 'pointer'}} onClick={() => {*/}
-                            {/*    }}*/}
-                            {/*         onClick={() => {*/}
-                            {/*             decreaseCount(product.product_id, item.product_size)*/}
-                            {/*         }}>-*/}
-                            {/*    </div>*/}
-                            {/*    {item.product_count}*/}
-                            {/*    <div style={{cursor: 'pointer'}} onClick={() => {*/}
-                            {/*        increaseCount(product.product_id, item.product_size);*/}
-                            {/*    }}>+*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
-                        </td>
-                        <td>{item.product_count * product.price}</td>
-                        <td style={{cursor: 'pointer'}}
+                    <div key={item.id} className='flex flex-row'>
+                        <div>
+                            <img className={'w-64 h-auto p-2'} src={`${baseUrl}/${product.Images[0].image_path}`}/></div>
+
+                        <div className={'flex flex-col'}>
+                        <div>{product.product_name}</div>
+                        <div>Цена: {product.price}</div>
+                        <div>Размер: {item.product_size}</div>
+                        <div>
+                            <div className="flex flex-row gap-2 justify-center">
+                                <div style={{cursor: 'pointer'}}
+                                     onClick={() => {
+                                         decreaseCartThunk(product.product_id, item.product_size)
+                                     }}>-
+                                </div>
+                                {item.product_count}
+                                <div style={{cursor: 'pointer'}} onClick={() => {
+                                    increaseCartThunk(product.product_id, item.product_size);
+                                }}>+
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+                        <div>{item.product_count * product.price}</div>
+                        <div style={{cursor: 'pointer'}}
                             onClick={() => deleteProductFromCart(product.product_id, item.product_size)}
                         >X
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
                 )
 
             }
@@ -159,11 +177,49 @@ export default function CategoryPage() {
     }
 
 
-
-
-
     return (
         <>
+
+            <div
+                tabIndex={0}
+                className="card card-compact bg-blue-400 shadow relative">
+
+                <div className="card-body">
+                    <div>{productsListInCart}</div>
+                    <a href="/cart"
+                       className="btn btn-primary btn-md px-0 mx-0"
+                       onClick={e => handleButtonClick(e)}>Оформить заказ
+                    </a>
+
+                </div>
+
+            </div>
+            <div
+                tabIndex={0}
+                className="card card-compact w-64 bg-blue-400 h-36 shadow scroll-card absolute">
+
+                <div className="card-body">
+                    <div>second</div>
+                    <a href="/cart"
+                       className="btn btn-primary btn-md px-0 mx-0"
+                       onClick={e => handleButtonClick(e)}>Оформить заказ
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            {/*<div className='flex flex-row'>*/}
+            {/*    <div>*/}
+            {/*        {productsListInCart}*/}
+            {/*    </div>*/}
+            {/*    <div>second column</div>*/}
+            {/*</div>*/}
+
+            {/*<div className="overflow-x-auto">*/}
+
+            {/*</div>*/}
             {/*<div className={'cart-container'}>*/}
             {/*    {*/}
             {/*        cart && cart.length > 0 ?*/}
@@ -180,7 +236,7 @@ export default function CategoryPage() {
             {/*                    /!*    close={closeModal}*!/*/}
             {/*                    /!*    text={'Вы правда хотите очистить корзину покупок?'}*!/*/}
             {/*                    /!*    func={() => dispatch(clearCart())}*!/*/}
-                                {/*/> : null}*/}
+            {/*/> : null}*/}
 
             {/*                </div>*/}
             {/*                </div>*/}

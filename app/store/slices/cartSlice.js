@@ -175,7 +175,7 @@ export const cartSlice = createSlice({
         builder.addCase(createCartThunk.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isLoaded = true;
-            console.log('create action',action.payload);
+            // console.log('create action',action.payload);
             state.cart = action.payload;
         });
         builder.addCase(createCartThunk.rejected, (state, action) => {

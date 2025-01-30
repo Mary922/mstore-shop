@@ -1,5 +1,6 @@
-import {getImagesStatic} from "../api/images";
+'use client'
 import React, {useEffect, useState} from 'react';
+import {getImagesStatic} from "@/app/lib/api/images";
 
 const AppFooter = () => {
     const [images, setImages] = useState([]);
@@ -31,7 +32,7 @@ const AppFooter = () => {
 
         if (imagesPathsList && imagesPathsList.length > 0) {
             for (let i = 0; i < imagesPathsList.length; i++) {
-                list.push(<img src={`${baseUrl}/${imagesPathsList[i]}`} key={i} />)
+                list.push(<img className="w-12 h-auto flex items-center" src={`${baseUrl}/${imagesPathsList[i]}`} key={i} />)
             }
         }
         return list;
@@ -40,7 +41,7 @@ const AppFooter = () => {
     return (
         <>
             <footer>
-            <div className={'bank-cards'}>{renderImages()}</div>
+            <div className='flex flex-row gap-4 items-center justify-center h-16 bg-neutral'>{renderImages()}</div>
             </footer>
         </>
     )

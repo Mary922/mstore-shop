@@ -8,11 +8,28 @@ export const Auth = (data) => {
 }
 
 export const authHeader = () => {
-    const client = JSON.parse(window.localStorage.getItem('client'));
 
-    const tempClient = window.localStorage.getItem('temp-client')
+    let tempClient;
+    let client;
+    let clientId;
+    if (typeof window !== "undefined") {
+        tempClient = localStorage.getItem("temp-client");
+        client = localStorage.getItem("client");
+        if (client){
+            client = JSON.parse(client);
+        }
+    }
 
-    // console.log('CLIENT & TOKEN from localstorage',client);
+    if (typeof window !== "undefined" && client) {
+        clientId = JSON.parse(localStorage.getItem("client")).id;
+    }
+
+
+    // const client = JSON.parse(localStorage.getItem('client'));
+    //
+    // const tempClient = localStorage.getItem('temp-client')
+
+    // console.log('CLIENT & TOKEN from localstorage', client);
 
     if (client && client.accessToken) {
         return client.accessToken

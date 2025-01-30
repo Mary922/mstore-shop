@@ -28,7 +28,6 @@ const ProductCard = ({id, text, images, price, path}) => {
     }
 
     const cart = useAppSelector(state => state.cart.cart);
-    console.log('cart', cart);
     const wish = useAppSelector(state => state.wishlist.wishlist);
 
     useEffect(() => {
@@ -65,7 +64,6 @@ const ProductCard = ({id, text, images, price, path}) => {
                             onClick={() => checkFilledSize(currentProduct.Sizes[i])}>{currentProduct.Sizes[i].size_name}</div>)
         }
     }
-    console.log('chosenSize', chosenSize);
 
     const checkIfProductExistInWishlist = async () => {
         let found = false;
@@ -106,7 +104,6 @@ const ProductCard = ({id, text, images, price, path}) => {
         price: price,
         size: chosenSize,
     }
-    console.log('payload',payload);
 
     let imagePathsInCarousel = [];
     images.map(image => imagePathsInCarousel.push(image.image_path));
@@ -164,7 +161,11 @@ const ProductCard = ({id, text, images, price, path}) => {
                                 setSizesIsShowing(false);
                             }
                             if (chosenSize && tempClient) {
-                                await dispatch(createCartThunk({productId: id, productSize: chosenSize, quantity: 1}));
+                                await dispatch(createCartThunk({
+                                    productId: id,
+                                    productSize: chosenSize,
+                                    quantity: 1
+                                }));
                                 setChosenSize('');
                                 setSizesIsShowing(false);
                             }

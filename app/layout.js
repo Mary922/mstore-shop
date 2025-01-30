@@ -2,9 +2,11 @@
 import localFont from "next/font/local";
 import "./globals.css";
 // import 'tailwindcss'
-import AppHeader from "@/app/ui/navbars/AppHeader";
+import AuthHeader from "@/app/ui/navbars/AuthHeader";
 import StoreProvider from "@/app/store/StoreProvider";
 import {useAppSelector} from "@/app/lib/hooks";
+import AppFooter from "@/app/ui/AppFooter";
+import ReduxLoader from "@/app/ui/loaders/ReduxLoader";
 
 
 const geistSans = localFont({
@@ -25,10 +27,10 @@ export const metadata = {
 
 export default function RootLayout({children}) {
 
-  //      console.log('cart layout', cart);
+    //      console.log('cart layout', cart);
 
     return (
-        <html lang="en" data-theme="corporate">
+        <html lang="en" data-theme="light">
         <head>
             <meta charSet="UTF-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -47,12 +49,14 @@ export default function RootLayout({children}) {
         >
         <StoreProvider>
             <div className="flex flex-col m-0 text-black min-h-screen">
-            <header className="flex flex-col border-y-green-900">
-                    <AppHeader/>
+                <header className="flex flex-col border-y-green-900">
+                    <AuthHeader/>
+                    <ReduxLoader/>
                 </header>
-                <main className='content mx-10 mt-10 bg-pink-200'>
+                <main className='flex flex-grow content mx-10 mt-10 bg-pink-200 mb-10'>
                     {children}
                 </main>
+                <AppFooter/>
                 {/*<footer className={'footer'}>*/}
                 {/*    <div className={'footer-company-name'} style={{alignItems: 'flex-end'}}>2024 © Manyasha Store</div>*/}
                 {/*    <div>*/}
