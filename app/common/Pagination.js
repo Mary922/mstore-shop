@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import ReactPaginate from 'react-paginate';
-import {IconContext} from "react-icons";
-import {AiFillLeftCircle, AiFillRightCircle} from "react-icons/ai";
-
-
+// import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 
 
 const PagData = ({data,itemsPerPage,request,pages}) => {
@@ -11,6 +8,7 @@ const PagData = ({data,itemsPerPage,request,pages}) => {
 
     const endOffset = itemOffset + itemsPerPage;
     // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+
     const currentItems = data.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(pages / itemsPerPage);
 
@@ -28,28 +26,18 @@ const PagData = ({data,itemsPerPage,request,pages}) => {
     return (
         <>
             <ReactPaginate
-                containerClassName={"pagination"}
-                pageClassName={"page-item"}
-                activeClassName={"active-pagination"}
+                containerClassName={"join"}
+                pageClassName="join-item cursor-pointer btn"
+                activeClassName="btn btn-active btn-primary "
                 onPageChange={handlePageClick}
                 pageCount={pageCount}
                 pageRangeDisplayed={5}
-                // previousLabel="< previous"
-                // nextLabel="next >"
                 breakLabel="..."
+                previousClassName="join-item btn btn-outline"
+                nextClassName="join-item btn btn-outline"
                 renderOnZeroPageCount={null}
-
-                // previousLabel={
-                //     <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
-                //         <AiFillLeftCircle />
-                //     </IconContext.Provider>
-                // }
-                // nextLabel={
-                //     <IconContext.Provider value={{ color: "#B8C1CC", size: "36px" }}>
-                //         <AiFillRightCircle />
-                //     </IconContext.Provider>
-                // }
             />
+
         </>
     )
 }

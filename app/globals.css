@@ -85,7 +85,9 @@ body {
 }
 
 .scroll-card {
-  position: fixed;
+  /*position: fixed;*/
+  position: sticky;
+  top: 100px;
   right: 2.5rem;
   transition: all .3s ease;
   transform: translateY(0%);

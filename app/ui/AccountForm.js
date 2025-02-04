@@ -22,9 +22,9 @@ const AccountForm = () => {
             <ul
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                <li><a>Мой кабинет</a></li>
-                <li><a>Мои заказы</a></li>
-                <li><a>Избранное</a></li>
+                <li><a href={'/account/my-account'}>Мой кабинет</a></li>
+                <li><a href={'/account/orders'}>Мои заказы</a></li>
+                <li><a href={'/account/wishlist'}>Избранное</a></li>
                 <li><a onClick={logOut}>Выйти</a></li>
             </ul>
         </>

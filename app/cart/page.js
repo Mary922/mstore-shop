@@ -61,7 +61,7 @@ export default function CartPage() {
             (async () => {
                 let ids = getIdsFromCart();
                 const productsList = await getProductsByIds(ids);
-                console.log('productsList',productsList);
+                console.log('productsList', productsList);
                 setProducts(productsList?.data);
 
                 if (productsList?.data?.Images) {
@@ -133,42 +133,45 @@ export default function CartPage() {
         }
     }
 
+    let total = 0;
     let productsListInCart = [];
     if (cart && cart.length > 0 && products.length > 0) {
         productsListInCart = cart.map(item => {
             const product = products.find((product) => product.product_id === item.product_id);
             if (product) {
+                total += item.product_count * product.price;
                 return (
-                    <div key={item.id} className='flex flex-row'>
-                        <div>
-                            <img className={'w-64 h-auto p-2'} src={`${baseUrl}/${product.Images[0].image_path}`}/></div>
+                        <div key={item.id} className='flex flex-row'>
+                            <div>
+                                <img className={'w-36 h-auto p-2'} src={`${baseUrl}/${product.Images[0].image_path}`}/>
+                            </div>
 
-                        <div className={'flex flex-col'}>
-                        <div>{product.product_name}</div>
-                        <div>Цена: {product.price}</div>
-                        <div>Размер: {item.product_size}</div>
-                        <div>
-                            <div className="flex flex-row gap-2 justify-center">
-                                <div style={{cursor: 'pointer'}}
-                                     onClick={() => {
-                                         decreaseCartThunk(product.product_id, item.product_size)
-                                     }}>-
+                            <div className={'flex flex-col ml-5 text-base w-full bg-fuchsia-400'}>
+                                <div className='flex justify-between'>
+                                    <div>{product.product_name}</div>
+                                    <div className='cursor-pointer font-bold'
+                                         onClick={() => deleteProductFromCart(product.product_id, item.product_size)}
+                                    >X
+                                    </div>
                                 </div>
-                                {item.product_count}
-                                <div style={{cursor: 'pointer'}} onClick={() => {
-                                    increaseCartThunk(product.product_id, item.product_size);
-                                }}>+
+                                <div>Цена: {product.price}</div>
+                                <div>Размер: {item.product_size}</div>
+                                <div>
+                                    <div className="flex flex-row gap-2 justify-center font-bold text-xl">
+                                        <div style={{cursor: 'pointer'}}
+                                             onClick={() => {
+                                                 decreaseCartThunk(product.product_id, item.product_size)
+                                             }}>-
+                                        </div>
+                                        {item.product_count}
+                                        <div style={{cursor: 'pointer'}} onClick={() => {
+                                            increaseCartThunk(product.product_id, item.product_size);
+                                        }}>+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        </div>
-                        <div>{item.product_count * product.price}</div>
-                        <div style={{cursor: 'pointer'}}
-                            onClick={() => deleteProductFromCart(product.product_id, item.product_size)}
-                        >X
-                        </div>
-                    </div>
                 )
 
             }
@@ -179,35 +182,39 @@ export default function CartPage() {
 
     return (
         <>
+            <div className='w-full mr-16'>
+                <div className='card h-16 bg-red-400 mb-10 shadow'>Выберите способо доставки</div>
+
+                <div className="card card-compact bg-blue-400 shadow">
+                    <div className="card-body">
+                        <div>{productsListInCart}</div>
+                        <a href="/cart"
+                           className="btn btn-primary btn-md px-0 mx-0"
+                           onClick={e => handleButtonClick(e)}>Оформить заказ
+                        </a>
+                    </div>
+                </div>
+            </div>
 
             <div
                 tabIndex={0}
-                className="card card-compact bg-blue-400 shadow relative">
+                className="card w-80 bg-base-100 h-16 shadow-xl scroll-card rounded-sm">
 
-                <div className="card-body">
-                    <div>{productsListInCart}</div>
+                <div className='mb-16 flex items-center justify-start'>доставка</div>
+                <div className="card">
+                    <div
+                        className='card h-10 bg-base-100 rounded-sm flex items-center justify-center font-bold p-2'>Всего
+                        к оплате {total}Р
+                    </div>
+                </div>
+                <div className="card h-10 rounded-sm">
                     <a href="/cart"
-                       className="btn btn-primary btn-md px-0 mx-0"
+                       className="btn btn-primary btn-md mt-5"
                        onClick={e => handleButtonClick(e)}>Оформить заказ
                     </a>
-
                 </div>
-
             </div>
-            <div
-                tabIndex={0}
-                className="card card-compact w-64 bg-blue-400 h-36 shadow scroll-card absolute">
-
-                <div className="card-body">
-                    <div>second</div>
-                    <a href="/cart"
-                       className="btn btn-primary btn-md px-0 mx-0"
-                       onClick={e => handleButtonClick(e)}>Оформить заказ
-                    </a>
-
-                </div>
-
-            </div>
+            {/*</div>*/}
 
 
             {/*<div className='flex flex-row'>*/}

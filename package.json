@@ -24,7 +24,9 @@
     "react-bootstrap": "^2.10.7",
     "react-datepicker": "^7.5.0",
     "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.1",
     "react-number-format": "^5.4.2",
+    "react-paginate": "^8.3.0",
     "react-redux": "https://pkg.csb.dev/reduxjs/react-redux/commit/3271037e/react-redux",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7"
