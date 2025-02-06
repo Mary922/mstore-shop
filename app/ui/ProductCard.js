@@ -142,7 +142,7 @@ const ProductCard = ({id, text, images, price, path}) => {
                     <div>price: {price}</div>
                     {
                         sizesIsShowing ? <>
-                            <div className="flex flex-row gap-4" >{sizes}</div>
+                            <div className="flex flex-row gap-4">{sizes}</div>
                             <div className="cursor-pointer" onClick={() => setSizesIsShowing(false)}>X</div>
                         </> : null
                     }

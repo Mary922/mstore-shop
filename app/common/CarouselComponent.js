@@ -2,39 +2,69 @@
 import React, {useState} from 'react';
 
 
-const CarouselComponent = ({paths, className, interval, width, height, index}) => {
+const CarouselComponent = ({paths, staticPaths, interval, index}) => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    let baseUrl = 'http://localhost:3001/images';
+    let baseUrl = '';
+    if (paths) {
+        baseUrl = 'http://localhost:3001/images';
+    }
+    if (staticPaths) {
+        baseUrl = 'http://localhost:3001/static';
+    }
 
     const handleNextClick = () => {
-        if (currentIndex === paths.length - 1) {
-            setCurrentIndex(0);
-        } else {
-            setCurrentIndex(currentIndex + 1);
+        if (paths) {
+            if (currentIndex < paths.length - 1) {
+                setCurrentIndex(currentIndex + 1);
+            } else {
+                setCurrentIndex(0);
+            }
+        }
+        if (staticPaths) {
+            if (currentIndex < staticPaths.length - 1) {
+                setCurrentIndex(currentIndex + 1);
+            } else {
+                setCurrentIndex(0);
+            }
         }
     };
 
     const handlePrevClick = () => {
-        if (currentIndex === 0) {
-            setCurrentIndex(paths.length - 1);
-        } else {
-            setCurrentIndex(currentIndex - 1);
+        if (paths) {
+            if (currentIndex === 0) {
+                setCurrentIndex(paths.length - 1);
+            } else {
+                setCurrentIndex(currentIndex - 1);
+            }
+        }
+        if (staticPaths) {
+            if (currentIndex === 0) {
+                setCurrentIndex(staticPaths.length - 1);
+            } else {
+                setCurrentIndex(currentIndex - 1);
+            }
         }
     };
 
     return (
         <>
-            <div className="relative w-full h-[400px] overflow-hidden">
+            <div className=" w-full bg-rose-700">
                 {/* Карусель */}
-                <div className="flex items-center justify-center w-full h-full">
+                <div className="flex justify-center w-full h-full">
                     <div key={currentIndex}>
-                        <img
-                            className="w-full object-cover"
-                            src={`${baseUrl}/${paths[currentIndex]}`}
-                            alt=""
-                        />
+                        {
+                            paths ? <img
+                                className="w-full object-cover"
+                                src={`${baseUrl}/${paths[currentIndex]}`}
+                                alt=""
+                            /> : <img
+                                className="w-full object-cover"
+                                src={`${baseUrl}/${staticPaths[currentIndex]}`}
+                                alt=""
+                            />
+                        }
                     </div>
                 </div>
 

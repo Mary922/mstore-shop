@@ -147,13 +147,13 @@ export default function ProductPage() {
 
     return (
         <>
-            <div className="grid grid-cols-[800px_1fr] bg-yellow-50 h-screen">
-                <div className="relative h-full">
+            <div className="grid grid-cols-[400px_1fr] bg-yellow-50 h-screen w-full">
+                <div className="flex bg-blue-400 w-full h-full ">
                     {
                         images && images.length > 0
                             ? (
-                                <div className="absolute inset-0 overflow-hidden">
-                            <CarouselComponent className="h-full" paths={imagePathsInCarousel}
+                                <div className="bg-orange-400 w-full h-auto rounded-box">
+                            <CarouselComponent paths={imagePathsInCarousel}
                             />
                                 </div>
                             ) : null
@@ -216,7 +216,7 @@ export default function ProductPage() {
                                     setSizesIsShowing(false);
                                 }
                             }
-                    }>
+                        }>
                         Добавить в
                         корзину
                     </button>

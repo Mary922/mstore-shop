@@ -5,6 +5,7 @@ export default function AccountNavBar() {
 
     const logOut = () => {
         localStorage.removeItem("client");
+        localStorage.removeItem("cart");
         window.location.reload();
     }
 

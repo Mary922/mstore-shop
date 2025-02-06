@@ -27,10 +27,6 @@ const NavbarHeader = () => {
     const cartList = useAppSelector((state) => state.cart.cart);
     const quantityInCart = useAppSelector((state) => state.cart.quantityInCart);
 
-    // console.log('cartList',cartList);
-    // console.log('quantityInCart',quantityInCart);
-    // console.log('CARTCARTCART header', cartList);
-
     const getIdsFromCart = () => {
         const idsList = [];
         if (cartList.length > 0) {
@@ -49,9 +45,6 @@ const NavbarHeader = () => {
             })();
         }
     }, [cartList]);
-
-    console.log('cartList', cartList);
-    console.log('products', products);
 
     let total = 0;
 
@@ -89,8 +82,6 @@ const NavbarHeader = () => {
             return null;
         })
     }
-    console.log('productsListincart',productsListInCart);
-
 
     let tempClient;
     let client;
@@ -169,7 +160,7 @@ const NavbarHeader = () => {
     return (
         <>
 
-            <div className="navbar">
+            <div className="navbar bg-primary-content">
                 <div className="navbar-start">
                     <Link href='/' className="btn btn-ghost text-xl">Home</Link>
 

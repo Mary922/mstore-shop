@@ -53,25 +53,13 @@ export default function RootLayout({children}) {
                     <AuthHeader/>
                     <ReduxLoader/>
                 </header>
-                <main className='flex flex-grow content mx-10 mt-10 bg-pink-200 mb-10'>
+                <main className='flex flex-grow content mx-10 mt-10 bg-pink-200 mb-10 overflow-y-auto'>
                     {children}
                 </main>
-                <AppFooter/>
-                {/*<footer className={'footer'}>*/}
-                {/*    <div className={'footer-company-name'} style={{alignItems: 'flex-end'}}>2024 © Manyasha Store</div>*/}
-                {/*    <div>*/}
-
-                {/*    </div>*/}
-                {/*    /!*<div className={'bank-cards'}>*!/*/}
-                {/*    /!*    <div className={'card visa'}><img src={'visa-card.png'} alt={'visa'}/></div>*!/*/}
-                {/*    /!*    <div className={'card'}><img src={'master.png'} alt={'visa'}/></div>*!/*/}
-                {/*    /!*    <div className={'card'}><img src={'ypay.png'} alt={'visa'}/></div>*!/*/}
-                {/*    /!*    <div className={'card'}><img src={'mir.png'} alt={'visa'}/></div>*!/*/}
-                {/*    /!*</div>*!/*/}
-                {/*</footer>*/}
+                    <AppFooter/>
             </div>
         </StoreProvider>
         </body>
         </html>
-    );
+);
 }

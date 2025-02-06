@@ -1,8 +1,8 @@
 'use client';
 import {useEffect, useState} from 'react'
-import {useDispatch} from "react-redux";
 import {useAppDispatch} from "@/app/lib/hooks";
 import {getCartThunk} from "@/app/store/slices/cartSlice";
+import {wishlistGetThunk} from "@/app/store/slices/wishlistSlice";
 
 const ReduxLoader = () => {
     const dispatch = useAppDispatch();
@@ -19,28 +19,29 @@ const ReduxLoader = () => {
                 tempClient = localStorage.getItem("temp-client");
                 client = localStorage.getItem("client");
                 token = localStorage.getItem("temp-client");
-                console.log('toktok',token)
             }
 
             if (typeof window !== "undefined" && client) {
                 clientId = JSON.parse(localStorage.getItem("client")).id;
                 token = JSON.parse(localStorage.getItem("client")).accessToken;
-
-                console.log('token client',token);
             }
 
 
             if (tempClient) {
-                console.log('lalala its temp client')
-
                 dispatch(getCartThunk(tempClient));
             }
             if (client) {
-                console.log('lalala its auth client')
                 dispatch(getCartThunk(clientId))
             }
         })()
     },[])
+
+    useEffect(() => {
+        // dispatch(restoreCart());
+        if (client) {
+            dispatch(wishlistGetThunk());
+        }
+    }, []);
 
     // useEffect(()=> {
     //     if (token) {

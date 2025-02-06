@@ -3,11 +3,12 @@ import {useEffect, useState} from "react";
 import React from 'react';
 import {useRouter} from "next/router";
 
-import { useParams } from 'next/navigation';
+import {useParams} from 'next/navigation';
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
 import {getProductCategories} from "@/app/lib/api/productCategories";
 import ProductCard from "@/app/ui/ProductCard";
 import CarouselComponent from "@/app/common/CarouselComponent";
+import FilterComponent from "@/app/ui/FilterComponent";
 
 export default function CategoryPage() {
     const params = useParams();
@@ -24,7 +25,7 @@ export default function CategoryPage() {
 
     // const show = useAppSelector((state) => state.common.canvasLeftOnShow);
 
-    useEffect(()=>{
+    useEffect(() => {
         (async () => {
             if (categoryId) {
                 try {
@@ -39,14 +40,14 @@ export default function CategoryPage() {
             }
 
         })();
-    },[categoryId])
+    }, [categoryId])
 
 
     let productName = '';
     let path = '';
     let arrayOfProducts = [];
 
-    for (let i=0; i < products.length; i++) {
+    for (let i = 0; i < products.length; i++) {
         arrayOfProducts.push(<ProductCard key={products[i].product_id}
                                           images={products[i].Images}
                                           id={products[i].product_id}
@@ -65,16 +66,19 @@ export default function CategoryPage() {
 
     return (
         <>
-                <div className="grid grid-cols-3 gap-4">{arrayOfProducts}</div>
+            <div className="flex flex-col">
+                <FilterComponent/>
+            <div className="grid grid-cols-3 gap-4">{arrayOfProducts}</div>
+            </div>
 
 
-                {/*<div className="card-body">*/}
-                {/*    <h2 className="card-title">Shoes!</h2>*/}
-                {/*    <p>If a dog chews shoes whose shoes does he choose?</p>*/}
-                {/*    <div className="card-actions justify-end">*/}
-                {/*        <button className="btn btn-primary">Buy Now</button>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+            {/*<div className="card-body">*/}
+            {/*    <h2 className="card-title">Shoes!</h2>*/}
+            {/*    <p>If a dog chews shoes whose shoes does he choose?</p>*/}
+            {/*    <div className="card-actions justify-end">*/}
+            {/*        <button className="btn btn-primary">Buy Now</button>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
         </>
     )
 }
@@ -86,6 +90,6 @@ export default function CategoryPage() {
 // {/*    {*/}
 // {/*        show ? <><CanvasFilter category={currentCategoryId} show={show} placement={'start'}/></> : null*/}
 // {/*    }*/}
-            // {/*    <div>Фильтр</div>*/}
-            // {/*</div>*/}
-            // {/*<CardGroup className={'productcard-group'}>{arrayOfProducts}</CardGroup>*/}
+// {/*    <div>Фильтр</div>*/}
+// {/*</div>*/}
+// {/*<CardGroup className={'productcard-group'}>{arrayOfProducts}</CardGroup>*/}

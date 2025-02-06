@@ -8,6 +8,13 @@ export const getWishlist = (data) => {
     return result;
 }
 
+export const getProductsInWishlistByIds = (data) => {
+    let result = Request.post(`${baseURL}/wishlist/getProducts`,{
+        ids: data
+    });
+    return result;
+}
+
 
 export const updateWishlist = (data) => {
     let result = Request.post(`${baseURL}/wishlist/update`,{

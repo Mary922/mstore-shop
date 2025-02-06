@@ -70,8 +70,8 @@ export default function CartPage() {
             })();
         }
     }, [cart]);
-    console.log('products', products);
-    console.log('images', images);
+    // console.log('products', products);
+    // console.log('images', images);
 
     let sum = 0;
     if (products && products.length > 0 && cart && cart.length > 0) {

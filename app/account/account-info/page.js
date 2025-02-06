@@ -67,17 +67,6 @@ export default function AccountInfoPage() {
         }
     }
 
-    // const notify = () => toast('Here is your toast.');
-
-    // const notify = () => toast.promise(
-    //     saveSettings(settings),
-    //     {
-    //         loading: 'Saving...',
-    //         success: <b>Settings saved!</b>,
-    //         error: <b>Could not save.</b>,
-    //     }
-    // );
-
     const handleAsyncOperation = async () => {
         try {
             setLoading(true);
@@ -112,8 +101,8 @@ export default function AccountInfoPage() {
 
     return (
         <>
-            <div className='flex flex-row w-full gap-4'>
-            <div className="flex flex-col gap-4 w-96 flex-grow">
+            <div className='flex flex-row w-96 gap-4'>
+            <div className="flex flex-col gap-4 w-full">
                 <label className="flex items-center gap-2">
                     <div className="w-5">
                         <svg
@@ -214,17 +203,7 @@ export default function AccountInfoPage() {
                         }}>Submit
                 </button>
             </div>
-            <div className="flex w-96">
-                {/*{*/}
-                {/*    isShow ? toast.success('cool') : 'no toast'*/}
-                {/*}*/}
-
-            {/*{*/}
-            {/*    isShow ? <ToastComponent show={isShow} setShow={setIsShow} name={formik.values.name} text={'Ваши данные успешно изменены!'}/> : null*/}
-            {/*}*/}
             </div>
-            </div>
-            {/*<div className='btn' onClick={notify}>but</div>*/}
             <Toaster/>
         </>
     )

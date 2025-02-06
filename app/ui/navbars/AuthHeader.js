@@ -7,7 +7,6 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import {getCategories} from "@/app/lib/api/categories";
 
 import {clearCartThunk} from "@/app/store/slices/cartSlice";
-import {logOut} from "@/config";
 import {getClient} from "../../lib/api/clients";
 import {getImagesStatic} from "../../lib/api/images";
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
@@ -17,7 +16,7 @@ import NavbarHeader from "./NavbarHeader";
 import AccountForm from "@/app/ui/AccountForm";
 
 const AuthHeader = () => {
-
+    const baseUrl = 'http://localhost:3001/static';
     const dispatch = useAppDispatch();
     const cart = useAppSelector(state => state.cart.cart);
 
@@ -79,15 +78,22 @@ const AuthHeader = () => {
 
     useEffect(() => {
         (async () => {
-            const imageHeader = await getImagesStatic('web', 'header');
-            const images = imageHeader.data;
-            if (imageHeader && images) {
-                for (let i = 0; i < images.length; i++) {
-                    setImageLogoPath(images[i].image_path);
-                }
+            // const imageHeader = await getImagesStatic('web', 'header');
+            // const images = imageHeader.data;
+            // if (imageHeader && images) {
+            //     for (let i = 0; i < images.length; i++) {
+            //         setImageLogoPath(images[i].image_path);
+            //     }
+            // }
+            const resLogo = await getImagesStatic('web', 'logo');
+            console.log('resLogo', resLogo);
+            if (resLogo?.data) {
+                setImageLogoPath(resLogo.data[0].image_path);
             }
         })()
     }, [])
+
+    console.log('imageLogoPath',imageLogoPath)
 
 
     const cartList = useAppSelector((state) => state.cart.cart);
@@ -114,9 +120,15 @@ const AuthHeader = () => {
 
     return (
         <>
-            <div className="navbar h-2.5 bg-primary">
+            <div className="navbar bg-base-100 w-full p-2.5">
                 <div className="navbar-start">
-                    <Link href="/" className="link text-xl">Manyasha Store</Link>
+                    {/*<Link href="/" className="link text-xl">*/}
+                        <img
+                            className="w-40 h-auto"
+                            src={`${baseUrl}/${imageLogoPath}`}
+                            alt=""
+                        />
+                    {/*</Link>*/}
                 </div>
 
                 <div className="navbar-end">
@@ -145,7 +157,7 @@ const AuthHeader = () => {
             </div>
             <NavbarHeader/>
 
-            <div className='flex flex-row items-center bg-primary-content text-black h-10 p-2.5 w-full'>
+            <div className='flex flex-row items-center bg-primary text-black h-10 p-2.5 w-full'>
                 <div>Бесплатная доставка от 2000 р</div>
             </div>
         </>

@@ -35,6 +35,7 @@ export default function MyAccountPage() {
 
     const logOut = () => {
         localStorage.removeItem("client");
+        localStorage.removeItem("cart");
         window.location.reload();
     }
 

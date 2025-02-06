@@ -6,6 +6,9 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
+  /*padding: 0;*/
+  /*max-width: 1200px;*/
+  /*box-sizing: border-box;*/
 }
 
 @layer base {
@@ -91,4 +94,7 @@ body {
   right: 2.5rem;
   transition: all .3s ease;
   transform: translateY(0%);
+}
+.playing {
+  transition: all 2s ease-in-out;
 }
