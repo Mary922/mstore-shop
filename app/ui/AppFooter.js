@@ -38,22 +38,24 @@ const AppFooter = () => {
         return list;
     }
 
+
+
     return (
         <>
             <footer className="footer bg-red-400 text-base-content w-full p-2.5">
                 <nav>
                     <h6 className="footer-title">Компания</h6>
                     <a href={'/footer/about-us'} className="link link-hover">О нас</a>
-                    <a href={'footer/contacts'} className="link link-hover">Контакты</a>
-                    <a href={'footer/offer'} className="link link-hover">Публичная оферта</a>
-                    <a href={'footer/help'} className="link link-hover">Помощь</a>
+                    <a href={'/footer/contacts'} className="link link-hover">Контакты</a>
+                    <a href={'/footer/offer'} className="link link-hover">Публичная оферта</a>
+                    <a href={'/footer/help'} className="link link-hover">Помощь</a>
                 </nav>
                 <nav>
                     <h6 className="footer-title">Покупателям</h6>
-                    <a href={'footer/delivery'} className="link link-hover">Доставка</a>
-                    <a href={'footer/payment'} className="link link-hover">Оплата</a>
-                    <a href={'footer/exchange-return'} className="link link-hover">Обмен и возврат</a>
-                    <a href={'account/my-account'} className="link link-hover">Мой кабинет</a>
+                    <a href={'/footer/delivery'} className="link link-hover">Доставка</a>
+                    <a href={'/footer/payment'} className="link link-hover">Оплата</a>
+                    <a href={'/footer/exchange-return'} className="link link-hover">Обмен и возврат</a>
+                    <a href={'/account/my-account'} className="link link-hover">Мой кабинет</a>
                 </nav>
                 <nav>
                     <h6 className="footer-title">Контакты</h6>

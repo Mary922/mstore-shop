@@ -55,7 +55,8 @@ const CarouselComponent = ({paths, staticPaths, interval, index}) => {
                 <div className="flex justify-center w-full h-full">
                     <div key={currentIndex}>
                         {
-                            paths ? <img
+                            paths ?
+                                <img
                                 className="w-full object-cover"
                                 src={`${baseUrl}/${paths[currentIndex]}`}
                                 alt=""

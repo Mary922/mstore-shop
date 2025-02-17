@@ -108,29 +108,33 @@ const ProductCard = ({id, text, images, price, path}) => {
     let imagePathsInCarousel = [];
     images.map(image => imagePathsInCarousel.push(image.image_path));
 
+    // hover:scale-105 transition-all duration-2000
 
     return (
         <>
-            <div className="card bg-fuchsia-400 shadow-xl hover:scale-105 transition-all duration-2000">
+            <div className="card bg-fuchsia-400 shadow-xl w-75 z-0">
                 <div className="cursor-pointer" onClick={(event) => {
                     event.stopPropagation();
                 }}>
                     {
                         images && images.length > 0
                             ?
+                            <>
                             <Link href={`/product/${id}`}>
-                                <CarouselComponent paths={imagePathsInCarousel}
-                                                   activeIndex={index}
+                                <div><CarouselComponent paths={imagePathsInCarousel}
+                                                        activeIndex={index}
                                     // className={'d-block w-100'}
-                                /></Link>
-                            : null
+                                /></div>
+                            </Link>
+                            </>
+                        : null
                     }
                 </div>
-                <div>
+                <div className="flex flex-col">
                     <div className={'productcard-header'}>
                         <div>
-                            product id: {id}
-                            name: {text}
+                            {id}
+                            {text}
                         </div>
                         <div>
                             <h1><i className={classes.heart} onClick={event => {
@@ -139,10 +143,10 @@ const ProductCard = ({id, text, images, price, path}) => {
                             }}></i></h1>
                         </div>
                     </div>
-                    <div>price: {price}</div>
+                    <div>{price}Р</div>
                     {
                         sizesIsShowing ? <>
-                            <div className="flex flex-row gap-4">{sizes}</div>
+                            <div className="flex flex-row flex-wrap">{sizes}</div>
                             <div className="cursor-pointer" onClick={() => setSizesIsShowing(false)}>X</div>
                         </> : null
                     }

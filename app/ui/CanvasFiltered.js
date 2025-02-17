@@ -12,7 +12,9 @@ import {getFilteredProducts} from "@/app/store/slices/appCommonSlice";
 import {setSearchParams} from "@/app/store/slices/searchParamsSlice";
 
 
-const CanvasFilter = ({category}) => {
+const CanvasFilter = ({filteredSizes}) => {
+
+    console.log('filteredSizes',filteredSizes)
     const dispatch = useDispatch();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -40,8 +42,6 @@ const CanvasFilter = ({category}) => {
     useEffect(() => {
         (async () => {
             const filterRes = await getFilterParams();
-            console.log('filterRes',filterRes);
-
             if (filterRes?.data) {
                 setFilterItems(filterRes.data);
             }
@@ -59,7 +59,7 @@ const CanvasFilter = ({category}) => {
     }
 
     const handleApplyFilter = async () => {
-         checkChangedFilter();
+        checkChangedFilter();
         const result = await applyFilterParams(
             category,
             minRangeValue,
@@ -104,94 +104,82 @@ const CanvasFilter = ({category}) => {
 
             router.push(`/search?${newSearchParams.toString()}`);
         } else {
-           console.log('no such products')
+            console.log('no such products')
         }
-
-
-
-
-
-        // let ids = [];
-        // if (result?.data.length > 0) {
-        //     console.log('result',result);
-        //
-        //     for (let i = 0; i < result?.data?.length; i++) {
-        //         ids.push(result?.data[i].product_id);
-        //     }
-        //
-        //     await dispatch(getFilteredProducts(ids));
-        //
-        //     // navigate(`/search?${searchParams.toString()}`);
-        // }
-        // console.log('ids',ids)
     }
+
+    if (   filteredSizes && filteredSizes.length > 0 ) {
+        console.log('hereeeeeeeee')
+    }
+
 
     return (
         <>
 
-                {/*{*/}
-                {/*    category ? null : <CollapseComponent name={'Категории'}/>*/}
-                {/*}*/}
+            {/*{*/}
+            {/*    category ? null : <CollapseComponent name={'Категории'}/>*/}
+            {/*}*/}
 
-                <div className="flex flex-col p-1">
+            <div className="flex flex-col p-1">
+
 
                 {
                     filterItems.sizes && filterItems.sizes.length > 0 ? <CollapseComponent name={'Размер'}
-                                                                                            checkedOptions={checkedOptionsSizes}
-                                                                                            setCheckedOptions={setCheckedOptionsSizes}
-                                                                                            options={filterItems.sizes.map(item => ({
-                                                                                                value: item.size_id,
-                                                                                                label: item.size_name
-                                                                                            }))}
+                                                                                           checkedOptions={checkedOptionsSizes}
+                                                                                           setCheckedOptions={setCheckedOptionsSizes}
+                                                                                           options={filterItems.sizes.map(item => ({
+                                                                                               value: item.size_id,
+                                                                                               label: item.size_name
+                                                                                           }))}
                     /> : null
                 }
 
                 {
                     filterItems.colors && filterItems.colors.length > 0 ? <CollapseComponent name={'Цвет'}
-                                                                                              options={filterItems.colors.map(item => ({
-                                                                                                  value: item.color_id,
-                                                                                                  label: item.color_name
-                                                                                              }))}
-                                                                                              checkedOptions={checkedOptionsColors}
-                                                                                              setCheckedOptions={setCheckedOptionsColors}
+                                                                                             options={filterItems.colors.map(item => ({
+                                                                                                 value: item.color_id,
+                                                                                                 label: item.color_name
+                                                                                             }))}
+                                                                                             checkedOptions={checkedOptionsColors}
+                                                                                             setCheckedOptions={setCheckedOptionsColors}
                     /> : null
                 }
 
                 {
                     filterItems.seasons && filterItems.seasons.length > 0 ? <CollapseComponent name={'Сезон'}
-                                                                                                options={filterItems.seasons.map(item => ({
-                                                                                                    value: item.season_id,
-                                                                                                    label: item.season_name
-                                                                                                }))}
-                                                                                                checkedOptions={checkedOptionsSeasons}
-                                                                                                setCheckedOptions={setCheckedOptionsSeasons}
+                                                                                               options={filterItems.seasons.map(item => ({
+                                                                                                   value: item.season_id,
+                                                                                                   label: item.season_name
+                                                                                               }))}
+                                                                                               checkedOptions={checkedOptionsSeasons}
+                                                                                               setCheckedOptions={setCheckedOptionsSeasons}
                     /> : null
                 }
                 {
                     filterItems.brands && filterItems.brands.length ? <CollapseComponent name={'Бренд'}
-                                                                                          options={filterItems.brands.map(item => ({
-                                                                                              value: item.brand_id,
-                                                                                              label: item.brand_name
-                                                                                          }))}
-                                                                                          checkedOptions={checkedOptionsBrands}
-                                                                                          setCheckedOptions={setCheckedOptionsBrands}
+                                                                                         options={filterItems.brands.map(item => ({
+                                                                                             value: item.brand_id,
+                                                                                             label: item.brand_name
+                                                                                         }))}
+                                                                                         checkedOptions={checkedOptionsBrands}
+                                                                                         setCheckedOptions={setCheckedOptionsBrands}
                     /> : null
                 }
                 {
                     filterItems.countries && filterItems.countries.length ? <CollapseComponent name={'Страна'}
-                                                                                                options={filterItems.countries.map(item => ({
-                                                                                                    value: item.country_id,
-                                                                                                    label: item.country_name
-                                                                                                }))}
-                                                                                                checkedOptions={checkedOptionsCountries}
-                                                                                                setCheckedOptions={setCheckedOptionsCountries}
+                                                                                               options={filterItems.countries.map(item => ({
+                                                                                                   value: item.country_id,
+                                                                                                   label: item.country_name
+                                                                                               }))}
+                                                                                               checkedOptions={checkedOptionsCountries}
+                                                                                               setCheckedOptions={setCheckedOptionsCountries}
                     /> : null
                 }
 
-                </div>
+            </div>
 
-                <RangeComponent label={'Цена'} minRangeValue={minRangeValue} maxRangeValue={maxRangeValue} onRangeChange={handleRangeChange} />
-                <button className="btn btn-primary" onClick={handleApplyFilter}>Применить</button>
+            <RangeComponent label={'Цена'} minRangeValue={minRangeValue} maxRangeValue={maxRangeValue} onRangeChange={handleRangeChange} />
+            <button className="btn btn-primary" onClick={handleApplyFilter}>Применить</button>
 
         </>
     )

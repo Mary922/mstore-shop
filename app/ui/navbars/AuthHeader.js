@@ -86,14 +86,11 @@ const AuthHeader = () => {
             //     }
             // }
             const resLogo = await getImagesStatic('web', 'logo');
-            console.log('resLogo', resLogo);
             if (resLogo?.data) {
                 setImageLogoPath(resLogo.data[0].image_path);
             }
         })()
     }, [])
-
-    console.log('imageLogoPath',imageLogoPath)
 
 
     const cartList = useAppSelector((state) => state.cart.cart);

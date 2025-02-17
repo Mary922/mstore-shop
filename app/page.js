@@ -23,7 +23,7 @@ export default function Home() {
         })();
     },[])
 
-    console.log('imagePaths',imagePaths);
+    // console.log('imagePaths',imagePaths);
 
     return (
         <>

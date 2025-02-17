@@ -42,18 +42,18 @@ export default function RootLayout({children}) {
             {/*<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png"/>*/}
 
             {/*<link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>*/}
-
+            {/*<script src="https://api-maps.yandex.ru/v3/?apikey=YOUR_API_KEY&lang=en_US"></script>*/}
         </head>
         <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
         <StoreProvider>
-            <div className="flex flex-col m-0 text-black min-h-screen">
+            <div className="flex flex-col m-0 text-black ">
                 <header className="flex flex-col border-y-green-900">
                     <AuthHeader/>
                     <ReduxLoader/>
                 </header>
-                <main className='flex flex-grow content mx-10 mt-10 bg-pink-200 mb-10 overflow-y-auto'>
+                <main className='flex mx-10 mt-10 bg-pink-200 mb-10 overflow-y-auto '>
                     {children}
                 </main>
                     <AppFooter/>

@@ -1,7 +1,6 @@
 "use client"
 import {useEffect, useState} from "react";
 import React from 'react';
-import {useRouter} from "next/router";
 
 import {useParams} from 'next/navigation';
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
@@ -9,11 +8,14 @@ import {getProductCategories} from "@/app/lib/api/productCategories";
 import ProductCard from "@/app/ui/ProductCard";
 import CarouselComponent from "@/app/common/CarouselComponent";
 import FilterComponent from "@/app/ui/FilterComponent";
+import CanvasFilter from "@/app/ui/CanvasFilter";
 
 export default function CategoryPage() {
     const params = useParams();
     const dispatch = useAppDispatch();
     const categoryId = params.categoryId;
+
+    const [show, setShow] = useState(false);
 
 
     const [products, setProducts] = useState([]);
@@ -66,9 +68,38 @@ export default function CategoryPage() {
 
     return (
         <>
-            <div className="flex flex-col">
-                <FilterComponent/>
-            <div className="grid grid-cols-3 gap-4">{arrayOfProducts}</div>
+            <div className="flex flex-col w-full">
+                <div className="drawer mb-5 z-10">
+                    <input id="my-drawer" type="checkbox" className="drawer-toggle"/>
+                    <div className="drawer-content">
+                        <label htmlFor="my-drawer" className="btn btn-primary drawer-button">фильтры</label>
+                    </div>
+                    <div className="drawer-side">
+                        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+                        <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                            <CanvasFilter category={categoryId}/>
+                        </div>
+                    </div>
+                </div>
+
+                {/*<FilterComponent category={categoryId}/>*/}
+
+                {/*<div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px'}}>*/}
+                {/*    <i onClick={() => setShow(!show)}*/}
+                {/*       style={{fontSize: '35px', marginLeft: '30px', cursor: 'pointer'}} className="bi bi-filter"></i>*/}
+                {/*</div>*/}
+
+
+                {/*{*/}
+                {/*    show ? <><CanvasFilter category={categoryId} show={show} placement={'start'}/></> : null*/}
+                {/*}*/}
+                {/*<div>Фильтр</div>*/}
+
+
+                <div className="grid grid-cols-4 mb-10 gap-4">{arrayOfProducts}</div>
+            </div>
+            <div>
+
             </div>
 
 
@@ -82,14 +113,3 @@ export default function CategoryPage() {
         </>
     )
 }
-
-
-//
-// {/*<div style={{display: 'flex', flexDirection: 'row',alignItems: 'center',gap: '10px'}}>*/}
-// {/*    <i onClick={()=>dispatch(changeFilterCanvas(true))} style={{fontSize: '35px',marginLeft: '30px',cursor:'pointer'}} className="bi bi-filter"></i>*/}
-// {/*    {*/}
-// {/*        show ? <><CanvasFilter category={currentCategoryId} show={show} placement={'start'}/></> : null*/}
-// {/*    }*/}
-// {/*    <div>Фильтр</div>*/}
-// {/*</div>*/}
-// {/*<CardGroup className={'productcard-group'}>{arrayOfProducts}</CardGroup>*/}
