@@ -40,7 +40,7 @@ const CanvasFilter = ({category}) => {
     useEffect(() => {
         (async () => {
             const filterRes = await getFilterParams();
-            console.log('filterRes',filterRes);
+            // console.log('filterRes',filterRes);
 
             if (filterRes?.data) {
                 setFilterItems(filterRes.data);

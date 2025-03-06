@@ -59,7 +59,7 @@ const NavbarHeader = () => {
 
                 return (
                     <div key={item.id}>
-                        <div  className={'flex flex-row'}>
+                        <div className={'flex flex-row'}>
                             {
                                 product?.Images?.[0]?.image_path
                                     ? <img src={`${baseUrl}/${product.Images[0].image_path}`} alt={'Product Image'}
@@ -211,16 +211,62 @@ const NavbarHeader = () => {
                                 </span>
 
                                 <div
-                                    tabIndex={0}
                                     className="card card-compact dropdown-content bg-white rounded-box w-96 z-[2] shadow relative">
-
-                                    <div className="card-body">
-                                        <div>{productsListInCart}</div>
+                                    <div className="card-body max-h-80">
+                                        {
+                                            cartList && cartList.length > 0 ?
+                                                <>
+                                                <div className="flex-1 overflow-y-auto">{productsListInCart}</div>
+                                                </>
+                                                : <div className="card-body flex h-40 items-center justify-center">
+                                                    <div className="text-xl">В корзине пока нет
+                                                        добавленных товаров
+                                                    </div>
+                                                </div>
+                                        }
                                         <a href="/cart"
                                            className="btn btn-primary btn-md px-0 mx-0"
-                                           onClick={e => handleButtonClick(e)}>Оформить заказ
+                                           onClick={e => handleButtonClick(e)}>
+                                            <div>Оформить заказ</div>
                                         </a>
                                     </div>
+
+
+                                    {/*{*/}
+                                    {/*    cartList && cartList.length > 0 ?*/}
+                                    {/*        <div className="card-body">*/}
+                                    {/*            <div>{productsListInCart}</div>*/}
+                                    {/*            <a href="/cart"*/}
+                                    {/*               className="btn btn-primary btn-md px-0 mx-0"*/}
+                                    {/*               onClick={e => handleButtonClick(e)}>*/}
+                                    {/*                <div>Оформить заказ</div>*/}
+                                    {/*            </a>*/}
+                                    {/*        </div> :*/}
+                                    {/*        <div className="card-body flex h-40 items-center justify-center">*/}
+                                    {/*            <div className="text-xl">В корзине пока нет*/}
+                                    {/*                добавленных товаров*/}
+                                    {/*            </div>*/}
+                                    {/*        </div>*/}
+                                    {/*}*/}
+
+
+
+                                    {/*{*/}
+                                    {/*    cartList && cartList.length > 0 ?*/}
+                                    {/*        <div className="card-body">*/}
+                                    {/*            <div>{productsListInCart}</div>*/}
+                                    {/*            <a href="/cart"*/}
+                                    {/*               className="btn btn-primary btn-md px-0 mx-0"*/}
+                                    {/*               onClick={e => handleButtonClick(e)}>*/}
+                                    {/*                <div>Оформить заказ</div>*/}
+                                    {/*            </a>*/}
+                                    {/*        </div> :*/}
+                                    {/*        <div className="card-body flex h-40 items-center justify-center">*/}
+                                    {/*            <div className="text-xl">В корзине пока нет*/}
+                                    {/*                добавленных товаров*/}
+                                    {/*            </div>*/}
+                                    {/*        </div>*/}
+                                    {/*}*/}
                                 </div>
                             </div>
                         </div>

@@ -4,7 +4,9 @@
 
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  /*font-family: Arial, Helvetica, sans-serif;*/
+  font-family: Poppins, sans-serif;
+  /*font-family: Inter, sans-serif;*/
   margin: 0;
   /*padding: 0;*/
   /*max-width: 1200px;*/
@@ -105,6 +107,10 @@ body {
   border-radius: 0.5rem;
   cursor: pointer;
 }
-/*.collapse-arrow {*/
-/*  height: 200px;*/
-/*}*/
+.scrollable-div {
+  /*position: sticky;*/
+  /*width: 200px;*/
+  /*height: 300px;*/
+  /*overflow-y: scroll;*/
+  /*border: 1px solid #000;*/
+}

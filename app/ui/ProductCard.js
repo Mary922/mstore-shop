@@ -53,11 +53,11 @@ const ProductCard = ({id, text, images, price, path}) => {
     if (currentProduct.Sizes) {
         for (let i = 0; i < currentProduct.Sizes.length; i++) {
             let isSelected = false;
-            let sizeClass = 'btn btn-ghost';
+            let sizeClass = 'btn btn-ghost btn-sm';
             if (currentProduct.Sizes[i].size_name === chosenSize) {
                 isSelected = true;
                 if (isSelected) {
-                    sizeClass = 'btn btn-ghost underline';
+                    sizeClass = 'btn btn-ghost btn-sm underline';
                 }
             }
             sizes.push(<div className={`${sizeClass}`} key={i}
@@ -112,7 +112,7 @@ const ProductCard = ({id, text, images, price, path}) => {
 
     return (
         <>
-            <div className="card bg-fuchsia-400 shadow-xl w-75 z-0">
+            <div className="card bg-fuchsia-400 shadow-xl z-0">
                 <div className="cursor-pointer" onClick={(event) => {
                     event.stopPropagation();
                 }}>
@@ -120,63 +120,66 @@ const ProductCard = ({id, text, images, price, path}) => {
                         images && images.length > 0
                             ?
                             <>
-                            <Link href={`/product/${id}`}>
-                                <div><CarouselComponent paths={imagePathsInCarousel}
-                                                        activeIndex={index}
-                                    // className={'d-block w-100'}
-                                /></div>
-                            </Link>
+                                <Link href={`/product/${id}`}>
+                                    <div><CarouselComponent paths={imagePathsInCarousel}
+                                                            activeIndex={index}
+                                        // className={'d-block w-100'}
+                                    /></div>
+                                </Link>
                             </>
-                        : null
+                            : null
                     }
                 </div>
                 <div className="flex flex-col">
-                    <div className={'productcard-header'}>
-                        <div>
-                            {id}
-                            {text}
-                        </div>
-                        <div>
+                    <div className="flex flex-col">
+                        <div className="flex justify-end">
                             <h1><i className={classes.heart} onClick={event => {
                                 event.stopPropagation();
                                 checkIfProductExistInWishlist();
                             }}></i></h1>
                         </div>
+                        <div className="flex flex-col items-center">
+                            <div>
+                                {id}
+                                {text}
+                            </div>
+                            <div>{price}Р</div>
+                        </div>
                     </div>
-                    <div>{price}Р</div>
+
                     {
                         sizesIsShowing ? <>
-                            <div className="flex flex-row flex-wrap">{sizes}</div>
-                            <div className="cursor-pointer" onClick={() => setSizesIsShowing(false)}>X</div>
+                            <div className="flex flex-row bg-yellow-200 items-center justify-center">
+                                <div className="flex flex-row flex-wrap">{sizes}</div>
+                                <div className="cursor-pointer" onClick={() => setSizesIsShowing(false)}>X</div>
+                            </div>
                         </> : null
                     }
-                    <div>
-                        <button className="btn btn-primary w-full" onClick={async (event) => {
-                            setSizesIsShowing(true);
-                            event.stopPropagation();
-                            if (chosenSize && client) {
-                                await dispatch(createCartThunk({
-                                    clientId: clientId,
-                                    productId: id,
-                                    productSize: chosenSize,
-                                    quantity: 1
-                                }));
-                                setChosenSize('');
-                                setSizesIsShowing(false);
-                            }
-                            if (chosenSize && tempClient) {
-                                await dispatch(createCartThunk({
-                                    productId: id,
-                                    productSize: chosenSize,
-                                    quantity: 1
-                                }));
-                                setChosenSize('');
-                                setSizesIsShowing(false);
-                            }
-                        }}>Добавить в
-                            корзину
-                        </button>
-                    </div>
+                    <button className="btn btn-primary w-full" onClick={async (event) => {
+                        setSizesIsShowing(true);
+                        event.stopPropagation();
+                        if (chosenSize && client) {
+                            await dispatch(createCartThunk({
+                                clientId: clientId,
+                                productId: id,
+                                productSize: chosenSize,
+                                quantity: 1
+                            }));
+                            setChosenSize('');
+                            setSizesIsShowing(false);
+                        }
+                        if (chosenSize && tempClient) {
+                            await dispatch(createCartThunk({
+                                productId: id,
+                                productSize: chosenSize,
+                                quantity: 1
+                            }));
+                            setChosenSize('');
+                            setSizesIsShowing(false);
+                        }
+                    }}>Добавить в
+                        корзину
+                    </button>
                 </div>
                 <div>
                 </div>

@@ -48,11 +48,12 @@ const AuthHeader = () => {
     //     clientId = JSON.parse(window.localStorage.getItem("client")).id;
     // }
 
+
     useEffect(() => {
         (async () => {
-            if (!client) {
+            if (!client && !tempClient) {
                 const result = await authTemp();
-                // console.log('result AUTH TEMP', result);
+                console.log('result AUTH TEMP', result);
                 localStorage.setItem('temp-client', result.data.accessToken);
             }
             if (client) {

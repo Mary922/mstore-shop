@@ -5,7 +5,7 @@ import {getOrders} from "@/app/lib/api/orders";
 import moment from "moment";
 import PagData from "@/app/common/Pagination";
 
-const ITEMS_PER_PAGE = 1;
+const ITEMS_PER_PAGE = 2;
 
 export default function OrdersPage() {
     const [orders, setOrders] = useState([]);

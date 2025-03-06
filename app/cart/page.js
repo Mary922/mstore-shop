@@ -1,50 +1,45 @@
 "use client"
-import {useParams} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
 import React, {useEffect, useState} from "react";
-import {useSelector} from "react-redux";
-import {decreaseCartThunk, getCartThunk, increaseCartThunk, clearCartThunk} from "@/app/store/slices/cartSlice";
-import {deleteProduct} from "@/app/lib/api/cart";
+import {
+    decreaseCartThunk,
+    getCartThunk,
+    increaseCartThunk,
+    clearCartThunk,
+    deleteProductInCartThunk
+} from "@/app/store/slices/cartSlice";
+import {deleteProduct, getCartPreOrder} from "@/app/lib/api/cart";
 import {getProductsByIds} from "@/app/lib/api/products";
+import ConfirmModal from "@/app/ui/modals/ConfirmModal";
+import Link from "next/link";
+import {toast,Toaster} from "react-hot-toast";
 
 
 export default function CartPage() {
     let baseUrl = 'http://localhost:3001/images';
-    const params = useParams();
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
-    let clientId;
-    let client = null;
-    let tempClient;
-
-    if (typeof window !== "undefined") {
-        let tempClient = localStorage.getItem("temp-client");
-    }
-
-    useEffect(() => {
-        client = window.localStorage.getItem('client');
-        if (client) {
-            clientId = JSON.parse(client).id;
-        }
-    }, []);
-    console.log('tempClient header', tempClient);
-    console.log('client header', client);
-
-    // let clientId, tempClient;
-    // const client = JSON.parse(localStorage.getItem("client"));
-    // tempClient = localStorage.getItem("temp-client");
-    // if (client) {
-    //     clientId = client.id;
-    // }
-
+    const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false);
     const [products, setProducts] = useState([]);
     const [images, setImages] = useState([]);
 
 
-    // const [show, setShow] = useState(false);
+    let tempClient = '';
+    let client;
+    let clientId;
+
+    if (typeof window !== "undefined") {
+        tempClient = localStorage.getItem("temp-client");
+        client = localStorage.getItem("client");
+    }
+
+    if (typeof window !== "undefined" && client) {
+        clientId = JSON.parse(localStorage.getItem("client")).id;
+    }
 
     const cart = useAppSelector(state => state.cart.cart);
-    console.log('cart', cart);
 
 
     const getIdsFromCart = () => {
@@ -61,7 +56,7 @@ export default function CartPage() {
             (async () => {
                 let ids = getIdsFromCart();
                 const productsList = await getProductsByIds(ids);
-                console.log('productsList', productsList);
+                // console.log('productsList', productsList);
                 setProducts(productsList?.data);
 
                 if (productsList?.data?.Images) {
@@ -70,8 +65,6 @@ export default function CartPage() {
             })();
         }
     }, [cart]);
-    // console.log('products', products);
-    // console.log('images', images);
 
     let sum = 0;
     if (products && products.length > 0 && cart && cart.length > 0) {
@@ -86,7 +79,7 @@ export default function CartPage() {
 
 
     const deleteProductFromCart = async (id, size) => {
-        const result = await deleteProduct(id, size);
+        await dispatch(deleteProductInCartThunk({productId: id, sizeId:size}));
         if (tempClient) {
             await dispatch(getCartThunk(tempClient));
         }
@@ -98,8 +91,11 @@ export default function CartPage() {
         if (tempClient) {
             await dispatch(getCartThunk(tempClient));
         }
-        await dispatch(getCartThunk(clientId));
+        if (clientId) {
+            await dispatch(getCartThunk(clientId));
+        }
     }
+
     const decreaseCount = async (productId, sizeId) => {
         await dispatch(decreaseCartThunk({productId: productId, sizeId: sizeId}));
         if (tempClient) {
@@ -118,18 +114,23 @@ export default function CartPage() {
 
     }
 
-    const checkIsAuthorized = async (sum) => {
+    const checkIsAuthorized = async () => {
         if (clientId) {
-            const result = await getCartPreOrder({cart: cart, sum: sum});
+            const result = await getCartPreOrder({cart: cart, sum: total});
             // console.log('PRE ORDER', result);
 
             if (result?.data?.status === 200) {
-                navigate('/orderform', {state: {sum}});
+                router.push(`preorder?sum=${total}`);
             }
         }
         if (tempClient) {
-            await dispatch(changeCanvas(true));
-            console.log('hahah you are temp')
+            toast.success('Чтобы оформить заказ нужно авторизоваться', {
+                position: "top-center"
+            })
+
+            setTimeout(() => {
+                router.push('/registration?from=/cart');
+            },3000)
         }
     }
 
@@ -140,38 +141,37 @@ export default function CartPage() {
             const product = products.find((product) => product.product_id === item.product_id);
             if (product) {
                 total += item.product_count * product.price;
-                return (
-                        <div key={item.id} className='flex flex-row'>
-                            <div>
-                                <img className={'w-36 h-auto p-2'} src={`${baseUrl}/${product.Images[0].image_path}`}/>
-                            </div>
 
-                            <div className={'flex flex-col ml-5 text-base w-full bg-fuchsia-400'}>
-                                <div className='flex justify-between'>
-                                    <div>{product.product_name}</div>
-                                    <div className='cursor-pointer font-bold'
-                                         onClick={() => deleteProductFromCart(product.product_id, item.product_size)}
-                                    >X
-                                    </div>
+                return (
+                    <div key={item.id} className='flex flex-row'>
+                        <div>
+                            <img className={'w-36 h-auto p-2'} src={`${baseUrl}/${product.Images[0].image_path}`}/>
+                        </div>
+
+                        <div className={'flex flex-col ml-5 text-base w-full bg-fuchsia-400'}>
+                            <div className='flex justify-between'>
+                                <div>{product.product_name}</div>
+                                <div className='cursor-pointer font-bold'
+                                     onClick={() => deleteProductFromCart(product.product_id, item.product_size)}
+                                >X
                                 </div>
-                                <div>Цена: {product.price}</div>
-                                <div>Размер: {item.product_size}</div>
-                                <div>
-                                    <div className="flex flex-row gap-2 justify-center font-bold text-xl">
-                                        <div style={{cursor: 'pointer'}}
-                                             onClick={() => {
-                                                 decreaseCartThunk(product.product_id, item.product_size)
-                                             }}>-
-                                        </div>
-                                        {item.product_count}
-                                        <div style={{cursor: 'pointer'}} onClick={() => {
-                                            increaseCartThunk(product.product_id, item.product_size);
-                                        }}>+
-                                        </div>
+                            </div>
+                            <div>Цена: {product.price}</div>
+                            <div>Размер: {item.product_size}</div>
+                            <div>
+                                <div className="flex flex-row gap-2 justify-center font-bold text-xl">
+                                    <div style={{cursor: 'pointer'}}
+                                         onClick={() => decreaseCount(product.product_id, item.product_size)
+                                         }>-
+                                    </div>
+                                    {item.product_count}
+                                    <div className="cursor-pointer" onClick={() => increaseCount( product.product_id, item.product_size)
+                                    }>+
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 )
 
             }
@@ -182,82 +182,85 @@ export default function CartPage() {
 
     return (
         <>
+            {
+                cart && cart.length > 0 ?
+            <>
             <div className='w-full mr-16'>
-                <div className='card h-16 bg-red-400 mb-10 shadow'>Выберите способо доставки</div>
+                <div className="flex flex-row justify-between w-full gap-3">
+                <div className='card h-16 bg-red-400 mb-10 shadow w-full'>Выберите способ доставки</div>
+                <button className="btn btn-square btn-outline" onClick={()=>{
+                    setConfirmModalIsOpen(true);
+                }}>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+                </div>
 
                 <div className="card card-compact bg-blue-400 shadow">
                     <div className="card-body">
                         <div>{productsListInCart}</div>
-                        <a href="/cart"
+                        <button
                            className="btn btn-primary btn-md px-0 mx-0"
-                           onClick={e => handleButtonClick(e)}>Оформить заказ
-                        </a>
+                           onClick={checkIsAuthorized}>Оформить заказ
+                        </button>
                     </div>
                 </div>
             </div>
 
+                <div className='card bg-yellow-300 sticky border-blue-500 w-80'>
             <div
                 tabIndex={0}
-                className="card w-80 bg-base-100 h-16 shadow-xl scroll-card rounded-sm">
+                className="card bg-base-400 h-16 shadow-xl rounded-sm scrollable-div">
 
                 <div className='mb-16 flex items-center justify-start'>доставка</div>
-                <div className="card">
+                <div>
                     <div
-                        className='card h-10 bg-base-100 rounded-sm flex items-center justify-center font-bold p-2'>Всего
+                        className='h-10 bg-base-100 rounded-sm flex items-center justify-center font-bold p-2'>Всего
                         к оплате {total}Р
                     </div>
                 </div>
-                <div className="card h-10 rounded-sm">
+                <div className="w-full rounded-sm">
                     <a href="/cart"
                        className="btn btn-primary btn-md mt-5"
-                       onClick={e => handleButtonClick(e)}>Оформить заказ
+                       onClick={checkIsAuthorized}>Оформить заказ
                     </a>
                 </div>
             </div>
-            {/*</div>*/}
+                </div>
+                </>
+                    :
+                    <>
+                        <div className="flex flex-col items-center justify-center w-full">
+                        <h1>Корзина пуста</h1>
+                        <div>В корзину ничего не добавлено. Чтобы добавить товары перейдите в каталог</div>
+                        <Link href={'/'}><button className="btn btn-primary my-5">Начать покупки</button></Link>
+                        </div>
+                    </>
 
+            }
 
-            {/*<div className='flex flex-row'>*/}
-            {/*    <div>*/}
-            {/*        {productsListInCart}*/}
-            {/*    </div>*/}
-            {/*    <div>second column</div>*/}
-            {/*</div>*/}
-
-            {/*<div className="overflow-x-auto">*/}
-
-            {/*</div>*/}
-            {/*<div className={'cart-container'}>*/}
-            {/*    {*/}
-            {/*        cart && cart.length > 0 ?*/}
-            {/*            <div>*/}
-            {/*                <div>*/}
-            {/*                    <div style={{display: "flex", justifyContent: "space-between"}}>*/}
-            {/*                        <div>Сумма покупок: {sum} руб.</div>*/}
-            {/*                        <div style={{color: 'red', fontWeight: 'bold', cursor: 'pointer'}}*/}
-            {/*                             onClick={clearProductsInCart}>X*/}
-            {/*                        </div>*/}
-            {/*                    </div>*/}
-            {/*                    /!*{show ? <ConfirmModal*!/*/}
-            {/*                    /!*    show={show}*!/*/}
-            {/*                    /!*    close={closeModal}*!/*/}
-            {/*                    /!*    text={'Вы правда хотите очистить корзину покупок?'}*!/*/}
-            {/*                    /!*    func={() => dispatch(clearCart())}*!/*/}
-            {/*/> : null}*/}
-
-            {/*                </div>*/}
-            {/*                </div>*/}
-
-            {/*                <button onClick={() => checkIsAuthorized(sum)}>Оформить заказ</button>*/}
-            {/*            </div> :*/}
-            {/*            <>*/}
-            {/*                <div>Добавьте товары в корзину</div>*/}
-            {/*                /!*<Nav><Nav.Item><Nav.Link onClick={redirectToHome}>За*!/*/}
-            {/*                /!*    покупками</Nav.Link></Nav.Item></Nav>*!/*/}
-            {/*            </>*/}
-            {/*    }*/}
-            {/*</div>*/}
+            {
+                confirmModalIsOpen ? <ConfirmModal show={confirmModalIsOpen}
+                                                   close={setConfirmModalIsOpen}
+                                                   text={'Вы действительно хотите очистить корзину покупок?'}
+                                                   func={clearProductsInCart}/> : null
+            }
+            <Toaster
+                position="bottom-center"
+                reverseOrder={false}
+            />
         </>
-    )
-
+            )
 }
+
+

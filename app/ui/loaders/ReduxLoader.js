@@ -28,6 +28,7 @@ const ReduxLoader = () => {
 
 
             if (tempClient) {
+                console.log('im temp hah')
                 dispatch(getCartThunk(tempClient));
             }
             if (client) {
@@ -35,6 +36,9 @@ const ReduxLoader = () => {
             }
         })()
     },[])
+
+
+    // console.log('loader')
 
     useEffect(() => {
         // dispatch(restoreCart());

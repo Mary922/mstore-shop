@@ -33,6 +33,9 @@ export const getCurrentCart = (clientId) => {
 }
 
 export const deleteProduct = (productId,sizeId) => {
+    console.log('req', productId, sizeId);
+
+
     let result = Request.post(`${baseURL}/cart/delete`,{
         productId: productId,
         sizeId: sizeId

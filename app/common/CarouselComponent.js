@@ -50,10 +50,9 @@ const CarouselComponent = ({paths, staticPaths, interval, index}) => {
 
     return (
         <>
-            <div className=" w-full bg-rose-700">
-                {/* Карусель */}
-                <div className="flex justify-center w-full h-full">
-                    <div key={currentIndex}>
+            {/*<div className=" w-full bg-rose-700">*/}
+            {/*    <div className="flex justify-center">*/}
+                    <div className="flex bg-green-300 h-72" key={currentIndex}>
                         {
                             paths ?
                                 <img
@@ -66,8 +65,8 @@ const CarouselComponent = ({paths, staticPaths, interval, index}) => {
                                 alt=""
                             />
                         }
-                    </div>
-                </div>
+                    {/*</div>*/}
+                {/*</div>*/}
 
                 {/* Кнопки навигации */}
                 <button

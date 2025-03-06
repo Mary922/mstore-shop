@@ -6,6 +6,7 @@ const AccountForm = () => {
 
     const logOut = () => {
         localStorage.removeItem("client");
+        localStorage.removeItem("cart");
         window.location.reload();
     }
     return (

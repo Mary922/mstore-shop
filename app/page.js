@@ -11,7 +11,7 @@ export default function Home() {
     useEffect(()=> {
         (async () => {
             const res = await getImagesStatic('web','home');
-            console.log('res',res);
+            // console.log('res',res);
 
             let paths = [];
             if (res?.data) {

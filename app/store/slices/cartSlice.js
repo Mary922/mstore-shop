@@ -3,9 +3,9 @@ import {
     addProductToCart,
     clearCart,
     decreaseCountInCart,
-    getCartPreOrder,
     getCurrentCart,
-    increaseCountInCart
+    increaseCountInCart,
+    deleteProduct
 } from "../../lib/api/cart";
 
 export const getCartThunk = createAsyncThunk(
@@ -46,6 +46,14 @@ export const clearCartThunk = createAsyncThunk(
         const result = await clearCart(clientId);
         // console.log('clear result thunk',result);
         return result.data.cart;
+    }
+)
+
+export const deleteProductInCartThunk = createAsyncThunk(
+    "Cart/deleteProduct",
+    async function deleteProd({productId:productId, sizeId: sizeId}) {
+        const result = await deleteProduct(productId, sizeId);
+        return result.data;
     }
 )
 
@@ -162,6 +170,7 @@ export const cartSlice = createSlice({
         builder.addCase(increaseCartThunk.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isLoaded = true;
+
             state.cart = action.payload;
         });
         builder.addCase(increaseCartThunk.rejected, (state, action) => {
@@ -205,6 +214,19 @@ export const cartSlice = createSlice({
             state.cart = action.payload;
         });
         builder.addCase(clearCartThunk.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        });
+        builder.addCase(deleteProductInCartThunk.pending, (state, action) => {
+            state.isLoading = true;
+            state.isLoaded = false;
+        });
+        builder.addCase(deleteProductInCartThunk.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isLoaded = true;
+            state.cart = action.payload;
+        });
+        builder.addCase(deleteProductInCartThunk.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.payload;
         });

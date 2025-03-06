@@ -8,7 +8,7 @@ const AccordionComponent = ({name,options, checkedOptions, setCheckedOptions}) =
     const dispatch = useDispatch();
     // const [isChecked, setIsChecked] = useState(false);
 
-    console.log('collapse',checkedOptions);
+    // console.log('collapse',checkedOptions);
 
 
     const handleChange = async (event) => {
