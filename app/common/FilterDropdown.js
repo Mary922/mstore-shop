@@ -17,6 +17,7 @@ const FilterDropdown = ({name,options,category,minRangeValue,maxRangeValue}) => 
     const [checkedOptions, setCheckedOptions] = useState([]);
 
 
+
     const checkChangedFilter = () => {
         if (
             // checkedOptionsBrands.length > 0 ||

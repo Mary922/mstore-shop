@@ -3,6 +3,7 @@ import Carousel from "react-bootstrap/Carousel";
 import CarouselComponent from "@/app/common/CarouselComponent";
 import React, {useEffect, useState} from "react";
 import {getImagesStatic} from "@/app/lib/api/images";
+import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
 
 
 export default function Home() {
@@ -27,8 +28,8 @@ export default function Home() {
 
     return (
         <>
-            <div className=" bg-orange-400 bg-cover relative overflow-hidden bg-center w-full h-screen">
-            <CarouselComponent staticPaths={imagePaths}
+            <div className=" bg-orange-400 relative w-full">
+            <CarouselComponentWithDots staticPaths={imagePaths}
                                // activeIndex={index}
             />
             </div>

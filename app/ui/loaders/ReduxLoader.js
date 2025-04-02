@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react'
 import {useAppDispatch} from "@/app/lib/hooks";
 import {getCartThunk} from "@/app/store/slices/cartSlice";
 import {wishlistGetThunk} from "@/app/store/slices/wishlistSlice";
+import {jwtDecode} from "jwt-decode";
 
 const ReduxLoader = () => {
     const dispatch = useAppDispatch();
@@ -12,6 +13,18 @@ const ReduxLoader = () => {
     let clientId;
     let token;
 
+    const isTokenValid = (token) => {
+        try {
+            const decoded = jwtDecode(token);
+            console.log('deocded', decoded);
+            console.log('now',Date.now());
+            console.log(decoded.exp * 1000 < Date.now());
+            return decoded.exp * 1000 < Date.now();
+        }   catch(err) {
+            return false;
+        }
+    }
+
     useEffect(()=> {
         (async () => {
 
@@ -19,6 +32,7 @@ const ReduxLoader = () => {
                 tempClient = localStorage.getItem("temp-client");
                 client = localStorage.getItem("client");
                 token = localStorage.getItem("temp-client");
+
             }
 
             if (typeof window !== "undefined" && client) {
@@ -27,18 +41,30 @@ const ReduxLoader = () => {
             }
 
 
-            if (tempClient) {
-                console.log('im temp hah')
-                dispatch(getCartThunk(tempClient));
+            if (tempClient && isTokenValid(tempClient)) {
+                console.log('temp token', tempClient);
+                console.log('im temp hah');
+                console.log("Временный токен истек и удален");
+                localStorage.removeItem("temp-client");
+                return;
+
+            } else {
+                await dispatch(getCartThunk(tempClient));
             }
-            if (client) {
-                dispatch(getCartThunk(clientId))
+
+            if (client && isTokenValid(client)) {
+                console.log('im client constant');
+                localStorage.removeItem("client");
+                console.log("Токен клиента истек");
+                return;
+            } else {
+                await dispatch(getCartThunk(clientId))
+
             }
         })()
     },[])
 
 
-    // console.log('loader')
 
     useEffect(() => {
         // dispatch(restoreCart());

@@ -485,6 +485,14 @@ export default function RegistrationPage() {
                                             </>
                                             : null
                                     }
+                                    {
+                                        repeatRequestPassword ? <div onClick={async ()=>{
+                                            setValidationPassword(true);
+                                            setRepeatRequestPassword(false);
+                                            await registerClient();
+                                        }}>запросить пароль еще раз</div> : null
+                                    }
+
                                     {/*{*/}
                                     {/*    repeatRequestPassword ? <div onClick={async ()=>{*/}
                                     {/*        setValidationPassword(true);*/}

@@ -71,7 +71,7 @@ const AuthHeader = () => {
                 setAuthLabel('');
 
             } else {
-                setAuthLabel(`привет ${clientRes.data.client_name}`)
+                setAuthLabel(`Привет, ${clientRes.data.client_name}`)
             }
         })()
     }, [])
@@ -118,22 +118,23 @@ const AuthHeader = () => {
 
     return (
         <>
-            <div className="navbar bg-base-100 w-full p-2.5">
+            <div className="navbar w-full p-2.5 navbar-top">
                 <div className="navbar-start">
-                    {/*<Link href="/" className="link text-xl">*/}
-                        <img
-                            className="w-40 h-auto"
-                            src={`${baseUrl}/${imageLogoPath}`}
-                            alt=""
-                        />
-                    {/*</Link>*/}
+
+                </div>
+                <div className='navbar-center'>
+                    <img
+                        className="w-40 h-auto"
+                        src={`${baseUrl}/${imageLogoPath}`}
+                        alt=""
+                    />
                 </div>
 
                 <div className="navbar-end">
-                    <div>{authLabel}</div>
+                    <div className='text-lg mr-1'>{authLabel}</div>
                     <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="flex flex-row btn-circle avatar cursor-pointer">
-                            <div className="w-10 rounded-full">
+                        <div tabIndex={0} role="button" className="flex flex-row btn-circle avatar cursor-pointer mr-5">
+                            <div className="w-12 rounded-full">
                                 <svg className="w-full h-full text-gray-800 dark:text-white" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                      viewBox="0 0 24 24">
@@ -155,24 +156,10 @@ const AuthHeader = () => {
             </div>
             <NavbarHeader/>
 
-            <div className='flex flex-row items-center bg-primary text-black h-10 p-2.5 w-full'>
-                <div>Бесплатная доставка от 2000 р</div>
+            <div className='flex flex-row items-center bg-emerald-500 text-black h-10 pl-5 py-1 w-full navbar-info'>
+                <div className='text-neutral-content'>Бесплатная доставка от 2000 ₽</div>
             </div>
         </>
-
-
-
-        // {/*{*/}
-        // {/*    authMode ? <>*/}
-        // {/*        <div>ldld</div>*/}
-        // {/*        <div tabIndex={0} className="collapse bg-base-200">*/}
-        // {/*            <div className="collapse-title text-xl font-medium">Focus me to see content</div>*/}
-        // {/*            <div className="collapse-content">*/}
-        // {/*                <p>tabindex={0} attribute is necessary to make the div focusable</p>*/}
-        // {/*            </div>*/}
-        // {/*        </div>*/}
-        // {/*    </> : null*/}
-        // // {/*}*/}
 
     )
 }

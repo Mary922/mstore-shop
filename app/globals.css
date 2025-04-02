@@ -8,7 +8,10 @@ body {
   font-family: Poppins, sans-serif;
   /*font-family: Inter, sans-serif;*/
   margin: 0;
-  /*padding: 0;*/
+  padding: 0;
+  width: 100%;
+  /*overflow-y: auto;*/
+  overflow-x: hidden;
   /*max-width: 1200px;*/
   /*box-sizing: border-box;*/
 }
@@ -87,6 +90,7 @@ body {
 .navbar {
   /*padding: 0.625rem !important;*/
   /*border-bottom: 1px solid gray !important;*/
+
 }
 
 .scroll-card {
@@ -109,8 +113,45 @@ body {
 }
 .scrollable-div {
   /*position: sticky;*/
-  /*width: 200px;*/
-  /*height: 300px;*/
+  width: 200px;
+  height: 300px;
   /*overflow-y: scroll;*/
-  /*border: 1px solid #000;*/
+  overflow: hidden;
+  border: 1px solid #000;
 }
+.checkbox {
+  border: 1px solid grey;
+}
+.radio {
+  border: 1px solid grey;
+}
+.border-nav {
+  border-top: 2px solid #ecfdf5;
+  /*border-bottom:  2px solid black;*/
+}
+.plus-minus {
+  border: 1px solid lightgray;
+  padding: 3px;
+}
+.scroll-price {
+  border: 1px solid lightgreen;
+}
+#left-content {
+  flex-grow: 1; /* Левый блок занимает всё доступное пространство */
+}
+#right-sidebar {
+  width: 20%;
+  flex-shrink: 0; /* Правый блок сохраняет свою ширину */
+  flex-basis: 20%; /* Начальная ширина — 20%, можно менять на нужную */
+  min-width: 250px; /* Минимальная ширина для мобильных устройств */
+  /*transition: opacity 0.3s ease-in-out; !* Плавный переход прозрачности *!*/
+  /*opacity: 1;*/
+}
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+/*#right-sidebar.hidden {*/
+/*  opacity: 0; !* Скрываем блок *!*/
+/*}*/

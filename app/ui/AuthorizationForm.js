@@ -3,6 +3,7 @@ import React, {useEffect,useState} from "react";
 import {Auth} from "@/app/lib/api/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 
+
 const AuthorizationForm = ({clientId, tempClient}) => {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -10,6 +11,7 @@ const AuthorizationForm = ({clientId, tempClient}) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [repeatRequestPassword, setRepeatRequestPassword] = useState(false);
 
     // console.log('clientId', clientId);
     // console.log('tempClient', tempClient);
@@ -57,12 +59,14 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                 console.log('it was succesful auth');
                 localStorage.setItem('client', JSON.stringify(result.data));
                 localStorage.removeItem('temp-client');
+                // localStorage.removeItem('filter-list');
 
                 router.push(from);
+                window.location.reload();
             }
-        }
-        else {
-            alert('No token')
+        } else {
+            setRepeatRequestPassword(true);
+            alert('No token');
         }
     }
 
@@ -71,17 +75,17 @@ const AuthorizationForm = ({clientId, tempClient}) => {
         <>
             <ul
                 tabIndex={0}
-                className="menu menu-compact dropdown-content mt-2.5 mr-20 bg-white rounded-box w-96 z-[2] shadow p-2.5">
+                className="menu dropdown-content mt-7 mr-20 rounded-box w-96 z-[100] shadow p-2.5 bg-neutral-content">
                 <div className="flex flex-row justify-between">
                     <li>
-                        <div>ВОЙТИ</div>
+                        <div className="text-base font-bold">ВОЙТИ</div>
                     </li>
-                    <li><a href={'/registration'}>Создать аккаунт</a></li>
+                    <li><a className="link link-hover text-base text-neutral" href={'/registration'}>Создать аккаунт</a></li>
                 </div>
 
-                <hr className="border-t border-gray-400 my-4"/>
+                <hr className="border-t border-gray-500 my-4"/>
 
-                <div className="flex flex-col mb-2.5">
+                <div className="flex flex-col mb-2.5 p-2.5">
                     <label className="flex items-center gap-2 bg-white">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -102,8 +106,8 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                     </label>
                 </div>
 
-                <div className="flex flex-col">
-                    <label className="flex items-center bg-white">
+                <div className="flex flex-col mb-2.5 p-2.5">
+                    <label className="flex items-center bg-white gap-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 16 16"
@@ -127,6 +131,13 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                                 transition duration-200 ease-in-out hover:bg-gray-900" onClick={checkClient}>
                     Авторизоваться
                 </button>
+                {
+                    repeatRequestPassword ? <div onClick={async ()=>{
+                        // setValidationPassword(true);
+                        setRepeatRequestPassword(false);
+                        await registerCl();
+                    }}>запросить пароль еще раз</div> : null
+                }
                 <li><a>Забыли пароль?</a></li>
             </ul>
 

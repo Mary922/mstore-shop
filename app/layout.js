@@ -7,6 +7,7 @@ import StoreProvider from "@/app/store/StoreProvider";
 import {useAppSelector} from "@/app/lib/hooks";
 import AppFooter from "@/app/ui/AppFooter";
 import ReduxLoader from "@/app/ui/loaders/ReduxLoader";
+import ScrollToTopComponent from "@/app/common/ScrollToTopComponent";
 
 
 const geistSans = localFont({
@@ -30,7 +31,7 @@ export default function RootLayout({children}) {
     //      console.log('cart layout', cart);
 
     return (
-        <html lang="en" data-theme="light">
+        <html lang="en" data-theme="emerald">
         <head>
             <meta charSet="UTF-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -39,6 +40,8 @@ export default function RootLayout({children}) {
             {/*<meta name="theme-color" content="#000000"/>*/}
 
             <title>Manyasha Store</title>
+            <link rel="icon" href="/favicon-2.ico"/>
+
             {/*<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png"/>*/}
 
             {/*<link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>*/}
@@ -48,18 +51,22 @@ export default function RootLayout({children}) {
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
         <StoreProvider>
-            <div className="flex flex-col m-0 text-black ">
-                <header className="flex flex-col border-y-green-900">
+            <div className="flex flex-col m-0 p-0 text-black w-full max-w-full min-h-screen">
+                <header className="flex flex-col w-full border-y-green-900 ">
                     <AuthHeader/>
                     <ReduxLoader/>
                 </header>
-                <main className='flex mx-10 mt-10 bg-pink-200 mb-10 overflow-y-auto '>
+                <main className='flex w-full mx-auto mb-10 overflow-y-auto overflow-hidden '>
                     {children}
                 </main>
-                    <AppFooter/>
+
+                <AppFooter/>
+                <ScrollToTopComponent/>
             </div>
+
+
         </StoreProvider>
         </body>
         </html>
-);
+    );
 }

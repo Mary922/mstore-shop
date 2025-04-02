@@ -17,7 +17,7 @@ export default function PreorderPage() {
     const dispatch = useAppDispatch();
     const sumUrlParam = useSearchParams();
     const sum = sumUrlParam.get('sum');
-    console.log('sum',sum);
+    // console.log('sum',sum);
 
     const [client, setClient] = useState([]);
     const [regions, setRegions] = useState([]);
@@ -79,12 +79,31 @@ export default function PreorderPage() {
             if (clientId) {
                 const result = await getClient(clientId);
                 setClient(result.data);
+
+                if (result.data.Addresses) {
+                    console.log('actual address exists');
+
+                    const actualAddress = result.data.Addresses;
+
+                    for (let i = 0; i < actualAddress.length; i++) {
+                        console.log('act region',actualAddress[i].region_id);
+                        setSelectedRegion(actualAddress[i].region_id);
+                        setSelectedCity(actualAddress[i].city_id);
+                        setAddress(actualAddress[i].address_name);
+                    }
+                }
             }
 
             const regionsList = await getRegions();
             setRegions(regionsList.data);
         })();
     }, [])
+    console.log('preorder client',client);
+
+    console.log('selectedRegion', selectedRegion);
+    console.log('address name',address)
+
+
 
     useEffect(() => {
         (async () => {
@@ -260,16 +279,25 @@ export default function PreorderPage() {
 
 
                     <div className="w-full">
+                        <label className="form-control w-full max-w-xs">
+                            <div className="label">
+                                <a className="label-text link link-primary" href={'/account/account-addresses'}>Изменить актуальный адрес</a>
+                            </div>
                             <select className={classes.region}
-                                    onChange={checkSelectedRegion} required={true}>
+                                    onChange={checkSelectedRegion}
+                                    value={selectedRegion || VALUE_NOT_SELECTED.value}
+                                    required={true}>
                                 <option value={VALUE_NOT_SELECTED.value}>Выберите регион</option>
                                 {regionsOptions}
                             </select>
+                        </label>
                     </div>
 
                     <div className="w-full">
-                            <select className={classes.city}
-                                    onChange={checkSelectedCity} required={true}>
+                        <select className={classes.city}
+                                onChange={checkSelectedCity}
+                                value={selectedCity || VALUE_NOT_SELECTED.value}
+                                    required={true}>
                                 <option value={VALUE_NOT_SELECTED.value}>Выберите город</option>
                                 {citiesOptions}
                             </select>
@@ -282,6 +310,7 @@ export default function PreorderPage() {
                             </div>
                             <input type="text"
                                    className={classes.address}
+                                   defaultValue={address}
                                    // className="input-sm input-bordered grow"
                                    placeholder="Советская ул.,12 д.,156 кв."
                                    onChange={event => handleAddressChange(event)}

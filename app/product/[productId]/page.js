@@ -4,6 +4,7 @@ import React, {useState, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
 import {getProduct} from "@/app/lib/api/products";
 import CarouselComponent from "@/app/common/CarouselComponent";
+import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
 
 
 export default function ProductPage() {
@@ -88,14 +89,15 @@ export default function ProductPage() {
     if (currentProduct.Sizes) {
         for (let i = 0; i < currentProduct.Sizes.length; i++) {
             let isSelected = false;
-            let sizeClass = '';
+            let sizeClass = 'btn btn-ghost btn-sm';
             if (currentProduct.Sizes[i].size_name === chosenSize) {
                 isSelected = true;
                 if (isSelected) {
-                    sizeClass = 'chosen-size'
+                    sizeClass = 'btn btn-ghost btn-sm underline'
                 }
             }
-            sizes.push(<div className={`${sizeClass}`} key={i} onClick={()=>checkFilledSize(currentProduct.Sizes[i])}>{currentProduct.Sizes[i].size_name}</div>)
+            sizes.push(<div className={`${sizeClass}`} key={i}
+                            onClick={()=>checkFilledSize(currentProduct.Sizes[i])}>{currentProduct.Sizes[i].size_name}</div>)
         }
     }
 
@@ -147,25 +149,33 @@ export default function ProductPage() {
 
     return (
         <>
-            <div className="grid grid-cols-[400px_1fr] bg-yellow-50 h-screen w-full">
-                <div className="flex bg-blue-400 w-full h-full ">
+            <div className="grid grid-cols-[400px_1fr] px-5 gap-20 py-10 w-full">
+                <div className="flex w-full h-full mx-auto">
                     {
                         images && images.length > 0
                             ? (
-                                <div className="bg-orange-400 w-full h-auto rounded-box">
-                            <CarouselComponent paths={imagePathsInCarousel}
+                                <div className=" w-full h-auto rounded-box">
+                            <CarouselComponentWithDots paths={imagePathsInCarousel}
                             />
                                 </div>
                             ) : null
                     }
                 </div>
-                <div className="p-4 text-xl">
-                    <div>{currentProduct.product_id}</div>
-                    <div>Название: {currentProduct.product_name}</div>
-                    <div>{currentProduct.price} P</div>
-                    <div>Цвет: {colors}</div>
-                    <div>Производитель: {currentProduct?.Brand ? currentProduct.Brand.brand_name : ''} </div>
-                    <div>Страна: {currentProduct?.Country ? currentProduct.Country.country_name : ''} </div>
+                <div className="px-4 text-xl ">
+                    <div className='font-bold'>{currentProduct.product_name}</div>
+                    <div><span className='font-bold'>Цена:</span>{currentProduct.price} ₽</div>
+                    <div><span className='font-bold'>Цвет:</span> {colors}</div>
+                    <div><span
+                        className='font-bold'>Производитель:</span> {currentProduct?.Brand ? currentProduct.Brand.brand_name : ''}
+                    </div>
+                    <div><span
+                        className='font-bold'>Страна:</span> {currentProduct?.Country ? currentProduct.Country.country_name : ''}
+                    </div>
+                    <div>season</div>
+                    <div>info+</div>
+                    <div className='flex flex-row'><span>Размер</span>
+                        <div className='flex flex-row gap-2 cursor-pointer'>{sizes}</div>
+                    </div>
                     {/*<div style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>Размер: {sizes}</div>*/}
 
                     {/*{productsListInCart}*/}
@@ -176,50 +186,82 @@ export default function ProductPage() {
                         </> : null
                     }
 
-                    {/*<div className={'minus-zero-plus'}>*/}
-                    {/*    <div style={{cursor: 'pointer'}} onClick={() => {*/}
-                    {/*             decreaseCount(currentProduct.product_id, currentProduct.product_size)*/}
-                    {/*         }}>-*/}
-                    {/*    </div>*/}
-                    {/*    {quantity}*/}
-                    {/*    <div style={{cursor: 'pointer'}} onClick={() => {*/}
-                    {/*        setSizesIsShowing(true);*/}
-                    {/*        increaseCount(currentProduct.product_id, chosenSize);*/}
-                    {/*    }}>+*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    <div className='flex flex-row items-center'>
 
-                    <button
-                        className="h-10 mt-3 flex justify-center items-center cursor-pointer rounded-md
-                                bg-primary px-4 py-3 text-center text-sm font-semibold uppercase text-white
-                                transition duration-200 ease-in-out hover:bg-gray-900"
-                        onClick={
-                            async (event) => {
-                                setSizesIsShowing(true);
-                                if (chosenSize && client) {
-                                    await dispatch(createCartThunk({
-                                        clientId: clientId,
-                                        productId: currentProduct.product_id,
-                                        productSize: chosenSize,
-                                        quantity: 1
-                                    }));
-                                    setChosenSize('');
-                                    setSizesIsShowing(false);
+                        <div className="join border border-base-300 rounded-full">
+                            <button
+                                className="join-item btn btn-ghost text-xl w-12 h-12 min-h-0"
+                                onClick={() => decreaseCount(currentProduct.product_id, currentProduct.product_size)}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4"/>
+                                </svg>
+                            </button>
+                            <div className="join-item btn btn-ghost text-xl w-16 pointer-events-none">
+                                {quantity}
+                            </div>
+                            <button
+                                className="join-item btn btn-ghost text-xl w-12 h-12 min-h-0"
+                                onClick={() => {
+                                    setSizesIsShowing(true);
+                                    increaseCount(currentProduct.product_id, chosenSize);
+                                }}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                          d="M12 4v16m8-8H4"/>
+                                </svg>
+                            </button>
+                        </div>
+
+
+                        {/*<div className='flex flex-row text-3xl'>*/}
+                        {/*    <div className='plus-minus' onClick={() => {*/}
+                        {/*        decreaseCount(currentProduct.product_id, currentProduct.product_size)*/}
+                        {/*    }}>-*/}
+                        {/*    </div>*/}
+                        {/*    <div className='plus-minus'>{quantity}</div>*/}
+                        {/*    <div className='plus-minus' onClick={() => {*/}
+                        {/*        setSizesIsShowing(true);*/}
+                        {/*        increaseCount(currentProduct.product_id, chosenSize);*/}
+                        {/*    }}>+*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
+
+                        <button
+                            className="h-10 mt-3 flex justify-center items-center cursor-pointer rounded-md
+                                bg-neutral px-4 py-3 text-center text-sm uppercase text-white
+                                transition duration-200 ease-in-out hover:bg-gray-600"
+                            onClick={
+                                async (event) => {
+                                    setSizesIsShowing(true);
+                                    if (chosenSize && client) {
+                                        await dispatch(createCartThunk({
+                                            clientId: clientId,
+                                            productId: currentProduct.product_id,
+                                            productSize: chosenSize,
+                                            quantity: 1
+                                        }));
+                                        setChosenSize('');
+                                        setSizesIsShowing(false);
+                                    }
+                                    if (chosenSize && tempClient) {
+                                        await dispatch(createCartThunk({
+                                            productId: currentProduct.product_id,
+                                            productSize: chosenSize,
+                                            quantity: 1
+                                        }));
+                                        setChosenSize('');
+                                        setSizesIsShowing(false);
+                                    }
                                 }
-                                if (chosenSize && tempClient) {
-                                    await dispatch(createCartThunk({
-                                        productId: currentProduct.product_id,
-                                        productSize: chosenSize,
-                                        quantity: 1
-                                    }));
-                                    setChosenSize('');
-                                    setSizesIsShowing(false);
-                                }
-                            }
-                        }>
-                        Добавить в
-                        корзину
-                    </button>
+                            }>
+                            Добавить в
+                            корзину
+                        </button>
+                    </div>
                 </div>
             </div>
         </>
