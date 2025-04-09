@@ -43,7 +43,7 @@ export default function MyAccountPage() {
         <>
             <div className='flex flex-col text-xl'>
                 <div>Добро пожаловать, <span className='font-bold'>{authLabel}</span> (не <span
-                    className='font-bold'>{authLabel}?</span> <a href={'/home'} className='cursor-pointer'
+                    className='font-bold'>{authLabel}?</span> <a href={'/home'} className='cursor-pointer link-hover text-info text-lg'
                                                                  onClick={logOut}>Выйти</a>)
                 </div>
                 <div>Из главной страницы аккаунта вы можете посмотреть ваши недавние заказы, настроить адрес доставки, а

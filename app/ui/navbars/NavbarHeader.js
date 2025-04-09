@@ -143,6 +143,7 @@ const NavbarHeader = () => {
             }
         })()
     }, [])
+    // console.log('gggggg',girls)
 
     const handleClickDropdown = () => {
         const elem = document.activeElement;
@@ -150,14 +151,95 @@ const NavbarHeader = () => {
             elem?.blur();
         }
     };
+
     let boysLinks = boys.map(link => <Link href={`/category/${link.category_id}`}
                                            className="link link-hover text-black"
                                            onClick={handleClickDropdown}
                                            key={link.category_id}>{link.category_name}</Link>)
-    let girlsLinks = girls.map(link => <Link href={`/category/${link.category_id}`}
-                                             className="link link-hover text-black"
-                                             onClick={handleClickDropdown}
-                                             key={link.category_id}>{link.category_name}</Link>)
+
+    const renderBoysLinks = () => {
+
+        // 1. Находим все родительские категории (у которых нет parent_id или он null)
+        const parentCategories = boys.filter(category => !category.parent_id);
+
+        // console.log('parentCategories',parentCategories);
+
+        return parentCategories.map(parent => {
+            // 2. Находим все дочерние категории для этого родителя
+            const childCategories = boys.filter(category => category.parent_id === parent.category_id);
+
+            return (
+                <div key={parent.category_id} className="mb-6">
+                    {/* 3. Родительская категория (заголовок) */}
+                    <div className="font-bold text-lg mb-2">
+                        <div
+                            // href={`/category/${parent.category_id}`}
+                            // className="hover:text-gray-700"
+                            onClick={handleClickDropdown}
+                        >
+                            {parent.category_name}
+                        </div>
+                    </div>
+
+                    {/* 4. Дочерние категории (список) */}
+                    <div className="grid grid-cols-2 gap-2">
+                        {childCategories.map(child => (
+                            <Link
+                                key={child.category_id}
+                                href={`/category/${child.category_id}`}
+                                className="text-neutral no-underline hover:text-black block py-1"
+                                onClick={handleClickDropdown}
+                            >
+                                {child.category_name}
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            );
+        });
+    };
+
+    const renderGirlsLinks = () => {
+
+        // 1. Находим все родительские категории (у которых нет parent_id или он null)
+        const parentCategories = girls.filter(category => !category.parent_id);
+
+        // console.log('parentCategories',parentCategories);
+
+        return parentCategories.map(parent => {
+            // 2. Находим все дочерние категории для этого родителя
+            const childCategories = girls.filter(category => category.parent_id === parent.category_id);
+
+            return (
+                <div key={parent.category_id} className="mb-6">
+                    {/* 3. Родительская категория (заголовок) */}
+                    <div className="font-bold text-lg mb-2">
+                        <div
+                            // href={`/category/${parent.category_id}`}
+                            // className="hover:text-gray-700"
+                            onClick={handleClickDropdown}
+                        >
+                            {parent.category_name}
+                        </div>
+                    </div>
+
+                    {/* 4. Дочерние категории (список) */}
+                    <div className="grid grid-cols-2 gap-2">
+                        {childCategories.map(child => (
+                            <Link
+                                key={child.category_id}
+                                href={`/category/${child.category_id}`}
+                                className="text-neutral no-underline hover:text-black block py-1"
+                                onClick={handleClickDropdown}
+                            >
+                                {child.category_name}
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            );
+        });
+    };
 
     const handleButtonClick = (e) => {
         //  e.preventDefault();
@@ -168,6 +250,8 @@ const NavbarHeader = () => {
         // console.log('inputText', inputText);
         setSearchVal(inputText);
     }
+
+    // console.log('girls',girls)
 
 
     const toggleIsSearching = () => {
@@ -206,32 +290,40 @@ const NavbarHeader = () => {
 
 return (
     <>
-
         <div className="navbar border-nav navbar-bottom">
-            <div className="navbar-start">
+            <div className="navbar-start gap-3">
                 <Link href='/' className="btn btn-ghost btn-circle">
                     <svg className="w-7 h-7 text-gray-800 dark:text-white" aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                               d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"/>
                     </svg>
-
                 </Link>
 
-                <div className="dropdown left-0">
-                    <div tabIndex={0} role="button" className="btn btn-ghost btn-square w-auto text-lg px-2 mr-8 ml-8 font-normal">Мальчики</div>
+                <div className="dropdown">
+                    <div tabIndex={0} className="btn btn-ghost btn-square text-lg font-normal px-7"
+                    >
+                        Мальчики
+                    </div>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                        <li>{boysLinks}</li>
+                        className="bg-base-100 menu dropdown-content rounded-box z-[1] shadow-lg w-screen">
+                        <div
+                            className="grid grid-cols-6 h-auto text-sm p-5 leading-normal container">{renderBoysLinks()}</div>
                     </ul>
                 </div>
+
+
                 <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost w-auto btn-square text-lg px-2 mr-8 font-normal">Девочки</div>
+                    <div tabIndex={0} className="btn btn-ghost btn-square text-lg font-normal px-7"
+                    >
+                        Девочки
+                    </div>
                     <ul
                         tabIndex={0}
-                        className="menu dropdown-content bg-white rounded-box z-[1] left-0 right-0 mt-3 p-2 shadow w-screen">
-                        <div className="grid grid-cols-2 text-lg p-5 leading-normal container">{girlsLinks}</div>
+                        className="bg-base-100 menu dropdown-content rounded-box z-[1] shadow-lg w-screen">
+                        <div
+                            className="grid grid-cols-6 h-auto text-sm p-5 leading-normal container">{renderGirlsLinks()}</div>
                     </ul>
                 </div>
                 <Link href='/footer/contacts' className="btn btn-ghost btn-square mr-8 w-auto">
@@ -346,6 +438,7 @@ return (
                 <div className="text-primary-content flex flex-col ml-3"><span>Сумма</span><span> {total} Р</span></div>
             </div>
         </div>
+
     </>
 )
 }

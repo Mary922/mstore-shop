@@ -8,6 +8,7 @@ import {useAppSelector} from "@/app/lib/hooks";
 import AppFooter from "@/app/ui/AppFooter";
 import ReduxLoader from "@/app/ui/loaders/ReduxLoader";
 import ScrollToTopComponent from "@/app/common/ScrollToTopComponent";
+import ScrollToTop from "@/app/ui/loaders/ScrollToTop";
 
 
 const geistSans = localFont({
@@ -56,7 +57,8 @@ export default function RootLayout({children}) {
                     <AuthHeader/>
                     <ReduxLoader/>
                 </header>
-                <main className='flex w-full mx-auto mb-10 overflow-y-auto overflow-hidden '>
+                <main className='flex w-full mx-auto overflow-y-auto overflow-hidden '>
+                    <ScrollToTop/>
                     {children}
                 </main>
 

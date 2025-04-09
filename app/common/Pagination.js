@@ -25,10 +25,11 @@ const PagData = ({data,itemsPerPage,request,pages}) => {
 
     return (
         <>
+            <div className="join flex justify-center mt-4">
             <ReactPaginate
                 containerClassName={"join"}
                 pageClassName="join-item cursor-pointer btn"
-                activeClassName="btn btn-active btn-primary "
+                activeClassName="btn btn-active btn-primary text-white"
                 onPageChange={handlePageClick}
                 pageCount={pageCount}
                 pageRangeDisplayed={5}
@@ -36,7 +37,10 @@ const PagData = ({data,itemsPerPage,request,pages}) => {
                 previousClassName="join-item btn btn-outline"
                 nextClassName="join-item btn btn-outline"
                 renderOnZeroPageCount={null}
+                previousLabel='Предыдущая'
+                nextLabel='Следующая'
             />
+            </div>
 
         </>
     )

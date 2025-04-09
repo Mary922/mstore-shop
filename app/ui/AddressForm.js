@@ -193,7 +193,7 @@ const AddressForm = ({setAddressIsAdded}) => {
     return (
         <>
             <form onSubmit={formik.handleSubmit}>
-            <div className="card bg-violet-400 w-full items-center p-5 gap-3">
+            <div className="card bg-base-200 w-full items-center px-5 gap-3">
                 <div className="card-body w-full">
                     <div className="w-full">
                         <label className="form-control w-full max-w-xs">
@@ -292,7 +292,7 @@ const AddressForm = ({setAddressIsAdded}) => {
                         />
                         {formik.errors.phone && <div>{formik.errors.phone}</div>}
                     </div>
-                    <button type='sumbit' className="btn btn-primary">Добавить адрес
+                    <button type='sumbit' className="btn btn-primary text-white">Добавить адрес
                     </button>
                 </div>
             </div>

@@ -58,7 +58,7 @@ export default function OrdersPage() {
 
     return (
         <>
-                <div className="overflow-x-auto w-full">
+                <div className="w-full flex flex-col items-center ">
                     <table className="table">
                         <thead>
                         <tr>
@@ -72,12 +72,13 @@ export default function OrdersPage() {
                         </tbody>
                     </table>
 
-                    <PagData
+                    <div className='w-full flex justify-center mt-4'>
+                        <PagData
                         data={orders}
                         itemsPerPage={ITEMS_PER_PAGE}
                         request={requestForOrders}
                         pages={pageCount}
-                    />
+                    /></div>
 
                     {/*<PagData data={orders}*/}
                     {/*         itemsPerPage={ITEMS_PER_PAGE}*/}

@@ -3,7 +3,7 @@
 export default function PaymentPage() {
     return (
         <>
-            <div className='p-5 mx-16 leading-relaxed'>
+            <div className='p-5 mx-60 leading-relaxed'>
                 <h1>
                     Оплата
                 </h1>

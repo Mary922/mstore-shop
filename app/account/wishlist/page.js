@@ -60,36 +60,75 @@ export default function Wishlist() {
     if (products) {
         productsInWishlist = products.map(product => {
             return (
-                <div key={product.product_id} className='card bg-base-100 shadow-xl'>
-                    <div className="flex flex-row mb-5 items-center">
-                        <button className="btn btn-square btn-sm mr-2" onClick={async ()=>{
-                            await dispatch(wishlistDeleteThunk({id: product.product_id}));
-                            window.location.reload();
-                        }}>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                        </button>
-                        <div>Удалить</div>
+                <div key={product.product_id} className='card bg-base-100 shadow-xl h-auto'>
+                    <div className="flex items-center mb-2">
+                        <div className="relative">  {/* Обертка для кнопки и текста */}
+                            <button
+                                className="btn btn-square btn-neutral btn-sm peer"
+                                onClick={async () => {
+                                    await dispatch(wishlistDeleteThunk({id: product.product_id}));
+                                    window.location.reload();
+                                }}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+
+                            <span className="
+      absolute left-full top-1/2 -translate-y-1/2 ml-2
+      text-sm text-gray-600
+      opacity-0 peer-hover:opacity-100
+      transition-opacity duration-200
+      whitespace-nowrap
+    ">
+      Удалить
+    </span>
+                        </div>
                     </div>
-                    <img className={'w-full h-auto'} src={`${baseUrl}/${product.Images[0].image_path}`}/>
+
+
+                    {/*<div className="flex flex-row mb-5 items-center">*/}
+                    {/*    <button className="btn btn-square btn-neutral btn-sm mr-2 focus:text-red-600"*/}
+                    {/*            onClick={async () => {*/}
+                    {/*                await dispatch(wishlistDeleteThunk({id: product.product_id}));*/}
+                    {/*                window.location.reload();*/}
+                    {/*            }}>*/}
+                    {/*        <svg*/}
+                    {/*            xmlns="http://www.w3.org/2000/svg"*/}
+                    {/*            className="h-6 w-6"*/}
+                    {/*            fill="none"*/}
+                    {/*            viewBox="0 0 24 24"*/}
+                    {/*            stroke="currentColor">*/}
+                    {/*            <path*/}
+                    {/*                strokeLinecap="round"*/}
+                    {/*                strokeLinejoin="round"*/}
+                    {/*                strokeWidth="2"*/}
+                    {/*                d="M6 18L18 6M6 6l12 12"/>*/}
+                    {/*        </svg>*/}
+                    {/*    </button>*/}
+                    {/*    <div>Удалить</div>*/}
+                    {/*</div>*/}
+
+                    <img className={'w-full h-96'} src={`${baseUrl}/${product.Images[0].image_path}`}/>
                     <div className='card-body'>
-                        <h2 className="card-title">
-                            <div>{product.product_name}</div>
+                        <h2 className="card-title flex justify-center items-center">
+                            <div className='text-lg text-center'>{product.product_name}</div>
                         </h2>
-                        <p>{product.price}Р</p>
-                        <div className="card-actions justify-end">
+                        <p className='text-lg text-center'>{product.price} ₽</p>
+                        <div className="card-actions w-full flex items-center justify-center text-center">
                             <Link href={`/product/${product.product_id}`}>
-                                <button className="btn btn-primary">Купить сейчас</button></Link>
+                                <button className="btn btn-neutral w-full">Купить сейчас</button>
+                            </Link>
                         </div>
                     </div>
                 </div>

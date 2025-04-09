@@ -125,6 +125,21 @@ body {
 .radio {
   border: 1px solid grey;
 }
+.carousel-dot-active {
+  border: 1px solid lightgray;
+  background-color: white;
+  scale: 1.25;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.carousel-dot-not-active {
+  border: 1px solid rgba(211, 211, 211, 0.9);
+  background-color: transparent;
+  scale: 1.25;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+.carousel-dot-not-active:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
 .border-nav {
   border-top: 2px solid #ecfdf5;
   /*border-bottom:  2px solid black;*/
@@ -152,6 +167,14 @@ body {
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
-/*#right-sidebar.hidden {*/
-/*  opacity: 0; !* Скрываем блок *!*/
-/*}*/
+.uniform-height  {
+  height: 3rem;
+}
+.drop-links {
+  width: 100%;
+}
+.dropdown div{
+  /*width: 100%;*/
+  /*margin-left: 0;*/
+  /*margin: 0;*/
+}

@@ -31,3 +31,16 @@ export const getProductsFiltered = (data) => {
     });
     return result;
 }
+
+export const getProductsBoys = (data) => {
+    let result = Request.get(`${baseURL}/boys`);
+    return result;
+}
+export const getProductsGirls = (data) => {
+    let result = Request.get(`${baseURL}/girls`);
+    return result;
+}
+export const getProductsBabies = (data) => {
+    let result = Request.get(`${baseURL}/babies`);
+    return result;
+}

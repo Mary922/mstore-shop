@@ -3,7 +3,7 @@
 export default function DeliveryPage() {
     return (
         <>
-            <div className='p-5 mx-16 leading-relaxed'>
+            <div className='p-5 mx-60 leading-relaxed'>
                 <h2>
                     Заказ
                 </h2>

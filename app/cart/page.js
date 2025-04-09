@@ -18,28 +18,31 @@ import ScrollDownComponent from "@/app/common/ScrollDownComponent";
 
 
 export default function CartPage() {
-    let totalHeaderHeight = 0;
-    const navbarTop = document.querySelector('.navbar-top');
-    const navbarBottom = document.querySelector('.navbar-bottom');
-    const navbarInfo = document.querySelector('.navbar-info');
+    // let totalHeaderHeight = 0;
+    const [totalHeaderHeight, setTotalHeaderHeight] = useState(0);
 
-    if (navbarTop && navbarBottom && navbarInfo) {
-        totalHeaderHeight = navbarTop.offsetHeight + navbarBottom.offsetHeight + navbarInfo.offsetHeight;
-    } else if (navbarTop && navbarBottom) {
-        totalHeaderHeight = navbarTop.offsetHeight + navbarBottom.offsetHeight;
-    } else if (navbarTop && navbarInfo) {
-        totalHeaderHeight = navbarTop.offsetHeight + navbarInfo.offsetHeight;
-    } else if (navbarBottom && navbarInfo) {
-        totalHeaderHeight = navbarBottom.offsetHeight + navbarInfo.offsetHeight;
-    } else if (navbarTop) {
-        totalHeaderHeight = navbarTop.offsetHeight;
-    } else if (navbarBottom) {
-        totalHeaderHeight = navbarBottom.offsetHeight;
-    } else if (navbarInfo) {
-        totalHeaderHeight = navbarInfo.offsetHeight;
-    }
+    useEffect(() => {
+        const calculateHeaderHeight = () => {
+            const navbarTop = document.querySelector('.navbar-top');
+            const navbarBottom = document.querySelector('.navbar-bottom');
+            const navbarInfo = document.querySelector('.navbar-info');
 
-    console.log('высота header', totalHeaderHeight);
+            let height = 0;
+
+            if (navbarTop) height += navbarTop.offsetHeight;
+            if (navbarBottom) height += navbarBottom.offsetHeight;
+            if (navbarInfo) height += navbarInfo.offsetHeight;
+
+            return height;
+        };
+
+        const height = calculateHeaderHeight();
+        setTotalHeaderHeight(height);
+    }, []);
+
+    // console.log('Calculated header height:', totalHeaderHeight);
+
+
 
     let baseUrl = 'http://localhost:3001/images';
     const dispatch = useAppDispatch();
@@ -80,11 +83,11 @@ export default function CartPage() {
             // Устанавливаем безопасную позицию для правого блока
             const safeOffset = Math.min(currentScroll, maxSidebarOffset);
 
-            if (window.scrollY >= triggerPoint) {
-                rightSidebar.classList.add('hidden'); // Добавляем класс скрытого состояния
-            } else {
-                rightSidebar.classList.remove('hidden'); // Возвращаем видимость
-            }
+            // if (window.scrollY >= triggerPoint) {
+            //     rightSidebar.classList.add('hidden'); // Добавляем класс скрытого состояния
+            // } else {
+            //     rightSidebar.classList.remove('hidden'); // Возвращаем видимость
+            // }
 
 
             setScrollOffset(safeOffset);
@@ -93,16 +96,6 @@ export default function CartPage() {
         leftContent.addEventListener('scroll', handleScroll);
         return () => leftContent.removeEventListener('scroll', handleScroll);
     }, []);
-
-    //         const maxOffset = leftContent.scrollHeight - window.innerHeight;
-    //         const offset = Math.min(leftContent.scrollTop, maxOffset);
-    //         setScrollOffset(offset);
-    //     };
-    //
-    //     leftContent.addEventListener('scroll', handleScroll);
-    //     return () => leftContent.removeEventListener('scroll', handleScroll);
-    // }, []);
-
 
     let tempClient = '';
     let client;
@@ -190,6 +183,7 @@ export default function CartPage() {
         await dispatch(clearCartThunk(clientId));
         await dispatch(getCartThunk(clientId));
 
+        setConfirmModalIsOpen(false)
     }
 
     const checkIsAuthorized = async () => {
@@ -221,12 +215,12 @@ export default function CartPage() {
                 total += item.product_count * product.price;
 
                 return (
-                    <div key={item.id} className='flex flex-row'>
+                    <div key={item.id} className='flex flex-row mb-2'>
                         <div>
                             <img className={'w-36 h-auto p-2'} src={`${baseUrl}/${product.Images[0].image_path}`}/>
                         </div>
 
-                        <div className={'flex flex-col ml-5 text-base w-full p-1'}>
+                        <div className={'flex flex-col ml-5 text-base w-full p-1 justify-around'}>
                             <div className='flex justify-between'>
                                 <div className='font-bold mb-5'>{product.product_name}</div>
                                 <div className='cursor-pointer font-bold'
@@ -242,8 +236,8 @@ export default function CartPage() {
 
                                 </div>
                             </div>
-                            <div><span className='text-neutral mr-2'>Цена</span> {product.price}</div>
-                            <div><span className='text-neutral mr-2'>Размер</span> {item.product_size}</div>
+                            <div><span className='text-gray-500 mr-2'>Цена</span> {product.price}</div>
+                            <div><span className='text-gray-500 mr-2'>Размер</span> {item.product_size}</div>
 
                             <div className="join border border-base-300 rounded-full flex items-center justify-center">
                                 <button
@@ -273,20 +267,8 @@ export default function CartPage() {
                                     </svg>
                                 </button>
                             </div>
-
-                            {/*<div>*/}
-                            {/*    <div className="flex flex-row gap-2 justify-center font-bold text-xl mt-3">*/}
-                            {/*        <div style={{cursor: 'pointer'}}*/}
-                            {/*             onClick={() => decreaseCount(product.product_id, item.product_size)*/}
-                            {/*             }>-*/}
-                            {/*        </div>*/}
-                            {/*        {item.product_count}*/}
-                            {/*        <div className="cursor-pointer"*/}
-                            {/*             onClick={() => increaseCount(product.product_id, item.product_size)*/}
-                            {/*             }>+*/}
-                            {/*        </div>*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
+                            <div className='font-bold text-lg flex justify-end'>{product.price * item.product_count} ₽
+                            </div>
                         </div>
                     </div>
                 )
@@ -299,11 +281,10 @@ export default function CartPage() {
 
     return (
         <>
-
             <div className="flex">
                 <div
                     id="left-content"
-                    className="flex-1 p-4 h-[200vh] w-[1000px] overflow-y-auto"
+                    className="flex-1 p-4 w-[1000px]"
                 >
 
                     {
@@ -344,7 +325,7 @@ export default function CartPage() {
                                                 onClick={checkIsAuthorized}>Оформить заказ
                                             </button>
                                         </div>
-                                        <div>Нажимая на кнопку «Оформить заказ», вы принимаете условия пользовательского соглашения, политики конфиденциальности и публичной оферты.</div>
+                                        <div className='card-body'>Нажимая на кнопку «Оформить заказ», вы принимаете условия пользовательского соглашения, политики конфиденциальности и публичной оферты.</div>
                                     </div>
                                 </div>
 
@@ -368,10 +349,10 @@ export default function CartPage() {
 
                 <div
                     id="right-sidebar"
-                    className={`border-gray-200 fixed top-14 right-10 ${scrollOffset > 300 ? 'hidden' : ''}`}
-                    // className="border-gray-200 fixed top-14 right-10"
+                    // className={`border-gray-200 fixed top-14 right-10 ${scrollOffset > 300 ? 'hidden' : ''}`}
+                    className="border-gray-200 fixed top-14 right-10"
                     style={{
-                        top: `${totalHeaderHeight + 14}px`,
+                        top: `${totalHeaderHeight + 40}px`,
                         height: "auto",       // Высота по содержимому
                         maxHeight: `calc(100vh - ${totalHeaderHeight + 14}px)`, // Не выходит за пределы видимой части экрана
                         overflowY: "auto",     // Прокрутка внутри блока, если содержимое не умещается
@@ -393,7 +374,6 @@ export default function CartPage() {
 
                         <div>
                             <a
-                                href="/cart"
                                 className="btn btn-primary btn-md text-white shadow-lg flex"
                                 onClick={checkIsAuthorized}
                             >
@@ -408,6 +388,7 @@ export default function CartPage() {
                 {
                     confirmModalIsOpen ? <ConfirmModal show={confirmModalIsOpen}
                                                        close={setConfirmModalIsOpen}
+                                                       title={'Уважаемый клиент!'}
                                                        text={'Вы действительно хотите очистить корзину покупок?'}
                                                        func={clearProductsInCart}/> : null
                 }

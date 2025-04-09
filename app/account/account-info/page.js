@@ -195,12 +195,12 @@ export default function AccountInfoPage() {
                     />
                 </label>
                 <button type="submit"
-                        className='btn btn-primary btn-sm'
+                        className='btn btn-primary btn-sm text-white'
                     // onClick={formik.handleSubmit}>Submit</button>
                         onClick={async ()=> {
                             await updateClientInfo();
                             await handleAsyncOperation();
-                        }}>Submit
+                        }}>Изменить данные
                 </button>
             </div>
             </div>

@@ -136,7 +136,7 @@ export default function AccountAddressesPage() {
     return (
         <>
             <div className="flex flex-col w-full">
-                <div>Следующие адреса будут использованы по умолчанию при оформлении заказов.</div>
+                <div className='my-3'>Следующие адреса будут использованы по умолчанию при оформлении заказов.</div>
                 {/*<h1>Адрес доставки</h1>*/}
 
                 <div className='flex flex-row'>
@@ -144,7 +144,7 @@ export default function AccountAddressesPage() {
 
                     {
                         !addressIsAdded && (
-                            <button className="btn btn-primary my-5" onClick={() => setAddressIsAdded(true)}>Добавить новый
+                            <button className="btn btn-primary my-5 btn-neutral" onClick={() => setAddressIsAdded(true)}>Добавить новый
                                 адрес</button>
                         )
                     }
@@ -154,9 +154,9 @@ export default function AccountAddressesPage() {
                             <>
                                 <div className='flex flex-row w-full'>
                                     <AddressForm setAddressIsAdded={setAddressIsAdded}/>
-                                    <div onClick={() => setAddressIsAdded(false)}
-                                         className='cursor-pointer ml-10 flex items-center text-lg'>X
-                                    </div>
+                                    <button onClick={() => setAddressIsAdded(false)}
+                                         className='cursor-pointer btn btn-ghost ml-10 flex items-center text-lg'>Закрыть
+                                    </button>
                                 </div>
                             </>
                             : null

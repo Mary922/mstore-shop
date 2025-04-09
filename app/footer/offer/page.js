@@ -3,7 +3,7 @@
 export default function OfferPage() {
     return (
         <>
-            <div className="p-5 mx-16 leading-relaxed">
+            <div className="p-5 mx-60 leading-relaxed">
                 <section>
                     <h2>
                         Предмет соглашения (Пользовательское соглашение)

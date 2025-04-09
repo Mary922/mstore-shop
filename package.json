@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@pbe/react-yandex-maps": "^1.2.5",
     "@reduxjs/toolkit": "https://pkg.csb.dev/reduxjs/redux-toolkit/commit/436d29c1/@reduxjs/toolkit",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",

@@ -8,7 +8,7 @@ export default function AboutUsPage() {
 
     return (
         <>
-            <div>
+            <div className='mx-60 p-5 leading-relaxed'>
             <h1>Manyasha Store – лучшее для самых любимых!</h1>
             <div>Одевайте детей красиво с Manyasha Store!
 
