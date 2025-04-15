@@ -15,6 +15,7 @@ import ConfirmModal from "@/app/ui/modals/ConfirmModal";
 import Link from "next/link";
 import {toast, Toaster} from "react-hot-toast";
 import ScrollDownComponent from "@/app/common/ScrollDownComponent";
+import MainLayout from "@/app/ui/MainLayout";
 
 
 export default function CartPage() {
@@ -281,6 +282,7 @@ export default function CartPage() {
 
     return (
         <>
+            <MainLayout>
             <div className="flex">
                 <div
                     id="left-content"
@@ -396,6 +398,7 @@ export default function CartPage() {
                     position="bottom-center"
                     reverseOrder={false}
                 />
+            </MainLayout>
             </>
             )
             }

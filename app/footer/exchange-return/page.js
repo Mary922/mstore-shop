@@ -1,8 +1,11 @@
 "use client"
 
+import MainLayout from "@/app/ui/MainLayout";
+
 export default function exchangeReturn() {
     return (
         <>
+            <MainLayout>
             <div className='p-5 mx-60 leading-relaxed'>
                 <h2>Обмен и возврат товара</h2>
             <p>Обмен и возврат товара надлежащего качества производится в соответствии с Законом о защите прав потребителей. В соответствии со ст. 26.1 “О дистанционном способе продаж”.
@@ -68,6 +71,7 @@ export default function exchangeReturn() {
 
                     Пересылка производится за счет покупателя.</p>
             </div>
+            </MainLayout>
             </>
     )
 }

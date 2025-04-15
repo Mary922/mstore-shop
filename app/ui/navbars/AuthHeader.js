@@ -14,6 +14,7 @@ import {Auth, authTemp} from "@/app/lib/api/auth";
 import AuthorizationForm from "@/app/ui/AuthorizationForm";
 import NavbarHeader from "./NavbarHeader";
 import AccountForm from "@/app/ui/AccountForm";
+import MainLayout from "@/app/ui/MainLayout";
 
 const AuthHeader = () => {
     const baseUrl = 'http://localhost:3001/static';
@@ -40,6 +41,7 @@ const AuthHeader = () => {
     if (typeof window !== "undefined" && client) {
         clientId = JSON.parse(localStorage.getItem("client")).id;
     }
+    // console.log('temppppClient', tempClient);
 
     // const tempClient = window.localStorage.getItem("temp-client");
     // const client = window.localStorage.getItem("client");
@@ -123,11 +125,13 @@ const AuthHeader = () => {
 
                 </div>
                 <div className='navbar-center'>
+                    {imageLogoPath ?
                     <img
                         className="w-40 h-auto"
                         src={`${baseUrl}/${imageLogoPath}`}
                         alt=""
                     />
+                        : null}
                 </div>
 
                 <div className="navbar-end">

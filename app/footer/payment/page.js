@@ -1,8 +1,11 @@
 "use client"
 
+import MainLayout from "@/app/ui/MainLayout";
+
 export default function PaymentPage() {
     return (
         <>
+            <MainLayout>
             <div className='p-5 mx-60 leading-relaxed'>
                 <h1>
                     Оплата
@@ -36,6 +39,7 @@ export default function PaymentPage() {
                 </p>
 
             </div>
+            </MainLayout>
         </>
     )
 }

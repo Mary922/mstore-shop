@@ -5,6 +5,7 @@ import {getProductsBoys} from "@/app/lib/api/products";
 import ProductCard from "@/app/ui/ProductCard";
 import CanvasFilter from "@/app/ui/CanvasFilter";
 import CanvasFilterForLinks from "@/app/ui/CanvasFilterForLinks";
+import MainLayout from "@/app/ui/MainLayout";
 
 export default function BoysPage() {
     const [products, setProducts] = useState([]);
@@ -33,6 +34,7 @@ export default function BoysPage() {
 
     return (
         <>
+            <MainLayout>
             <div className="flex flex-col w-full bg-gray-100">
                 <div className="mx-5 mt-2">
                     <div className="drawer z-10 flex">
@@ -62,6 +64,7 @@ export default function BoysPage() {
             <div>
 
             </div>
+            </MainLayout>
         </>
     )
 }

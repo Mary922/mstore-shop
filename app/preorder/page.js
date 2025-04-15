@@ -11,6 +11,7 @@ import {toast, Toaster} from "react-hot-toast";
 import {VALUE_NOT_SELECTED} from "@/constants";
 import {useRouter, useSearchParams} from "next/navigation";
 import {clearCartThunk} from "@/app/store/slices/cartSlice";
+import MainLayout from "@/app/ui/MainLayout";
 
 export default function PreorderPage() {
     const router = useRouter();
@@ -248,6 +249,7 @@ export default function PreorderPage() {
 
     return (
         <>
+            <MainLayout>
             <div className="card bg-violet-400 w-96 items-center p-5 gap-3">
                 <div className="card-body w-full">
                     <div className="w-full">
@@ -345,6 +347,7 @@ export default function PreorderPage() {
                 position="top-center"
                 reverseOrder={false}
             />
+            </MainLayout>
 
 
             {/*{*/}

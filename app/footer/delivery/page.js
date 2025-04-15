@@ -1,8 +1,11 @@
 "use client"
 
+import MainLayout from "@/app/ui/MainLayout";
+
 export default function DeliveryPage() {
     return (
         <>
+            <MainLayout>
             <div className='p-5 mx-60 leading-relaxed'>
                 <h2>
                     Заказ
@@ -50,6 +53,7 @@ export default function DeliveryPage() {
                     Если сумма вашей единовременной покупки более 2000 руб. – доставка по Москве (в пределах МКАД) бесплатна.
                 </p>
             </div>
+            </MainLayout>
         </>
     )
 }

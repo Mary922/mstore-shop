@@ -52,22 +52,24 @@ export default function RootLayout({children}) {
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
         <StoreProvider>
-            <div className="flex flex-col m-0 p-0 text-black w-full max-w-full min-h-screen">
-                <header className="flex flex-col w-full border-y-green-900 ">
-                    <AuthHeader/>
-                    <ReduxLoader/>
-                </header>
-                <main className='flex w-full mx-auto overflow-y-auto overflow-hidden '>
-                    <ScrollToTop/>
-                    {children}
-                </main>
-
-                <AppFooter/>
-                <ScrollToTopComponent/>
-            </div>
-
-
+            {children}
         </StoreProvider>
+        {/*{children}*/}
+        {/*<StoreProvider>*/}
+        {/*    <div className="flex flex-col m-0 p-0 text-black w-full max-w-full min-h-screen">*/}
+        {/*        <header className="flex flex-col w-full border-y-green-900 ">*/}
+        {/*            <AuthHeader/>*/}
+        {/*            <ReduxLoader/>*/}
+        {/*        </header>*/}
+        {/*        <main className='flex w-full mx-auto overflow-y-auto overflow-hidden '>*/}
+        {/*            <ScrollToTop/>*/}
+        {/*            {children}*/}
+        {/*        </main>*/}
+
+        {/*        <AppFooter/>*/}
+        {/*        <ScrollToTopComponent/>*/}
+        {/*    </div>*/}
+        {/*</StoreProvider>*/}
         </body>
         </html>
     );

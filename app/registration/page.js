@@ -14,6 +14,7 @@ import clsx from "clsx";
 import "react-day-picker/style.css";
 import {DatePickerComponent} from "@/app/common/DatePickerComponent";
 import {useAppDispatch} from "@/app/lib/hooks";
+import MainLayout from "@/app/ui/MainLayout";
 
 
 export default function RegistrationPage() {
@@ -200,7 +201,7 @@ export default function RegistrationPage() {
                 setValidationPassword(true);
                 console.log("Проверьте свою почту для активации аккаунта.");
             } else {
-                toast.error('Заполните все данные');
+                toast.error(result.message);
                 console.log("Что-то пошло не так. Попробуйте еще раз.")
             }
         } catch (error) {
@@ -226,12 +227,15 @@ export default function RegistrationPage() {
                 toast('Вы успешно зарегистрированы!', {
                     icon: '👏',
                 });
-                // console.log('вы зарегистрированы');
+                setTimeout(()=> {
+                    router.push('/');
+                },2000)
+                console.log('вы зарегистрированы');
 
                 const authMode = await Auth({email: formik.values.email, password: formik.values.password});
 
                 if (authMode.success) {
-                    // setValidationPassword(true);
+                    setValidationPassword(true);
                 }
                 if (authMode.success) {
                     localStorage.removeItem('temp-client');
@@ -252,6 +256,7 @@ export default function RegistrationPage() {
 
     return (
         <>
+            <MainLayout>
             <div className="container mx-auto my-10 text-lg">
                 <div className="flex flex-row justify-center gap-4">
                     <div className="w-full shadow-xl">
@@ -514,7 +519,7 @@ export default function RegistrationPage() {
                 reverseOrder={false}
             />
 
-
+            </MainLayout>
         </>
     )
 }

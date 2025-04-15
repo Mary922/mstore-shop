@@ -1,8 +1,11 @@
 "use client"
 
+import MainLayout from "@/app/ui/MainLayout";
+
 export default function HelpPage() {
     return (
         <>
+            <MainLayout>
             <div className='p-5 mx-60 leading-relaxed'>
             <h1>
                 Оформление и изменение заказа
@@ -60,6 +63,7 @@ export default function HelpPage() {
                 Вы можете уточнить информацию по интересующему Вас вопросу, позвонив в нашу Службу поддержки по телефону 8 (800) 111 11 11 с 9 до 20 по будням. И с 10 до 18 в выходные дни.
             </p>
             </div>
+            </MainLayout>
         </>
     )
 }

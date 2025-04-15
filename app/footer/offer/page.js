@@ -1,8 +1,11 @@
 "use client"
 
+import MainLayout from "@/app/ui/MainLayout";
+
 export default function OfferPage() {
     return (
         <>
+            <MainLayout>
             <div className="p-5 mx-60 leading-relaxed">
                 <section>
                     <h2>
@@ -402,6 +405,7 @@ export default function OfferPage() {
                     </p>
                 </section>
             </div>
+            </MainLayout>
         </>
     )
 }

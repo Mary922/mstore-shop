@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
 import {getProduct} from "@/app/lib/api/products";
 import CarouselComponent from "@/app/common/CarouselComponent";
 import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
+import {createCartThunk} from "@/app/store/slices/cartSlice";
 
 
 export default function ProductPage() {
@@ -236,7 +237,7 @@ export default function ProductPage() {
                                 transition duration-200 ease-in-out hover:bg-gray-600"
                             onClick={
                                 async (event) => {
-                                    setSizesIsShowing(true);
+                                    // setSizesIsShowing(true);
                                     if (chosenSize && client) {
                                         await dispatch(createCartThunk({
                                             clientId: clientId,

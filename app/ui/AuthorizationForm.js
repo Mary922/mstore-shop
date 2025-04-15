@@ -1,7 +1,9 @@
 'use client'
-import React, {useEffect,useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Auth} from "@/app/lib/api/auth";
 import {useRouter, useSearchParams} from "next/navigation";
+import validator from "validator";
+import {resetPasswordRequest} from "@/app/lib/api/forgotPassword";
 
 
 const AuthorizationForm = ({clientId, tempClient}) => {
@@ -9,9 +11,13 @@ const AuthorizationForm = ({clientId, tempClient}) => {
     const searchParams = useSearchParams();
     const from = searchParams.get("from");
 
-    const [email, setEmail] = useState('');
+    const [error, setError] = useState(null);
+
+    const [email, setEmail] = useState('mary_k_92@mail.ru');
     const [password, setPassword] = useState('');
     const [repeatRequestPassword, setRepeatRequestPassword] = useState(false);
+    const [forgotPassword, setForgotPassword] = useState(false);
+    const [emailForgot, setEmailForgot] = useState('56-metall@mail.ru');
 
     // console.log('clientId', clientId);
     // console.log('tempClient', tempClient);
@@ -51,24 +57,50 @@ const AuthorizationForm = ({clientId, tempClient}) => {
     // console.log('client header', client);
 
     const checkClient = async () => {
-        if (clientId || tempClient) {
-            const result = await Auth({email: email, password: password});
-            // console.log('TOKEN RESPONSE', result);
+        try {
+            if (clientId || tempClient) {
+                const result = await Auth({email: email, password: password});
+                console.log('TOKEN RESPONSE', result);
+                setError('Проверьте почту и пароль');
 
-            if (result.data?.accessToken) {
-                console.log('it was succesful auth');
-                localStorage.setItem('client', JSON.stringify(result.data));
-                localStorage.removeItem('temp-client');
-                // localStorage.removeItem('filter-list');
+                if (result?.data?.accessToken) {
+                    console.log('it was succesful auth');
+                    localStorage.setItem('client', JSON.stringify(result.data));
+                    localStorage.removeItem('temp-client');
+                    // localStorage.removeItem('filter-list');
 
-                router.push(from);
-                window.location.reload();
+                    router.push(from);
+                }
+            } else {
+                setRepeatRequestPassword(true);
             }
-        } else {
-            setRepeatRequestPassword(true);
-            alert('No token');
+        } catch (error) {
+            if (error.response?.status === 401) {
+                setError('Invalid credentials. Please check your email/password.'); // Ошибка 401
+            } else {
+                setError('Something went wrong. Please try again.'); // Другие ошибки
+            }
         }
     }
+    const checkFilledInput = async () => {
+        if (!emailForgot?.trim()) {
+            // setError('Заполните email');
+            console.log('email need right')
+            return false;
+        }
+        const isValidEmail = validator.isEmail('emailForgot');
+        if (isValidEmail) {
+            // console.log('email need right')
+            // setError('Введите корректный email');
+            return false;
+        } else {
+            const result = await resetPasswordRequest(emailForgot);
+            console.log('result',result);
+            console.log('email exist lalal');
+        }
+    }
+
+
 
 
     return (
@@ -80,12 +112,18 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                     <li>
                         <div className="text-base font-bold">ВОЙТИ</div>
                     </li>
-                    <li><a className="link link-hover text-base text-neutral" href={'/registration'}>Создать аккаунт</a></li>
+                    <li><a className="link link-hover text-base text-neutral" href={'/registration'}>Создать аккаунт</a>
+                    </li>
                 </div>
 
                 <hr className="border-t border-gray-500 my-4"/>
 
                 <div className="flex flex-col mb-2.5 p-2.5">
+                    {error && (
+                        <div className="text-error">
+                            {error}
+                        </div>
+                    )}
                     <label className="flex items-center gap-2 bg-white">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +136,7 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                                 d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z"/>
                         </svg>
                         <input type="email"
-                               className="input-sm input-bordered grow"
+                               className='input input-bordered input-sm grow'
                                value={email}
                                onChange={(e) => setEmail(e.target.value)}
                                placeholder="Email"
@@ -119,7 +157,7 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                                 clipRule="evenodd"/>
                         </svg>
                         <input type="password"
-                               className="input-sm input-bordered grow"
+                               className='input input-bordered input-sm grow'
                                value={password}
                                onChange={(e) => setPassword(e.target.value)}
                         />
@@ -131,14 +169,46 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                                 transition duration-200 ease-in-out hover:bg-gray-900" onClick={checkClient}>
                     Авторизоваться
                 </button>
+                {/*{*/}
+                {/*    repeatRequestPassword ? <div onClick={async () => {*/}
+                {/*        // setValidationPassword(true);*/}
+                {/*        setRepeatRequestPassword(false);*/}
+                {/*        await registerCl();*/}
+                {/*    }}>запросить пароль еще раз</div> : null*/}
+                {/*}*/}
                 {
-                    repeatRequestPassword ? <div onClick={async ()=>{
-                        // setValidationPassword(true);
-                        setRepeatRequestPassword(false);
-                        await registerCl();
-                    }}>запросить пароль еще раз</div> : null
+                    forgotPassword === false ?
+                        <li><a onClick={() => setForgotPassword(true)}>Забыли пароль?</a></li>
+                        : null
                 }
-                <li><a>Забыли пароль?</a></li>
+                {
+                    forgotPassword &&
+                    <>
+                        <div className='flex flex-row justify-between items-center'>
+                            <div className='text-info my-2'>Укажите почту для восстановления пароля</div>
+                            <div onClick={() => setForgotPassword(false)}>
+                                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                     viewBox="0 0 24 24">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                          strokeWidth="1" d="M6 18 17.94 6M18 18 6.06 6"/>
+                                </svg>
+
+                            </div>
+                        </div>
+                        <div className='flex flex-row w-full gap-2 items-center justify-center'>
+                            <input className='input input-bordered input-sm flex-1 min-w-0'
+                                   value={emailForgot}
+                                   onChange={(e) => setEmailForgot(e.target.value)}
+                            ></input>
+                            <button
+                                className='btn btn-primary btn-sm text-white flex-shrink-0  transition duration-200 ease-in-out hover:bg-gray-900'
+                                onClick={checkFilledInput}
+                            >Отправить ссылку</button>
+                        </div>
+                    </>
+                }
+
             </ul>
 
         </>

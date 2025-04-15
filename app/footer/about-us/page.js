@@ -1,6 +1,8 @@
 "use client"
 
 
+import MainLayout from "@/app/ui/MainLayout";
+
 export default function AboutUsPage() {
 
 
@@ -8,6 +10,7 @@ export default function AboutUsPage() {
 
     return (
         <>
+            <MainLayout>
             <div className='mx-60 p-5 leading-relaxed'>
             <h1>Manyasha Store – лучшее для самых любимых!</h1>
             <div>Одевайте детей красиво с Manyasha Store!
@@ -20,6 +23,7 @@ export default function AboutUsPage() {
 
                 «Manyasha Store » — залог того, что ваш ребенок будет эстетом и модником с самого рождения! Для родителей же приятным сюрпризом окажется весьма демократичная ценовая политика. Теперь роскошная продукция премиум-класса вместе с «Manyasha Store» доступна каждому!  </div>
             </div>
+            </MainLayout>
         </>
     )
 }

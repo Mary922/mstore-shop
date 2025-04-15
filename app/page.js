@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import {getImagesStatic} from "@/app/lib/api/images";
 import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
 import {createNewSubscription} from "@/app/lib/api/subscriptions";
+import MainLayout from "@/app/ui/MainLayout";
 
 
 export default function Home() {
@@ -73,33 +74,33 @@ export default function Home() {
         }
     };
 
-    const checkFilledInput = () => {
-        if (!email) {
-            setError('Заполните поле');
-            setIsSuccess(false);
-            return false;
-        } else if (!validateEmail(email)) {
-            setError('Введите корректный email');
-            setIsSuccess(false);
-            return false;
-        } else {
-            setError('');
-            setIsSuccess(true);
-            return true;
-        }
-    };
-
     // const checkFilledInput = () => {
-    //     if (email === '' || email == null || email.length < 5) {
+    //     if (!email) {
     //         setError('Заполните поле');
-    //     }
-    //     if (!/^\S+@\S+\.\S+$/.test(email)) {
-    //         setError('Введите корректный email');
+    //         setIsSuccess(false);
     //         return false;
+    //     } else if (!validateEmail(email)) {
+    //         setError('Введите корректный email');
+    //         setIsSuccess(false);
+    //         return false;
+    //     } else {
+    //         setError('');
+    //         setIsSuccess(true);
+    //         return true;
     //     }
-    //     setError('');
-    //     return true;
-    // }
+    // };
+
+    const checkFilledInput = () => {
+        if (email === '' || email == null || email.length < 5) {
+            setError('Заполните поле');
+        }
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+            setError('Введите корректный email');
+            return false;
+        }
+        setError('');
+        return true;
+    }
 
     const createSubscription = async () => {
         const isValid = checkFilledInput();
@@ -114,6 +115,7 @@ export default function Home() {
 
     return (
         <>
+            <MainLayout>
             <div className='flex flex-col'>
                 <div>
                     <div className="w-full">
@@ -210,6 +212,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+            </MainLayout>
         </>
     );
 }

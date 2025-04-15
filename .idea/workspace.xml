@@ -4,39 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="cart, styles">
-      <change afterPath="$PROJECT_DIR$/app/babies/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/boys/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/girls/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/lib/api/subscriptions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/ui/CanvasFilterForLinks.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/ui/loaders/ScrollToTop.js" afterDir="false" />
+    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="home links">
+      <change afterPath="$PROJECT_DIR$/app/lib/api/forgotPassword.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/reset-password/[token]/layout.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/reset-password/[token]/page.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/reset-password/layout.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/ui/ForgotPassword.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/ui/MainLayout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/account-addresses/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-addresses/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/account-info/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-info/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/account-navibar.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-navibar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/my-account/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/my-account/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/orders/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/orders/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/wishlist/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/wishlist/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/babies/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/babies/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/boys/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/boys/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/cart/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cart/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/Pagination.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/category/[categoryId]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/category/[categoryId]/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/footer/about-us/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/about-us/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/delivery/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/delivery/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/exchange-return/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/exchange-return/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/help/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/help/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/offer/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/offer/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/payment/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/payment/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/girls/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/girls/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AddressForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AddressForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/maps/YandexMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/maps/YandexMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/modals/ConfirmModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/modals/ConfirmModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/navbars/NavbarHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/NavbarHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/product/[productId]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/product/[productId]/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/registration/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/registration/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/AuthorizationForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AuthorizationForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
@@ -80,7 +68,7 @@
     "Node.js.NavbarHeader.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/Masha/react_projects/nextjs-mystore/app/common",
+    "last_opened_file_path": "/Users/Masha/react_projects/nextjs-mystore/app/reset-password",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -94,18 +82,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/reset-password" />
       <recent name="$PROJECT_DIR$/app/common" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/app/ui/modals" />
       <recent name="$PROJECT_DIR$/app" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/ui" />
-      <recent name="$PROJECT_DIR$/app/home" />
-      <recent name="$PROJECT_DIR$/app/account/my-account" />
-      <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/ui/navbars" />
+      <recent name="$PROJECT_DIR$/app/reset-password/[token]" />
+      <recent name="$PROJECT_DIR$/app/reset-password" />
+      <recent name="$PROJECT_DIR$/app" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -129,7 +117,7 @@
       <workItem from="1741588108854" duration="34550000" />
       <workItem from="1741969568876" duration="2000" />
       <workItem from="1741969669627" duration="1000" />
-      <workItem from="1742484272766" duration="104774000" />
+      <workItem from="1742484272766" duration="136931000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -235,7 +223,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743594006960</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="home links">
+      <option name="closed" value="true" />
+      <created>1744215553863</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1744215553863</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,6 +247,7 @@
     <MESSAGE value="filter &amp; canvas" />
     <MESSAGE value="footer, account" />
     <MESSAGE value="cart, styles" />
-    <option name="LAST_COMMIT_MESSAGE" value="cart, styles" />
+    <MESSAGE value="home links" />
+    <option name="LAST_COMMIT_MESSAGE" value="home links" />
   </component>
 </project>

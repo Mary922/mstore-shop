@@ -7,6 +7,7 @@ import CanvasFilter from "@/app/ui/CanvasFilter";
 import {useRouter, useSearchParams} from "next/navigation";
 import {useAppSelector} from "@/app/lib/hooks";
 import CanvasFiltered from "@/app/ui/CanvasFiltered";
+import MainLayout from "@/app/ui/MainLayout";
 
 
 export default function SearchPage({category}) {
@@ -85,6 +86,7 @@ export default function SearchPage({category}) {
 
     return (
         <>
+            <MainLayout>
 
             <div className='flex flex-col w-full'>
                 <div>
@@ -117,7 +119,7 @@ export default function SearchPage({category}) {
 
                 <div className="grid grid-cols-4 gap-4">{productCards}</div>
             </div>
-
+            </MainLayout>
         </>
     )
 }

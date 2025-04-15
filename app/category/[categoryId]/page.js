@@ -9,6 +9,7 @@ import ProductCard from "@/app/ui/ProductCard";
 import CarouselComponent from "@/app/common/CarouselComponent";
 import FilterComponent from "@/app/ui/FilterComponent";
 import CanvasFilter from "@/app/ui/CanvasFilter";
+import MainLayout from "@/app/ui/MainLayout";
 
 export default function CategoryPage() {
     const params = useParams();
@@ -68,6 +69,7 @@ export default function CategoryPage() {
 
     return (
         <>
+            <MainLayout>
             <div className="flex flex-col w-full bg-gray-100">
                 <div className="mx-5 mt-2">
                     <div className="drawer z-10 flex">
@@ -120,6 +122,7 @@ export default function CategoryPage() {
                 {/*        <button className="btn btn-primary">Buy Now</button>*/}
                 {/*    </div>*/}
                 {/*</div>*/}
+            </MainLayout>
             </>
             )
             }
