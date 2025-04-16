@@ -4,6 +4,7 @@ import {Auth} from "@/app/lib/api/auth";
 import {useRouter, useSearchParams} from "next/navigation";
 import validator from "validator";
 import {resetPasswordRequest} from "@/app/lib/api/forgotPassword";
+import {toast, Toaster} from "react-hot-toast";
 
 
 const AuthorizationForm = ({clientId, tempClient}) => {
@@ -95,6 +96,13 @@ const AuthorizationForm = ({clientId, tempClient}) => {
             return false;
         } else {
             const result = await resetPasswordRequest(emailForgot);
+
+            if (result.success) {
+                setForgotPassword(false);
+                setEmailForgot('');
+
+                // toast.success('Проверьте почту для восстановления пароля');
+            }
             console.log('result',result);
             console.log('email exist lalal');
         }

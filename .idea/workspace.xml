@@ -4,29 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="home links">
-      <change afterPath="$PROJECT_DIR$/app/lib/api/forgotPassword.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/reset-password/[token]/layout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/reset-password/[token]/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/reset-password/layout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/ui/ForgotPassword.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/ui/MainLayout.js" afterDir="false" />
+    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="creating main layout &amp; reset-page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/babies/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/babies/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/boys/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/boys/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/cart/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cart/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/category/[categoryId]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/category/[categoryId]/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/about-us/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/about-us/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/girls/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/girls/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/forgotPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/forgotPassword.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/product/[productId]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/product/[productId]/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/registration/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/registration/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/reset-password/[token]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/reset-password/[token]/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ui/AuthorizationForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AuthorizationForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +100,7 @@
       <workItem from="1741588108854" duration="34550000" />
       <workItem from="1741969568876" duration="2000" />
       <workItem from="1741969669627" duration="1000" />
-      <workItem from="1742484272766" duration="136931000" />
+      <workItem from="1742484272766" duration="148865000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -231,7 +214,23 @@
       <option name="project" value="LOCAL" />
       <updated>1744215553863</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="creating main layout &amp; reset-page">
+      <option name="closed" value="true" />
+      <created>1744717516301</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1744717516301</updated>
+    </task>
+    <task id="LOCAL-00016" summary="creating main layout &amp; reset-page">
+      <option name="closed" value="true" />
+      <created>1744717537082</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1744717537082</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,6 +247,7 @@
     <MESSAGE value="footer, account" />
     <MESSAGE value="cart, styles" />
     <MESSAGE value="home links" />
-    <option name="LAST_COMMIT_MESSAGE" value="home links" />
+    <MESSAGE value="creating main layout &amp; reset-page" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating main layout &amp; reset-page" />
   </component>
 </project>

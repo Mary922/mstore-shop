@@ -6,6 +6,7 @@ import {getProduct} from "@/app/lib/api/products";
 import CarouselComponent from "@/app/common/CarouselComponent";
 import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
 import {createCartThunk} from "@/app/store/slices/cartSlice";
+import MainLayout from "@/app/ui/MainLayout";
 
 
 export default function ProductPage() {
@@ -150,6 +151,7 @@ export default function ProductPage() {
 
     return (
         <>
+            <MainLayout>
             <div className="grid grid-cols-[400px_1fr] px-5 gap-20 py-10 w-full">
                 <div className="flex w-full h-full mx-auto">
                     {
@@ -265,6 +267,7 @@ export default function ProductPage() {
                     </div>
                 </div>
             </div>
+            </MainLayout>
         </>
     )
 

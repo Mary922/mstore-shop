@@ -9,3 +9,12 @@ export const resetPasswordRequest = (email) => {
     });
     return result;
 }
+
+export const changeForgottenPasswordRequest = (token,password) => {
+    let result = Request.post(`${baseURL}/changeForgottenPassword`,{
+        token: token,
+        password: password
+    });
+    return result;
+}
+
