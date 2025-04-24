@@ -2,32 +2,20 @@
 import {useEffect, useState} from "react";
 import {useParams, useRouter} from "next/navigation";
 import {changeForgottenPasswordRequest} from "@/app/lib/api/forgotPassword";
-import {router} from "next/client";
 
-export default function ResetPage() {
+export default function ChangePasswordForm({token}) {
     const router = useRouter();
-    const {token} = useParams();
-
-
-    // const params = useParams();
-    // const token = params.token;
-    console.log('tokentoken', token);
+    // const {token} = useParams();
+    // console.log('tokentoken', token);
 
     const [firstPassword, setFirstPassword] = useState('');
     const [secondPassword, setSecondPassword] = useState('');
-    // const [btnIsDisabled, setBtnIsDisabled] = useState(true);
     const [passwordsMatch, setPasswordsMatch] = useState(false);
     const [showError, setShowError] = useState(false);
-    // console.log('btnIsDisabled', btnIsDisabled);
 
     console.log('firstPassword', firstPassword);
     console.log('secondPassword', secondPassword);
 
-    // const checkFilledInputs = () => {
-    //     if (firstPassword === secondPassword) {
-    //         setBtnIsDisabled(false);
-    //     }
-    // }
     useEffect(()=>{
         const match = firstPassword === secondPassword && firstPassword.length > 0;
         if (firstPassword === secondPassword) {

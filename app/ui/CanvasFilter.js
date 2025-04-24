@@ -191,7 +191,7 @@ const CanvasFilter = ({category}) => {
                 </div>
 
                 <RangeComponent label={'Цена'} minRangeValue={minRangeValue} maxRangeValue={maxRangeValue} onRangeChange={handleRangeChange} />
-                <button className="btn btn-primary" onClick={handleApplyFilter}>Применить</button>
+                <button className="btn btn-primary text-white text-lg" onClick={handleApplyFilter}>Применить</button>
 
         </>
     )

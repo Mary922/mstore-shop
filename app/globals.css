@@ -178,3 +178,21 @@ body {
   /*margin-left: 0;*/
   /*margin: 0;*/
 }
+.dropdown ul {
+  height: auto;
+}
+.column-divider > div:nth-child(n+2)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -8px; /* Отступ вправо */
+  width: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: translateX(-50%); /* Центровка относительно левого края */
+}
+
+/* Позиционирование элементов сетки относительно абсолютному позиционированию */
+.grid.grid-cols-6 > div {
+  position: relative;
+}

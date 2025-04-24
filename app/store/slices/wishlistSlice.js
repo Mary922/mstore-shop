@@ -16,6 +16,7 @@ export const wishlistDeleteThunk = createAsyncThunk(
     "wishlist/deleteWishlist",
     async function getWishlist({id}) {
         const result = await deleteWishlistProduct(id);
+        console.log('result get',result)
         return result.data;
     }
 );

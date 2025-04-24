@@ -87,7 +87,6 @@ export default function SearchPage({category}) {
     return (
         <>
             <MainLayout>
-
             <div className='flex flex-col w-full'>
                 <div>
                     <div className="drawer mb-5 z-10 flex">

@@ -25,12 +25,12 @@ const AccordionComponent = ({name,options, checkedOptions, setCheckedOptions}) =
 
     return (
         <>
-            <details className="collapse collapse-arrow">
-                <summary className="collapse-title text-base font-medium">{name}</summary>
-                <div className="collapse-content">
+            <details className="collapse collapse-arrow py-3">
+                <summary className="collapse-title !min-h-fit !flex !items-center font-medium text-xl">{name}</summary>
+                <div className="collapse-content p-2">
                     {options ? options.map((option, index) => (
-                        <div key={index} className="form-control">
-                            <label className="label">{option.label}
+                        <div key={index} className="form-control py-1">
+                            <label className="label py-1">{option.label}
                                 <input className="custom-checkbox"
                                        type="checkbox"
                                        value={option.value}

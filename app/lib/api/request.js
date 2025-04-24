@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {authHeader} from "./auth";
-import {sessionHeader} from "./session";
 
 const getHeaders = () => {
     return {
@@ -19,9 +18,9 @@ export class Request {
             const result = response.data;
             // console.log('RESULT GET', result);
 
-            if (!response) {
-                throw new  Error('Server error')
-            }
+            // if (!response) {
+            //     throw new  Error('Server error')
+            // }
             return result;
 
         } catch (error) {
@@ -39,9 +38,9 @@ export class Request {
             const result = response.data;
             // console.log('RESULT', result);
 
-            if (!response) {
-                throw new  Error('Server error')
-            }
+            // if (!response) {
+            //     throw new  Error('Server error')
+            // }
             return result;
 
         } catch (error) {

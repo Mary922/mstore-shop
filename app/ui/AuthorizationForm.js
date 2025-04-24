@@ -18,7 +18,7 @@ const AuthorizationForm = ({clientId, tempClient}) => {
     const [password, setPassword] = useState('');
     const [repeatRequestPassword, setRepeatRequestPassword] = useState(false);
     const [forgotPassword, setForgotPassword] = useState(false);
-    const [emailForgot, setEmailForgot] = useState('56-metall@mail.ru');
+    const [emailForgot, setEmailForgot] = useState('mary_k_92@mail.ru');
 
     // console.log('clientId', clientId);
     // console.log('tempClient', tempClient);
@@ -195,7 +195,7 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                         <div className='flex flex-row justify-between items-center'>
                             <div className='text-info my-2'>Укажите почту для восстановления пароля</div>
                             <div onClick={() => setForgotPassword(false)}>
-                                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                <svg className="w-6 h-6 text-gray-800 dark:text-white cursor-pointer" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                      viewBox="0 0 24 24">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"

@@ -3,10 +3,12 @@ import React, {useEffect, useState} from 'react';
 import {getImagesStatic} from "@/app/lib/api/images";
 import AccountForm from "@/app/ui/AccountForm";
 import AuthorizationForm from "@/app/ui/AuthorizationForm";
+import {getDivisionInfo} from "@/app/lib/api/divisions";
 
 const AppFooter = () => {
     const [images, setImages] = useState([]);
     const [favicon, setFavicon] = useState([]);
+    const [phone, setPhone] = useState("");
 
     let baseUrl = 'http://localhost:3001/static';
     const type = 'web';
@@ -30,6 +32,18 @@ const AppFooter = () => {
             }
         })();
     }, [])
+
+    useEffect(()=>{
+        (async () => {
+            const companyInfo = await getDivisionInfo();
+            console.log('companyInfo',companyInfo);
+
+            if (companyInfo?.data) {
+                setPhone(companyInfo.data[0].division_phone);
+            }
+        })();
+    },[])
+
 
     let imagesPathsList = [];
     let list = [];
@@ -69,11 +83,11 @@ const AppFooter = () => {
                     <a href={'/footer/delivery'} className="link link-hover text-neutral-content">Доставка</a>
                     <a href={'/footer/payment'} className="link link-hover text-neutral-content">Оплата</a>
                     <a href={'/footer/exchange-return'} className="link link-hover text-neutral-content">Обмен и возврат</a>
-                    <a href={'/account/my-account'} className="link link-hover text-neutral-content">Мой кабинет</a>
+                    {/*<a href={'/account/my-account'} className="link link-hover text-neutral-content">Мой кабинет</a>*/}
                 </nav>
                 <nav>
                     <h6 className="footer-title">Контакты</h6>
-                    <div className='text-neutral-content'>телефон: </div>
+                    <div className='text-neutral-content'>Телефон: <span className='text-neutral-content text-lg'>+{phone}</span></div>
                     <div className='text-neutral-content flex flex-row items-center gap-2'><span>Оплата картами:</span> {renderImages()} </div>
                 </nav>
             </footer>

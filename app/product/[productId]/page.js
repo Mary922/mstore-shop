@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
 import {getProduct} from "@/app/lib/api/products";
 import CarouselComponent from "@/app/common/CarouselComponent";
 import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
-import {createCartThunk} from "@/app/store/slices/cartSlice";
+import {createCartThunk,increaseCartThunk,getCartThunk} from "@/app/store/slices/cartSlice";
 import MainLayout from "@/app/ui/MainLayout";
 
 
@@ -182,42 +182,42 @@ export default function ProductPage() {
                     {/*<div style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>Размер: {sizes}</div>*/}
 
                     {/*{productsListInCart}*/}
-                    {
-                        sizesIsShowing ? <>
-                            <div style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>{sizes}</div>
-                            <div onClick={() => setSizesIsShowing(false)}>X</div>
-                        </> : null
-                    }
+                    {/*{*/}
+                    {/*    sizesIsShowing ? <>*/}
+                    {/*        <div style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>{sizes}</div>*/}
+                    {/*        <div onClick={() => setSizesIsShowing(false)}>X</div>*/}
+                    {/*    </> : null*/}
+                    {/*}*/}
 
                     <div className='flex flex-row items-center'>
 
-                        <div className="join border border-base-300 rounded-full">
-                            <button
-                                className="join-item btn btn-ghost text-xl w-12 h-12 min-h-0"
-                                onClick={() => decreaseCount(currentProduct.product_id, currentProduct.product_size)}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4"/>
-                                </svg>
-                            </button>
-                            <div className="join-item btn btn-ghost text-xl w-16 pointer-events-none">
-                                {quantity}
-                            </div>
-                            <button
-                                className="join-item btn btn-ghost text-xl w-12 h-12 min-h-0"
-                                onClick={() => {
-                                    setSizesIsShowing(true);
-                                    increaseCount(currentProduct.product_id, chosenSize);
-                                }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                          d="M12 4v16m8-8H4"/>
-                                </svg>
-                            </button>
-                        </div>
+                        {/*<div className="join border border-base-300 rounded-full">*/}
+                        {/*    <button*/}
+                        {/*        className="join-item btn btn-ghost text-xl w-12 h-12 min-h-0"*/}
+                        {/*        onClick={() => decreaseCount(currentProduct.product_id, currentProduct.product_size)}*/}
+                        {/*    >*/}
+                        {/*        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"*/}
+                        {/*             viewBox="0 0 24 24" stroke="currentColor">*/}
+                        {/*            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4"/>*/}
+                        {/*        </svg>*/}
+                        {/*    </button>*/}
+                        {/*    <div className="join-item btn btn-ghost text-xl w-16 pointer-events-none">*/}
+                        {/*        {quantity}*/}
+                        {/*    </div>*/}
+                        {/*    <button*/}
+                        {/*        className="join-item btn btn-ghost text-xl w-12 h-12 min-h-0"*/}
+                        {/*        onClick={async () => {*/}
+                        {/*            // setSizesIsShowing(true);*/}
+                        {/*            await increaseCount(currentProduct.product_id, chosenSize);*/}
+                        {/*        }}*/}
+                        {/*    >*/}
+                        {/*        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"*/}
+                        {/*             viewBox="0 0 24 24" stroke="currentColor">*/}
+                        {/*            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"*/}
+                        {/*                  d="M12 4v16m8-8H4"/>*/}
+                        {/*        </svg>*/}
+                        {/*    </button>*/}
+                        {/*</div>*/}
 
 
                         {/*<div className='flex flex-row text-3xl'>*/}

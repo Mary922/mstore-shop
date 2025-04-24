@@ -6,6 +6,7 @@ import {getImagesStatic} from "@/app/lib/api/images";
 import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
 import {createNewSubscription} from "@/app/lib/api/subscriptions";
 import MainLayout from "@/app/ui/MainLayout";
+import {getDivisionInfo} from "@/app/lib/api/divisions";
 
 
 export default function Home() {
@@ -55,8 +56,10 @@ export default function Home() {
                 });
                 setBaby(babiesPaths);
             }
+
         })();
     }, []);
+
 
     const validateEmail = (email) => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -9,6 +9,7 @@ import {getImagesStatic} from "@/app/lib/api/images";
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
 import Link from "next/link";
 import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
+import {toast, Toaster} from "react-hot-toast";
 
 const ProductCard = ({id, text, images, price, path}) => {
     const dispatch = useAppDispatch();
@@ -67,6 +68,19 @@ const ProductCard = ({id, text, images, price, path}) => {
     }
 
     const checkIfProductExistInWishlist = async () => {
+        if (tempClient) {
+            toast('Для добавления в wishlist необходима авторизация!',
+                {
+                    style: {
+                        borderRadius: '10px',
+                        background: '#333',
+                        color: '#fff',
+                        textAlign: 'center'
+                    },
+                }
+            );
+            return;
+        }
         let found = false;
         for (let i = 0; i < wish.length; i++) {
             if (wish[i] === id) {
@@ -132,7 +146,7 @@ const ProductCard = ({id, text, images, price, path}) => {
                 </div>
 
                 <div
-                    className="absolute top-1 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                    className="absolute -top-2 right-9 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
                     {/*<div className="flex justify-end">*/}
                     <h1>
                         <i className={classes.heart} onClick={event => {
@@ -226,6 +240,10 @@ const ProductCard = ({id, text, images, price, path}) => {
                 <div>
                 </div>
             </div>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
         </>
     )
 }

@@ -15,6 +15,8 @@ import "react-day-picker/style.css";
 import {DatePickerComponent} from "@/app/common/DatePickerComponent";
 import {useAppDispatch} from "@/app/lib/hooks";
 import MainLayout from "@/app/ui/MainLayout";
+import validator from "validator";
+import {resetPasswordRequest} from "@/app/lib/api/forgotPassword";
 
 
 export default function RegistrationPage() {
@@ -39,6 +41,9 @@ export default function RegistrationPage() {
     const [validationPassword, setValidationPassword] = useState(false);
     const [validationPasswordValue, setValidationPasswordValue] = useState('');
     const [repeatRequestPassword, setRepeatRequestPassword] = useState(false);
+
+    const [forgotPassword, setForgotPassword] = useState(false);
+    const [emailForgot, setEmailForgot] = useState('mary_k_92@mail.ru');
 
     console.log('pass',authPassword);
     console.log('email',authEmail);
@@ -254,6 +259,31 @@ export default function RegistrationPage() {
         }
     }
 
+    const checkFilledInput = async () => {
+        if (!emailForgot?.trim()) {
+            // setError('Заполните email');
+            console.log('email need right')
+            return false;
+        }
+        const isValidEmail = validator.isEmail('emailForgot');
+        if (isValidEmail) {
+            // console.log('email need right')
+            // setError('Введите корректный email');
+            return false;
+        } else {
+            const result = await resetPasswordRequest(emailForgot);
+
+            if (result.success) {
+                setForgotPassword(false);
+                setEmailForgot('');
+
+                // toast.success('Проверьте почту для восстановления пароля');
+            }
+            console.log('result',result);
+            console.log('email exist lalal');
+        }
+    }
+
     return (
         <>
             <MainLayout>
@@ -306,7 +336,39 @@ export default function RegistrationPage() {
                                 transition duration-200 ease-in-out hover:bg-gray-900" onClick={checkClient}>
                                     Авторизоваться
                                 </button>
-                                <a>Забыли пароль?</a>
+                                {
+                                    forgotPassword === false ?
+                                        <a className='cursor-pointer' onClick={() => setForgotPassword(true)}>Забыли пароль?</a>
+                                        : null
+                                }
+                                {
+                                    forgotPassword &&
+                                    <>
+                                        <div className='flex flex-row justify-between items-center'>
+                                            <div className='text-info my-2'>Укажите почту для восстановления пароля</div>
+                                            <div onClick={() => setForgotPassword(false)}>
+                                                <svg className="w-6 h-6 text-gray-800 dark:text-white cursor-pointer" aria-hidden="true"
+                                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                                     viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                                          strokeWidth="1" d="M6 18 17.94 6M18 18 6.06 6"/>
+                                                </svg>
+
+                                            </div>
+                                        </div>
+                                        <div className='flex flex-row w-full gap-2 items-center justify-center'>
+                                            <input className='input input-bordered input-sm flex-1 min-w-0'
+                                                   value={emailForgot}
+                                                   onChange={(e) => setEmailForgot(e.target.value)}
+                                            ></input>
+                                            <button
+                                                className='btn btn-primary btn-sm text-white flex-shrink-0  transition duration-200 ease-in-out hover:bg-gray-900'
+                                                onClick={checkFilledInput}
+                                            >Отправить ссылку</button>
+                                        </div>
+                                    </>
+                                }
+                                {/*<a onClick={}>Забыли пароль?</a>*/}
                             </div>
 
                         </div>
@@ -505,6 +567,7 @@ export default function RegistrationPage() {
                                     {/*        await registerClient();*/}
                                     {/*    }}>запросить пароль еще раз</div> : null*/}
                                     {/*}*/}
+
                                 </div>
                             </div>
                         </div>

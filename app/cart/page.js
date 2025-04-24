@@ -339,7 +339,7 @@ export default function CartPage() {
                                     <h1>Корзина пуста</h1>
                                     <div>В корзину ничего не добавлено. Чтобы добавить товары перейдите в каталог</div>
                                     <Link href={'/'}>
-                                        <button className="btn btn-primary my-5">Начать покупки</button>
+                                        <button className="btn btn-primary my-5 text-white">Начать покупки</button>
                                     </Link>
                                 </div>
                             </>

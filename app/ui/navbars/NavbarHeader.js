@@ -169,7 +169,7 @@ const NavbarHeader = () => {
             const childCategories = boys.filter(category => category.parent_id === parent.category_id);
 
             return (
-                <div key={parent.category_id} className="mb-6">
+                <div key={parent.category_id} className="mb-1">
                     {/* 3. Родительская категория (заголовок) */}
                     <div className="font-bold text-lg mb-2">
                         <div
@@ -182,12 +182,12 @@ const NavbarHeader = () => {
                     </div>
 
                     {/* 4. Дочерние категории (список) */}
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 gap-2">
                         {childCategories.map(child => (
                             <Link
                                 key={child.category_id}
                                 href={`/category/${child.category_id}`}
-                                className="text-neutral no-underline hover:text-black block py-1"
+                                className="text-neutral no-underline hover:text-black block"
                                 onClick={handleClickDropdown}
                             >
                                 {child.category_name}
@@ -211,7 +211,7 @@ const NavbarHeader = () => {
             const childCategories = girls.filter(category => category.parent_id === parent.category_id);
 
             return (
-                <div key={parent.category_id} className="mb-6">
+                <div key={parent.category_id} className="mb-1">
                     {/* 3. Родительская категория (заголовок) */}
                     <div className="font-bold text-lg mb-2">
                         <div
@@ -224,12 +224,12 @@ const NavbarHeader = () => {
                     </div>
 
                     {/* 4. Дочерние категории (список) */}
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 gap-2">
                         {childCategories.map(child => (
                             <Link
                                 key={child.category_id}
                                 href={`/category/${child.category_id}`}
-                                className="text-neutral no-underline hover:text-black block py-1"
+                                className="text-neutral no-underline hover:text-black block"
                                 onClick={handleClickDropdown}
                             >
                                 {child.category_name}
@@ -307,9 +307,9 @@ return (
                     </div>
                     <ul
                         tabIndex={0}
-                        className="bg-base-100 menu dropdown-content rounded-box z-[1] shadow-lg w-screen">
+                        className="bg-base-100 menu dropdown-content rounded-box z-[1] shadow-lg w-[1100px]">
                         <div
-                            className="grid grid-cols-6 h-auto text-sm p-5 leading-normal container">{renderBoysLinks()}</div>
+                            className="grid grid-cols-6 text-sm pl-5 justify-center justify-items-center column-divider">{renderBoysLinks()}</div>
                     </ul>
                 </div>
 
@@ -321,13 +321,13 @@ return (
                     </div>
                     <ul
                         tabIndex={0}
-                        className="bg-base-100 menu dropdown-content rounded-box z-[1] shadow-lg w-screen">
+                        className="bg-base-100 menu dropdown-content rounded-box z-[1] shadow-lg w-[1100px]">
                         <div
-                            className="grid grid-cols-6 h-auto text-sm p-5 leading-normal container">{renderGirlsLinks()}</div>
+                            className="grid grid-cols-6 text-sm pl-5 justify-center justify-items-center column-divider">{renderGirlsLinks()}</div>
                     </ul>
                 </div>
                 <Link href='/footer/contacts' className="btn btn-ghost btn-square mr-8 w-auto">
-                    <div className='font-normal text-lg px-2 '>Магазины</div>
+                    <div className='font-normal text-lg px-2'>Магазины</div>
                 </Link>
             </div>
 

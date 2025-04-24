@@ -18,3 +18,10 @@ export const changeForgottenPasswordRequest = (token,password) => {
     return result;
 }
 
+export const checkTokenNotExpired = (token) => {
+    let result = Request.post(`${baseURL}/checkTokenNotExpired`,{
+        token: token,
+    });
+    return result;
+}
+
