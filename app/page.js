@@ -7,6 +7,10 @@ import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
 import {createNewSubscription} from "@/app/lib/api/subscriptions";
 import MainLayout from "@/app/ui/MainLayout";
 import {getDivisionInfo} from "@/app/lib/api/divisions";
+import Link from "next/link";
+import {getCategories} from "@/app/lib/api/categories";
+import {getProductsBoys} from "@/app/lib/api/products";
+import {GENDER} from "@/constants";
 
 
 export default function Home() {
@@ -59,7 +63,6 @@ export default function Home() {
 
         })();
     }, []);
-
 
     const validateEmail = (email) => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -115,7 +118,6 @@ export default function Home() {
         }
     }
 
-
     return (
         <>
             <MainLayout>
@@ -136,8 +138,8 @@ export default function Home() {
                             alt="Boys"
                             className='w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105'
                         />
-                        <a
-                            href="/boys"
+                        <Link
+                            href={`/catalog?gender=${GENDER.MALE}`}
                             className="no-underline absolute inset-0 flex items-center justify-center bg-black/30
                             transition-all duration-300 opacity-0 group-hover:opacity-100"
                         >
@@ -145,7 +147,7 @@ export default function Home() {
                                 className="btn btn-ghost glass text-white font-bold text-lg px-6 py-3 shadow-lg hover:scale-105 transition-transform">
                                 Boys Collection
                             </button>
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="flex-1 max-w-[30%] relative group overflow-hidden rounded-lg">
@@ -173,7 +175,7 @@ export default function Home() {
                             className='w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105'
                         />
                         <a
-                            href="/girls"
+                            href={`/catalog?gender=${GENDER.FEMALE}`}
                             className="no-underline absolute inset-0 flex items-center justify-center bg-black/30 transition-all duration-300 opacity-0 group-hover:opacity-100"
                         >
                             <button

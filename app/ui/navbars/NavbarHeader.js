@@ -186,7 +186,7 @@ const NavbarHeader = () => {
                         {childCategories.map(child => (
                             <Link
                                 key={child.category_id}
-                                href={`/category/${child.category_id}`}
+                                href={`/catalog?category=${child.category_id}&gender=${child.gender}`}
                                 className="text-neutral no-underline hover:text-black block"
                                 onClick={handleClickDropdown}
                             >
@@ -228,7 +228,7 @@ const NavbarHeader = () => {
                         {childCategories.map(child => (
                             <Link
                                 key={child.category_id}
-                                href={`/category/${child.category_id}`}
+                                href={`/catalog?category=${child.category_id}&gender=${child.gender}`}
                                 className="text-neutral no-underline hover:text-black block"
                                 onClick={handleClickDropdown}
                             >
@@ -307,7 +307,7 @@ return (
                     </div>
                     <ul
                         tabIndex={0}
-                        className="bg-base-100 menu dropdown-content rounded-box z-[1] shadow-lg w-[1100px]">
+                        className="bg-base-100 menu dropdown-content rounded-box z-[20] shadow-lg w-[1100px]">
                         <div
                             className="grid grid-cols-6 text-sm pl-5 justify-center justify-items-center column-divider">{renderBoysLinks()}</div>
                     </ul>
@@ -321,7 +321,7 @@ return (
                     </div>
                     <ul
                         tabIndex={0}
-                        className="bg-base-100 menu dropdown-content rounded-box z-[1] shadow-lg w-[1100px]">
+                        className="bg-base-100 menu dropdown-content rounded-box z-[20] shadow-lg w-[1100px]">
                         <div
                             className="grid grid-cols-6 text-sm pl-5 justify-center justify-items-center column-divider">{renderGirlsLinks()}</div>
                     </ul>

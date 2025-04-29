@@ -36,7 +36,6 @@ const AppFooter = () => {
     useEffect(()=>{
         (async () => {
             const companyInfo = await getDivisionInfo();
-            console.log('companyInfo',companyInfo);
 
             if (companyInfo?.data) {
                 setPhone(companyInfo.data[0].division_phone);

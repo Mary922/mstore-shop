@@ -8,38 +8,18 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {useAppSelector} from "@/app/lib/hooks";
 import CanvasFiltered from "@/app/ui/CanvasFiltered";
 import MainLayout from "@/app/ui/MainLayout";
+import {applyFilterParams} from "@/app/lib/api/filter";
 
 
 export default function SearchPage({category}) {
     const router = useRouter();
     const searchParams = useSearchParams();
+    console.log('searchParams',searchParams);
 
     const productsList = useAppSelector(state => state.common.filteredProductIds);
     const [products, setProducts] = useState([]);
 
-    const categoryFilterParam = searchParams.get('category');
-    console.log("categoryFilterParam", categoryFilterParam);
 
-    const sizesFilterParam = JSON.parse(searchParams.get('sizes'));
-    console.log("sizesFilterParam", sizesFilterParam);
-
-    const colorsFilterParam = JSON.parse(searchParams.get('colors'));
-    console.log("colorsFilterParam", colorsFilterParam);
-
-    const seasonsFilterParam = JSON.parse(searchParams.get('seasons'));
-    console.log("seasonsFilterParam", seasonsFilterParam);
-
-    const brandsFilterParam = JSON.parse(searchParams.get('brands'));
-    console.log("brandsFilterParam", brandsFilterParam);
-
-    const countriesFilterParam = JSON.parse(searchParams.get('countries'));
-    console.log("countriesFilterParam", countriesFilterParam);
-
-    const minPriceFilterParam = searchParams.get('minPrice');
-    console.log("minPriceFilterParam", minPriceFilterParam);
-
-    const maxPriceFilterParam = searchParams.get('maxPrice');
-    console.log("maxPriceFilterParam", maxPriceFilterParam);
 
     // let chosenSizes = [];
     // useEffect(()=>{
@@ -50,14 +30,45 @@ export default function SearchPage({category}) {
     // console.log('chosenSizes',chosenSizes);
 
 
+
     useEffect(() => {
+
+        const categoryFilterParam = searchParams.get('category');
+        console.log("categoryFilterParam", categoryFilterParam);
+
+        const sizesFilterParam = JSON.parse(searchParams.get('sizes'));
+        console.log("sizesFilterParam", sizesFilterParam);
+
+        const colorsFilterParam = JSON.parse(searchParams.get('colors'));
+        console.log("colorsFilterParam", colorsFilterParam);
+
+        const seasonsFilterParam = JSON.parse(searchParams.get('seasons'));
+        console.log("seasonsFilterParam", seasonsFilterParam);
+
+        const brandsFilterParam = JSON.parse(searchParams.get('brands'));
+        console.log("brandsFilterParam", brandsFilterParam);
+
+        const countriesFilterParam = JSON.parse(searchParams.get('countries'));
+        console.log("countriesFilterParam", countriesFilterParam);
+
+        const minPriceFilterParam = searchParams.get('minPrice');
+        console.log("minPriceFilterParam", minPriceFilterParam);
+
+        const maxPriceFilterParam = searchParams.get('maxPrice');
+        console.log("maxPriceFilterParam", maxPriceFilterParam);
+
+
+
         (async () => {
             if (productsList && productsList.length > 0) {
-                const result = await getProductsByIds(productsList);
-                // console.log('result PROD',result);
-                if (result?.data) {
-                    setProducts(result.data);
-                }
+                // const searchResult = await
+
+
+                // const result = await getProductsByIds(productsList);
+                // // console.log('result PROD',result);
+                // if (result?.data) {
+                //     setProducts(result.data);
+                // }
             }
 
             // const url = window.location.href;
@@ -87,9 +98,9 @@ export default function SearchPage({category}) {
     return (
         <>
             <MainLayout>
-            <div className='flex flex-col w-full'>
-                <div>
-                    <div className="drawer mb-5 z-10 flex">
+            <div className='flex flex-col w-full bg-gray-100'>
+                <div className="mx-5 mt-2">
+                    <div className="drawer z-10 flex">
                         <label htmlFor="my-drawer">
                             <svg className="w-full h-full text-gray-800 dark:text-white cursor-pointer"
                                  aria-hidden="true"
@@ -104,19 +115,20 @@ export default function SearchPage({category}) {
                         <div className="drawer-side">
                             <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
                             <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-                                <CanvasFiltered filteredSizes={sizesFilterParam}/>
+                                {/*<CanvasFiltered filteredSizes={sizesFilterParam}/>*/}
+                                {/*<CanvasFilter category={categoryFilterParam} />*/}
                             </div>
                         </div>
                         <button className="btn btn-ghost" onClick={handleGoBack}>Очистить фильтры Х</button>
-                        {
-                            sizesFilterParam ? <div></div> : ''
-                        }
+                        {/*{*/}
+                        {/*    sizesFilterParam ? <div></div> : ''*/}
+                        {/*}*/}
 
                     </div>
 
                 </div>
 
-                <div className="grid grid-cols-4 gap-4">{productCards}</div>
+                <div className="grid grid-cols-4 mb-10 gap-5 p-10">{productCards}</div>
             </div>
             </MainLayout>
         </>

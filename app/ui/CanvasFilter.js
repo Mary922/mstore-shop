@@ -1,5 +1,5 @@
 "use client"
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useDispatch} from "react-redux";
 import {applyFilterParams, getFilterParams} from "@/app/lib/api/filter";
 import {getMaxPrice} from "@/app/lib/api/prices";
@@ -12,13 +12,14 @@ import {getFilteredProducts} from "@/app/store/slices/appCommonSlice";
 import {setSearchParams} from "@/app/store/slices/searchParamsSlice";
 
 
-const CanvasFilter = ({category}) => {
+const CanvasFilter = ({category,gender,drawerToggleRef}) => {
     const dispatch = useDispatch();
     const router = useRouter();
     const searchParams = useSearchParams();
 
     const [filterItems, setFilterItems] = useState([]);
     const [names, setNames] = useState([]);
+    const [filterApplied, setFilterApplied] = useState(false);
 
     // const [show, setShow] = useState(false);
 
@@ -30,11 +31,27 @@ const CanvasFilter = ({category}) => {
 
     const [minRangeValue, setMinRangeValue] = useState(0);
     const [maxRangeValue, setMaxRangeValue] = useState(0);
+    const [initialMaxRangeValue, setInitialMaxRangeValue] = useState(null);
 
     const handleRangeChange = useCallback((newMinRangeValue, newMaxRangeValue) => {
         setMinRangeValue(newMinRangeValue);
         setMaxRangeValue(newMaxRangeValue);
     }, []);
+
+
+    // useEffect(()=>{
+    //     const handleBeforeUnload = () => {
+    //         if (drawerToggleRef.current) {
+    //             drawerToggleRef.current.checked = false;
+    //         }
+    //     }
+    //     window.addEventListener("popstate", handleBeforeUnload);
+    //     return () => {
+    //         window.removeEventListener("popstate", handleBeforeUnload);
+    //     }
+    //
+    //
+    // },[])
 
 
     useEffect(() => {
@@ -48,20 +65,43 @@ const CanvasFilter = ({category}) => {
             const resultMax = await getMaxPrice();
             if (resultMax?.data) {
                 setMaxRangeValue(resultMax.data.maxPrice);
+                setInitialMaxRangeValue(resultMax.data.maxPrice);
             }
         })()
-    }, [checkedOptionsSeasons])
+    }, [])
 
     const checkChangedFilter = () => {
         if (checkedOptionsBrands.length > 0 || checkedOptionsColors.length > 0 || checkedOptionsCountries.length > 0 || checkedOptionsSeasons.length > 0 || checkedOptionsSizes.length > 0) {
-            console.log('changes smth')
+            console.log('changes smth');
         }
     }
+
+    useEffect(() => {
+        const hasChanges =
+            checkedOptionsSizes.length ||
+            checkedOptionsColors.length ||
+            checkedOptionsSeasons.length ||
+            checkedOptionsBrands.length ||
+            checkedOptionsCountries.length ||
+            minRangeValue !== 0 ||
+            maxRangeValue !== initialMaxRangeValue;
+
+        setFilterApplied(hasChanges);
+    }, [
+        checkedOptionsSizes,
+        checkedOptionsColors,
+        checkedOptionsSeasons,
+        checkedOptionsBrands,
+        checkedOptionsCountries,
+        minRangeValue,
+        maxRangeValue
+    ])
 
     const handleApplyFilter = async () => {
          checkChangedFilter();
         const result = await applyFilterParams(
             category,
+            gender,
             minRangeValue,
             maxRangeValue,
             checkedOptionsSizes,
@@ -73,6 +113,7 @@ const CanvasFilter = ({category}) => {
 
         const newSearchParams = new URLSearchParams();
         if (category) newSearchParams.set('category', category);
+        if (gender) newSearchParams.set('gender', gender);
         if (checkedOptionsSizes.length > 0) newSearchParams.set('sizes', JSON.stringify(checkedOptionsSizes));
         if (checkedOptionsColors.length > 0) newSearchParams.set('colors', JSON.stringify(checkedOptionsColors));
         if (checkedOptionsSeasons.length > 0) newSearchParams.set('seasons', JSON.stringify(checkedOptionsSeasons));
@@ -96,34 +137,22 @@ const CanvasFilter = ({category}) => {
 
         let ids = [];
         if (result?.data?.length > 0) {
-            console.log('result', result);
+            console.log('result FILTER NEW', result);
             for (let i = 0; i < result?.data?.length; i++) {
                 ids.push(result?.data[i].product_id);
             }
             await dispatch(getFilteredProducts(ids));
 
-            router.push(`/search?${newSearchParams.toString()}`);
+            if (drawerToggleRef.current) {
+                drawerToggleRef.current.checked = false;
+            }
+
+            router.push(`/catalog?${newSearchParams.toString()}`);
         } else {
-           console.log('no such products')
+            router.push(`/catalog?${newSearchParams.toString()}`);
+           console.log('no such products');
         }
-
-
-
-
-
-        // let ids = [];
-        // if (result?.data.length > 0) {
-        //     console.log('result',result);
-        //
-        //     for (let i = 0; i < result?.data?.length; i++) {
-        //         ids.push(result?.data[i].product_id);
-        //     }
-        //
-        //     await dispatch(getFilteredProducts(ids));
-        //
-        //     // navigate(`/search?${searchParams.toString()}`);
-        // }
-        // console.log('ids',ids)
+        console.log('ids',ids)
     }
 
     return (
@@ -191,7 +220,11 @@ const CanvasFilter = ({category}) => {
                 </div>
 
                 <RangeComponent label={'Цена'} minRangeValue={minRangeValue} maxRangeValue={maxRangeValue} onRangeChange={handleRangeChange} />
-                <button className="btn btn-primary text-white text-lg" onClick={handleApplyFilter}>Применить</button>
+            {
+                filterApplied && (
+                    <button className="btn btn-primary text-white text-lg"
+                            onClick={handleApplyFilter}>Применить</button>)
+            }
 
         </>
     )

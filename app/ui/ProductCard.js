@@ -121,7 +121,9 @@ const ProductCard = ({id, text, images, price, path}) => {
     }
 
     let imagePathsInCarousel = [];
-    images.map(image => imagePathsInCarousel.push(image.image_path));
+    if (images && images.length > 0) {
+        images.map(image => imagePathsInCarousel.push(image.image_path));
+    }
 
     // hover:scale-105 transition-all duration-2000
 

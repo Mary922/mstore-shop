@@ -8,13 +8,13 @@ export const getFilterParams = () => {
     return result;
 }
 
-export const applyFilterParams = (category,minRangeValue,maxRangeValue,sizes,colors,seasons,brands,countries) => {
+export const applyFilterParams = (category,gender,minRangeValue,maxRangeValue,sizes,colors,seasons,brands,countries) => {
 
     const params = new URLSearchParams();
 
-
-    console.log('apply sizes',sizes)
-    console.log('categoryyyyyy',category);
+    //
+    // console.log('apply sizes',sizes)
+    // console.log('categoryyyyyy',category);
 
 
     // if (category) params.set('category', category);
@@ -37,6 +37,10 @@ export const applyFilterParams = (category,minRangeValue,maxRangeValue,sizes,col
     //     // params.append('category', category);
     //     params.set('category', category);
     // }
+    // if (gender) {
+    //     // params.append('category', category);
+    //     params.set('gender', gender);
+    // }
     //
     // if (Array.isArray(sizes)) {
     //     params.set('sizes', JSON.stringify(sizes));
@@ -58,16 +62,11 @@ export const applyFilterParams = (category,minRangeValue,maxRangeValue,sizes,col
     // params.append('minRangeValue', minRangeValue);
     // params.append('maxRangeValue', maxRangeValue);
 
-
-
-
-
-
-
-
-
     if (category) {
         params.append('category', category);
+    }
+    if (gender) {
+        params.append('gender', gender);
     }
 
     if (Array.isArray(sizes)) {
@@ -86,11 +85,15 @@ export const applyFilterParams = (category,minRangeValue,maxRangeValue,sizes,col
         countries.forEach(country => params.append('countries', country));
     }
 
-    params.append('minRangeValue', minRangeValue);
-    params.append('maxRangeValue', maxRangeValue);
+    if (minRangeValue) {
+        params.append('minRangeValue', minRangeValue);
+    }
+    if (maxRangeValue) {
+        params.append('maxRangeValue', maxRangeValue);
+    }
 
-    if (minRangeValue) params.set('minPrice', minRangeValue.toString());
-    if (maxRangeValue) params.set('maxPrice', maxRangeValue.toString());
+    // if (minRangeValue) params.set('minPrice', minRangeValue.toString());
+    // if (maxRangeValue) params.set('maxPrice', maxRangeValue.toString());
 
     console.log('PARAMS',params.toString());
 
