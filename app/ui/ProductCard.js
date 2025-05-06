@@ -11,7 +11,7 @@ import Link from "next/link";
 import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
 import {toast, Toaster} from "react-hot-toast";
 
-const ProductCard = ({id, text, images, price, path}) => {
+const ProductCard = ({id, text, images, price, path,isOpen,onClick}) => {
     const dispatch = useAppDispatch();
     const [isAddedToWishlist, setIsAddedToWishlist] = useState(false);
 
@@ -63,7 +63,12 @@ const ProductCard = ({id, text, images, price, path}) => {
                 }
             }
             sizes.push(<div className={`${sizeClass}`} key={i}
-                            onClick={() => checkFilledSize(currentProduct.Sizes[i])}>{currentProduct.Sizes[i].size_name}</div>)
+                            onClick={() => setChosenSize(currentProduct.Sizes[i].size_name)}>
+                {currentProduct.Sizes[i].size_name}
+            </div>);
+
+            // sizes.push(<div className={`${sizeClass}`} key={i}
+            //                 onClick={() => checkFilledSize(currentProduct.Sizes[i])}>{currentProduct.Sizes[i].size_name}</div>)
         }
     }
 
@@ -167,14 +172,23 @@ const ProductCard = ({id, text, images, price, path}) => {
                         </div>
                     </div>
 
-                    {
-                        sizesIsShowing ? <>
+
+
+                        {isOpen && (
                             <div className="flex flex-row items-center justify-center p-1 mb-3">
                                 <div className="flex flex-row flex-wrap">{sizes}</div>
-                                <div className="cursor-pointer" onClick={() => setSizesIsShowing(false)}>X</div>
                             </div>
-                        </> : null
+                        )
                     }
+
+                    {/*{*/}
+                    {/*    sizesIsShowing ? <>*/}
+                    {/*        <div className="flex flex-row items-center justify-center p-1 mb-3">*/}
+                    {/*            <div className="flex flex-row flex-wrap">{sizes}</div>*/}
+                    {/*            <div className="cursor-pointer" onClick={() => setSizesIsShowing(false)}>X</div>*/}
+                    {/*        </div>*/}
+                    {/*    </> : null*/}
+                    {/*}*/}
 
 
                     <div className="absolute bottom-0 left-0 right-0 p-2 opacity-0 group-hover:opacity-100
@@ -187,6 +201,7 @@ const ProductCard = ({id, text, images, price, path}) => {
               hover:scale-[1.02] active:scale-100"
                             onClick={async (event) => {
                                 setSizesIsShowing(true);
+                                await onClick();
                                 event.stopPropagation();
                                 if (chosenSize && client) {
                                     await dispatch(createCartThunk({

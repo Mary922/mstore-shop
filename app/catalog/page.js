@@ -7,6 +7,7 @@ import {useAppSelector} from "@/app/lib/hooks";
 import MainLayout from "@/app/ui/MainLayout";
 import {applyFilterParams} from "@/app/lib/api/filter";
 import CanvasFilter from "@/app/ui/CanvasFilter";
+import {getMaxPrice} from "@/app/lib/api/prices";
 
 
 export default function CatalogPage() {
@@ -16,10 +17,91 @@ export default function CatalogPage() {
 
 
     const productsList = useAppSelector(state => state.common.filteredProductIds);
-    console.log('productsList',productsList);
+    // console.log('productsList',productsList);
     const [products, setProducts] = useState([]);
     const [category, setCategory] = useState(null);
     const [gender, setGender] = useState(null);
+
+    const [activeProductId, setActiveProductId] = useState(null);
+    const [filterApplied, setFilterApplied] = useState(false);
+
+    const [colors, setColors] = useState([]);
+    const [sizes, setSizes] = useState([]);
+    const [brands, setBrands] = useState([]);
+    const [countries, setCountries] = useState([]);
+    const [seasons, setSeasons] = useState([]);
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(null);
+    const [initialMaxPrice, setInitialMaxPrice] = useState(null);
+
+    useEffect(()=> {
+        (async () => {
+            try {
+                const result = await getMaxPrice();
+                if (result?.data) {
+                    setInitialMaxPrice(result.data.maxPrice);
+                }
+            } catch (error) {
+                console.log('Error fetching max price:', error);
+            }
+
+        })()
+    },[])
+
+    const updateQueryParameter = (key, value) => {
+        const nextParams = new URLSearchParams(searchParams.toString()); // Копия текущих параметров
+
+        if (value === '') {
+            nextParams.delete(key); // Удаляем параметр, если значение пустое
+        } else {
+            nextParams.set(key, value); // Иначе устанавливаем новое значение
+        }
+        router.push(`?${nextParams.toString()}`, undefined, { scroll: false });
+    };
+
+
+    const clearFilter = (type) => {
+        switch(type) {
+            case 'color':
+                setColors([]);
+                updateQueryParameter('colors', '');
+                break;
+            case 'size':
+                setSizes([]);
+                updateQueryParameter('sizes', '');
+                break;
+            case 'brand':
+                setBrands([]);
+                updateQueryParameter('brands', '');
+                break;
+            case 'country':
+                setCountries([]);
+                updateQueryParameter('countries', '');
+                break;
+            case 'season':
+                setSeasons([]);
+                updateQueryParameter('seasons', '');
+                break;
+            case 'minPrice':
+                setMinPrice(0);
+                updateQueryParameter('minPrice', '');
+                break;
+            case 'maxPrice':
+                setMaxPrice(null);
+                updateQueryParameter('maxPrice', initialMaxPrice);
+                break;
+            default:
+                break;
+        }
+    };
+
+    const toggleSizeDropdown = (id) => {
+        if(activeProductId === id){
+            setActiveProductId(null);   // Закрываем список, если кликнули повторно на открытом товаре
+        } else{
+            setActiveProductId(id);     // Открываем список для нового товара
+        }
+    };
 
 
     // let chosenSizes = [];
@@ -35,32 +117,40 @@ export default function CatalogPage() {
     useEffect(() => {
         (async () => {
             const categoryFilterParam = searchParams.get('category');
-            console.log("categoryFilterParam22", categoryFilterParam);
+            // console.log("categoryFilterParam22", categoryFilterParam);
             setCategory(categoryFilterParam);
 
             const genderFilterParam = searchParams.get('gender');
-            console.log("genderFilterParam4444", genderFilterParam);
+            // console.log("genderFilterParam4444", genderFilterParam);
             setGender(genderFilterParam);
 
             const sizesFilterParam = JSON.parse(searchParams.get('sizes'));
+            setSizes(sizesFilterParam || []);
             // console.log("sizesFilterParam", sizesFilterParam);
 
             const colorsFilterParam = JSON.parse(searchParams.get('colors'));
+            setColors(colorsFilterParam || []);
             // console.log("colorsFilterParam", colorsFilterParam);
 
             const seasonsFilterParam = JSON.parse(searchParams.get('seasons'));
+            setSeasons(seasonsFilterParam || []);
             // console.log("seasonsFilterParam", seasonsFilterParam);
 
             const brandsFilterParam = JSON.parse(searchParams.get('brands'));
+            setBrands(brandsFilterParam || []);
+
             // console.log("brandsFilterParam", brandsFilterParam);
 
             const countriesFilterParam = JSON.parse(searchParams.get('countries'));
+            setCountries(countriesFilterParam || []);
             // console.log("countriesFilterParam", countriesFilterParam);
 
             const minPriceFilterParam = searchParams.get('minPrice');
+            setMinPrice(minPriceFilterParam);
             // console.log("minPriceFilterParam", minPriceFilterParam);
 
             const maxPriceFilterParam = searchParams.get('maxPrice');
+            setMaxPrice(maxPriceFilterParam);
             // console.log("maxPriceFilterParam", maxPriceFilterParam);
 
             const result = await applyFilterParams(
@@ -74,34 +164,32 @@ export default function CatalogPage() {
                 brandsFilterParam,
                 countriesFilterParam,
             )
-            console.log("result of FILTERRR", result);
+            // console.log("result of FILTERRR", result);
 
             if (result?.data) {
                 setProducts(result.data);
             }
-
-
-
-            // if (productsList && productsList.length > 0) {
-
-
-
-                // const result = await getProductsByIds(productsList);
-                // // console.log('result PROD',result);
-                // if (result?.data) {
-                //     setProducts(result.data);
-                // }
+            // if (colorsFilterParam) {
+            //     // setFilterApplied(true);
+            //     // console.log('dadada')
+            //     setColors(colorsFilterParam);
             // }
-
-            // const url = window.location.href;
-            // const searchParams = new URLSearchParams(url);
-            // console.log('searchParams',searchParams);
 
         })();
     }, [productsList,searchParams]);
 
 
-    // console.log('products', products);
+    // const handleClearAllFilters = () => {
+    //     setColors([]);
+    //     // очищаем другие состояния фильтров
+    //     router.push(router.asPath.split('?')[0], undefined, { scroll: false });
+    // };
+
+    // const handleClearColors = () => {
+    //     setColors([]);
+    //     updateQueryParameter('colors', ''); // Очищаем параметр цвета
+    // };
+
 
     const productCards = [];
     products.map(product => {
@@ -110,6 +198,8 @@ export default function CatalogPage() {
                                        price={product.price}
                                        text={product.product_name}
                                        images={product.Images}
+                                       isOpen={activeProductId === product.product_id}
+                                       onClick={() => toggleSizeDropdown(product.product_id)}
         />);
     })
     const handleGoBack = () => {
@@ -143,14 +233,86 @@ export default function CatalogPage() {
                                         <label htmlFor="my-drawer" aria-label="close sidebar"
                                                className="drawer-overlay"></label>
                                         <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-
-                                            {/*<CanvasFiltered filteredSizes={sizesFilterParam}/>*/}
-
                                             <CanvasFilter drawerToggleRef={drawerToggleRef} category={category}
                                                           gender={gender}/>
                                         </div>
                                     </div>
-                                    <button className="btn btn-ghost" onClick={handleGoBack}>Очистить фильтры Х</button>
+                                    {
+                                        category || gender ? null
+                                            :
+                                            <button className="btn btn-ghost" onClick={handleGoBack}>Очистить фильтры
+                                                Х</button>
+
+                                    }
+
+                                    {/*{*/}
+                                    {/*    filterApplied && (*/}
+                                    {/*        <button className="btn btn-ghost" onClick={handleGoBack}>Цвет*/}
+                                    {/*            Х</button>)*/}
+                                    {/*}*/}
+
+                                    {
+                                        sizes && sizes.length > 0 && (
+                                            <button className="btn btn-ghost" onClick={() => clearFilter('size')}>
+                                                Очистить размеры Х
+                                            </button>
+                                        )
+                                    }
+                                    {
+                                        brands && brands.length > 0 && (
+                                            <button className="btn btn-ghost" onClick={() => clearFilter('brand')}>
+                                                Очистить бренды Х
+                                            </button>
+                                        )
+                                    }
+                                    {
+                                        countries && countries.length > 0 && (
+                                            <button className="btn btn-ghost" onClick={() => clearFilter('country')}>
+                                                Очистить страны Х
+                                            </button>
+                                        )
+                                    }
+                                    {
+                                        colors && colors.length > 0 && (
+                                            <button className="btn btn-ghost" onClick={() => clearFilter('color')}>
+                                                Очистить цвета Х
+                                            </button>
+                                        )
+                                    }
+                                    {
+                                        seasons && seasons.length > 0 && (
+                                            <button className="btn btn-ghost" onClick={() => clearFilter('season')}>
+                                                Очистить сезон Х
+                                            </button>
+                                        )
+                                    }
+                                    {
+                                        minPrice && (
+                                            <button className="btn btn-ghost" onClick={() => clearFilter('minPrice')}>
+                                                Очистить min цену Х
+                                            </button>
+                                        )
+                                    }
+                                    {
+                                        maxPrice ?
+                                            <button className="btn btn-ghost" onClick={() => clearFilter('maxPrice')}>
+                                                Очистить max цену Х
+                                            </button> : null
+                                    }
+                                {/*    {*/}
+                                {/*        maxPrice && maxPrice > 0 ? 'f' :*/}
+                                {/*            <button className="btn btn-ghost" onClick={() => clearFilter('maxPrice')}>*/}
+                                {/*    Очистить max цену Х*/}
+                                {/*</button>*/}
+                                {/*    }*/}
+
+
+                                    {/*{*/}
+                                    {/*    colors &&*/}
+                                    {/*    <button className="btn btn-ghost" onClick={handleClearColors}>*/}
+                                    {/*        Очистить цвета*/}
+                                    {/*    </button>*/}
+                                    {/*}*/}
 
 
                                     {/*{*/}
@@ -173,7 +335,6 @@ export default function CatalogPage() {
                             </div>
                                 </>
                                 }
-
                             </MainLayout>
                         </>
                     )

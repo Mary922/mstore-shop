@@ -36,7 +36,7 @@ const ScrollToTopComponent = () => {
                     aria-label="Scroll to top"
                     className="p-2 bg-gray-100 dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-200
                     dark:hover:bg-gray-700 transition-colors duration-300
-                    focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
+                    focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 btn-scroll"
                 >
                     <svg
                         className="w-6 h-6"

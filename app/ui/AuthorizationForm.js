@@ -7,18 +7,18 @@ import {resetPasswordRequest} from "@/app/lib/api/forgotPassword";
 import {toast, Toaster} from "react-hot-toast";
 
 
-const AuthorizationForm = ({clientId, tempClient}) => {
+const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const from = searchParams.get("from");
 
     const [error, setError] = useState(null);
 
-    const [email, setEmail] = useState('mary_k_92@mail.ru');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatRequestPassword, setRepeatRequestPassword] = useState(false);
     const [forgotPassword, setForgotPassword] = useState(false);
-    const [emailForgot, setEmailForgot] = useState('mary_k_92@mail.ru');
+    const [emailForgot, setEmailForgot] = useState('');
 
     // console.log('clientId', clientId);
     // console.log('tempClient', tempClient);
@@ -117,10 +117,34 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                 tabIndex={0}
                 className="menu dropdown-content mt-7 mr-20 rounded-box w-96 z-[100] shadow p-2.5 bg-neutral-content">
                 <div className="flex flex-row justify-between">
-                    <li>
-                        <div className="text-base font-bold">ВОЙТИ</div>
-                    </li>
+                    {/*<li>*/}
+                    {/*    <div className="text-base font-bold hover:bg-transparent hover:shadow-none cursor-default disabled">ВОЙТИ</div>*/}
+                    {/*</li>*/}
                     <li><a className="link link-hover text-base text-neutral" href={'/registration'}>Создать аккаунт</a>
+                    </li>
+                    <li>
+                        {/*<button*/}
+                        {/*    onClick={(e) => {*/}
+                        {/*        e.stopPropagation(); // Важно: предотвращаем всплытие события*/}
+                        {/*        closeDropdown();*/}
+                        {/*    }}*/}
+                        {/*    className="p-0 hover:bg-transparent"*/}
+                        {/*>*/}
+                        {/*    <svg className="w-6 h-6 text-gray-800" aria-hidden="true"*/}
+                        {/*         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"*/}
+                        {/*         viewBox="0 0 24 24">*/}
+                        {/*        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+                        {/*              strokeWidth="1" d="M6 18 17.94 6M18 18 6.06 6"/>*/}
+                        {/*    </svg>*/}
+                        {/*</button>*/}
+                        <div onClick={closeDropdown}>
+                            <svg className="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                 viewBox="0 0 24 24">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                      strokeWidth="1" d="M6 18 17.94 6M18 18 6.06 6"/>
+                            </svg>
+                        </div>
                     </li>
                 </div>
 
@@ -166,6 +190,7 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                         </svg>
                         <input type="password"
                                className='input input-bordered input-sm grow'
+                               placeholder="Пароль"
                                value={password}
                                onChange={(e) => setPassword(e.target.value)}
                         />
@@ -207,6 +232,7 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                         <div className='flex flex-row w-full gap-2 items-center justify-center'>
                             <input className='input input-bordered input-sm flex-1 min-w-0'
                                    value={emailForgot}
+                                   placeholder={'Email'}
                                    onChange={(e) => setEmailForgot(e.target.value)}
                             ></input>
                             <button
