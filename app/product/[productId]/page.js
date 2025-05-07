@@ -166,16 +166,24 @@ export default function ProductPage() {
                 </div>
                 <div className="px-4 text-xl ">
                     <div className='font-bold'>{currentProduct.product_name}</div>
-                    <div><span className='font-bold'>Цена:</span>{currentProduct.price} ₽</div>
-                    <div><span className='font-bold'>Цвет:</span> {colors}</div>
+                    <div><span className='font-bold'>Цена: </span>{currentProduct.price} ₽</div>
+                    <div><span className='font-bold'>Цвет: </span> {colors}</div>
                     <div><span
-                        className='font-bold'>Производитель:</span> {currentProduct?.Brand ? currentProduct.Brand.brand_name : ''}
+                        className='font-bold'>Производитель: </span> {currentProduct?.Brand ? currentProduct.Brand.brand_name : ''}
                     </div>
                     <div><span
                         className='font-bold'>Страна:</span> {currentProduct?.Country ? currentProduct.Country.country_name : ''}
                     </div>
-                    <div>season</div>
-                    <div>info+</div>
+                    <div><span
+                        className='font-bold'>Сезон:</span> {currentProduct?.Season ? currentProduct.Season.season_name : ''}</div>
+                    {
+                        currentProduct?.product_description ?
+                            <div><span
+                                className='font-bold'>Дополнительная информация: </span>{currentProduct?.product_description ? currentProduct.product_description : ''} </div>
+                            : null
+
+                    }
+
                     <div className='flex flex-row'><span>Размер</span>
                         <div className='flex flex-row gap-2 cursor-pointer'>{sizes}</div>
                     </div>

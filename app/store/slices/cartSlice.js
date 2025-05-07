@@ -26,9 +26,9 @@ export const createCartThunk = createAsyncThunk(
 
 export const increaseCartThunk = createAsyncThunk(
     "Cart/increaseCart",
-    async function increaseCartAsync({productId:productId, sizeId: sizeId}) {
-        const result = await increaseCountInCart({productId:productId, sizeId: sizeId});
-        return result.data;
+    async function increaseCartAsync({productId:productId, sizeId: sizeId,clientId: clientId}) {
+        const result = await increaseCountInCart({productId:productId, sizeId: sizeId, clientId: clientId});
+        return result.data.cart;
     }
 )
 
@@ -81,8 +81,9 @@ export const cartSlice = createSlice({
         //     let found = false;
         //     for (let i = 0; i < cart.length; i++) {
         //         console.log('payload SIZE', payload.size);
+        //         console.log('payload',payload);
         //         if (cart[i].id === payload.id && cart[i].size === payload.size) {
-        //             // console.log(cart[i].count);
+        //             console.log(cart[i].count);
         //             cart[i].count++;
         //             found = true;
         //             break;
@@ -157,6 +158,7 @@ export const cartSlice = createSlice({
         builder.addCase(getCartThunk.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isLoaded = true;
+            console.log('action payload get cart thunk',action.payload);
             state.cart = action.payload;
         });
         builder.addCase(getCartThunk.rejected, (state, action) => {
@@ -171,7 +173,8 @@ export const cartSlice = createSlice({
             state.isLoading = false;
             state.isLoaded = true;
 
-            state.cart = action.payload;
+            console.log('increase cart thunk payload',action.payload);
+
         });
         builder.addCase(increaseCartThunk.rejected, (state, action) => {
             state.isLoading = false;
@@ -184,7 +187,7 @@ export const cartSlice = createSlice({
         builder.addCase(createCartThunk.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isLoaded = true;
-            // console.log('create action',action.payload);
+            console.log('create action',action.payload);
             state.cart = action.payload;
         });
         builder.addCase(createCartThunk.rejected, (state, action) => {
@@ -198,7 +201,9 @@ export const cartSlice = createSlice({
         builder.addCase(decreaseCartThunk.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isLoaded = true;
-            state.cart = action.payload;
+
+            console.log('decrease cart thunk payload',action.payload);
+
         });
         builder.addCase(decreaseCartThunk.rejected, (state, action) => {
             state.isLoading = false;
@@ -224,7 +229,9 @@ export const cartSlice = createSlice({
         builder.addCase(deleteProductInCartThunk.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isLoaded = true;
-            state.cart = action.payload;
+
+            console.log('clear cart thunk payload',action.payload);
+
         });
         builder.addCase(deleteProductInCartThunk.rejected, (state, action) => {
             state.isLoading = false;

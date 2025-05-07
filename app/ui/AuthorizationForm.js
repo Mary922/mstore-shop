@@ -14,11 +14,24 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
 
     const [error, setError] = useState(null);
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('mary_k_92@mail.ru');
+    const [password, setPassword] = useState('12345678');
     const [repeatRequestPassword, setRepeatRequestPassword] = useState(false);
     const [forgotPassword, setForgotPassword] = useState(false);
     const [emailForgot, setEmailForgot] = useState('');
+
+    let client;
+    // let tempClient = '';
+    // let client;
+
+    if (typeof window !== "undefined") {
+        tempClient = localStorage.getItem("temp-client");
+        client = localStorage.getItem("client");
+    }
+
+    if (typeof window !== "undefined" && client) {
+        clientId = JSON.parse(localStorage.getItem("client")).id;
+    }
 
     // console.log('clientId', clientId);
     // console.log('tempClient', tempClient);
@@ -60,6 +73,7 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
     const checkClient = async () => {
         try {
             if (clientId || tempClient) {
+                console.log('looooog')
                 const result = await Auth({email: email, password: password});
                 console.log('TOKEN RESPONSE', result);
                 setError('Проверьте почту и пароль');
@@ -70,7 +84,8 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
                     localStorage.removeItem('temp-client');
                     // localStorage.removeItem('filter-list');
 
-                    router.push(from);
+                    window.location.reload();
+                    // router.push(from);
                 }
             } else {
                 setRepeatRequestPassword(true);
@@ -137,14 +152,14 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
                         {/*              strokeWidth="1" d="M6 18 17.94 6M18 18 6.06 6"/>*/}
                         {/*    </svg>*/}
                         {/*</button>*/}
-                        <div onClick={closeDropdown}>
-                            <svg className="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                 viewBox="0 0 24 24">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
-                                      strokeWidth="1" d="M6 18 17.94 6M18 18 6.06 6"/>
-                            </svg>
-                        </div>
+                        {/*<div>*/}
+                        {/*    <svg className="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true"*/}
+                        {/*         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"*/}
+                        {/*         viewBox="0 0 24 24">*/}
+                        {/*        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+                        {/*              strokeWidth="1" d="M6 18 17.94 6M18 18 6.06 6"/>*/}
+                        {/*    </svg>*/}
+                        {/*</div>*/}
                     </li>
                 </div>
 

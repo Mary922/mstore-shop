@@ -152,11 +152,11 @@ export default function RegistrationPage() {
         enableReinitialize: true,
         validate,
         initialValues: {
-            name: '',
-            surname: 'Smith',
-            phone: '78234312444',
+            name: 'Mary',
+            surname: 'Go',
+            phone: '79213932139',
             email: 'mary_k_92@mail.ru',
-            password: 'sdfgnlmk32',
+            password: '12345678',
             birthday: moment().format('YYYY-MM-DD'),
         },
         onSubmit: (values) => {
@@ -325,6 +325,7 @@ export default function RegistrationPage() {
                                         </svg>
                                         <input type="password"
                                                value={authPassword}
+                                               placeholder="Пароль"
                                                onChange={(e) => setAuthPassword(e.target.value)}
                                                className="w-full input input-bordered input-sm "
                                         />
@@ -493,7 +494,7 @@ export default function RegistrationPage() {
                                         <input id={'password'}
                                                name={'password'}
                                                type={'password'}
-                                               placeholder="Password"
+                                               placeholder="Пароль"
                                                value={formik.values.password}
                                                onChange={formik.handleChange}
                                             // className="w-full input input-bordered input-sm"

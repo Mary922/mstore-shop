@@ -200,3 +200,13 @@ body {
   border: none;
   box-shadow: 0 0 8px 2px rgba(128, 128, 128, 0.3);
 }
+.order-button {
+  position: fixed;
+  top: 250px; /* Расстояние от верхнего края */
+  right: 20px; /* Расстояние от правого края */
+  color: white; /* Цвет текста */
+  padding: 10px 20px; /* Внутренний отступ */
+  border-radius: 5px; /* Скругление углов */
+  font-size: 18px; /* Размер шрифта */
+  cursor: pointer; /* Курсор при наведении */
+}
