@@ -158,7 +158,7 @@ export const cartSlice = createSlice({
         builder.addCase(getCartThunk.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isLoaded = true;
-            console.log('action payload get cart thunk',action.payload);
+            // console.log('action payload get cart thunk',action.payload);
             state.cart = action.payload;
         });
         builder.addCase(getCartThunk.rejected, (state, action) => {
@@ -173,7 +173,7 @@ export const cartSlice = createSlice({
             state.isLoading = false;
             state.isLoaded = true;
 
-            console.log('increase cart thunk payload',action.payload);
+            // console.log('increase cart thunk payload',action.payload);
 
         });
         builder.addCase(increaseCartThunk.rejected, (state, action) => {
@@ -187,7 +187,7 @@ export const cartSlice = createSlice({
         builder.addCase(createCartThunk.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isLoaded = true;
-            console.log('create action',action.payload);
+            // console.log('create action',action.payload);
             state.cart = action.payload;
         });
         builder.addCase(createCartThunk.rejected, (state, action) => {
@@ -202,7 +202,7 @@ export const cartSlice = createSlice({
             state.isLoading = false;
             state.isLoaded = true;
 
-            console.log('decrease cart thunk payload',action.payload);
+            // console.log('decrease cart thunk payload',action.payload);
 
         });
         builder.addCase(decreaseCartThunk.rejected, (state, action) => {
@@ -230,7 +230,7 @@ export const cartSlice = createSlice({
             state.isLoading = false;
             state.isLoaded = true;
 
-            console.log('clear cart thunk payload',action.payload);
+            // console.log('clear cart thunk payload',action.payload);
 
         });
         builder.addCase(deleteProductInCartThunk.rejected, (state, action) => {

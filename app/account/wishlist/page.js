@@ -84,15 +84,10 @@ export default function Wishlist() {
                                 </svg>
                             </button>
 
-                            <span className="
-      absolute left-full top-1/2 -translate-y-1/2 ml-2
-      text-sm text-gray-600
-      opacity-0 peer-hover:opacity-100
-      transition-opacity duration-200
-      whitespace-nowrap
-    ">
-      Удалить
-    </span>
+                            <span
+                                className="absolute left-full top-1/2 -translate-y-1/2 ml-2 text-sm text-gray-600 opacity-0 peer-hover:opacity-100
+                                transition-opacity duration-200 whitespace-nowrap">Удалить
+                            </span>
                         </div>
                     </div>
 
@@ -118,8 +113,11 @@ export default function Wishlist() {
                     {/*    </button>*/}
                     {/*    <div>Удалить</div>*/}
                     {/*</div>*/}
+                    <div className='flex items-center justify-center'>
+                        <img className='w-72 h-96' src={`${baseUrl}/${product.Images[0].image_path}`}/>
 
-                    <img className={'w-full h-96'} src={`${baseUrl}/${product.Images[0].image_path}`}/>
+                    </div>
+
                     <div className='card-body'>
                         <h2 className="card-title flex justify-center items-center">
                             <div className='text-lg text-center'>{product.product_name}</div>

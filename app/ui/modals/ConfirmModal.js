@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {addressesGetThunk} from "@/app/store/slices/addressesSlice";
+import {useDispatch} from "react-redux";
+import {useAppDispatch} from "@/app/lib/hooks";
 
-const ConfirmModal = ({show,close,text,func,title}) => {
+const ConfirmModal = ({show,close,text,func,title,clientId}) => {
+    const dispatch = useAppDispatch();
 
     return (
         <>
@@ -13,7 +17,11 @@ const ConfirmModal = ({show,close,text,func,title}) => {
                     <div className="modal-action">
                         {/*<form method="dialog-2">*/}
                             <div className='flex gap-3'>
-                            <button className="btn btn-neutral btn-md text-white hover:text-white hover:bg-gray-600" onClick={func}>Да</button>
+                            <button className="btn btn-neutral btn-md text-white hover:text-white hover:bg-gray-600" onClick={async ()=>{
+                                func();
+                                close(false);
+                                // await dispatch(addressesGetThunk(clientId));
+                            }}>Да</button>
                             <button className="btn btn-neutral btn-md text-white hover:text-white hover:bg-gray-600" onClick={()=>close(false)}>Нет</button>
                             </div>
                         {/*</form>*/}

@@ -14,11 +14,17 @@ export default function AccountInfoPage() {
     const [isShow, setIsShow] = useState(false);
     const [loading, setLoading] = useState(false);
 
-
+    let tempClient = '';
+    let client;
     let clientId;
-    const client = JSON.parse(localStorage.getItem("client"));
-    if (client) {
-        clientId = client.id;
+
+    if (typeof window !== "undefined") {
+        tempClient = localStorage.getItem("temp-client");
+        client = localStorage.getItem("client");
+    }
+
+    if (typeof window !== "undefined" && client) {
+        clientId = JSON.parse(localStorage.getItem("client")).id;
     }
 
     useEffect(() => {

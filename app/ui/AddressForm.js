@@ -12,8 +12,12 @@ import {getCities} from "@/app/lib/api/cities";
 import {toast,Toaster} from "react-hot-toast";
 import {createAddress} from "@/app/lib/api/addresses";
 import {useRouter} from "next/navigation";
+import {addressesCreateThunk, addressesGetThunk} from "@/app/store/slices/addressesSlice";
+import {useDispatch} from "react-redux";
+import {useAppDispatch} from "@/app/lib/hooks";
 
-const AddressForm = ({setAddressIsAdded}) => {
+const AddressForm = ({setAddressIsAdded,id}) => {
+    const dispatch = useAppDispatch();
     const router = useRouter();
     const [client, setClient] = useState([]);
     const [regions, setRegions] = useState([]);
@@ -121,7 +125,7 @@ const AddressForm = ({setAddressIsAdded}) => {
                 console.log('here errors',errors)
                 return;
             }
-            const result = await createAddress(values);
+            const result = await dispatch(addressesCreateThunk(values));
             console.log('result',result);
 
             if (result?.success === true) {
@@ -292,7 +296,11 @@ const AddressForm = ({setAddressIsAdded}) => {
                         />
                         {formik.errors.phone && <div>{formik.errors.phone}</div>}
                     </div>
-                    <button type='sumbit' className="btn btn-primary text-white">Добавить адрес
+                    <button type='sumbit' className="btn btn-primary text-white"
+                    onClick={async ()=>{
+                        await dispatch(addressesGetThunk(id));
+                        setAddressIsAdded(false);
+                    }}>Добавить адрес
                     </button>
                 </div>
             </div>

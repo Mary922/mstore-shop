@@ -2,15 +2,16 @@
 
 import {useEffect, useState} from "react";
 import AddressForm from "@/app/ui/AddressForm";
-import {deleteAddress, getAddresses, updateAddress} from "@/app/lib/api/addresses";
+import {deleteAddress} from "@/app/lib/api/addresses";
 import ConfirmModal from "@/app/ui/modals/ConfirmModal";
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
-import {addressesGetThunk, addressesUpdateRadioThunk} from "@/app/store/slices/addressesSlice";
+import {addressesDeleteThunk, addressesGetThunk, addressesUpdateRadioThunk} from "@/app/store/slices/addressesSlice";
+import {useRouter} from "next/navigation";
 
 export default function AccountAddressesPage() {
     const dispatch = useAppDispatch();
+    const router = useRouter();
     const [addressIsAdded, setAddressIsAdded] = useState(false);
-    // const [addresses, setAddresses] = useState([]);
 
     const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false);
 
@@ -35,25 +36,20 @@ export default function AccountAddressesPage() {
     }
 
     const addresses = useAppSelector(state => state.addresses.addresses);
-    // console.log('addressesLis',addressesLis);
+    console.log('addresses',addresses);
+
 
     const actualRadio = useAppSelector(state => state.addresses.actualAddressId);
-    console.log('actualRadio', actualRadio);
+    // console.log('actualRadio', actualRadio);
 
     const actualAddress = useAppSelector(state => state.addresses.actualAddress);
-    console.log('actualAddress', actualAddress);
+    // console.log('actualAddress', actualAddress);
 
     useEffect(() => {
         (async () => {
-            dispatch(addressesGetThunk(clientId));
+            await dispatch(addressesGetThunk(clientId));
 
 
-            // const result = await getAddresses(clientId);
-
-            // if (result?.data) {
-            //     setAddresses(result?.data);
-            //
-            //
             //     const actualAddress = result.data.find(address => address.isActual === 1);
             //     if (actualAddress) {
             //         setSelectedAddressId(actualAddress.address_id);
@@ -63,8 +59,7 @@ export default function AccountAddressesPage() {
         })()
     }, [])
 
-    console.log('selectedAddressId', selectedAddressId);
-    console.log('addresses', addresses);
+    // console.log('selectedAddressId', selectedAddressId);
 
 
     // const handleRadioChange =  async (newAddressId) => {
@@ -84,13 +79,11 @@ export default function AccountAddressesPage() {
 
     const handleAddressDelete = async (newAddressId) => {
         try {
-            const result = await deleteAddress({
+            const result = await dispatch(addressesDeleteThunk({
                 addressId: newAddressId,
                 flag: 1
-            })
+            }))
             console.log('result deleting', result)
-
-
         } catch (error) {
             console.log(error);
         }
@@ -100,9 +93,9 @@ export default function AccountAddressesPage() {
     addresses.map((address) => {
         addressesList.push(
             <div className="card bg-base-100" key={address.address_id}>
-                <div className="card-body flex flex-col p-2">
-                    <div>
-                    <div className='flex flex-row items-center justify-between'>
+                <div className="card-body flex flex-col p-2 justify-between">
+                    <div className='flex flex-col'>
+                    <div className='flex flex-row items-center'>
                         <div>Актуальный адрес:</div>
                         <input type="radio" name="radio-1"
                                className="radio radio-primary"
@@ -114,12 +107,11 @@ export default function AccountAddressesPage() {
                                }}
                         />
                     </div>
-                    <div>Регион: {address.City.Region.region_name}</div>
-                    <div>Город: {address.City.city_name}</div>
+                    <div>Регион: {address.City?.Region?.region_name}</div>
+                    <div>Город: {address.City?.city_name}</div>
                     <div>Адрес: {address.address_name}</div>
                     </div>
-                    <div className='flex flex-row items-center justify-between'>
-                        <div className='btn btn-ghost btn-sm'>Изменить адрес</div>
+                    <div className='flex flex-row items-center justify-center'>
                         <div className='btn btn-ghost btn-sm' onClick={()=>{
                             setConfirmModalIsOpen(true);
                             setSelectedAddressToDelete(address.address_id);
@@ -144,7 +136,7 @@ export default function AccountAddressesPage() {
 
                     {
                         !addressIsAdded && (
-                            <button className="btn btn-primary my-5 btn-neutral" onClick={() => setAddressIsAdded(true)}>Добавить новый
+                           <button className="btn btn-primary my-5 btn-neutral" onClick={() => setAddressIsAdded(true)}>Добавить новый
                                 адрес</button>
                         )
                     }
@@ -153,8 +145,12 @@ export default function AccountAddressesPage() {
                         addressIsAdded ?
                             <>
                                 <div className='flex flex-row w-full'>
-                                    <AddressForm setAddressIsAdded={setAddressIsAdded}/>
-                                    <button onClick={() => setAddressIsAdded(false)}
+                                    <AddressForm setAddressIsAdded={setAddressIsAdded} id={clientId}/>
+                                    <button onClick={
+                                        async () => {
+                                            setAddressIsAdded(false);
+                                            // await dispatch(addressesGetThunk(clientId));
+                                        }}
                                          className='cursor-pointer btn btn-ghost ml-10 flex items-center text-lg'>Закрыть
                                     </button>
                                 </div>
@@ -173,6 +169,7 @@ export default function AccountAddressesPage() {
                                   close={setConfirmModalIsOpen}
                                   text={'Вы действительно хотите удалить адрес?'}
                                   func={()=>handleAddressDelete(selectedAddressToDelete)}
+                                  clientId={clientId}
                     />
                 )
             }
