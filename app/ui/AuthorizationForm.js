@@ -15,7 +15,7 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
     const [error, setError] = useState(null);
 
     const [email, setEmail] = useState('mary_k_92@mail.ru');
-    const [password, setPassword] = useState('12345678');
+    const [password, setPassword] = useState('12345');
     const [repeatRequestPassword, setRepeatRequestPassword] = useState(false);
     const [forgotPassword, setForgotPassword] = useState(false);
     const [emailForgot, setEmailForgot] = useState('');
@@ -73,16 +73,16 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
     const checkClient = async () => {
         try {
             if (clientId || tempClient) {
-                console.log('looooog')
                 const result = await Auth({email: email, password: password});
                 console.log('TOKEN RESPONSE', result);
-                setError('Проверьте почту и пароль');
+                setError('Неверные данные');
 
                 if (result?.data?.accessToken) {
                     console.log('it was succesful auth');
                     localStorage.setItem('client', JSON.stringify(result.data));
                     localStorage.removeItem('temp-client');
                     // localStorage.removeItem('filter-list');
+                    setError('');
 
                     window.location.reload();
                     // router.push(from);

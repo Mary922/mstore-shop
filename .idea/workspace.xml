@@ -4,19 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="cart">
+    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="client account">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/account-addresses/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-addresses/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/account/account-info/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-info/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/account/account-navibar.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-navibar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/layout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/account/orders/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/orders/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/wishlist/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/wishlist/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/common/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/Pagination.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/preorder/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/preorder/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/reset-password/[token]/changePasswordForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/reset-password/[token]/changePasswordForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/store/slices/addressesSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/slices/addressesSlice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/store/slices/cartSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/slices/cartSlice.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ui/AccountForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AccountForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AddressForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AddressForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/AuthorizationForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AuthorizationForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/OrderButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/OrderButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/ProductCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/ProductCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ui/modals/ConfirmModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/modals/ConfirmModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +136,7 @@
       <workItem from="1742484272766" duration="197233000" />
       <workItem from="1746528898838" duration="89000" />
       <workItem from="1746528989347" duration="127000" />
-      <workItem from="1746531782255" duration="30149000" />
+      <workItem from="1746531782255" duration="49788000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -282,7 +290,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746621791818</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="client account">
+      <option name="closed" value="true" />
+      <created>1746635863250</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1746635863250</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,6 +318,7 @@
     <MESSAGE value="reset Password" />
     <MESSAGE value="styles dropdown,canvas" />
     <MESSAGE value="cart" />
-    <option name="LAST_COMMIT_MESSAGE" value="cart" />
+    <MESSAGE value="client account" />
+    <option name="LAST_COMMIT_MESSAGE" value="client account" />
   </component>
 </project>

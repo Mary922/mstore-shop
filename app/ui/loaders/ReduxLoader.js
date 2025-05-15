@@ -4,6 +4,7 @@ import {useAppDispatch} from "@/app/lib/hooks";
 import {getCartThunk} from "@/app/store/slices/cartSlice";
 import {wishlistGetThunk} from "@/app/store/slices/wishlistSlice";
 import {jwtDecode} from "jwt-decode";
+import {authTemp} from "@/app/lib/api/auth";
 
 const ReduxLoader = () => {
     const dispatch = useAppDispatch();
@@ -22,15 +23,24 @@ const ReduxLoader = () => {
         }
     }
 
+
     useEffect(()=> {
         (async () => {
-
             if (typeof window !== "undefined") {
                 tempClient = localStorage.getItem("temp-client");
                 client = localStorage.getItem("client");
                 token = localStorage.getItem("temp-client");
-
             }
+            if (!client && !tempClient) {
+                    const result = await authTemp();
+                    console.log('result AUTH TEMP', result);
+                    localStorage.setItem('temp-client', result?.data?.accessToken);
+                }
+            if (client) {
+                localStorage.removeItem('temp-client');
+            }
+
+
 
             if (typeof window !== "undefined" && client) {
                 clientId = JSON.parse(localStorage.getItem("client")).id;
@@ -39,46 +49,30 @@ const ReduxLoader = () => {
 
 
             if (tempClient && isTokenValid(tempClient)) {
-                // console.log('temp token', tempClient);
-                // console.log('im temp hah');
-                // console.log("Временный токен истек и удален");
+                console.log('im temp hah');
                 localStorage.removeItem("temp-client");
-                return;
-
-            } else {
-                await dispatch(getCartThunk(tempClient));
             }
 
             if (client && isTokenValid(client)) {
-                // console.log('im client constant');
+                console.log('im client constant');
                 localStorage.removeItem("client");
                 // console.log("Токен клиента истек");
-                return;
             } else {
-                await dispatch(getCartThunk(clientId))
-
+                await dispatch(getCartThunk(clientId));
+                await dispatch(wishlistGetThunk());
             }
+
         })()
-    },[])
+    },[]);
 
 
 
-    useEffect(() => {
-        // dispatch(restoreCart());
-        if (client) {
-            dispatch(wishlistGetThunk());
-        }
-    }, []);
-
-    // useEffect(()=> {
-    //     if (token) {
-    //         (async () => {
-    //             if (client) {
-    //                 dispatch(getCartThunk(clientId))
-    //             }
-    //         })()
+    // useEffect(() => {
+    //     // dispatch(restoreCart());
+    //     if (client) {
+    //         dispatch(wishlistGetThunk());
     //     }
-    // },[token,clientId])
+    // }, []);
 
     return (
         <>

@@ -11,7 +11,12 @@ import Link from "next/link";
 import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
 import {toast, Toaster} from "react-hot-toast";
 
+const sortImages = (a, b) => a.ProductImages.order_index - b.ProductImages.order_index;
+
+
 const ProductCard = ({id, text, images, price, path,isOpen,onClick}) => {
+
+    images.sort(sortImages);
     const dispatch = useAppDispatch();
     const [isAddedToWishlist, setIsAddedToWishlist] = useState(false);
 

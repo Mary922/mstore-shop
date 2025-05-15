@@ -210,3 +210,27 @@ body {
   font-size: 18px; /* Размер шрифта */
   cursor: pointer; /* Курсор при наведении */
 }
+.backdrop {
+  position: fixed;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный серый фон */
+  z-index: 998; /* Немного ниже модального окна */
+}
+
+/*.modal {*/
+/*  z-index: 999; !* Модальное окно должно быть над затемнением *!*/
+/*}*/
+
+@media screen and (max-width: 768px) {
+  .hide-on-small-screen {
+    display: none;
+  }
+  
+}

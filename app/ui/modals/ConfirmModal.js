@@ -10,7 +10,8 @@ const ConfirmModal = ({show,close,text,func,title,clientId}) => {
 
     return (
         <>
-            <dialog className="modal modal-bottom sm:modal-middle shadow-lg" open={show}>
+            {show && <div className="backdrop"></div>}
+            <div className="modal modal-bottom sm:modal-middle shadow-lg" open={show}>
                 <div className="modal-box bg-neutral-content">
                     <h3 className="font-bold text-lg flex items-center justify-center">{title}</h3>
                     <p className="py-4 flex items-center justify-center text-lg">{text}</p>
@@ -27,7 +28,7 @@ const ConfirmModal = ({show,close,text,func,title,clientId}) => {
                         {/*</form>*/}
                     </div>
                 </div>
-            </dialog>
+            </div>
 
         </>
     )

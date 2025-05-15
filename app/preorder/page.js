@@ -183,11 +183,11 @@ export default function PreorderPage() {
             //     await dispatch(clearCartThunk(tempClient));
             // }
             await dispatch(clearCartThunk(clientId));
+            toast.success('Спасибо за заказ!');
 
             setTimeout(() => {
-                toast.success('Спасибо за заказ!');
                 router.push('account/orders');
-            }, 1000);
+            }, 2000);
         } else {
             toast.error('error here')
             console.log('error in creating order');
@@ -250,10 +250,11 @@ export default function PreorderPage() {
     return (
         <>
             <MainLayout>
-            <div className="card bg-violet-400 w-96 items-center p-5 gap-3">
+                <div className="flex flex-col w-full my-10 items-center">
+            <div className="card bg-neutral-200 w-[500px] items-center p-5 shadow-lg py-0">
                 <div className="card-body w-full">
                     <div className="w-full">
-                        <label className="form-control w-full max-w-xs">
+                        <label className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Имя</span>
                             </div>
@@ -267,7 +268,7 @@ export default function PreorderPage() {
                     </div>
 
 
-                    <label className="form-control w-full max-w-xs">
+                    <label className="form-control w-full">
                         <div className="label">
                             <span className="label-text">Фамилия</span>
                         </div>
@@ -283,7 +284,7 @@ export default function PreorderPage() {
                     <div className="w-full">
                         <label className="form-control w-full max-w-xs">
                             <div className="label">
-                                <a className="label-text link link-primary" href={'/account/account-addresses'}>Изменить актуальный адрес</a>
+                                <a className="label-text link link-info" href={'/account/account-addresses'}>Изменить актуальный адрес</a>
                             </div>
                             <select className={classes.region}
                                     onChange={checkSelectedRegion}
@@ -306,7 +307,7 @@ export default function PreorderPage() {
                     </div>
 
                     <div className="w-full">
-                        <label className="form-control w-full max-w-xs">
+                        <label className="form-control w-full">
                             <div className="label">
                                 <span className="label-text">Адрес доставки</span>
                             </div>
@@ -334,15 +335,17 @@ export default function PreorderPage() {
                             value={client.client_phone}
                             className="input input-bordered input-sm mb-2"
                             readOnly={true}
+                            // disabled={true}
                             // onValueChange={(values) => handlePhoneChange(values)}
                         />
                     </div>
-                    <button className="btn btn-primary" onClick={async ()=>{
+                    <button className="btn btn-primary text-white text-xl" onClick={async ()=>{
                         await createOrder();
                         // await handleAsyncOperation();
                     }}>Заказать</button>
                 </div>
             </div>
+                    </div>
             <Toaster
                 position="top-center"
                 reverseOrder={false}

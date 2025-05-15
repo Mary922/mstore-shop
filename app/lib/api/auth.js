@@ -2,8 +2,8 @@ import {Request} from "./request";
 
 let baseURL = 'http://127.0.0.1:3001';
 
-export const Auth = (data) => {
-    let result = Request.post(`${baseURL}/auth`, data)
+export const Auth = async (data) => {
+    let result = await Request.post(`${baseURL}/auth`, data)
     console.log('auth result request',result);
     return result;
 }
@@ -40,15 +40,16 @@ export const authHeader = () => {
         // console.log('No access token or client');
         // return ''
     }
+    // return null;
 }
 
-export const authTemp = () => {
-    let result = Request.post(`${baseURL}/auth-temp`)
+export const authTemp = async () => {
+    let result = await Request.post(`${baseURL}/auth-temp`)
     return result;
 }
 
-export const CheckValidationPassword = (data) => {
-    let result = Request.post(`${baseURL}/auth-password/check`, data)
+export const CheckValidationPassword = async (data) => {
+    let result = await Request.post(`${baseURL}/auth-password/check`, data)
     return result;
 }
 

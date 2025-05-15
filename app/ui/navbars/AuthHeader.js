@@ -61,25 +61,17 @@ const AuthHeader = () => {
     if (typeof window !== "undefined" && client) {
         clientId = JSON.parse(localStorage.getItem("client")).id;
     }
-    // console.log('temppppClient', tempClient);
-
-    // const tempClient = window.localStorage.getItem("temp-client");
-    // const client = window.localStorage.getItem("client");
-    // let clientId;
-    // if (client) {
-    //     clientId = JSON.parse(window.localStorage.getItem("client")).id;
-    // }
 
 
     useEffect(() => {
         (async () => {
-            if (!client && !tempClient) {
-                const result = await authTemp();
-                console.log('result AUTH TEMP', result);
-                localStorage.setItem('temp-client', result.data.accessToken);
-            }
+            // if (!client && !tempClient) {
+            //     const result = await authTemp();
+            //     console.log('result AUTH TEMP', result);
+            //     localStorage.setItem('temp-client', result?.data?.accessToken);
+            // }
             if (client) {
-                localStorage.removeItem('temp-client');
+                // localStorage.removeItem('temp-client');
                 setAuthMode(true);
             }
 

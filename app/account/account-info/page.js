@@ -171,6 +171,8 @@ export default function AccountInfoPage() {
                         onValueChange={values => {
                             formik.setFieldValue('phone', values.value);
                         }}
+                        readOnly={true}
+                        disabled={true}
                         // onValueChange={(values) => handlePhoneChange(values)}
                     />
                     {/*<input type="text" className="w-full input input-bordered input-sm mb-2"*/}
@@ -198,6 +200,8 @@ export default function AccountInfoPage() {
                            className="w-full input input-bordered input-sm mb-2"
                            placeholder="Email"
                            required
+                           readOnly={true}
+                           disabled={true}
                     />
                 </label>
                 <button type="submit"

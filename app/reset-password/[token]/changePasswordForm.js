@@ -1,5 +1,5 @@
 "use client"
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useParams, useRouter} from "next/navigation";
 import {changeForgottenPasswordRequest} from "@/app/lib/api/forgotPassword";
 
@@ -12,6 +12,7 @@ export default function ChangePasswordForm({token}) {
     const [secondPassword, setSecondPassword] = useState('');
     const [passwordsMatch, setPasswordsMatch] = useState(false);
     const [showError, setShowError] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
 
     console.log('firstPassword', firstPassword);
     console.log('secondPassword', secondPassword);
@@ -33,9 +34,12 @@ export default function ChangePasswordForm({token}) {
             console.log('result changePassword', result);
 
             if (result.success) {
-                console.log('success');
+                setShowSuccess(true);
 
-                router.push('/');
+                // console.log('success');
+                // setTimeout(() => {
+                //     router.push('/');
+                // },2000);
             }
 
         } catch (error) {
@@ -107,6 +111,13 @@ export default function ChangePasswordForm({token}) {
                             >
                                 Изменить пароль
                             </button>
+                            <div className={`relative ${showSuccess ? 'h-6' : 'h-0'}`}>
+                                {showSuccess && (
+                                    <div className="absolute top-0 -left-80 label">
+                                        <span className="label-text-alt text-info">Пароль успешно изменен</span>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>

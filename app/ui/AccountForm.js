@@ -3,11 +3,15 @@ import React from "react";
 
 
 const AccountForm = () => {
-    const logOut = () => {
-        localStorage.removeItem("client");
-        localStorage.removeItem("cart");
-
-        window.location.reload();
+    const logOut = async () => {
+        await localStorage.removeItem("client");
+        await localStorage.removeItem("cart");
+        await localStorage.removeItem("filter-list");
+        await localStorage.removeItem("filterData");
+        setTimeout(() => {
+            window.location.reload()
+        }, 500);
+        // window.location.reload();
     }
     return (
         <>
@@ -59,7 +63,7 @@ const AccountForm = () => {
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                               d="M16 12H4m12 0-4 4m4-4-4-4m3-4h2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-2"/>
                     </svg>
-                    <a onClick={logOut} className='link link-hover text-neutral'>Выйти</a></li>
+                    <a href='/' onClick={logOut} className='link link-hover text-neutral'>Выйти</a></li>
             </ul>
         </>
     )

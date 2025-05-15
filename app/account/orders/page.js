@@ -55,8 +55,7 @@ export default function OrdersPage() {
             }
             return (
                 <tr key={order.order_id} onClick={() => navigateToOrder(order.order_id)}>
-                    <td>{order.order_id}</td>
-
+                    {/*<td>{order.ProductOrders[i]}</td>*/}
                     <td>{moment.unix(order.created_at).format("MM.DD.YYYY HH:mm")}</td>
                     <td>{sum}</td>
                 </tr>
@@ -68,11 +67,11 @@ export default function OrdersPage() {
         <>
             {
                 orders && orders.length > 0 ?
-                    <div className="w-full flex flex-col items-center ">
+                    <div className="w-full flex flex-col items-center justify-between ">
                         <table className="table">
                             <thead>
                             <tr>
-                                <th>Заказ</th>
+                                {/*<th>Заказ</th>*/}
                                 <th>Дата</th>
                                 <th>Сумма</th>
                             </tr>

@@ -10,6 +10,8 @@ export default function AccountNavBar() {
     const logOut = () => {
         localStorage.removeItem("client");
         localStorage.removeItem("cart");
+        localStorage.removeItem("filter-list");
+        localStorage.removeItem("filterData");
         window.location.reload();
     }
 

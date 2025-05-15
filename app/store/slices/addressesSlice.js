@@ -48,7 +48,7 @@ const initialState = {
     // actualAddress: null,
 }
 export const addressesSlice = createSlice({
-    name: "wishlist",
+    name: "addresses",
     initialState: initialState,
     reducers: {
 
@@ -107,8 +107,9 @@ export const addressesSlice = createSlice({
             state.isLoaded = true;
 
             const payload = action.payload;
-            console.log('payload GET ADDRESSES', payload);
+            console.log('payload CREATE ADDRESSES', payload);
             state.addresses = payload.data;
+
         });
         builder.addCase(addressesCreateThunk.rejected, (state, action) => {
             state.isLoading = false;
