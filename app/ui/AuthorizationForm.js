@@ -24,6 +24,14 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
     // let tempClient = '';
     // let client;
 
+    const logOut = () => {
+        localStorage.removeItem("client");
+        localStorage.removeItem("cart");
+        localStorage.removeItem("filter-list");
+        localStorage.removeItem("filterData");
+        window.location.reload();
+    }
+
     if (typeof window !== "undefined") {
         tempClient = localStorage.getItem("temp-client");
         client = localStorage.getItem("client");
@@ -32,43 +40,6 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
     if (typeof window !== "undefined" && client) {
         clientId = JSON.parse(localStorage.getItem("client")).id;
     }
-
-    // console.log('clientId', clientId);
-    // console.log('tempClient', tempClient);
-    //
-    // let tempClient = '';
-    // let client;
-    // let clientId;
-    //
-    // if (typeof window !== "undefined") {
-    //     tempClient = localStorage.getItem("temp-client");
-    //     client = localStorage.getItem("client");
-    // }
-    //
-    // if (typeof window !== "undefined" && client) {
-    //     clientId = JSON.parse(localStorage.getItem("client")).id;
-    // }
-
-
-    // console.log('prop clientId', clientId);
-    // console.log('prop tempClient', tempClient);
-
-    // let clientId;
-    // let client = null;
-    // let tempClient;
-    //
-    // if (typeof window !== "undefined") {
-    //     let tempClient = localStorage.getItem("temp-client");
-    // }
-    //
-    // useEffect(() => {
-    //     client = window.localStorage.getItem('client');
-    //     if (client) {
-    //         clientId = JSON.parse(client).id;
-    //     }
-    // }, []);
-    // console.log('tempClient header', tempClient);
-    // console.log('client header', client);
 
     const checkClient = async () => {
         try {
@@ -85,7 +56,10 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
                     setError('');
 
                     window.location.reload();
-                    // router.push(from);
+                }
+                if (result?.status === 401) {
+                    console.log('login error', error);
+                    await logOut();
                 }
             } else {
                 setRepeatRequestPassword(true);

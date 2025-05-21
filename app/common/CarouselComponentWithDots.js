@@ -1,10 +1,11 @@
 "use client";
-import React, {useState} from 'react';
+import React, {useRef, useState,useEffect} from 'react';
 
 
-const CarouselComponentWithDots = ({paths, staticPaths, imageClassName,containerClassName}) => {
+const CarouselComponentWithDots = ({paths, staticPaths, imageClassName,containerClassName,interval}) => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const intervalId = useRef(); // Хранение интервала для авто-переключения слайдов
 
     let baseUrl = '';
     if (paths) {
@@ -13,12 +14,25 @@ const CarouselComponentWithDots = ({paths, staticPaths, imageClassName,container
     if (staticPaths) {
         baseUrl = 'http://localhost:3001/static';
     }
+    const items = paths || staticPaths;
+
 
     const goToSlide = (index) => {
         setCurrentIndex(index);
+        clearInterval(intervalId.current);
     };
 
-    const items = paths || staticPaths;
+    useEffect(() => {
+        if (interval) {
+            intervalId.current = setInterval(() => {
+                setCurrentIndex((prevIndex) =>
+                    prevIndex === items.length - 1 ? 0 : prevIndex + 1
+                );
+            }, interval);
+
+            return () => clearInterval(intervalId.current);
+        }
+    }, [items]);
 
 
     return (

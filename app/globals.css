@@ -228,9 +228,12 @@ body {
 /*  z-index: 999; !* Модальное окно должно быть над затемнением *!*/
 /*}*/
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .hide-on-small-screen {
     display: none;
   }
   
+}
+.filterBtn{
+  border: 1px solid lightgray;
 }

@@ -25,9 +25,10 @@ export default function Home() {
     const [boys, setBoys] = useState([]);
     const [baby, setBaby] = useState([]);
 
+
     useEffect(() => {
         (async () => {
-            const res = await getImagesStatic('web', 'home');
+                const res = await getImagesStatic('web', 'home');
             // console.log('res',res);
             let paths = [];
             let boysPaths = [];
@@ -142,6 +143,7 @@ export default function Home() {
                                 staticPaths={imagePaths}
                                 imageClassName={'object-cover w-full h-full'}
                                 containerClassName={'w-full h-[600px]'}
+                                interval={5000}
                             />
                         </div>
                     </div>
@@ -168,7 +170,7 @@ export default function Home() {
                             <img
                                 src={`${baseUrl}/${baby[0]}`}
                                 alt="Baby"
-                                className='w-full h-auto object-cover '
+                                className='w-full h-auto object-cover'
                             />
                             {/*<Link*/}
                             {/*    // href={`/catalog?sizes=${BABIES_SIZES.sizes}`}*/}

@@ -5,7 +5,7 @@ import ProductCard from "@/app/ui/ProductCard";
 import {useRouter, useSearchParams} from "next/navigation";
 import {useAppSelector} from "@/app/lib/hooks";
 import MainLayout from "@/app/ui/MainLayout";
-import {applyFilterParams} from "@/app/lib/api/filter";
+import {applyFilterParams, getFilterParams} from "@/app/lib/api/filter";
 import CanvasFilter from "@/app/ui/CanvasFilter";
 import {getMaxPrice} from "@/app/lib/api/prices";
 
@@ -17,7 +17,7 @@ export default function CatalogPage() {
 
 
     const productsList = useAppSelector(state => state.common.filteredProductIds);
-    // console.log('productsList',productsList);
+    const [filterItems, setFilterItems] = useState([]);
     const [products, setProducts] = useState([]);
     const [category, setCategory] = useState(null);
     const [gender, setGender] = useState(null);
@@ -34,7 +34,21 @@ export default function CatalogPage() {
     const [maxPrice, setMaxPrice] = useState(null);
     const [initialMaxPrice, setInitialMaxPrice] = useState(null);
 
-    useEffect(()=> {
+    const [checkedOptionsSizes, setCheckedOptionsSizes] = useState([]);
+    const [checkedOptionsColors, setCheckedOptionsColors] = useState([]);
+    const [checkedOptionsSeasons, setCheckedOptionsSeasons] = useState([]);
+    const [checkedOptionsBrands, setCheckedOptionsBrands] = useState([]);
+    const [checkedOptionsCountries, setCheckedOptionsCountries] = useState([]);
+
+    const [chosenFilters, setChosenFilters] = useState({
+        sizes: [],
+        colors: [],
+        seasons: [],
+        brands: [],
+        countries: [],
+    });
+
+    useEffect(() => {
         (async () => {
             try {
                 const result = await getMaxPrice();
@@ -46,7 +60,85 @@ export default function CatalogPage() {
             }
 
         })()
-    },[])
+    }, [maxPrice])
+
+    useEffect(() => {
+        (async () => {
+            const filterRes = await getFilterParams();
+            // console.log('filterRes',filterRes);
+
+            if (filterRes?.data) {
+                setFilterItems(filterRes.data);
+            }
+
+            let sizesFromApi = filterRes?.data?.sizes || [];
+            const numericSizes = sizes.map(Number);
+
+            const matchingSizes = sizesFromApi.filter(appSize => {
+                return numericSizes.includes(appSize.size_id);
+            }).map(matchingSize => matchingSize.size_name);
+            if (matchingSizes && matchingSizes.length > 0) {
+                setChosenFilters(prevState => ({
+                    ...prevState,
+                    sizes: matchingSizes
+                }))
+            }
+
+
+            let colorsFromApi = filterRes?.data?.colors || [];
+            const numericColors = colors.map(Number);
+            const matchingColors = colorsFromApi.filter(appColor => {
+                return numericColors.includes(appColor.color_id);
+            }).map(matchingColor => matchingColor.color_name);
+
+            if (matchingColors && matchingColors.length > 0) {
+                setChosenFilters(prevState => ({
+                    ...prevState,
+                    colors: matchingColors
+                }))
+            }
+
+            let seasonsFromApi = filterRes?.data?.seasons || [];
+            const numericSeasons = seasons.map(Number);
+            const matchingSeasons = seasonsFromApi.filter(appSeason => {
+                return numericSeasons.includes(appSeason.season_id);
+            }).map(matchingSeason => matchingSeason.season_name);
+
+            if (matchingSeasons && matchingSeasons.length > 0) {
+                setChosenFilters(prevState => ({
+                    ...prevState,
+                    seasons: matchingSeasons
+                }))
+            }
+
+            let brandsFromApi = filterRes?.data?.brands || [];
+            const numericBrands = brands.map(Number);
+            const matchingBrands = brandsFromApi.filter(appBrand => {
+                return numericBrands.includes(appBrand.brand_id);
+            }).map(matchingBrand => matchingBrand.brand_name);
+
+            if (matchingBrands && matchingBrands.length > 0) {
+                setChosenFilters(prevState => ({
+                    ...prevState,
+                    brands: matchingBrands
+                }))
+            }
+
+            let countriesFromApi = filterRes?.data?.countries || [];
+            const numericCountries = countries.map(Number);
+            const matchingCountries = countriesFromApi.filter(appCountry => {
+                return numericCountries.includes(appCountry.country_id);
+            }).map(matchingCountry => matchingCountry.country_name);
+
+            if (matchingCountries && matchingCountries.length > 0) {
+                setChosenFilters(prevState => ({
+                    ...prevState,
+                    countries: matchingCountries
+                }))
+            }
+
+        })()
+    }, [sizes, colors, seasons, brands, countries]);
 
     const updateQueryParameter = (key, value) => {
         const nextParams = new URLSearchParams(searchParams.toString()); // Копия текущих параметров
@@ -56,12 +148,12 @@ export default function CatalogPage() {
         } else {
             nextParams.set(key, value); // Иначе устанавливаем новое значение
         }
-        router.push(`?${nextParams.toString()}`, undefined, { scroll: false });
+        router.push(`?${nextParams.toString()}`, undefined, {scroll: false});
     };
 
 
     const clearFilter = (type) => {
-        switch(type) {
+        switch (type) {
             case 'color':
                 setColors([]);
                 updateQueryParameter('colors', '');
@@ -88,17 +180,64 @@ export default function CatalogPage() {
                 break;
             case 'maxPrice':
                 setMaxPrice(null);
-                updateQueryParameter('maxPrice', initialMaxPrice);
+                updateQueryParameter('maxPrice', '');
                 break;
             default:
                 break;
         }
     };
 
+
+    // const checkUrlCleanOfParameters = (paramsToCheck) => {
+    //     const currentParams = new URLSearchParams(window.location.search);
+    //
+    //     for (let param of paramsToCheck) {
+    //         if (currentParams.has(param)) {
+    //             return false; // Найден хотя бы один параметр
+    //         }
+    //     }
+    //     router.refresh();
+    //
+    //     return true; // Ни один из нужных параметров не найден
+    // };
+    //
+    // const paramsToCheck = ['colors', 'sizes', 'brands', 'countries', 'seasons', 'minPrice', 'maxPrice'];
+    // // const isUrlClean = checkUrlCleanOfParameters(paramsToCheck);
+    // // console.log(isUrlClean); // true, если URL чист от указанных параметров
+
+    const clearAllFilters = async () => {
+        setColors([]);
+        setSizes([]);
+        setBrands([]);
+        setCountries([]);
+        setSeasons([]);
+        setMinPrice(null);
+        setMaxPrice(null);
+
+        setCheckedOptionsColors([]);
+        setCheckedOptionsSeasons([]);
+        setCheckedOptionsSizes([]);
+        setCheckedOptionsBrands([]);
+        setCheckedOptionsCountries([]);
+
+        const nextParams = await new URLSearchParams(searchParams.toString());
+        [
+            'colors',
+            'sizes',
+            'brands',
+            'countries',
+            'seasons',
+            'minPrice',
+            'maxPrice'
+        ].forEach(paramKey => nextParams.delete(paramKey));
+
+        router.push(`?${nextParams}`, undefined, { scroll: false });
+    }
+
     const toggleSizeDropdown = (id) => {
-        if(activeProductId === id){
+        if (activeProductId === id) {
             setActiveProductId(null);   // Закрываем список, если кликнули повторно на открытом товаре
-        } else{
+        } else {
             setActiveProductId(id);     // Открываем список для нового товара
         }
     };
@@ -111,7 +250,6 @@ export default function CatalogPage() {
     //     }
     // })
     // console.log('chosenSizes',chosenSizes);
-
 
 
     useEffect(() => {
@@ -164,31 +302,13 @@ export default function CatalogPage() {
                 brandsFilterParam,
                 countriesFilterParam,
             )
-            // console.log("result of FILTERRR", result);
 
             if (result?.data) {
                 setProducts(result.data);
             }
-            // if (colorsFilterParam) {
-            //     // setFilterApplied(true);
-            //     // console.log('dadada')
-            //     setColors(colorsFilterParam);
-            // }
 
         })();
-    }, [productsList,searchParams]);
-
-
-    // const handleClearAllFilters = () => {
-    //     setColors([]);
-    //     // очищаем другие состояния фильтров
-    //     router.push(router.asPath.split('?')[0], undefined, { scroll: false });
-    // };
-
-    // const handleClearColors = () => {
-    //     setColors([]);
-    //     updateQueryParameter('colors', ''); // Очищаем параметр цвета
-    // };
+    }, [productsList, searchParams]);
 
 
     const productCards = [];
@@ -205,7 +325,18 @@ export default function CatalogPage() {
     const handleGoBack = () => {
         router.back();
     }
+    //
+    // console.log('maxii', typeof (maxPrice), maxPrice)
+    // console.log('initial', typeof (initialMaxPrice), initialMaxPrice)
 
+    // console.log('colors',colors);
+    // console.log('maxprice',maxPrice);
+    // console.log('chosen',chosenFilters);
+
+    // const hasMultipleNonEmptyArrays = Object.entries(chosenFilters)
+    //     .filter(([, value]) => Array.isArray(value) && value.length > 0)
+    //     .length >= 0;
+    // console.log('hasMultipleNonEmptyArrays', hasMultipleNonEmptyArrays);
 
 
     return (
@@ -234,7 +365,13 @@ export default function CatalogPage() {
                                                className="drawer-overlay"></label>
                                         <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                                             <CanvasFilter drawerToggleRef={drawerToggleRef} category={category}
-                                                          gender={gender}/>
+                                                          gender={gender}
+                                                          checkedOptionsColors={checkedOptionsColors} setCheckedOptionsColors={setCheckedOptionsColors}
+                                                          checkedOptionsSizes={checkedOptionsSizes} setCheckedOptionsSizes={setCheckedOptionsSizes}
+                                                          checkedOptionsSeasons={checkedOptionsSeasons} setCheckedOptionsSeasons={setCheckedOptionsSeasons}
+                                                          checkedOptionsBrands={checkedOptionsBrands} setCheckedOptionsBrands={setCheckedOptionsBrands}
+                                                          checkedOptionsCountries={checkedOptionsCountries} setCheckedOptionsCountries={setCheckedOptionsCountries}
+                                            />
                                         </div>
                                     </div>
                                     {
@@ -245,84 +382,168 @@ export default function CatalogPage() {
 
                                     }
 
-                                    {/*{*/}
-                                    {/*    filterApplied && (*/}
-                                    {/*        <button className="btn btn-ghost" onClick={handleGoBack}>Цвет*/}
-                                    {/*            Х</button>)*/}
-                                    {/*}*/}
-
                                     {
                                         sizes && sizes.length > 0 && (
-                                            <button className="btn btn-ghost" onClick={() => clearFilter('size')}>
-                                                Очистить размеры Х
-                                            </button>
-                                        )
-                                    }
-                                    {
-                                        brands && brands.length > 0 && (
-                                            <button className="btn btn-ghost" onClick={() => clearFilter('brand')}>
-                                                Очистить бренды Х
-                                            </button>
-                                        )
-                                    }
-                                    {
-                                        countries && countries.length > 0 && (
-                                            <button className="btn btn-ghost" onClick={() => clearFilter('country')}>
-                                                Очистить страны Х
+                                            <button className="btn btn-md btn-outline filterBtn"
+                                                    onClick={() => clearFilter('size')}>
+                                                <div className='flex flex-row gap-2 p-1 items-center'>
+                                                    {
+                                                        chosenFilters.sizes.length === 1 ?
+                                                            <span className='flex flex-row'>Размер: <div
+                                                                className='mx-1'>{chosenFilters.sizes}</div></span>
+                                                            :
+                                                            <span>Размеры: {chosenFilters.sizes.length}</span>
+                                                    }
+                                                    <div className='text-xl font-thin ml-2' style={{color: 'lightgray'}}>X
+                                                    </div>
+                                                </div>
                                             </button>
                                         )
                                     }
                                     {
                                         colors && colors.length > 0 && (
-                                            <button className="btn btn-ghost" onClick={() => clearFilter('color')}>
-                                                Очистить цвета Х
+                                            <button className="btn btn-md btn-outline filterBtn"
+                                                    onClick={() => clearFilter('color')}>
+                                                <div className='flex flex-row gap-2 p-1 items-center'>
+                                                    {
+                                                        chosenFilters.colors.length === 1 ?
+                                                            <span className='flex flex-row'>Цвет: <div
+                                                                className='mx-1'>{chosenFilters.colors}</div></span>
+                                                            :
+                                                            <span>Цвета: {chosenFilters.colors.length}</span>
+                                                    }
+                                                    <div className='text-xl font-thin ml-2' style={{color: 'lightgray'}}>X
+                                                    </div>
+                                                </div>
                                             </button>
                                         )
                                     }
                                     {
                                         seasons && seasons.length > 0 && (
-                                            <button className="btn btn-ghost" onClick={() => clearFilter('season')}>
-                                                Очистить сезон Х
+                                            <button className="btn btn-md btn-outline filterBtn"
+                                                    onClick={() => clearFilter('season')}>
+                                                <div className='flex flex-row gap-2 p-1 items-center'>
+                                                    {
+                                                        chosenFilters.seasons.length === 1 ?
+                                                            <span className='flex flex-row'>Сезон: <div
+                                                                className='mx-1'>{chosenFilters.seasons}</div></span>
+                                                            :
+                                                            <span>Сезоны: {chosenFilters.seasons.length}</span>
+                                                    }
+                                                    <div className='text-xl font-thin ml-2' style={{color: 'lightgray'}}>X
+                                                    </div>
+                                                </div>
                                             </button>
                                         )
                                     }
+                                    {
+                                        brands && brands.length > 0 && (
+                                            <button className="btn btn-md btn-outline filterBtn"
+                                                    onClick={() => clearFilter('brand')}>
+                                                <div className='flex flex-row gap-2 p-1 items-center'>
+                                                    {
+                                                        chosenFilters.brands.length === 1 ?
+                                                            <span className='flex flex-row'>Бренд: <div
+                                                                className='mx-1'>{chosenFilters.brands}</div></span>
+                                                            :
+                                                            <span>Бренды: {chosenFilters.brands.length}</span>
+                                                    }
+                                                    <div className='text-xl font-thin ml-2' style={{color: 'lightgray'}}>X
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        )
+                                    }
+                                    {
+                                        countries && countries.length > 0 && (
+                                            <button className="btn btn-md btn-outline filterBtn"
+                                                    onClick={() => clearFilter('country')}>
+                                                <div className='flex flex-row gap-2 p-1 items-center'>
+                                                    {
+                                                        chosenFilters.countries.length === 1 ?
+                                                            <span className='flex flex-row'>Страна: <div
+                                                                className='mx-1'>{chosenFilters.countries}</div></span>
+                                                            :
+                                                            <span>Страны: {chosenFilters.countries.length}</span>
+                                                    }
+                                                    <div className='text-xl font-thin ml-2' style={{color: 'lightgray'}}>X
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        )
+                                    }
+
                                     {
                                         minPrice && (
-                                            <button className="btn btn-ghost" onClick={() => clearFilter('minPrice')}>
-                                                Очистить min цену Х
+                                            <button className="btn btn-md btn-outline filterBtn"
+                                                    onClick={() => clearFilter('minPrice')}>
+                                                <div className='flex flex-row gap-2 p-1 items-center'>
+                                                    <div className='flex flex-row gap-2 p-1 items-center'>
+                                                    <span className='flex flex-row'>Min цена: {minPrice}
+                                                        <div
+                                                            className='mx-1'></div></span>
+                                                        <div className='text-xl font-thin ml-2'
+                                                             style={{color: 'lightgray'}}>X
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </button>
                                         )
                                     }
+
                                     {
-                                        maxPrice ?
-                                            <button className="btn btn-ghost" onClick={() => clearFilter('maxPrice')}>
-                                                Очистить max цену Х
-                                            </button> : null
+                                        !maxPrice && Number(maxPrice) !== initialMaxPrice
+                                            ? ''
+                                            :
+                                            <button className="btn btn-md btn-outline filterBtn"
+                                                    onClick={() => clearFilter('maxPrice')}>
+                                                <div className='flex flex-row gap-2 p-1 items-center'>
+                                                    <span className='flex flex-row'>Max цена: {maxPrice}
+                                                        <div
+                                                            className='mx-1'></div></span>
+                                                    <div className='text-xl font-thin ml-2'
+                                                         style={{color: 'lightgray'}}>X
+                                                    </div>
+                                                </div>
+                                            </button>
+
                                     }
-                                {/*    {*/}
-                                {/*        maxPrice && maxPrice > 0 ? 'f' :*/}
-                                {/*            <button className="btn btn-ghost" onClick={() => clearFilter('maxPrice')}>*/}
-                                {/*    Очистить max цену Х*/}
-                                {/*</button>*/}
-                                {/*    }*/}
 
+                                    {colors.length > 0 || sizes.length > 0 || brands.length > 0 || seasons.length > 0 || countries.length > 0 || minPrice || maxPrice
+                                        ?
+                                        (
+                                            <button className="btn btn-md btn-outline filterBtn"
+                                                    onClick={()=>clearAllFilters()}>
+                                                <div className='flex flex-row gap-2 p-1 items-center'>
+                                                    Очистить все фильтры
+                                                    <div className='text-xl font-thin ml-2' style={{ color: 'lightgray' }}>
+                                                        X
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        ) : null
+                                    }
 
-                                    {/*{*/}
-                                    {/*    colors &&*/}
-                                    {/*    <button className="btn btn-ghost" onClick={handleClearColors}>*/}
-                                    {/*        Очистить цвета*/}
+                                    {/*{Object.values(chosenFilters)*/}
+                                    {/*    .filter((arr) => Array.isArray(arr))*/}
+                                    {/*    .some((array) => array.length > 0)*/}
+                                    {/*        ?*/}
+                                    {/*    (*/}
+                                    {/*    <button className="btn btn-md btn-outline filterBtn"*/}
+                                    {/*            onClick={()=>clearAllFilters()}>*/}
+                                    {/*        <div className='flex flex-row gap-2 p-1 items-center'>*/}
+                                    {/*            Очистить все фильтры*/}
+                                    {/*            <div className='text-xl font-thin ml-2' style={{ color: 'lightgray' }}>*/}
+                                    {/*                X*/}
+                                    {/*            </div>*/}
+                                    {/*        </div>*/}
                                     {/*    </button>*/}
-                                    {/*}*/}
-
-
-                                    {/*{*/}
-                                    {/*    sizesFilterParam ? <div></div> : ''*/}
+                                    {/*) : ''*/}
                                     {/*}*/}
 
                                 </div>
 
                             </div>
-
                             <div className="grid grid-cols-4 mb-10 gap-5 p-10">{productCards}</div>
                         </div>
                         :
@@ -330,12 +551,15 @@ export default function CatalogPage() {
                             <div className='flex flex-col w-full bg-gray-100 items-center my-10'>
                                 <div className="mx-5 mt-2 text-lg p-5 flex flex-col items-center">
                                     <div>Не найдено товаров удовлетворяющих условиям поиска</div>
-                                    <button style={{ width: 'auto', maxWidth: 'fit-content' }} className="btn btn-primary text-white mt-1" onClick={handleGoBack}>Вернуться назад</button>
+                                    <button style={{width: 'auto', maxWidth: 'fit-content'}}
+                                            className="btn btn-primary text-white mt-1" onClick={handleGoBack}>Вернуться
+                                        назад
+                                    </button>
                                 </div>
                             </div>
-                                </>
-                                }
-                            </MainLayout>
                         </>
-                    )
                 }
+            </MainLayout>
+        </>
+    )
+}

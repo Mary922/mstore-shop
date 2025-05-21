@@ -82,7 +82,6 @@ const AppFooter = () => {
                     <a href={'/footer/delivery'} className="link link-hover text-neutral-content">Доставка</a>
                     <a href={'/footer/payment'} className="link link-hover text-neutral-content">Оплата</a>
                     <a href={'/footer/exchange-return'} className="link link-hover text-neutral-content">Обмен и возврат</a>
-                    {/*<a href={'/account/my-account'} className="link link-hover text-neutral-content">Мой кабинет</a>*/}
                 </nav>
                 <nav>
                     <h6 className="footer-title">Контакты</h6>

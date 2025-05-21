@@ -26,13 +26,27 @@ const ProductCard = ({id, text, images, price, path,isOpen,onClick}) => {
     const [sizesIsShowing, setSizesIsShowing] = useState(false);
 
     const [index, setIndex] = useState(0);
+    // console.log('chosenSize', chosenSize);
 
-    let clientId, tempClient;
-    const client = JSON.parse(localStorage.getItem("client"));
-    tempClient = localStorage.getItem("temp-client");
-    if (client) {
-        clientId = client.id;
+    let tempClient = '';
+    let client;
+    let clientId;
+
+    if (typeof window !== "undefined") {
+        tempClient = localStorage.getItem("temp-client");
+        client = localStorage.getItem("client");
     }
+
+    if (typeof window !== "undefined" && client) {
+        clientId = JSON.parse(localStorage.getItem("client")).id;
+    }
+
+    // let clientId, tempClient;
+    // const client = JSON.parse(localStorage.getItem("client"));
+    // tempClient = localStorage.getItem("temp-client");
+    // if (client) {
+    //     clientId = client.id;
+    // }
 
     const cart = useAppSelector(state => state.cart.cart);
     const wish = useAppSelector(state => state.wishlist.wishlist);
@@ -58,18 +72,23 @@ const ProductCard = ({id, text, images, price, path,isOpen,onClick}) => {
 
     let sizes = [];
     if (currentProduct.Sizes) {
-        for (let i = 0; i < currentProduct.Sizes.length; i++) {
+        const sortedSizes = [...currentProduct.Sizes].sort((a, b) =>
+            parseInt(a.size_name) - parseInt(b.size_name)
+        );
+
+
+        for (let i = 0; i < sortedSizes.length; i++) {
             let isSelected = false;
             let sizeClass = 'btn btn-ghost btn-sm';
-            if (currentProduct.Sizes[i].size_name === chosenSize) {
+            if (sortedSizes[i].size_name === chosenSize) {
                 isSelected = true;
                 if (isSelected) {
                     sizeClass = 'btn btn-ghost btn-sm underline';
                 }
             }
             sizes.push(<div className={`${sizeClass}`} key={i}
-                            onClick={() => setChosenSize(currentProduct.Sizes[i].size_name)}>
-                {currentProduct.Sizes[i].size_name}
+                            onClick={() => setChosenSize(sortedSizes[i].size_name)}>
+                {sortedSizes[i].size_name}
             </div>);
 
             // sizes.push(<div className={`${sizeClass}`} key={i}

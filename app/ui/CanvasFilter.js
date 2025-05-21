@@ -12,7 +12,9 @@ import {getFilteredProducts} from "@/app/store/slices/appCommonSlice";
 import {setSearchParams} from "@/app/store/slices/searchParamsSlice";
 
 
-const CanvasFilter = ({category,gender,drawerToggleRef}) => {
+const CanvasFilter = ({category,gender,drawerToggleRef,checkedOptionsSizes,setCheckedOptionsSizes,checkedOptionsColors,setCheckedOptionsColors,
+                          checkedOptionsSeasons,setCheckedOptionsSeasons,checkedOptionsBrands,setCheckedOptionsBrands,checkedOptionsCountries,setCheckedOptionsCountries
+                      }) => {
     const dispatch = useDispatch();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -23,11 +25,11 @@ const CanvasFilter = ({category,gender,drawerToggleRef}) => {
 
     // const [show, setShow] = useState(false);
 
-    const [checkedOptionsSizes, setCheckedOptionsSizes] = useState([]);
-    const [checkedOptionsColors, setCheckedOptionsColors] = useState([]);
-    const [checkedOptionsSeasons, setCheckedOptionsSeasons] = useState([]);
-    const [checkedOptionsBrands, setCheckedOptionsBrands] = useState([]);
-    const [checkedOptionsCountries, setCheckedOptionsCountries] = useState([]);
+    // const [checkedOptionsSizes, setCheckedOptionsSizes] = useState([]);
+    // const [checkedOptionsColors, setCheckedOptionsColors] = useState([]);
+    // const [checkedOptionsSeasons, setCheckedOptionsSeasons] = useState([]);
+    // const [checkedOptionsBrands, setCheckedOptionsBrands] = useState([]);
+    // const [checkedOptionsCountries, setCheckedOptionsCountries] = useState([]);
 
     const [minRangeValue, setMinRangeValue] = useState(0);
     const [maxRangeValue, setMaxRangeValue] = useState(0);

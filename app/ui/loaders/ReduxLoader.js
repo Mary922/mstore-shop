@@ -1,6 +1,6 @@
 'use client';
 import {useEffect, useState} from 'react'
-import {useAppDispatch} from "@/app/lib/hooks";
+import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
 import {getCartThunk} from "@/app/store/slices/cartSlice";
 import {wishlistGetThunk} from "@/app/store/slices/wishlistSlice";
 import {jwtDecode} from "jwt-decode";
@@ -8,6 +8,7 @@ import {authTemp} from "@/app/lib/api/auth";
 
 const ReduxLoader = () => {
     const dispatch = useAppDispatch();
+    const cartList = useAppSelector((state) => state.cart.cart);
 
     let tempClient;
     let client;
