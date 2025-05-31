@@ -8,7 +8,7 @@ export const getFilterParams = () => {
     return result;
 }
 
-export const applyFilterParams = (category,gender,minRangeValue,maxRangeValue,sizes,colors,seasons,brands,countries) => {
+export const applyFilterParams = (category, gender, minRangeValue, maxRangeValue, sizes, colors, seasons, brands, countries) => {
 
     const params = new URLSearchParams();
 
@@ -41,11 +41,6 @@ export const applyFilterParams = (category,gender,minRangeValue,maxRangeValue,si
     if (maxRangeValue) {
         params.append('maxRangeValue', maxRangeValue);
     }
-
-    // if (minRangeValue) params.set('minPrice', minRangeValue.toString());
-    // if (maxRangeValue) params.set('maxPrice', maxRangeValue.toString());
-
-    // console.log('PARAMS',params.toString());
 
     let result = Request.get(`${baseURL}/filter/products?${params.toString()}`);
     return result;

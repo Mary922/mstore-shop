@@ -6,7 +6,6 @@ export default function AccountNavBar() {
 
     const pathname = usePathname();
 
-
     const logOut = () => {
         localStorage.removeItem("client");
         localStorage.removeItem("cart");
@@ -33,7 +32,6 @@ export default function AccountNavBar() {
                         >Адрес доставки</a></li>
                         <li><a href={'/account/wishlist'}
 
-                            // className='link-hover text-neutral text-lg active:bg-neutral active:text-red-600'
                                className={`link-hover text-lg ${pathname === '/account/wishlist' ? 'active text-primary' : 'text-neutral'}`}
                         >
                             Избранное</a></li>

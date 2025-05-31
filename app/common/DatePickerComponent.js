@@ -1,31 +1,20 @@
-import { useEffect, useId, useRef, useState } from "react";
-import { ru } from "react-day-picker/locale";
-import { format, isValid, parse } from "date-fns";
-import { DayPicker } from "react-day-picker";
+import {useEffect, useId, useRef, useState} from "react";
+import {ru} from "react-day-picker/locale";
+import {format, isValid, parse} from "date-fns";
+import {DayPicker} from "react-day-picker";
 
-export function DatePickerComponent() {
+export function DatePickerComponent({formik}) {
     const dialogRef = useRef(null);
     const dialogId = useId();
     const headerId = useId();
 
-    // Hold the month in state to control the calendar when the input changes
     const [month, setMonth] = useState(new Date());
-
-    // Hold the selected date in state
     const [selectedDate, setSelectedDate] = useState(undefined);
-
-    // Hold the input value in state
     const [inputValue, setInputValue] = useState("");
-
-    console.log('inputValue',inputValue);
-
-    // Hold the dialog visibility in state
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    // Function to toggle the dialog visibility
     const toggleDialog = () => setIsDialogOpen(!isDialogOpen);
 
-    // Hook to handle the body scroll behavior and focus trapping.
     useEffect(() => {
         const handleBodyScroll = (isOpen) => {
             document.body.style.overflow = isOpen ? "hidden" : "";
@@ -49,21 +38,25 @@ export function DatePickerComponent() {
             setSelectedDate(undefined);
         } else {
             setSelectedDate(date);
-            setInputValue(format(date, "MM/dd/yyyy"));
+            setInputValue(format(date, "yyyy-MM-dd"));
+            formik.setFieldValue('birthday', format(date, "yyyy-MM-dd")); // Сохраняем дату в правильном формате для Formik
+            formik.setTouched({birthday: true}); // Стартуем проверку после выбора даты
         }
         dialogRef.current?.close();
     };
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value); // keep the input value in sync
-
-        const parsedDate = parse(e.target.value, "MM/dd/yyyy", new Date());
+        const parsedDate = parse(e.target.value, "yyyy-MM-dd", new Date()); // Разбираем строку даты
 
         if (isValid(parsedDate)) {
             setSelectedDate(parsedDate);
             setMonth(parsedDate);
+            formik.setFieldValue('birthday', format(parsedDate, "yyyy-MM-dd")); // Записываем в Formik правильную дату
+            formik.setTouched({birthday: true}); // Триггерим проверку
         } else {
             setSelectedDate(undefined);
+            formik.setFieldValue('birthday', '');
         }
     };
 
@@ -73,15 +66,15 @@ export function DatePickerComponent() {
                 <strong>Выберите дату: </strong>
             </label>
             <input
-                style={{ fontSize: "inherit" }}
+                style={{fontSize: "inherit"}}
                 id="date-input"
                 type="text"
                 value={inputValue}
-                placeholder={"MM/dd/yyyy"}
+                placeholder={"yyyy-MM-dd"}
                 onChange={handleInputChange}
             />{" "}
             <button
-                style={{ fontSize: "inherit" }}
+                style={{fontSize: "inherit"}}
                 onClick={toggleDialog}
                 aria-controls="dialog"
                 aria-haspopup="dialog"
@@ -90,11 +83,6 @@ export function DatePickerComponent() {
             >
                 📆
             </button>
-            {/*<p aria-live="assertive" aria-atomic="true">*/}
-            {/*    {selectedDate !== undefined*/}
-            {/*        ? selectedDate.toDateString()*/}
-            {/*        : "Выберите дату рождения"}*/}
-            {/*</p>*/}
             <dialog
                 role="dialog"
                 ref={dialogRef}
@@ -105,42 +93,26 @@ export function DatePickerComponent() {
             >
                 <div className='flex justify-between items-center'>
                     <div>Выша дата рождения:</div>
-                    {/* Кнопка закрытия */}
                     <button
-                        onClick={()=>setIsDialogOpen(false)}
+                        onClick={() => setIsDialogOpen(false)}
                         className='btn btn-ghost text-lg'
-                        // style={{
-                        //     position: "absolute",
-                        //     top: "10px",
-                        //     right: "10px",
-                        //     background: "none",
-                        //     border: "none",
-                        //     fontSize: "1.5em",
-                        //     cursor: "pointer",
-                        // }}
                         aria-label="Close calendar"
                     >
                         X
                     </button>
                 </div>
-
-                        {/*<button className='btn btn-ghost cursor-pointer' onClick={()=> setIsDialogOpen(null)}>X</button>*/}
-                        <DayPicker
-                            hideNavigation
-                            captionLayout={'dropdown'}
-                            locale={ru}
-                            month={month}
-                            onMonthChange={setMonth}
-                            autoFocus
-                            mode="single"
-                            selected={selectedDate}
-                            onSelect={handleDayPickerSelect}
-                            // footer={
-                            //     selectedDate !== undefined &&
-                            //     `Selected: ${selectedDate.toDateString()}`
-                            // }
-                        />
+                <DayPicker
+                    hideNavigation
+                    captionLayout={'dropdown'}
+                    locale={ru}
+                    month={month}
+                    onMonthChange={setMonth}
+                    autoFocus
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={handleDayPickerSelect}
+                />
             </dialog>
         </div>
-);
+    );
 }

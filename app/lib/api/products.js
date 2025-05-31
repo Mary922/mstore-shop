@@ -1,6 +1,5 @@
 import {Request} from "./request";
 
-
 let baseURL = 'http://127.0.0.1:3001';
 
 export const getProducts = () => {
@@ -9,7 +8,7 @@ export const getProducts = () => {
 }
 
 export const getProductsByIds = (ids) => {
-    let result = Request.post(`${baseURL}/products/cart`,{
+    let result = Request.post(`${baseURL}/products/cart`, {
         ids: ids,
     });
     return result;
@@ -26,7 +25,7 @@ export const getProductsInSearch = (searchValue) => {
 }
 
 export const getProductsFiltered = (data) => {
-    let result = Request.post(`${baseURL}/products/filter`,{
+    let result = Request.post(`${baseURL}/products/filter`, {
         data: data,
     });
     return result;

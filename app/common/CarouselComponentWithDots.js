@@ -1,11 +1,11 @@
 "use client";
-import React, {useRef, useState,useEffect} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 
 
-const CarouselComponentWithDots = ({paths, staticPaths, imageClassName,containerClassName,interval}) => {
+const CarouselComponentWithDots = ({paths, staticPaths, imageClassName, containerClassName, interval}) => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
-    const intervalId = useRef(); // Хранение интервала для авто-переключения слайдов
+    const intervalId = useRef();
 
     let baseUrl = '';
     if (paths) {
@@ -15,7 +15,6 @@ const CarouselComponentWithDots = ({paths, staticPaths, imageClassName,container
         baseUrl = 'http://localhost:3001/static';
     }
     const items = paths || staticPaths;
-
 
     const goToSlide = (index) => {
         setCurrentIndex(index);
@@ -38,7 +37,6 @@ const CarouselComponentWithDots = ({paths, staticPaths, imageClassName,container
     return (
         <>
             <div className={`relative w-full ${containerClassName || 'h-[400px]'}`}>
-                {/* Основной слайд */}
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4/5 h-full" key={currentIndex}>
                     {paths ? (
                         <img
@@ -70,8 +68,8 @@ const CarouselComponentWithDots = ({paths, staticPaths, imageClassName,container
                                 border-2 border-white shadow-lg
                                 ${
                                     currentIndex === index
-                                        ? 'bg-white scale-125 carousel-dot-active' // активная точка
-                                        : 'bg-transparent hover:bg-white/30 carousel-dot-not-active' // неактивные
+                                        ? 'bg-white scale-125 carousel-dot-active'
+                                        : 'bg-transparent hover:bg-white/30 carousel-dot-not-active'
                                 }
                             `}
                                 aria-label={`Перейти к слайду ${index + 1}`}
@@ -79,8 +77,8 @@ const CarouselComponentWithDots = ({paths, staticPaths, imageClassName,container
                         ))}
                     </div>
                 </div>
-                </div>
-            </>
-            )
-            }
-            export default CarouselComponentWithDots;
+            </div>
+        </>
+    )
+}
+export default CarouselComponentWithDots;

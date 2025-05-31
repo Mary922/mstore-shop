@@ -1,11 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
 const ScrollToTopComponent = () => {
     const [isVisible, setIsVisible] = useState(false);
 
-    // Show button when scrolled past half the viewport height
     const toggleVisibility = () => {
         const halfViewport = window.innerHeight / 2;
         if (window.pageYOffset > halfViewport) {
@@ -15,7 +14,6 @@ const ScrollToTopComponent = () => {
         }
     };
 
-    // Smooth scroll to top
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,

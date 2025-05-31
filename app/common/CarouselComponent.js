@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 
 
-const CarouselComponent = ({paths, staticPaths, interval, index}) => {
+const CarouselComponent = ({paths, staticPaths}) => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -50,25 +50,19 @@ const CarouselComponent = ({paths, staticPaths, interval, index}) => {
 
     return (
         <>
-            {/*<div className=" w-full bg-rose-700">*/}
-            {/*    <div className="flex justify-center">*/}
-                    <div className="flex bg-green-300 h-72" key={currentIndex}>
-                        {
-                            paths ?
-                                <img
-                                className="w-full object-cover"
-                                src={`${baseUrl}/${paths[currentIndex]}`}
-                                alt=""
-                            /> : <img
-                                className="w-full object-cover"
-                                src={`${baseUrl}/${staticPaths[currentIndex]}`}
-                                alt=""
-                            />
-                        }
-                    {/*</div>*/}
-                {/*</div>*/}
-
-                {/* Кнопки навигации */}
+            <div className="flex bg-green-300 h-72" key={currentIndex}>
+                {
+                    paths ?
+                        <img
+                            className="w-full object-cover"
+                            src={`${baseUrl}/${paths[currentIndex]}`}
+                            alt=""
+                        /> : <img
+                            className="w-full object-cover"
+                            src={`${baseUrl}/${staticPaths[currentIndex]}`}
+                            alt=""
+                        />
+                }
                 <button
                     type="button"
                     className="absolute top-1/2 left-4 z-1 -translate-y-1/2 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 focus:outline-none"
@@ -83,7 +77,7 @@ const CarouselComponent = ({paths, staticPaths, interval, index}) => {
                 <button
                     type="button"
                     className="absolute top-1/2 right-4 z-1 -translate-y-1/2 p-2 bg-white rounded-full shadow-lg hover:bg-gray-200 focus:outline-none"
-                    onClick={(event)=>{
+                    onClick={(event) => {
                         handleNextClick();
                         event.preventDefault();
                         event.stopPropagation();

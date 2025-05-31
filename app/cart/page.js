@@ -1,102 +1,30 @@
 "use client"
-import {usePathname, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     decreaseCartThunk,
     getCartThunk,
     increaseCartThunk,
     clearCartThunk,
-    deleteProductInCartThunk, increaseQuantity
+    deleteProductInCartThunk,
 } from "@/app/store/slices/cartSlice";
-import {deleteProduct, getCartPreOrder} from "@/app/lib/api/cart";
+import {getCartPreOrder} from "@/app/lib/api/cart";
 import {getProductsByIds} from "@/app/lib/api/products";
 import ConfirmModal from "@/app/ui/modals/ConfirmModal";
 import Link from "next/link";
 import {toast, Toaster} from "react-hot-toast";
-import ScrollDownComponent from "@/app/common/ScrollDownComponent";
 import MainLayout from "@/app/ui/MainLayout";
 import OrderButton from "@/app/ui/OrderButton";
 
 
 export default function CartPage() {
-    // let totalHeaderHeight = 0;
-    const [totalHeaderHeight, setTotalHeaderHeight] = useState(0);
-
-    // useEffect(() => {
-    //     const calculateHeaderHeight = () => {
-    //         const navbarTop = document.querySelector('.navbar-top');
-    //         const navbarBottom = document.querySelector('.navbar-bottom');
-    //         const navbarInfo = document.querySelector('.navbar-info');
-    //
-    //         let height = 0;
-    //
-    //         if (navbarTop) height += navbarTop.offsetHeight;
-    //         if (navbarBottom) height += navbarBottom.offsetHeight;
-    //         if (navbarInfo) height += navbarInfo.offsetHeight;
-    //
-    //         return height;
-    //     };
-    //
-    //     const height = calculateHeaderHeight();
-    //     setTotalHeaderHeight(height);
-    // }, []);
-    //
-    // // console.log('Calculated header height:', totalHeaderHeight);
-    //
-    //
     let baseUrl = 'http://localhost:3001/images';
     const dispatch = useAppDispatch();
     const router = useRouter();
 
     const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false);
     const [products, setProducts] = useState([]);
-    const [images, setImages] = useState([]);
-    //
-    // const [scrollOffset, setScrollOffset] = useState(0);
-    //
-    // useEffect(() => {
-    //     const leftContent = document.getElementById('left-content');
-    //     const rightSidebar = document.getElementById('right-sidebar');
-    //
-    //
-    //     const handleScroll = () => {
-    //         if (!leftContent || !rightSidebar) return;
-    //
-    //         const leftContentHeight = leftContent.scrollHeight; // Полная высота левого блока
-    //         const leftContentVisibleHeight = leftContent.clientHeight; // Видимая высота левого блока
-    //         const sidebarHeight = rightSidebar.offsetHeight; // Высота правого блока (по содержимому)
-    //         const currentScroll = leftContent.scrollTop; // Текущая прокрутка левого блока
-    //         const windowHeight = window.innerHeight;
-    //
-    //         if (currentScroll > 300) {
-    //             rightSidebar.classList.add('hidden');
-    //         } else {
-    //             rightSidebar.classList.remove('hidden');
-    //         }
-    //
-    //         // Максимальное значение прокрутки левого блока
-    //         const maxScrollLeft = leftContentHeight - leftContentVisibleHeight;
-    //
-    //         // Учитываем разницу между высотой левого блока и правого
-    //         const maxSidebarOffset = Math.max(0, leftContentHeight - sidebarHeight);
-    //
-    //         // Устанавливаем безопасную позицию для правого блока
-    //         const safeOffset = Math.min(currentScroll, maxSidebarOffset);
-    //
-    //         // if (window.scrollY >= triggerPoint) {
-    //         //     rightSidebar.classList.add('hidden'); // Добавляем класс скрытого состояния
-    //         // } else {
-    //         //     rightSidebar.classList.remove('hidden'); // Возвращаем видимость
-    //         // }
-    //
-    //
-    //         setScrollOffset(safeOffset);
-    //     };
-    //
-    //     leftContent.addEventListener('scroll', handleScroll);
-    //     return () => leftContent.removeEventListener('scroll', handleScroll);
-    // }, []);
 
     let tempClient = '';
     let client;
@@ -112,7 +40,6 @@ export default function CartPage() {
     }
 
     const cart = useAppSelector(state => state.cart.cart);
-
 
     const getIdsFromCart = () => {
         const idsList = [];
@@ -131,10 +58,6 @@ export default function CartPage() {
                 let ids = getIdsFromCart();
                 const productsList = await getProductsByIds(ids);
                 setProducts(productsList?.data);
-
-                // if (productsList?.data?.Images) {
-                //     setImages(productsList?.data.Images);
-                // }
             })();
         }
     }, [cart]);
@@ -151,7 +74,6 @@ export default function CartPage() {
         });
     }
 
-
     const deleteProductFromCart = async (id, size) => {
         await dispatch(deleteProductInCartThunk({productId: id, sizeId: size}));
         if (tempClient) {
@@ -162,15 +84,14 @@ export default function CartPage() {
 
     const increaseCount = async (productId, sizeId) => {
         if (tempClient) {
-            await dispatch(increaseCartThunk({productId: productId, sizeId: sizeId,clientId: tempClient}));
+            await dispatch(increaseCartThunk({productId: productId, sizeId: sizeId, clientId: tempClient}));
             await dispatch(getCartThunk(tempClient));
         }
         if (clientId) {
-            await dispatch(increaseCartThunk({productId: productId, sizeId: sizeId,clientId: clientId}));
+            await dispatch(increaseCartThunk({productId: productId, sizeId: sizeId, clientId: clientId}));
             await dispatch(getCartThunk(clientId));
         }
     }
-
 
     const decreaseCount = async (productId, sizeId) => {
         await dispatch(decreaseCartThunk({productId: productId, sizeId: sizeId}));
@@ -194,8 +115,6 @@ export default function CartPage() {
     const checkIsAuthorized = async () => {
         if (clientId) {
             const result = await getCartPreOrder({cart: cart, sum: total});
-            // console.log('PRE ORDER', result);
-
             if (result?.data?.status === 200) {
                 router.push(`preorder?sum=${total}`);
             }
@@ -263,7 +182,7 @@ export default function CartPage() {
                                 <button
                                     className="join-item btn btn-ghost text-xl w-12 h-12 min-h-0"
                                     onClick={() => {
-                                         increaseCount(product.product_id, item.product_size);
+                                        increaseCount(product.product_id, item.product_size);
                                     }}
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
@@ -292,7 +211,6 @@ export default function CartPage() {
                     <div
                         className="p-4 w-[1400px]"
                     >
-
                         {
                             cart && cart.length > 0 ?
                                 <>
@@ -352,41 +270,9 @@ export default function CartPage() {
                                         </Link>
                                     </div>
                                 </>
-
                         }
-
-
                     </div>
-
-                {/*    <div*/}
-                {/*        className="border-gray-200 w-96"*/}
-                {/*    >*/}
-                {/*        <div*/}
-                {/*            tabIndex={0}*/}
-                {/*            className="card shadow-xl rounded-sm py-2"*/}
-                {/*        >*/}
-                {/*            <div className='mb-4 flex items-center justify-center bg-neutral-content p-2 shadow-lg'>*/}
-                {/*                В корзине товаров*/}
-                {/*            </div>*/}
-
-                {/*            <div*/}
-                {/*                className='h-10 bg-white flex items-center justify-center font-bold p-2 mb-4 scroll-price shadow-lg'>*/}
-                {/*                Всего к оплате {total} ₽*/}
-                {/*            </div>*/}
-
-                {/*            <div>*/}
-                {/*                <a*/}
-                {/*                    className="btn btn-primary btn-md text-white shadow-lg flex"*/}
-                {/*                    // onClick={checkIsAuthorized}*/}
-                {/*                >*/}
-                {/*                    Оформить заказ*/}
-                {/*                </a>*/}
-                {/*            </div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
                 </div>
-
-
                 {
                     confirmModalIsOpen ? <ConfirmModal show={confirmModalIsOpen}
                                                        close={setConfirmModalIsOpen}

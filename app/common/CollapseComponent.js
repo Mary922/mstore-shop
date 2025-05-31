@@ -1,21 +1,14 @@
 import React, {useEffect} from 'react';
-import {useState} from "react";
 import {useDispatch} from "react-redux";
 
-
-
-const AccordionComponent = ({name,options, checkedOptions, setCheckedOptions}) => {
+const AccordionComponent = ({name, options, checkedOptions, setCheckedOptions}) => {
     const dispatch = useDispatch();
-    // const [isChecked, setIsChecked] = useState(false);
 
-    // console.log('collapse',checkedOptions);
-
-    useEffect(()=>{
-        if(checkedOptions.length === 0){
+    useEffect(() => {
+        if (checkedOptions.length === 0) {
             setCheckedOptions([]);
         }
-    },[]);
-
+    }, []);
 
     const handleChange = async (event) => {
         const newValue = event.target.value;
@@ -27,7 +20,6 @@ const AccordionComponent = ({name,options, checkedOptions, setCheckedOptions}) =
         }
         setCheckedOptions(updatedOptions);
     }
-    // console.log('checkedOptions',name, checkedOptions);
 
     return (
         <>

@@ -3,7 +3,6 @@ import {useParams} from "next/navigation";
 import React, {useState, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
 import {getProduct} from "@/app/lib/api/products";
-import CarouselComponent from "@/app/common/CarouselComponent";
 import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
 import {createCartThunk, increaseCartThunk, getCartThunk} from "@/app/store/slices/cartSlice";
 import MainLayout from "@/app/ui/MainLayout";
@@ -49,7 +48,6 @@ export default function ProductPage() {
         (async () => {
             if (productId) {
                 const result = await getProduct(productId);
-                // console.log('one product', result.data);
                 if (result?.data) {
                     setCurrentProduct(result.data);
                 }
@@ -75,16 +73,6 @@ export default function ProductPage() {
             await dispatch(wishlistUpdateThunk({id: productId}));
         }
     }
-
-    // const classes = {
-    //     heart: clsx(
-    //         {'bi bi-heart': wish.indexOf(currentProduct.product_id) < 0},
-    //         {'bi bi-heart-fill': wish.indexOf(currentProduct.product_id) > -1},
-    //     ),
-    //     size: clsx(
-    //         {'chosen-size': chosenSize},
-    //     )
-    // }
 
     let colors = [];
     if (currentProduct.Colors) {
@@ -195,62 +183,7 @@ export default function ProductPage() {
                         <div className='flex flex-row'><span>Размер</span>
                             <div className='flex flex-row gap-2 cursor-pointer'>{sizes}</div>
                         </div>
-
-
-                        {/*<div style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>Размер: {sizes}</div>*/}
-
-                        {/*{productsListInCart}*/}
-                        {/*{*/}
-                        {/*    sizesIsShowing ? <>*/}
-                        {/*        <div style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>{sizes}</div>*/}
-                        {/*        <div onClick={() => setSizesIsShowing(false)}>X</div>*/}
-                        {/*    </> : null*/}
-                        {/*}*/}
-
                         <div className='flex flex-row items-center'>
-
-                            {/*<div className="join border border-base-300 rounded-full">*/}
-                            {/*    <button*/}
-                            {/*        className="join-item btn btn-ghost text-xl w-12 h-12 min-h-0"*/}
-                            {/*        onClick={() => decreaseCount(currentProduct.product_id, currentProduct.product_size)}*/}
-                            {/*    >*/}
-                            {/*        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"*/}
-                            {/*             viewBox="0 0 24 24" stroke="currentColor">*/}
-                            {/*            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4"/>*/}
-                            {/*        </svg>*/}
-                            {/*    </button>*/}
-                            {/*    <div className="join-item btn btn-ghost text-xl w-16 pointer-events-none">*/}
-                            {/*        {quantity}*/}
-                            {/*    </div>*/}
-                            {/*    <button*/}
-                            {/*        className="join-item btn btn-ghost text-xl w-12 h-12 min-h-0"*/}
-                            {/*        onClick={async () => {*/}
-                            {/*            // setSizesIsShowing(true);*/}
-                            {/*            await increaseCount(currentProduct.product_id, chosenSize);*/}
-                            {/*        }}*/}
-                            {/*    >*/}
-                            {/*        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"*/}
-                            {/*             viewBox="0 0 24 24" stroke="currentColor">*/}
-                            {/*            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"*/}
-                            {/*                  d="M12 4v16m8-8H4"/>*/}
-                            {/*        </svg>*/}
-                            {/*    </button>*/}
-                            {/*</div>*/}
-
-
-                            {/*<div className='flex flex-row text-3xl'>*/}
-                            {/*    <div className='plus-minus' onClick={() => {*/}
-                            {/*        decreaseCount(currentProduct.product_id, currentProduct.product_size)*/}
-                            {/*    }}>-*/}
-                            {/*    </div>*/}
-                            {/*    <div className='plus-minus'>{quantity}</div>*/}
-                            {/*    <div className='plus-minus' onClick={() => {*/}
-                            {/*        setSizesIsShowing(true);*/}
-                            {/*        increaseCount(currentProduct.product_id, chosenSize);*/}
-                            {/*    }}>+*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
-
                             <div className="flex flex-col">
                                 {showSelectWarning && (
                                     <label className="text-red-500 text-sm">Выберите размер</label>
@@ -262,7 +195,6 @@ export default function ProductPage() {
                                 transition duration-200 ease-in-out hover:bg-gray-600"
                                     onClick={
                                         async (event) => {
-                                            // setSizesIsShowing(true);
                                             if (!chosenSize) {
                                                 setShowSelectWarning(true); // Показываем предупреждение, если размер не выбран
                                                 return;

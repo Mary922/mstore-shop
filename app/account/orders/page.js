@@ -29,7 +29,6 @@ export default function OrdersPage() {
         const ordersGet = await getOrders(clientId, limit, offset);
         const ordersData = ordersGet.data.rows;
         const ordersCount = ordersGet.data;
-        // console.log('ordersGET', ordersGet)
         setPageCount(ordersCount.count);
         setOrders(ordersData);
     }
@@ -37,14 +36,11 @@ export default function OrdersPage() {
     useEffect(() => {
         (async () => {
             if (clientId) {
-                requestForOrders(ITEMS_PER_PAGE, 0);
+                await requestForOrders(ITEMS_PER_PAGE, 0);
             }
         })()
     }, []);
 
-    // const navigateToOrder = (orderId) => {
-    //     navigate(`/order/${orderId}`);
-    // }
 
     let ordersList;
     if (orders.length > 0) {
@@ -55,7 +51,6 @@ export default function OrdersPage() {
             }
             return (
                 <tr key={order.order_id} onClick={() => navigateToOrder(order.order_id)}>
-                    {/*<td>{order.ProductOrders[i]}</td>*/}
                     <td>{moment.unix(order.created_at).format("MM.DD.YYYY HH:mm")}</td>
                     <td>{sum}</td>
                 </tr>
@@ -71,7 +66,6 @@ export default function OrdersPage() {
                         <table className="table">
                             <thead>
                             <tr>
-                                {/*<th>Заказ</th>*/}
                                 <th>Дата</th>
                                 <th>Сумма</th>
                             </tr>
@@ -88,11 +82,6 @@ export default function OrdersPage() {
                                 request={requestForOrders}
                                 pages={pageCount}
                             /></div>
-
-                        {/*<PagData data={orders}*/}
-                        {/*         itemsPerPage={ITEMS_PER_PAGE}*/}
-                        {/*         request={requestForOrders}*/}
-                        {/*         pages={pageCount} />*/}
                     </div>
                     :
                     <div className="flex flex-col items-center justify-center w-full">

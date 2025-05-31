@@ -1,54 +1,20 @@
 "use client"
 
-import React, {useEffect, useRef} from "react";
-import Link from "next/link";
+import React, {useEffect} from "react";
 import {useState} from "react";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import {getCategories} from "@/app/lib/api/categories";
-
-import {clearCartThunk} from "@/app/store/slices/cartSlice";
 import {getClient} from "../../lib/api/clients";
 import {getImagesStatic} from "../../lib/api/images";
-import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
-import {Auth, authTemp} from "@/app/lib/api/auth";
 import AuthorizationForm from "@/app/ui/AuthorizationForm";
 import NavbarHeader from "./NavbarHeader";
 import AccountForm from "@/app/ui/AccountForm";
-import MainLayout from "@/app/ui/MainLayout";
 
 const AuthHeader = () => {
     const baseUrl = 'http://localhost:3001/static';
-    const dispatch = useAppDispatch();
-    const cart = useAppSelector(state => state.cart.cart);
-
-    const [catalogIsShowing, setCatalogIsShowing] = useState(false);
-
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dropdownRef = useRef(null);
-
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-                setIsDropdownOpen(false);
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
-
-    const toggleDropdown = (e) => {
-        e.stopPropagation();
-        setIsDropdownOpen(!isDropdownOpen);
-    };
-    const closeDropdown = () => setIsDropdownOpen(false);
-
 
     const [authLabel, setAuthLabel] = useState('');
     const [imageLogoPath, setImageLogoPath] = useState('');
-
     const [authMode, setAuthMode] = useState(false);
-
 
     let tempClient;
     let client;
@@ -62,16 +28,9 @@ const AuthHeader = () => {
         clientId = JSON.parse(localStorage.getItem("client")).id;
     }
 
-
     useEffect(() => {
         (async () => {
-            // if (!client && !tempClient) {
-            //     const result = await authTemp();
-            //     console.log('result AUTH TEMP', result);
-            //     localStorage.setItem('temp-client', result?.data?.accessToken);
-            // }
             if (client) {
-                // localStorage.removeItem('temp-client');
                 setAuthMode(true);
             }
 
@@ -79,11 +38,8 @@ const AuthHeader = () => {
             if (client) {
                 clientRes = await getClient(clientId);
             }
-
             if (localStorage.getItem('client') === null) {
-                // setAuthLabel('Войти или зарегистрироваться');
                 setAuthLabel('');
-
             } else {
                 setAuthLabel(`Привет, ${clientRes.data.client_name}`)
             }
@@ -93,42 +49,12 @@ const AuthHeader = () => {
 
     useEffect(() => {
         (async () => {
-            // const imageHeader = await getImagesStatic('web', 'header');
-            // const images = imageHeader.data;
-            // if (imageHeader && images) {
-            //     for (let i = 0; i < images.length; i++) {
-            //         setImageLogoPath(images[i].image_path);
-            //     }
-            // }
             const resLogo = await getImagesStatic('web', 'logo');
             if (resLogo?.data) {
                 setImageLogoPath(resLogo.data[0].image_path);
             }
         })()
     }, [])
-
-
-    const cartList = useAppSelector((state) => state.cart.cart);
-    // console.log('cartList from header', cartList);
-
-    const quantityInCart = useAppSelector((state) => state.cart.quantityInCart);
-
-
-    //
-    // const accountLogOut = async () => {
-    //     await dispatch(clearCartThunk(clientId));
-    //     logOut();
-    //     // navigate('/home');
-    //     // window.location.reload();
-    // }
-
-
-    // function removePunctuation(text) {
-    //     const punctuation = ',.;:!?(){}[]^&*-_+=@#№$%"<>0123456789';
-    //     return text.split('').filter(char => !punctuation.includes(char)).join('');
-    // }
-    //
-
 
     return (
         <>
@@ -138,11 +64,11 @@ const AuthHeader = () => {
                 </div>
                 <div className='navbar-center'>
                     {imageLogoPath ?
-                    <img
-                        className="w-40 h-auto"
-                        src={`${baseUrl}/${imageLogoPath}`}
-                        alt=""
-                    />
+                        <img
+                            className="w-40 h-auto"
+                            src={`${baseUrl}/${imageLogoPath}`}
+                            alt=""
+                        />
                         : null}
                 </div>
 
@@ -152,8 +78,6 @@ const AuthHeader = () => {
                         <div tabIndex={0}
                              role="button"
                              className="flex flex-row btn-circle avatar cursor-pointer mr-5"
-                             // ref={dropdownRef}
-                             // onClick={toggleDropdown}
                         >
                             <div className="w-12 rounded-full">
                                 <svg className="w-full h-full text-gray-800 dark:text-white" aria-hidden="true"
@@ -164,27 +88,15 @@ const AuthHeader = () => {
                                           clipRule="evenodd"/>
                                 </svg>
                                 {
-                                    authMode ? <AccountForm /> : <AuthorizationForm  clientId={clientId} tempClient={tempClient} />
+                                    authMode ? <AccountForm/> :
+                                        <AuthorizationForm clientId={clientId} tempClient={tempClient}/>
                                 }
-
-                                {/*{isDropdownOpen && (*/}
-                                {/*    authMode ? (*/}
-                                {/*            <AccountForm/>*/}
-                                {/*        ) : (*/}
-                                {/*        <AuthorizationForm*/}
-                                {/*            clientId={client}*/}
-                                {/*            tempClient={tempClient}*/}
-                                {/*            // closeDropdown={closeDropdown}*/}
-                                {/*        />*/}
-                                {/*        )*/}
-                                {/*)}*/}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <NavbarHeader/>
-
             <div className='flex flex-row items-center bg-emerald-500 text-black h-10 pl-5 py-1 w-full navbar-info'>
                 <div className='text-neutral-content'>Бесплатная доставка от 2000 ₽</div>
             </div>

@@ -4,7 +4,7 @@ import {Request} from "@/app/lib/api/request";
 let baseURL = 'http://127.0.0.1:3001';
 
 export const createAddress = (data) => {
-    let result = Request.post(`${baseURL}/address/create`,data);
+    let result = Request.post(`${baseURL}/address/create`, data);
     return result;
 }
 
@@ -14,12 +14,12 @@ export const getAddresses = (id) => {
 }
 
 export const updateAddress = (data) => {
-    let result = Request.post(`${baseURL}/address/update`,data);
+    let result = Request.post(`${baseURL}/address/update`, data);
     return result;
 }
 
 export const deleteAddress = (data) => {
-    let result = Request.post(`${baseURL}/address/delete`,data);
+    let result = Request.post(`${baseURL}/address/delete`, data);
     return result;
 }
 

@@ -1,11 +1,10 @@
 "use client"
 import 'react-datepicker/dist/react-datepicker.css';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useState} from "react";
 import {useFormik} from "formik";
 import moment from "moment";
 import {PatternFormat} from "react-number-format";
-import DatePicker from "react-datepicker";
 import {Registration} from "@/app/lib/api/registration";
 import {Auth, CheckValidationPassword} from "@/app/lib/api/auth";
 import {useRouter, useSearchParams} from "next/navigation";
@@ -17,12 +16,11 @@ import {useAppDispatch} from "@/app/lib/hooks";
 import MainLayout from "@/app/ui/MainLayout";
 import validator from "validator";
 import {resetPasswordRequest} from "@/app/lib/api/forgotPassword";
+// import Yup from 'yup';
 
 
 export default function RegistrationPage() {
     const dispatch = useAppDispatch();
-    const [selected, setSelected] = useState(Date);
-
     const router = useRouter();
     const searchParams = useSearchParams();
     const from = searchParams.get("from");
@@ -30,23 +28,12 @@ export default function RegistrationPage() {
     const [authEmail, setAuthEmail] = useState('');
     const [authPassword, setAuthPassword] = useState('');
 
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [birthday, setBirthday] = useState('');
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [formValid,setFormValid] = useState(false);
-
     const [validationPassword, setValidationPassword] = useState(false);
     const [validationPasswordValue, setValidationPasswordValue] = useState('');
     const [repeatRequestPassword, setRepeatRequestPassword] = useState(false);
 
     const [forgotPassword, setForgotPassword] = useState(false);
     const [emailForgot, setEmailForgot] = useState('mary_k_92@mail.ru');
-
-    console.log('pass',authPassword);
-    console.log('email',authEmail);
 
     const [errorForm, setErrorForm] = useState({
         name: false,
@@ -98,20 +85,13 @@ export default function RegistrationPage() {
     const checkClient = async () => {
         if (clientId || tempClient) {
             const result = await Auth({email: authEmail, password: authPassword});
-            // console.log('TOKEN RESPONSE', result);
 
             if (result.data?.accessToken) {
                 localStorage.setItem('client', JSON.stringify(result.data));
                 localStorage.removeItem('temp-client');
-
                 router.push(from);
-
             }
         }
-
-            // if (tempClient) {
-            //     console.log('i dont know who you are')
-        // }
         else {
             alert('No token')
         }
@@ -120,73 +100,60 @@ export default function RegistrationPage() {
     const validate = (values) => {
         let errors = {};
 
-        if (!values.name || values.name.trim().length < 2) {
-            // errorForm.name = true;
-            errors.name = 'Имя должно содержать минимум 2 символа.';
-            // console.log(errors.name);
+        if (!/^[a-zA-Zа-яё\s\-]+$/i.test(values.name)) {
+            errors.name = 'Имя должно содержать только русские буквы, пробелы и дефисы.';
         }
-        if (!values.surname || values.surname.trim().length < 2) {
-            errors.surname = 'Фамилия должна содержать минимум 2 символа.';
-            // console.log(errors.surname);
+        if (!/^[a-zA-Zа-яё\s\-]+$/i.test(values.surname)) {
+            errors.surname = 'Фамилия должна содержать только русские буквы, пробелы и дефисы.';
         }
         if (values.phone.length < 10) {
             errors.phone = 'Номер телефона слишком короткий.';
-            // console.log(errors.phone);
         }
-        if (!values.email || values.email.trim().length < 5) {
-            errors.email = 'E-mail должен содержать минимум 5 символов.';
-            // console.log(errors.email);
+        if (!values.email || !validator.isEmail(values.email)) {
+            errors.email = 'Некорректный адрес электронной почты.';
         }
-        if (!values.password || values.password.trim().length < 6) {
-            errors.password = 'Пароль должен содержать минимум 6 символов.';
-            // console.log(errors.password);
+        if (!values.password || values.password.trim().length < 8) {
+            errors.password = 'Пароль должен содержать минимум 8 символов.';
         }
-        if (values.birthday.trim().length < 10) {
-            errors.birthday = 'Дата рождения должна содержать минимум 8 символов.';
-            console.log(errors.birthday);
+        const today = moment();
+        console.log('today', today);
+        const birthDay = moment(values.birthday);
+        console.log('birthday', birthDay);
+
+        if (!values.birthday) {
+            errors.birthday = 'Укажите дату рождения.';
+        } else if (birthDay.isAfter(today)) {
+            errors.birthday = 'Дата рождения не может быть больше текущей даты.';
         }
         return errors;
     }
 
     const formik = useFormik({
         enableReinitialize: true,
+        // validateOnMount: true,
         validate,
         initialValues: {
-            name: 'Mary',
-            surname: 'Go',
-            phone: '79213932139',
-            email: 'mary_k_92@mail.ru',
-            password: '12345678',
-            birthday: moment().format('YYYY-MM-DD'),
+            name: '',
+            surname: '',
+            phone: '',
+            email: '',
+            password: '',
+            birthday: '',
         },
         onSubmit: (values) => {
             console.log(JSON.stringify(values, null, 2));
         }
     })
-    // console.log('formik',formik);
 
     const registerClient = async () => {
         const formikErrors = formik.errors;
-        console.log('formikErrors', formikErrors);
 
         if (Object.keys(formikErrors).length > 0) {
-            // console.log(formikErrors.name)
-
-            // if (formikErrors.name) {
-            //     errorForm.name = true;
-            //     toast.error(formikErrors.name)
-            // }
-            // if (formikErrors.surname) {
-            //     errorForm.surname = true;
-            //     toast.error(formikErrors.surname)
-            // }
-           setFormValid(false);
-
-
-            console.log('Заполните все поля');
-            return false;
-        } else {
-            // setFormValid(true);
+            console.log('formik errors', formikErrors);
+            if (formikErrors.name || formikErrors.surname || formikErrors.phone || formikErrors.email || formikErrors.password || formikErrors.birthday) {
+                toast.error(formikErrors.name || formikErrors.surname || formikErrors.phone || formikErrors.email || formikErrors.password || formikErrors.birthday)
+            }
+            return;
         }
 
         try {
@@ -200,7 +167,6 @@ export default function RegistrationPage() {
                     birthday: formik.values.birthday,
                     tempClientToken: tempClient,
                 });
-            console.log('resultresult',result);
 
             if (result.success === true) {
                 setValidationPassword(true);
@@ -254,35 +220,35 @@ export default function RegistrationPage() {
                 setRepeatRequestPassword(true);
             }
         } catch (error) {
-            // console.log('Неправильный пароль');
             console.log(error);
         }
     }
 
     const checkFilledInput = async () => {
         if (!emailForgot?.trim()) {
-            // setError('Заполните email');
             console.log('email need right')
             return false;
         }
         const isValidEmail = validator.isEmail('emailForgot');
-        if (isValidEmail) {
-            // console.log('email need right')
-            // setError('Введите корректный email');
+        if (!isValidEmail) {
+            toast.error('Некорректный адрес электронной почты.');
             return false;
-        } else {
+        }
+        try {
             const result = await resetPasswordRequest(emailForgot);
 
             if (result.success) {
                 setForgotPassword(false);
                 setEmailForgot('');
-
-                // toast.success('Проверьте почту для восстановления пароля');
+                toast.success('Проверьте почту для восстановления пароля');
             }
-            console.log('result',result);
-            console.log('email exist lalal');
+        } catch (error) {
+            console.error("Ошибка при сбросе пароля:", error);
+            toast.error("Произошла ошибка при восстановлении пароля.", {icon: '⛔️'});
         }
     }
+    console.log('formik', formik);
+
 
     return (
         <>
@@ -369,7 +335,6 @@ export default function RegistrationPage() {
                                         </div>
                                     </>
                                 }
-                                {/*<a onClick={}>Забыли пароль?</a>*/}
                             </div>
 
                         </div>
@@ -398,7 +363,6 @@ export default function RegistrationPage() {
                                                value={formik.values.name}
                                                onChange={formik.handleChange}
                                                onBlur={formik.handleBlur}
-                                            // className="w-full input input-bordered input-sm mb-2"
                                                className={classes.name}
                                                placeholder="Имя" required
                                         />
@@ -419,7 +383,6 @@ export default function RegistrationPage() {
                                                value={formik.values.surname}
                                                onChange={formik.handleChange}
                                                onBlur={formik.handleBlur}
-                                            // className="w-full input input-bordered input-sm mb-2"
                                                className={classes.surname}
                                                placeholder="Фамилия" required
                                         />
@@ -436,20 +399,15 @@ export default function RegistrationPage() {
                                         <PatternFormat
                                             id={'phone'}
                                             name={'phone'}
-                                            // className={classes.phone}
                                             format={'+# (###) #### ###'}
                                             allowEmptyFormatting mask={'_'}
                                             type={'tel'}
                                             value={formik.values.phone}
-                                            // className="w-full input input-bordered input-sm mb-2"
                                             className={classes.phone}
                                             onValueChange={values => {
                                                 formik.setFieldValue('phone', values.value);
                                             }}
-                                            // onValueChange={(values) => handlePhoneChange(values)}
                                         />
-                                        {/*<input type="text" className="w-full input input-bordered input-sm mb-2"*/}
-                                        {/*       placeholder="Телефон"/>*/}
                                     </label>
 
                                     <label className="flex items-center gap-2">
@@ -470,8 +428,6 @@ export default function RegistrationPage() {
                                                name="email"
                                                value={formik.values.email}
                                                onChange={formik.handleChange}
-                                            // onBlur={formik.handleBlur}
-                                            //    className="w-full input input-bordered input-sm mb-2"
                                                className={classes.email}
                                                placeholder="Email"
                                                required
@@ -497,7 +453,6 @@ export default function RegistrationPage() {
                                                placeholder="Пароль"
                                                value={formik.values.password}
                                                onChange={formik.handleChange}
-                                            // className="w-full input input-bordered input-sm"
                                                className={classes.password}
                                                required
                                         />
@@ -513,31 +468,19 @@ export default function RegistrationPage() {
                                                       clipRule="evenodd"/>
                                             </svg>
                                         </div>
-
-                                        <DatePickerComponent/>
-
+                                        <DatePickerComponent
+                                            formik={{
+                                            values: formik.values,
+                                            setFieldValue: formik.setFieldValue,
+                                            setTouched: formik.setTouched
+                                        }}/>
                                     </label>
-
-
                                     <button
                                         className='h-10 mt-3 flex justify-center items-center cursor-pointer rounded-md
                                 bg-primary px-4 py-3 text-center text-sm font-semibold uppercase text-white
                                 transition duration-200 ease-in-out hover:bg-gray-900' onClick={registerClient}>
                                         Регистрация
                                     </button>
-
-
-                                    {/*    <button*/}
-                                    {/*            className={`h-10 mt-3 flex justify-center items-center cursor-pointer rounded-md*/}
-                                    {/*bg-primary px-4 py-3 text-center text-sm font-semibold uppercase text-white*/}
-                                    {/*transition duration-200 ease-in-out hover:bg-gray-900*/}
-                                    {/*    ${*/}
-                                    {/*                formValid ? 'bg-info' : 'disabled'*/}
-                                    {/*            }*/}
-
-                                    {/*`} onClick={registerClient}>*/}
-                                    {/*            Регистрация*/}
-                                    {/*        </button>*/}
                                     {
                                         validationPassword ?
                                             <>
@@ -547,7 +490,7 @@ export default function RegistrationPage() {
                                                     className='input input-bordered'
                                                     value={validationPasswordValue}
                                                     onChange={(event) => setValidationPasswordValue(event.target.value)}/>
-                                                <button className='btn btn-primary'
+                                                <button className='btn btn-primary text-white text-lg'
                                                         onClick={checkValidationPassword}>ok
                                                 </button>
                                             </>

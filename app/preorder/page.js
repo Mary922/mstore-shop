@@ -18,7 +18,6 @@ export default function PreorderPage() {
     const dispatch = useAppDispatch();
     const sumUrlParam = useSearchParams();
     const sum = sumUrlParam.get('sum');
-    // console.log('sum',sum);
 
     const [client, setClient] = useState([]);
     const [regions, setRegions] = useState([]);
@@ -31,8 +30,6 @@ export default function PreorderPage() {
 
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
-
-
     const [products, setProducts] = useState([]);
 
     const [errorForm, setErrorForm] = useState({
@@ -72,8 +69,6 @@ export default function PreorderPage() {
             {'input-error': errorForm.phone},
         )
     };
-    // console.log('classes', classes)
-
 
     useEffect(() => {
         (async () => {
@@ -82,29 +77,19 @@ export default function PreorderPage() {
                 setClient(result.data);
 
                 if (result.data.Addresses) {
-                    console.log('actual address exists');
-
                     const actualAddress = result.data.Addresses;
 
                     for (let i = 0; i < actualAddress.length; i++) {
-                        console.log('act region',actualAddress[i].region_id);
                         setSelectedRegion(actualAddress[i].region_id);
                         setSelectedCity(actualAddress[i].city_id);
                         setAddress(actualAddress[i].address_name);
                     }
                 }
             }
-
             const regionsList = await getRegions();
             setRegions(regionsList.data);
         })();
     }, [])
-    console.log('preorder client',client);
-
-    console.log('selectedRegion', selectedRegion);
-    console.log('address name',address)
-
-
 
     useEffect(() => {
         (async () => {
@@ -162,8 +147,6 @@ export default function PreorderPage() {
             return false;
         }
 
-        console.log('all is filled');
-
         const result = await makeOrder({
                 client: clientId,
                 region: selectedRegion,
@@ -174,14 +157,9 @@ export default function PreorderPage() {
             cart,
             sum,
         )
-        console.log('result order', result)
 
         if (result.success) {
             setShow(true);
-
-            // if (tempClient) {
-            //     await dispatch(clearCartThunk(tempClient));
-            // }
             await dispatch(clearCartThunk(clientId));
             toast.success('Спасибо за заказ!');
 
@@ -190,7 +168,6 @@ export default function PreorderPage() {
             }, 2000);
         } else {
             toast.error('error here')
-            console.log('error in creating order');
         }
     }
 
@@ -210,152 +187,104 @@ export default function PreorderPage() {
             toast.error('заполните адрес');
             newErrorForm.address = true
         }
-        // if (phone.length < 11) {
-        //     console.log('fill phone');
-        //     console.log('len', phone.length)
-        //     // newErrorForm.phone = true
-        // }
         return newErrorForm;
     }
-
-
-    // const handleAsyncOperation = async () => {
-    //     try {
-    //         setLoading(true);
-    //
-    //         const promise = new Promise((resolve) =>
-    //             setTimeout(resolve, 3000)
-    //         );
-    //
-    //         const toastId = toast.promise(promise, {
-    //             loading: 'Выполняется оформление заказа',
-    //             success: 'Заказ оформлен. Спасибо за заказ!',
-    //             error: 'Произошла ошибка.Попробуйте еще раз',
-    //         });
-    //
-    //         await promise;
-    //
-    //         toast.success( {
-    //             id: toastId,
-    //         });
-    //     } catch (error) {
-    //         console.error(error);
-    //         toast.error('Ошибка при выполнении операции.');
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
-
 
     return (
         <>
             <MainLayout>
                 <div className="flex flex-col w-full my-10 items-center">
-            <div className="card bg-neutral-200 w-[500px] items-center p-5 shadow-lg py-0">
-                <div className="card-body w-full">
-                    <div className="w-full">
-                        <label className="form-control w-full">
-                            <div className="label">
-                                <span className="label-text">Имя</span>
+                    <div className="card bg-neutral-200 w-[500px] items-center p-5 shadow-lg py-0">
+                        <div className="card-body w-full">
+                            <div className="w-full">
+                                <label className="form-control w-full">
+                                    <div className="label">
+                                        <span className="label-text">Имя</span>
+                                    </div>
+                                    <input type="text"
+                                           className="input-sm input-bordered "
+                                           placeholder="Имя"
+                                           defaultValue={client.client_name}
+                                           required readOnly={true}
+                                    />
+                                </label>
                             </div>
-                            <input type="text"
-                                   className="input-sm input-bordered "
-                                   placeholder="Имя"
-                                   defaultValue={client.client_name}
-                                   required readOnly={true}
-                            />
-                        </label>
-                    </div>
+                            <label className="form-control w-full">
+                                <div className="label">
+                                    <span className="label-text">Фамилия</span>
+                                </div>
+                                <input type="text"
+                                       className="input-sm input-bordered grow"
+                                       placeholder="Фамилия"
+                                       defaultValue={client.client_surname}
+                                       required readOnly={true}
+                                />
+                            </label>
+                            <div className="w-full">
+                                <label className="form-control w-full max-w-xs">
+                                    <div className="label">
+                                        <a className="label-text link link-info" href={'/account/account-addresses'}>Изменить
+                                            актуальный адрес</a>
+                                    </div>
+                                    <select className={classes.region}
+                                            onChange={checkSelectedRegion}
+                                            value={selectedRegion || VALUE_NOT_SELECTED.value}
+                                            required={true}>
+                                        <option value={VALUE_NOT_SELECTED.value}>Выберите регион</option>
+                                        {regionsOptions}
+                                    </select>
+                                </label>
+                            </div>
 
+                            <div className="w-full">
+                                <select className={classes.city}
+                                        onChange={checkSelectedCity}
+                                        value={selectedCity || VALUE_NOT_SELECTED.value}
+                                        required={true}>
+                                    <option value={VALUE_NOT_SELECTED.value}>Выберите город</option>
+                                    {citiesOptions}
+                                </select>
+                            </div>
 
-                    <label className="form-control w-full">
-                        <div className="label">
-                            <span className="label-text">Фамилия</span>
+                            <div className="w-full">
+                                <label className="form-control w-full">
+                                    <div className="label">
+                                        <span className="label-text">Адрес доставки</span>
+                                    </div>
+                                    <input type="text"
+                                           className={classes.address}
+                                           defaultValue={address}
+                                           placeholder="Советская ул.,12 д.,156 кв."
+                                           onChange={event => handleAddressChange(event)}
+                                           required
+                                    />
+                                </label>
+                            </div>
+
+                            <div className="w-full">
+                                <PatternFormat
+                                    id={'phone'}
+                                    name={'phone'}
+                                    format={'+# (###) #### ###'}
+                                    allowEmptyFormatting mask={'_'}
+                                    type={'tel'}
+                                    value={client.client_phone}
+                                    className="input input-bordered input-sm mb-2"
+                                    readOnly={true}
+                                />
+                            </div>
+                            <button className="btn btn-primary text-white text-xl" onClick={async () => {
+                                await createOrder();
+                            }}>Заказать
+                            </button>
                         </div>
-                        <input type="text"
-                               className="input-sm input-bordered grow"
-                               placeholder="Фамилия"
-                               defaultValue={client.client_surname}
-                               required readOnly={true}
-                        />
-                    </label>
-
-
-                    <div className="w-full">
-                        <label className="form-control w-full max-w-xs">
-                            <div className="label">
-                                <a className="label-text link link-info" href={'/account/account-addresses'}>Изменить актуальный адрес</a>
-                            </div>
-                            <select className={classes.region}
-                                    onChange={checkSelectedRegion}
-                                    value={selectedRegion || VALUE_NOT_SELECTED.value}
-                                    required={true}>
-                                <option value={VALUE_NOT_SELECTED.value}>Выберите регион</option>
-                                {regionsOptions}
-                            </select>
-                        </label>
                     </div>
-
-                    <div className="w-full">
-                        <select className={classes.city}
-                                onChange={checkSelectedCity}
-                                value={selectedCity || VALUE_NOT_SELECTED.value}
-                                    required={true}>
-                                <option value={VALUE_NOT_SELECTED.value}>Выберите город</option>
-                                {citiesOptions}
-                            </select>
-                    </div>
-
-                    <div className="w-full">
-                        <label className="form-control w-full">
-                            <div className="label">
-                                <span className="label-text">Адрес доставки</span>
-                            </div>
-                            <input type="text"
-                                   className={classes.address}
-                                   defaultValue={address}
-                                   // className="input-sm input-bordered grow"
-                                   placeholder="Советская ул.,12 д.,156 кв."
-                                   onChange={event => handleAddressChange(event)}
-                                   required
-                            />
-                        </label>
-                    </div>
-
-
-
-                    <div className="w-full">
-                        <PatternFormat
-                            id={'phone'}
-                            name={'phone'}
-                            // className={classes.phone}
-                            format={'+# (###) #### ###'}
-                            allowEmptyFormatting mask={'_'}
-                            type={'tel'}
-                            value={client.client_phone}
-                            className="input input-bordered input-sm mb-2"
-                            readOnly={true}
-                            // disabled={true}
-                            // onValueChange={(values) => handlePhoneChange(values)}
-                        />
-                    </div>
-                    <button className="btn btn-primary text-white text-xl" onClick={async ()=>{
-                        await createOrder();
-                        // await handleAsyncOperation();
-                    }}>Заказать</button>
                 </div>
-            </div>
-                    </div>
-            <Toaster
-                position="top-center"
-                reverseOrder={false}
-            />
+                <Toaster
+                    position="top-center"
+                    reverseOrder={false}
+                />
             </MainLayout>
-
-
-            {/*{*/}
-            {/*    show && <ToastComponent show={show} setShow={setShow} name={'Alert'} text={'Спасибо за заказ'}/>*/}
-            {/*}*/}
         </>
     )
 }

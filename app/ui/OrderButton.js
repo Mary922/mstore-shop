@@ -1,7 +1,5 @@
 
-
-export default function OrderButton({sum,func}) {
-
+export default function OrderButton({sum, func}) {
 
     return (
         <button className="order-button bg-primary hide-on-small-screen" onClick={func}>

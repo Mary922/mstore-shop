@@ -65,7 +65,6 @@ export default function CatalogPage() {
     useEffect(() => {
         (async () => {
             const filterRes = await getFilterParams();
-            // console.log('filterRes',filterRes);
 
             if (filterRes?.data) {
                 setFilterItems(filterRes.data);
@@ -141,12 +140,12 @@ export default function CatalogPage() {
     }, [sizes, colors, seasons, brands, countries]);
 
     const updateQueryParameter = (key, value) => {
-        const nextParams = new URLSearchParams(searchParams.toString()); // Копия текущих параметров
+        const nextParams = new URLSearchParams(searchParams.toString());
 
         if (value === '') {
-            nextParams.delete(key); // Удаляем параметр, если значение пустое
+            nextParams.delete(key);
         } else {
-            nextParams.set(key, value); // Иначе устанавливаем новое значение
+            nextParams.set(key, value);
         }
         router.push(`?${nextParams.toString()}`, undefined, {scroll: false});
     };
@@ -187,24 +186,6 @@ export default function CatalogPage() {
         }
     };
 
-
-    // const checkUrlCleanOfParameters = (paramsToCheck) => {
-    //     const currentParams = new URLSearchParams(window.location.search);
-    //
-    //     for (let param of paramsToCheck) {
-    //         if (currentParams.has(param)) {
-    //             return false; // Найден хотя бы один параметр
-    //         }
-    //     }
-    //     router.refresh();
-    //
-    //     return true; // Ни один из нужных параметров не найден
-    // };
-    //
-    // const paramsToCheck = ['colors', 'sizes', 'brands', 'countries', 'seasons', 'minPrice', 'maxPrice'];
-    // // const isUrlClean = checkUrlCleanOfParameters(paramsToCheck);
-    // // console.log(isUrlClean); // true, если URL чист от указанных параметров
-
     const clearAllFilters = async () => {
         setColors([]);
         setSizes([]);
@@ -231,65 +212,45 @@ export default function CatalogPage() {
             'maxPrice'
         ].forEach(paramKey => nextParams.delete(paramKey));
 
-        router.push(`?${nextParams}`, undefined, { scroll: false });
+        router.push(`?${nextParams}`, undefined, {scroll: false});
     }
 
     const toggleSizeDropdown = (id) => {
         if (activeProductId === id) {
-            setActiveProductId(null);   // Закрываем список, если кликнули повторно на открытом товаре
+            setActiveProductId(null);
         } else {
-            setActiveProductId(id);     // Открываем список для нового товара
+            setActiveProductId(id);
         }
     };
-
-
-    // let chosenSizes = [];
-    // useEffect(()=>{
-    //     if (sizesFilterParam) {
-    //         sizesFilterParam.forEach((size) => chosenSizes.push(size))
-    //     }
-    // })
-    // console.log('chosenSizes',chosenSizes);
-
 
     useEffect(() => {
         (async () => {
             const categoryFilterParam = searchParams.get('category');
-            // console.log("categoryFilterParam22", categoryFilterParam);
             setCategory(categoryFilterParam);
 
             const genderFilterParam = searchParams.get('gender');
-            // console.log("genderFilterParam4444", genderFilterParam);
             setGender(genderFilterParam);
 
             const sizesFilterParam = JSON.parse(searchParams.get('sizes'));
             setSizes(sizesFilterParam || []);
-            // console.log("sizesFilterParam", sizesFilterParam);
 
             const colorsFilterParam = JSON.parse(searchParams.get('colors'));
             setColors(colorsFilterParam || []);
-            // console.log("colorsFilterParam", colorsFilterParam);
 
             const seasonsFilterParam = JSON.parse(searchParams.get('seasons'));
             setSeasons(seasonsFilterParam || []);
-            // console.log("seasonsFilterParam", seasonsFilterParam);
 
             const brandsFilterParam = JSON.parse(searchParams.get('brands'));
             setBrands(brandsFilterParam || []);
 
-            // console.log("brandsFilterParam", brandsFilterParam);
-
             const countriesFilterParam = JSON.parse(searchParams.get('countries'));
             setCountries(countriesFilterParam || []);
-            // console.log("countriesFilterParam", countriesFilterParam);
 
             const minPriceFilterParam = searchParams.get('minPrice');
             setMinPrice(minPriceFilterParam);
-            // console.log("minPriceFilterParam", minPriceFilterParam);
 
             const maxPriceFilterParam = searchParams.get('maxPrice');
             setMaxPrice(maxPriceFilterParam);
-            // console.log("maxPriceFilterParam", maxPriceFilterParam);
 
             const result = await applyFilterParams(
                 categoryFilterParam,
@@ -325,19 +286,6 @@ export default function CatalogPage() {
     const handleGoBack = () => {
         router.back();
     }
-    //
-    // console.log('maxii', typeof (maxPrice), maxPrice)
-    // console.log('initial', typeof (initialMaxPrice), initialMaxPrice)
-
-    // console.log('colors',colors);
-    // console.log('maxprice',maxPrice);
-    // console.log('chosen',chosenFilters);
-
-    // const hasMultipleNonEmptyArrays = Object.entries(chosenFilters)
-    //     .filter(([, value]) => Array.isArray(value) && value.length > 0)
-    //     .length >= 0;
-    // console.log('hasMultipleNonEmptyArrays', hasMultipleNonEmptyArrays);
-
 
     return (
         <>
@@ -366,11 +314,16 @@ export default function CatalogPage() {
                                         <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                                             <CanvasFilter drawerToggleRef={drawerToggleRef} category={category}
                                                           gender={gender}
-                                                          checkedOptionsColors={checkedOptionsColors} setCheckedOptionsColors={setCheckedOptionsColors}
-                                                          checkedOptionsSizes={checkedOptionsSizes} setCheckedOptionsSizes={setCheckedOptionsSizes}
-                                                          checkedOptionsSeasons={checkedOptionsSeasons} setCheckedOptionsSeasons={setCheckedOptionsSeasons}
-                                                          checkedOptionsBrands={checkedOptionsBrands} setCheckedOptionsBrands={setCheckedOptionsBrands}
-                                                          checkedOptionsCountries={checkedOptionsCountries} setCheckedOptionsCountries={setCheckedOptionsCountries}
+                                                          checkedOptionsColors={checkedOptionsColors}
+                                                          setCheckedOptionsColors={setCheckedOptionsColors}
+                                                          checkedOptionsSizes={checkedOptionsSizes}
+                                                          setCheckedOptionsSizes={setCheckedOptionsSizes}
+                                                          checkedOptionsSeasons={checkedOptionsSeasons}
+                                                          setCheckedOptionsSeasons={setCheckedOptionsSeasons}
+                                                          checkedOptionsBrands={checkedOptionsBrands}
+                                                          setCheckedOptionsBrands={setCheckedOptionsBrands}
+                                                          checkedOptionsCountries={checkedOptionsCountries}
+                                                          setCheckedOptionsCountries={setCheckedOptionsCountries}
                                             />
                                         </div>
                                     </div>
@@ -513,34 +466,17 @@ export default function CatalogPage() {
                                         ?
                                         (
                                             <button className="btn btn-md btn-outline filterBtn"
-                                                    onClick={()=>clearAllFilters()}>
+                                                    onClick={() => clearAllFilters()}>
                                                 <div className='flex flex-row gap-2 p-1 items-center'>
                                                     Очистить все фильтры
-                                                    <div className='text-xl font-thin ml-2' style={{ color: 'lightgray' }}>
+                                                    <div className='text-xl font-thin ml-2'
+                                                         style={{color: 'lightgray'}}>
                                                         X
                                                     </div>
                                                 </div>
                                             </button>
                                         ) : null
                                     }
-
-                                    {/*{Object.values(chosenFilters)*/}
-                                    {/*    .filter((arr) => Array.isArray(arr))*/}
-                                    {/*    .some((array) => array.length > 0)*/}
-                                    {/*        ?*/}
-                                    {/*    (*/}
-                                    {/*    <button className="btn btn-md btn-outline filterBtn"*/}
-                                    {/*            onClick={()=>clearAllFilters()}>*/}
-                                    {/*        <div className='flex flex-row gap-2 p-1 items-center'>*/}
-                                    {/*            Очистить все фильтры*/}
-                                    {/*            <div className='text-xl font-thin ml-2' style={{ color: 'lightgray' }}>*/}
-                                    {/*                X*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*    </button>*/}
-                                    {/*) : ''*/}
-                                    {/*}*/}
-
                                 </div>
 
                             </div>

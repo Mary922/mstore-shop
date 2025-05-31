@@ -1,25 +1,18 @@
 "use client"
-import Carousel from "react-bootstrap/Carousel";
-import CarouselComponent from "@/app/common/CarouselComponent";
 import React, {useEffect, useState} from "react";
 import {getImagesStatic} from "@/app/lib/api/images";
 import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
 import {createNewSubscription} from "@/app/lib/api/subscriptions";
 import MainLayout from "@/app/ui/MainLayout";
-import {getDivisionInfo} from "@/app/lib/api/divisions";
 import Link from "next/link";
-import {getCategories} from "@/app/lib/api/categories";
-import {getProductsBoys} from "@/app/lib/api/products";
-import {BABIES_SIZES, GENDER} from "@/constants";
+import {GENDER} from "@/constants";
 
 
 export default function Home() {
+    const baseUrl = 'http://localhost:3001/static';
     const [email, setEmail] = useState("");
     const [feedbackMessage, setFeedbackMessage] = useState("");
     const [error, setError] = useState('');
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const baseUrl = 'http://localhost:3001/static';
     const [imagePaths, setImagePaths] = useState([]);
     const [girls, setGirls] = useState([]);
     const [boys, setBoys] = useState([]);
@@ -28,8 +21,7 @@ export default function Home() {
 
     useEffect(() => {
         (async () => {
-                const res = await getImagesStatic('web', 'home');
-            // console.log('res',res);
+            const res = await getImagesStatic('web', 'home');
             let paths = [];
             let boysPaths = [];
             let girlPaths = [];
@@ -75,28 +67,10 @@ export default function Home() {
         const value = e.target.value;
         setEmail(value);
 
-        // Автоматически убираем ошибку при вводе правильного email
         if (error && validateEmail(value)) {
             setError('');
-            setIsSuccess(true);
         }
     };
-
-    // const checkFilledInput = () => {
-    //     if (!email) {
-    //         setError('Заполните поле');
-    //         setIsSuccess(false);
-    //         return false;
-    //     } else if (!validateEmail(email)) {
-    //         setError('Введите корректный email');
-    //         setIsSuccess(false);
-    //         return false;
-    //     } else {
-    //         setError('');
-    //         setIsSuccess(true);
-    //         return true;
-    //     }
-    // };
 
     const checkFilledInput = () => {
         if (!email || email.trim() === '') {
@@ -118,7 +92,6 @@ export default function Home() {
             });
             if (result.success) {
                 setFeedbackMessage(result.message);
-                // console.log(result.message);
                 setTimeout(() => {
                     setFeedbackMessage('')
                 }, 3000)
@@ -139,21 +112,28 @@ export default function Home() {
                 <div className='flex flex-col'>
                     <div>
                         <div className="w-full">
-                            <CarouselComponentWithDots
-                                staticPaths={imagePaths}
-                                imageClassName={'object-cover w-full h-full'}
-                                containerClassName={'w-full h-[600px]'}
-                                interval={5000}
-                            />
+                            {
+                                imagePaths.length ?
+                                    <CarouselComponentWithDots
+                                        staticPaths={imagePaths}
+                                        imageClassName={'object-cover w-full h-full'}
+                                        containerClassName={'w-full h-[600px]'}
+                                        interval={5000}
+                                    /> : null
+
+                            }
+
                         </div>
                     </div>
                     <div className="relative w-full flex flex-row items-center justify-center gap-8 p-3">
                         <div className="flex-1 max-w-[30%] relative group overflow-hidden rounded-lg">
-                            <img
-                                src={`${baseUrl}/${boys[0]}`}
-                                alt="Boys"
-                                className='w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105'
-                            />
+                            {boys.length ?
+                                <img
+                                    src={`${baseUrl}/${boys[0]}`}
+                                    alt="Boys"
+                                    className='w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105'
+                                />
+                                : null}
                             <Link
                                 href={`/catalog?gender=${GENDER.MALE}`}
                                 className="no-underline absolute inset-0 flex items-center justify-center bg-black/30
@@ -167,30 +147,24 @@ export default function Home() {
                         </div>
 
                         <div className="flex-1 max-w-[30%] relative group overflow-hidden rounded-lg">
-                            <img
-                                src={`${baseUrl}/${baby[0]}`}
-                                alt="Baby"
-                                className='w-full h-auto object-cover'
-                            />
-                            {/*<Link*/}
-                            {/*    // href={`/catalog?sizes=${BABIES_SIZES.sizes}`}*/}
-                            {/*    className="no-underline absolute inset-0 flex items-center justify-center bg-black/30*/}
-                            {/*    transition-all duration-300 opacity-0 group-hover:opacity-100"*/}
-                            {/*>*/}
-                            {/*    <button*/}
-                            {/*        className="btn btn-ghost glass text-white font-bold text-lg px-6 py-3 shadow-lg hover:scale-105 transition-transform">*/}
-                            {/*        Baby Collection*/}
-                            {/*    </button>*/}
-                            {/*</Link>*/}
+                            {baby.length ?
+                                <img
+                                    src={`${baseUrl}/${baby[0]}`}
+                                    alt="Baby"
+                                    className='w-full h-auto object-cover'
+                                />
+                                : null}
                         </div>
 
 
                         <div className="flex-1 max-w-[30%] relative group overflow-hidden rounded-lg">
-                            <img
-                                src={`${baseUrl}/${girls[0]}`}
-                                alt="Girls"
-                                className='w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105'
-                            />
+                            {girls.length > 0 ?
+                                <img
+                                    src={`${baseUrl}/${girls[0]}`}
+                                    alt="Girls"
+                                    className='w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105'
+                                />
+                                : null}
                             <a
                                 href={`/catalog?gender=${GENDER.FEMALE}`}
                                 className="no-underline absolute inset-0 flex items-center justify-center bg-black/30 transition-all duration-300 opacity-0 group-hover:opacity-100"
@@ -232,10 +206,6 @@ export default function Home() {
                                         )}
                                     </div>
                                 </div>
-                                {/*{feedbackMessage && <div*/}
-                                {/*    className="absolute top-0 left-0 label">*/}
-                                {/*    <span className="label-text-alt">{feedbackMessage}</span>*/}
-                                {/*</div>}*/}
                             </div>
                             <div className='h-[calc(48px+24px)]'>
                                 <button className='btn btn-neutral min-h-0 border-l-0 rounded-none uniform-height'

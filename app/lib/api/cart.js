@@ -9,7 +9,7 @@ export const getCart = (cart) => {
     return result;
 }
 
-export const getCartPreOrder = (cart,sum) => {
+export const getCartPreOrder = (cart, sum) => {
     let result = Request.post(`${baseURL}/preorder`, {
         cart: cart,
         sum: sum
@@ -26,17 +26,17 @@ export const addProductToCart = (data) => {
 
 
 export const getCurrentCart = (clientId) => {
-    let result = Request.post(`${baseURL}/cart/get`,{
+    let result = Request.post(`${baseURL}/cart/get`, {
         clientId: clientId,
     });
     return result;
 }
 
-export const deleteProduct = (productId,sizeId) => {
+export const deleteProduct = (productId, sizeId) => {
     console.log('req', productId, sizeId);
 
 
-    let result = Request.post(`${baseURL}/cart/delete`,{
+    let result = Request.post(`${baseURL}/cart/delete`, {
         productId: productId,
         sizeId: sizeId
     });
@@ -44,20 +44,20 @@ export const deleteProduct = (productId,sizeId) => {
 }
 
 export const increaseCountInCart = (data) => {
-    let result = Request.post(`${baseURL}/cart/increase`,{
+    let result = Request.post(`${baseURL}/cart/increase`, {
         data: data
     });
     return result;
 }
 export const decreaseCountInCart = (data) => {
-    let result = Request.post(`${baseURL}/cart/decrease`,{
+    let result = Request.post(`${baseURL}/cart/decrease`, {
         data: data
     });
     return result;
 }
 
 export const clearCart = (clientId) => {
-    let result = Request.post(`${baseURL}/cart/clear`,{
+    let result = Request.post(`${baseURL}/cart/clear`, {
         clientId: clientId,
     });
     return result;

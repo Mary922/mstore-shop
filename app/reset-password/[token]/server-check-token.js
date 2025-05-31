@@ -2,11 +2,13 @@ import {checkTokenNotExpired} from "@/app/lib/api/forgotPassword";
 import ExpiredToken from "@/app/reset-password/[token]/expired";
 
 export default async function ServerCheckToken({token}) {
-    const isValid = await checkTokenNotExpired(token);
+    console.log('token here', token);
 
-    if (isValid) {
+    const isValid = await checkTokenNotExpired(token);
+    console.log('isValid', isValid);
+
+    if (!isValid?.success) {
         return <ExpiredToken/>
-        // throw new Error('Срок действия токена истёк.');
     }
     return null;
 }

@@ -15,7 +15,6 @@ export default function Wishlist() {
     useEffect(() => {
         (async () => {
             const res = await getWishlist();
-
             let prodIds = [];
             if (res && res.data) {
                 res.data.map(prod => prodIds.push(prod.product_id));
@@ -29,31 +28,15 @@ export default function Wishlist() {
             (async () => {
                 const productsListInWishlist = await getProductsInWishlistByIds(wishlistProductIds);
                 console.log('productsListInWishlist', productsListInWishlist)
-
                 setProducts(productsListInWishlist?.data);
-
-
                 if (productsListInWishlist?.data) {
                     productsListInWishlist.data.map(prod => {
                         setImages(prod.Images)
                     })
-                    // setImages(productsListInWishlist?.data.Images);
                 }
             })();
         }
     }, [wishlistProductIds]);
-
-    console.log('products', products);
-    console.log('images', images);
-
-    // useEffect(()=>{
-    //     if (products && products.length > 0) {
-    //         (async () => {
-    //             setImages(products.Images);
-    //         })()
-    //     }
-    // }, [products]);
-    // console.log('images',images);
 
     let productsInWishlist = [];
 
@@ -62,7 +45,7 @@ export default function Wishlist() {
             return (
                 <div key={product.product_id} className='card bg-base-100 shadow-xl h-auto'>
                     <div className="flex items-center mb-2">
-                        <div className="relative">  {/* Обертка для кнопки и текста */}
+                        <div className="relative">
                             <button
                                 className="btn btn-square btn-neutral btn-sm peer"
                                 onClick={async () => {
@@ -90,29 +73,6 @@ export default function Wishlist() {
                             </span>
                         </div>
                     </div>
-
-
-                    {/*<div className="flex flex-row mb-5 items-center">*/}
-                    {/*    <button className="btn btn-square btn-neutral btn-sm mr-2 focus:text-red-600"*/}
-                    {/*            onClick={async () => {*/}
-                    {/*                await dispatch(wishlistDeleteThunk({id: product.product_id}));*/}
-                    {/*                window.location.reload();*/}
-                    {/*            }}>*/}
-                    {/*        <svg*/}
-                    {/*            xmlns="http://www.w3.org/2000/svg"*/}
-                    {/*            className="h-6 w-6"*/}
-                    {/*            fill="none"*/}
-                    {/*            viewBox="0 0 24 24"*/}
-                    {/*            stroke="currentColor">*/}
-                    {/*            <path*/}
-                    {/*                strokeLinecap="round"*/}
-                    {/*                strokeLinejoin="round"*/}
-                    {/*                strokeWidth="2"*/}
-                    {/*                d="M6 18L18 6M6 6l12 12"/>*/}
-                    {/*        </svg>*/}
-                    {/*    </button>*/}
-                    {/*    <div>Удалить</div>*/}
-                    {/*</div>*/}
                     <div className='flex items-center justify-center'>
                         <img className='w-72 h-96' src={`${baseUrl}/${product.Images[0].image_path}`}/>
 

@@ -1,9 +1,9 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React from 'react';
 import dynamic from 'next/dynamic';
-import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
+import {YMaps, Map, Placemark} from '@pbe/react-yandex-maps';
 
 const YandexMap = dynamic(
-    () => Promise.resolve(function MapWithMarker({ latitude, longitude }) {
+    () => Promise.resolve(function MapWithMarker({latitude, longitude}) {
         return (
             <YMaps
                 query={{
@@ -37,25 +37,13 @@ const YandexMap = dynamic(
             </YMaps>
         );
     }),
-    { ssr: false, loading: () => <p>Загрузка карты...</p> }
+    {ssr: false, loading: () => <p>Загрузка карты...</p>}
 );
 
 export default function MapComponentWithMarker({latitude, longitude}) {
-
-    // console.log('latitude', latitude);
-    // console.log('longitude', longitude);
-
     if (!latitude || !longitude) {
         return <div>Неверные координаты</div>;
     }
-
-    // const mapElement = useMemo(() => (
-    //     <YandexMap
-    //         key={`map-${latitude}-${longitude}`}
-    //         latitude={latitude}
-    //         longitude={longitude}
-    //     />
-    // ), [latitude, longitude]);
 
     return (
         <div style={{width: '100%', height: '400px'}}>
@@ -67,28 +55,6 @@ export default function MapComponentWithMarker({latitude, longitude}) {
         </div>
     );
 };
-
-
-// import React from 'react';
-// import { YMaps, Map, Placemark } from 'react-yandex-maps';
-//
-//
-// const YandexMap = ({latitude,longitude}) => {
-//     const mapState = {
-//         center: [latitude, longitude], // Координаты центра карты (Москва)
-//         zoom: 10, // Уровень масштабирования
-//     };
-//
-//     return (
-//         <YMaps>
-//             <Map state={mapState} width="100%" height="400px">
-//                 <Placemark geometry={[latitude,longitude]} />
-//             </Map>
-//         </YMaps>
-//     );
-// };
-//
-// export default YandexMap;
 
 
 

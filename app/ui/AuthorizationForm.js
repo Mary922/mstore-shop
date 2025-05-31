@@ -1,28 +1,19 @@
 'use client'
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Auth} from "@/app/lib/api/auth";
-import {useRouter, useSearchParams} from "next/navigation";
 import validator from "validator";
 import {resetPasswordRequest} from "@/app/lib/api/forgotPassword";
-import {toast, Toaster} from "react-hot-toast";
 
 
-const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const from = searchParams.get("from");
+const AuthorizationForm = ({clientId, tempClient}) => {
 
     const [error, setError] = useState(null);
-
-    const [email, setEmail] = useState('mary_k_92@mail.ru');
-    const [password, setPassword] = useState('12345');
-    const [repeatRequestPassword, setRepeatRequestPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [forgotPassword, setForgotPassword] = useState(false);
     const [emailForgot, setEmailForgot] = useState('');
 
     let client;
-    // let tempClient = '';
-    // let client;
 
     const logOut = () => {
         localStorage.removeItem("client");
@@ -45,43 +36,30 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
         try {
             if (clientId || tempClient) {
                 const result = await Auth({email: email, password: password});
-                console.log('TOKEN RESPONSE', result);
                 setError('Неверные данные');
 
                 if (result?.data?.accessToken) {
-                    console.log('it was succesful auth');
                     localStorage.setItem('client', JSON.stringify(result.data));
                     localStorage.removeItem('temp-client');
-                    // localStorage.removeItem('filter-list');
                     setError('');
-
                     window.location.reload();
                 }
-                if (result?.status === 401) {
-                    console.log('login error', error);
-                    await logOut();
-                }
-            } else {
-                setRepeatRequestPassword(true);
             }
         } catch (error) {
             if (error.response?.status === 401) {
-                setError('Invalid credentials. Please check your email/password.'); // Ошибка 401
+                setError('Invalid credentials. Please check your email/password.');
+                await logOut();
             } else {
-                setError('Something went wrong. Please try again.'); // Другие ошибки
+                setError('Something went wrong. Please try again.');
             }
         }
     }
     const checkFilledInput = async () => {
         if (!emailForgot?.trim()) {
-            // setError('Заполните email');
-            console.log('email need right')
             return false;
         }
         const isValidEmail = validator.isEmail('emailForgot');
         if (isValidEmail) {
-            // console.log('email need right')
-            // setError('Введите корректный email');
             return false;
         } else {
             const result = await resetPasswordRequest(emailForgot);
@@ -89,16 +67,9 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
             if (result.success) {
                 setForgotPassword(false);
                 setEmailForgot('');
-
-                // toast.success('Проверьте почту для восстановления пароля');
             }
-            console.log('result',result);
-            console.log('email exist lalal');
         }
     }
-
-
-
 
     return (
         <>
@@ -106,34 +77,9 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
                 tabIndex={0}
                 className="menu dropdown-content mt-7 mr-20 rounded-box w-96 z-[100] shadow p-2.5 bg-neutral-content">
                 <div className="flex flex-row justify-between">
-                    {/*<li>*/}
-                    {/*    <div className="text-base font-bold hover:bg-transparent hover:shadow-none cursor-default disabled">ВОЙТИ</div>*/}
-                    {/*</li>*/}
                     <li><a className="link link-hover text-base text-neutral" href={'/registration'}>Создать аккаунт</a>
                     </li>
                     <li>
-                        {/*<button*/}
-                        {/*    onClick={(e) => {*/}
-                        {/*        e.stopPropagation(); // Важно: предотвращаем всплытие события*/}
-                        {/*        closeDropdown();*/}
-                        {/*    }}*/}
-                        {/*    className="p-0 hover:bg-transparent"*/}
-                        {/*>*/}
-                        {/*    <svg className="w-6 h-6 text-gray-800" aria-hidden="true"*/}
-                        {/*         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"*/}
-                        {/*         viewBox="0 0 24 24">*/}
-                        {/*        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
-                        {/*              strokeWidth="1" d="M6 18 17.94 6M18 18 6.06 6"/>*/}
-                        {/*    </svg>*/}
-                        {/*</button>*/}
-                        {/*<div>*/}
-                        {/*    <svg className="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true"*/}
-                        {/*         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"*/}
-                        {/*         viewBox="0 0 24 24">*/}
-                        {/*        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
-                        {/*              strokeWidth="1" d="M6 18 17.94 6M18 18 6.06 6"/>*/}
-                        {/*    </svg>*/}
-                        {/*</div>*/}
                     </li>
                 </div>
 
@@ -191,13 +137,6 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
                                 transition duration-200 ease-in-out hover:bg-gray-900" onClick={checkClient}>
                     Авторизоваться
                 </button>
-                {/*{*/}
-                {/*    repeatRequestPassword ? <div onClick={async () => {*/}
-                {/*        // setValidationPassword(true);*/}
-                {/*        setRepeatRequestPassword(false);*/}
-                {/*        await registerCl();*/}
-                {/*    }}>запросить пароль еще раз</div> : null*/}
-                {/*}*/}
                 {
                     forgotPassword === false ?
                         <li><a onClick={() => setForgotPassword(true)}>Забыли пароль?</a></li>
@@ -227,7 +166,8 @@ const AuthorizationForm = ({clientId, tempClient,closeDropdown}) => {
                             <button
                                 className='btn btn-primary btn-sm text-white flex-shrink-0  transition duration-200 ease-in-out hover:bg-gray-900'
                                 onClick={checkFilledInput}
-                            >Отправить ссылку</button>
+                            >Отправить ссылку
+                            </button>
                         </div>
                     </>
                 }

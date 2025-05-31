@@ -11,7 +11,6 @@ const AccountForm = () => {
         setTimeout(() => {
             window.location.reload()
         }, 500);
-        // window.location.reload();
     }
     return (
         <>
