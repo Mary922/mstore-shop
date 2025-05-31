@@ -5,23 +5,18 @@ import AddressForm from "@/app/ui/AddressForm";
 import ConfirmModal from "@/app/ui/modals/ConfirmModal";
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
 import {addressesDeleteThunk, addressesGetThunk, addressesUpdateRadioThunk} from "@/app/store/slices/addressesSlice";
-import {useRouter} from "next/navigation";
 
 export default function AccountAddressesPage() {
     const dispatch = useAppDispatch();
-    const router = useRouter();
     const [addressIsAdded, setAddressIsAdded] = useState(false);
 
     const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false);
     const [selectedAddressToDelete, setSelectedAddressToDelete] = useState(null);
 
-
-    let tempClient;
     let clientConstant;
     let clientId;
 
     if (typeof window !== "undefined") {
-        tempClient = localStorage.getItem("temp-client");
         clientConstant = localStorage.getItem("client");
     }
 
@@ -30,10 +25,7 @@ export default function AccountAddressesPage() {
     }
 
     const addresses = useAppSelector(state => state.addresses.addresses);
-
     const actualRadio = useAppSelector(state => state.addresses.actualAddressId);
-
-    const actualAddress = useAppSelector(state => state.addresses.actualAddress);
 
     useEffect(() => {
         (async () => {

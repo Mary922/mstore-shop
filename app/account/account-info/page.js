@@ -10,15 +10,11 @@ import {toast, Toaster} from "react-hot-toast";
 
 export default function AccountInfoPage() {
     const [clientInfo, setClientInfo] = useState({});
-    const [isShow, setIsShow] = useState(false);
-    const [loading, setLoading] = useState(false);
 
-    let tempClient = '';
     let client;
     let clientId;
 
     if (typeof window !== "undefined") {
-        tempClient = localStorage.getItem("temp-client");
         client = localStorage.getItem("client");
     }
 
@@ -58,15 +54,10 @@ export default function AccountInfoPage() {
             clientPhone: formik.values.phone,
             clientEmail: formik.values.email,
         });
-        if (updateClientInfo.success) {
-            setIsShow(true);
-        }
     }
 
     const handleAsyncOperation = async () => {
         try {
-            setLoading(true);
-
             const promise = new Promise((resolve) =>
                 setTimeout(resolve, 3000)
             );
@@ -87,8 +78,6 @@ export default function AccountInfoPage() {
             toast.error('Ошибка при выполнении операции.', {
                 id: toastId,
             });
-        } finally {
-            setLoading(false);
         }
     };
 

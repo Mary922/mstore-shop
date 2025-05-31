@@ -29,8 +29,6 @@ export default function MyAccountPage() {
         })()
     }, [])
 
-    console.log('authLabel', authLabel);
-
     const logOut = () => {
         localStorage.removeItem("client");
         localStorage.removeItem("cart");

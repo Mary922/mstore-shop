@@ -1,27 +1,19 @@
 "use client"
 import React, {useEffect, useState} from "react";
-import {useParams, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {changeForgottenPasswordRequest} from "@/app/lib/api/forgotPassword";
 
 export default function ChangePasswordForm({token}) {
     const router = useRouter();
-    // console.log('tokentoken', token);
 
     const [firstPassword, setFirstPassword] = useState('');
     const [secondPassword, setSecondPassword] = useState('');
-    // const [passwordsMatch, setPasswordsMatch] = useState(false);
-    // const [showError, setShowError] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
-
-    // const [validPassword, setValidPassword] = useState(false);
     const [invalidPasswordFormat, setInvalidPasswordFormat] = useState(false);
     const [passwordMismatch, setPasswordMismatch] = useState(false);
-
     const [fieldsTouched, setFieldsTouched] = useState(false);
 
-    console.log('firstPassword', firstPassword);
-    console.log('secondPassword', secondPassword);
-
+    console.log('pass', firstPassword);
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
     useEffect(() => {
@@ -29,30 +21,20 @@ export default function ChangePasswordForm({token}) {
         setPasswordMismatch(!passwordsAreEqual);
     }, [firstPassword, secondPassword]);
 
-
     useEffect(() => {
         const isValid = passwordRegex.test(firstPassword);
         setInvalidPasswordFormat(!isValid);
-        // setValidPassword(isValid);
-    },[firstPassword])
+    }, [firstPassword])
 
     useEffect(() => {
         if (firstPassword.trim() || secondPassword.trim()) {
-            setFieldsTouched(true); // помечаем, что поля начали использоваться
+            setFieldsTouched(true);
         }
     }, [firstPassword, secondPassword])
 
-    // useEffect(()=>{
-    //     if(!validPassword && firstPassword.trim()) {
-    //         console.log('password doesnt contain all rules');
-    //         setShowError(true);
-    //     }
-    // },[validPassword]);
-
     const changePassword = async () => {
         try {
-            const result = await changeForgottenPasswordRequest(token,firstPassword);
-            console.log('result changePassword', result);
+            const result = await changeForgottenPasswordRequest(token, firstPassword);
 
             if (result.success) {
                 setShowSuccess(true);
@@ -64,9 +46,8 @@ export default function ChangePasswordForm({token}) {
 
                 setTimeout(() => {
                     router.push('/');
-                },2000);
+                }, 2000);
             }
-
         } catch (error) {
             console.log('error with change forgotten password', error);
         }
@@ -74,12 +55,12 @@ export default function ChangePasswordForm({token}) {
 
     return (
         <>
-
             <div className='flex items-center justify-center min-h-screen'>
                 <div className="card w-96 bg-base-100 card-lg shadow-xl rounded-lg">
                     <div className="card-body">
                         <h2 className="card-title my-0">Введите новый пароль</h2>
-                        <p className='text-sm text-info'>Пароль должен быть больше чем 8 символов, включая цифру, строчную букву, заглавную букву</p>
+                        <p className='text-sm text-info'>Пароль должен быть больше чем 8 символов, включая цифру,
+                            строчную букву, заглавную букву</p>
                         <div className='w-full gap-2 flex flex-col'>
                             <label className="flex items-center w-full validator">
                                 <svg className="h-[1em] opacity-50 mr-2" xmlns="http://www.w3.org/2000/svg"
@@ -123,17 +104,13 @@ export default function ChangePasswordForm({token}) {
                             </p>
 
                             <div className='flex flex-col gap-1'>
-                            {fieldsTouched && passwordMismatch && (
-                                <div className="text-red-500 text-sm">Пароли не совпадают</div>
-                            )}
-                            {fieldsTouched && invalidPasswordFormat && (
-                                <div className="text-red-500 text-sm">Пароль не соответствует требованиям</div>
-                            )}
+                                {fieldsTouched && passwordMismatch && (
+                                    <div className="text-red-500 text-sm">Пароли не совпадают</div>
+                                )}
+                                {fieldsTouched && invalidPasswordFormat && (
+                                    <div className="text-red-500 text-sm">Пароль не соответствует требованиям</div>
+                                )}
                             </div>
-
-                            {/*{showError && (*/}
-                            {/*    <p className="text-red-500 text-sm">Пароли не совпадают</p>*/}
-                            {/*)}*/}
                         </div>
 
                         <div className="justify-end card-actions">

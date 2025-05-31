@@ -16,11 +16,6 @@ const CarouselComponentWithDots = ({paths, staticPaths, imageClassName, containe
     }
     const items = paths || staticPaths;
 
-    const goToSlide = (index) => {
-        setCurrentIndex(index);
-        clearInterval(intervalId.current);
-    };
-
     useEffect(() => {
         if (interval) {
             intervalId.current = setInterval(() => {

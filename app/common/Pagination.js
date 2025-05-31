@@ -5,7 +5,6 @@ const PagData = ({data, itemsPerPage, request, pages}) => {
     const [itemOffset, setItemOffset] = useState(0);
 
     const endOffset = itemOffset + itemsPerPage;
-    const currentItems = data.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(pages / itemsPerPage);
 
     const handlePageClick = (event) => {

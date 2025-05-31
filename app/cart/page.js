@@ -50,8 +50,6 @@ export default function CartPage() {
             return idsList;
         }
     }
-    let wasLoaded = false;
-
     useEffect(() => {
         if (cart && cart.length > 0 && products.length == 0) {
             (async () => {

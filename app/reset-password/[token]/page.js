@@ -4,7 +4,6 @@ import ChangePasswordForm from "@/app/reset-password/[token]/changePasswordForm"
 
 export default async function ResetPasswordPage({params}) {
     const {token} = await params;
-    // console.log('got token', token);
 
     const result = await ServerCheckToken({token});
 

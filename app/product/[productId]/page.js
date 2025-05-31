@@ -4,7 +4,7 @@ import React, {useState, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
 import {getProduct} from "@/app/lib/api/products";
 import CarouselComponentWithDots from "@/app/common/CarouselComponentWithDots";
-import {createCartThunk, increaseCartThunk, getCartThunk} from "@/app/store/slices/cartSlice";
+import {createCartThunk} from "@/app/store/slices/cartSlice";
 import MainLayout from "@/app/ui/MainLayout";
 
 
@@ -14,13 +14,9 @@ export default function ProductPage() {
     const productId = params.productId;
 
     const [currentProduct, setCurrentProduct] = useState([]);
-    const [productPrice, setProductPrice] = useState([]);
     const [chosenSize, setChosenSize] = useState('');
     const [images, setImages] = useState([]);
-    const [sizesIsShowing, setSizesIsShowing] = useState(false);
-
     const [showSelectWarning, setShowSelectWarning] = useState(false);
-
 
     const cartList = useAppSelector((state) => state.cart.cart);
 
@@ -51,28 +47,12 @@ export default function ProductPage() {
                 if (result?.data) {
                     setCurrentProduct(result.data);
                 }
-                if (result?.data?.price) {
-                    setProductPrice(result.data.price);
-                }
                 if (result?.data?.Images) {
                     setImages(result.data.Images);
                 }
             }
         })()
     }, [])
-
-
-    const wish = useAppSelector(state => state.wishlist.wishlist);
-
-    const checkIfProductExistInWishlist = async () => {
-        const found = wish.includes(currentProduct.product_id);
-
-        if (found) {
-            await dispatch(wishlistDeleteThunk({id: productId}));
-        } else {
-            await dispatch(wishlistUpdateThunk({id: productId}));
-        }
-    }
 
     let colors = [];
     if (currentProduct.Colors) {
@@ -108,11 +88,6 @@ export default function ProductPage() {
         }
     }
 
-    const payload = {
-        id: currentProduct.product_id,
-        price: currentProduct.price,
-    }
-
     const checkFilledSize = (size) => {
         if (size) {
             setChosenSize(size.size_name);
@@ -125,22 +100,6 @@ export default function ProductPage() {
         for (let i = 0; i < images.length; i++) {
             imagePathsInCarousel.push(images[i].image_path);
         }
-    }
-
-    const increaseCount = async (productId, sizeId) => {
-
-        await dispatch(increaseCartThunk({productId: productId, sizeId: sizeId}));
-        if (tempClient) {
-            await dispatch(getCartThunk(tempClient));
-        }
-        await dispatch(getCartThunk(clientId));
-    }
-    const decreaseCount = async (productId, sizeId) => {
-        await dispatch(decreaseCartThunk({productId: productId, sizeId: sizeId}));
-        if (tempClient) {
-            await dispatch(getCartThunk(tempClient));
-        }
-        await dispatch(getCartThunk(clientId));
     }
 
     return (
@@ -194,9 +153,9 @@ export default function ProductPage() {
                                 bg-neutral px-4 py-3 text-center text-sm uppercase text-white
                                 transition duration-200 ease-in-out hover:bg-gray-600"
                                     onClick={
-                                        async (event) => {
+                                        async () => {
                                             if (!chosenSize) {
-                                                setShowSelectWarning(true); // Показываем предупреждение, если размер не выбран
+                                                setShowSelectWarning(true);
                                                 return;
                                             }
                                             if (chosenSize && client) {
@@ -207,7 +166,6 @@ export default function ProductPage() {
                                                     quantity: 1
                                                 }));
                                                 setChosenSize('');
-                                                setSizesIsShowing(false);
                                             }
                                             if (chosenSize && tempClient) {
                                                 await dispatch(createCartThunk({
@@ -216,7 +174,6 @@ export default function ProductPage() {
                                                     quantity: 1
                                                 }));
                                                 setChosenSize('');
-                                                setSizesIsShowing(false);
                                             }
                                         }
                                     }>
@@ -230,6 +187,4 @@ export default function ProductPage() {
             </MainLayout>
         </>
     )
-
-
 }

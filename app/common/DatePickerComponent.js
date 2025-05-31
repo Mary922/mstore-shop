@@ -39,21 +39,21 @@ export function DatePickerComponent({formik}) {
         } else {
             setSelectedDate(date);
             setInputValue(format(date, "yyyy-MM-dd"));
-            formik.setFieldValue('birthday', format(date, "yyyy-MM-dd")); // Сохраняем дату в правильном формате для Formik
-            formik.setTouched({birthday: true}); // Стартуем проверку после выбора даты
+            formik.setFieldValue('birthday', format(date, "yyyy-MM-dd"));
+            formik.setTouched({birthday: true});
         }
         dialogRef.current?.close();
     };
 
     const handleInputChange = (e) => {
-        setInputValue(e.target.value); // keep the input value in sync
-        const parsedDate = parse(e.target.value, "yyyy-MM-dd", new Date()); // Разбираем строку даты
+        setInputValue(e.target.value);
+        const parsedDate = parse(e.target.value, "yyyy-MM-dd", new Date());
 
         if (isValid(parsedDate)) {
             setSelectedDate(parsedDate);
             setMonth(parsedDate);
-            formik.setFieldValue('birthday', format(parsedDate, "yyyy-MM-dd")); // Записываем в Formik правильную дату
-            formik.setTouched({birthday: true}); // Триггерим проверку
+            formik.setFieldValue('birthday', format(parsedDate, "yyyy-MM-dd"));
+            formik.setTouched({birthday: true});
         } else {
             setSelectedDate(undefined);
             formik.setFieldValue('birthday', '');

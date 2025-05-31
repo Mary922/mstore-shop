@@ -10,7 +10,6 @@ export default function Wishlist() {
     let baseUrl = 'http://localhost:3001/images';
     const [wishlistProductIds, setWishlistProductIds] = useState([]);
     const [products, setProducts] = useState([]);
-    const [images, setImages] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -27,13 +26,7 @@ export default function Wishlist() {
         if (wishlistProductIds && wishlistProductIds.length > 0) {
             (async () => {
                 const productsListInWishlist = await getProductsInWishlistByIds(wishlistProductIds);
-                console.log('productsListInWishlist', productsListInWishlist)
                 setProducts(productsListInWishlist?.data);
-                if (productsListInWishlist?.data) {
-                    productsListInWishlist.data.map(prod => {
-                        setImages(prod.Images)
-                    })
-                }
             })();
         }
     }, [wishlistProductIds]);

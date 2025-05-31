@@ -17,14 +17,11 @@ export default function CatalogPage() {
 
 
     const productsList = useAppSelector(state => state.common.filteredProductIds);
-    const [filterItems, setFilterItems] = useState([]);
     const [products, setProducts] = useState([]);
     const [category, setCategory] = useState(null);
     const [gender, setGender] = useState(null);
 
     const [activeProductId, setActiveProductId] = useState(null);
-    const [filterApplied, setFilterApplied] = useState(false);
-
     const [colors, setColors] = useState([]);
     const [sizes, setSizes] = useState([]);
     const [brands, setBrands] = useState([]);
@@ -65,11 +62,6 @@ export default function CatalogPage() {
     useEffect(() => {
         (async () => {
             const filterRes = await getFilterParams();
-
-            if (filterRes?.data) {
-                setFilterItems(filterRes.data);
-            }
-
             let sizesFromApi = filterRes?.data?.sizes || [];
             const numericSizes = sizes.map(Number);
 

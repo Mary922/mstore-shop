@@ -141,7 +141,7 @@ const ProductCard = ({id, text, images, price, isOpen, onClick}) => {
                 </div>
 
                 <div
-                    className="absolute -top-2 right-9 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                    className="absolute -top-2 right-12 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
                     <h1>
                         <i className={classes.heart} onClick={async (event) => {
                             event.stopPropagation();

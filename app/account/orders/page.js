@@ -12,12 +12,10 @@ export default function OrdersPage() {
     const [orders, setOrders] = useState([]);
     const [pageCount, setPageCount] = useState(0);
 
-    let tempClient = '';
     let client;
     let clientId;
 
     if (typeof window !== "undefined") {
-        tempClient = localStorage.getItem("temp-client");
         client = localStorage.getItem("client");
     }
 

@@ -25,13 +25,6 @@ export default function PreorderPage() {
     const [selectedCity, setSelectedCity] = useState(null);
     const [cities, setCities] = useState([]);
     const [address, setAddress] = useState(null);
-    const [phone, setPhone] = useState(null);
-    const [orderSum, setOrderSum] = useState(0);
-
-    const [show, setShow] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [products, setProducts] = useState([]);
-
     const [errorForm, setErrorForm] = useState({
         region: false,
         city: false,
@@ -41,15 +34,7 @@ export default function PreorderPage() {
 
 
     const cart = useAppSelector((state) => state.cart.cart);
-
-    let tempClient;
-    let clientConstant;
     let clientId;
-
-    if (typeof window !== "undefined") {
-        tempClient = localStorage.getItem("temp-client");
-        clientConstant = localStorage.getItem("client");
-    }
 
     if (typeof window !== "undefined" && client) {
         clientId = JSON.parse(localStorage.getItem("client")).id;
@@ -131,13 +116,6 @@ export default function PreorderPage() {
         })
     }
 
-    const openToast = () => {
-        setShow(true);
-    }
-    const closeToast = () => {
-        setShow(false);
-    }
-
     const createOrder = async () => {
 
         const errorsInInputs = checkFilledInputs();
@@ -159,7 +137,6 @@ export default function PreorderPage() {
         )
 
         if (result.success) {
-            setShow(true);
             await dispatch(clearCartThunk(clientId));
             toast.success('Спасибо за заказ!');
 

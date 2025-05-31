@@ -1,8 +1,6 @@
 import React, {useEffect} from 'react';
-import {useDispatch} from "react-redux";
 
 const AccordionComponent = ({name, options, checkedOptions, setCheckedOptions}) => {
-    const dispatch = useDispatch();
 
     useEffect(() => {
         if (checkedOptions.length === 0) {

@@ -4,94 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="filters">
+    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="code refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/account/account-addresses/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-addresses/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/account/account-info/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-info/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/account-navibar.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-navibar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/layout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/account/my-account/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/my-account/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/account/orders/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/orders/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/account/wishlist/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/wishlist/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/babies/page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/boys/page.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/cart/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cart/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/catalog/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/catalog/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/category/[categoryId]/page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/CarouselComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/CarouselComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/common/CarouselComponentWithDots.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/CarouselComponentWithDots.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/common/CollapseComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/CollapseComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/common/DatePickerComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/DatePickerComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/DropdownComponent.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/FilterDropdown.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/FilterDropdown.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/common/FilterDropdown.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/common/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/Pagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/RangeComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/RangeComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/ScrollDownComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/ScrollDownComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/ScrollToTopComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/ScrollToTopComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/ToastComponent.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/filter/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/filter/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/about-us/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/about-us/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/contacts/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/contacts/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/delivery/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/delivery/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/exchange-return/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/exchange-return/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/help/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/help/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/offer/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/offer/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/payment/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/payment/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/girls/page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/home/page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/addresses.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/addresses.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/cart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/categories.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/categories.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/cities.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/cities.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/clients.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/divisions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/divisions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/filter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/forgotPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/forgotPassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/images.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/orders.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/orders.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/prices.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/prices.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/productCategories.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/productCategories.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/products.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/regions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/regions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/registration.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/session.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/subscriptions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/lib/api/wishlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/wishlist.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/common/ScrollDownComponent.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/preorder/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/preorder/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/product/[productId]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/product/[productId]/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/registration/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/registration/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/reset-password/[token]/changePasswordForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/reset-password/[token]/changePasswordForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/reset-password/[token]/expired.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/reset-password/[token]/expired.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/reset-password/[token]/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/reset-password/[token]/layout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/reset-password/[token]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/reset-password/[token]/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/reset-password/[token]/server-check-token.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/reset-password/[token]/server-check-token.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AccountForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AccountForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AddressForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AddressForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AppContent.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AppFooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AppFooter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AuthorizationForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AuthorizationForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/CanvasFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/CanvasFilter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/CanvasFilterForLinks.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/CanvasFiltered.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/Cart.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/FilterComponent.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/ForgotPassword.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/MainLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/MainLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/OrderButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/OrderButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/ProductCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/ProductCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/layout.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/loaders/ScrollToTop.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/loaders/ScrollToTop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/maps/YandexMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/maps/YandexMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/modals/ConfirmModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/modals/ConfirmModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/navbars/NavbarHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/NavbarHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/reset-password/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/reset-password/layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/search/page.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/store/MakeStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/MakeStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/store/StoreProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/StoreProvider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/store/slices/addressesSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/slices/addressesSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/store/slices/appCommonSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/slices/appCommonSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/store/slices/cartSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/slices/cartSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/store/slices/searchParamsSlice.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/store/slices/wishlistSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/slices/wishlistSlice.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +148,7 @@
       <workItem from="1746528898838" duration="89000" />
       <workItem from="1746528989347" duration="127000" />
       <workItem from="1746531782255" duration="94180000" />
-      <workItem from="1748265780272" duration="17345000" />
+      <workItem from="1748265780272" duration="19536000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -382,7 +326,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747835180078</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="code refactoring">
+      <option name="closed" value="true" />
+      <created>1748704164527</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1748704164527</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -405,6 +357,7 @@
     <MESSAGE value="client account" />
     <MESSAGE value="auth" />
     <MESSAGE value="filters" />
-    <option name="LAST_COMMIT_MESSAGE" value="filters" />
+    <MESSAGE value="code refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="code refactoring" />
   </component>
 </project>
