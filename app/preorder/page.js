@@ -1,6 +1,6 @@
 "use client"
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, Suspense} from "react";
 import clsx from "clsx";
 import {getClient} from "@/app/lib/api/clients";
 import {getRegions} from "@/app/lib/api/regions";
@@ -13,7 +13,13 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {clearCartThunk} from "@/app/store/slices/cartSlice";
 import MainLayout from "@/app/ui/MainLayout";
 
-export default function PreorderPage() {
+export default function PreorderLoadingPage() {
+    return (<Suspense fallback={<div>Загрузка...</div>}>
+        <PreorderPage/>
+    </Suspense>);
+};
+
+function PreorderPage() {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const sumUrlParam = useSearchParams();
@@ -26,10 +32,7 @@ export default function PreorderPage() {
     const [cities, setCities] = useState([]);
     const [address, setAddress] = useState(null);
     const [errorForm, setErrorForm] = useState({
-        region: false,
-        city: false,
-        address: false,
-        phone: false,
+        region: false, city: false, address: false, phone: false,
     });
 
 
@@ -41,18 +44,10 @@ export default function PreorderPage() {
     }
 
     const classes = {
-        address: clsx({'input-sm input-bordered': true},
-            {'input-error': errorForm.address},
-        ),
-        region: clsx({'select select-bordered w-full max-w-xs': true},
-            {'select-error': errorForm.region},
-        ),
-        city: clsx({'select select-bordered w-full max-w-xs': true},
-            {'select-error': errorForm.city},
-        ),
-        phone: clsx({'input-sm input-bordered': true},
-            {'input-error': errorForm.phone},
-        )
+        address: clsx({'input-sm input-bordered': true}, {'input-error': errorForm.address},),
+        region: clsx({'select select-bordered w-full max-w-xs': true}, {'select-error': errorForm.region},),
+        city: clsx({'select select-bordered w-full max-w-xs': true}, {'select-error': errorForm.city},),
+        phone: clsx({'input-sm input-bordered': true}, {'input-error': errorForm.phone},)
     };
 
     useEffect(() => {
@@ -92,8 +87,7 @@ export default function PreorderPage() {
     }
     const checkSelectedRegion = (data) => {
         setErrorForm({
-            ...errorForm,
-            region: false
+            ...errorForm, region: false
         })
         setSelectedRegion(data.target.value);
     }
@@ -103,16 +97,14 @@ export default function PreorderPage() {
     }
     const checkSelectedCity = (data) => {
         setErrorForm({
-            ...errorForm,
-            city: false
+            ...errorForm, city: false
         })
         setSelectedCity(data.target.value);
     }
     const handleAddressChange = (event) => {
         setAddress(event.target.value);
         setErrorForm({
-            ...errorForm,
-            address: false
+            ...errorForm, address: false
         })
     }
 
@@ -126,15 +118,8 @@ export default function PreorderPage() {
         }
 
         const result = await makeOrder({
-                client: clientId,
-                region: selectedRegion,
-                city: selectedCity,
-                address: address,
-                phone: client.client_phone,
-            },
-            cart,
-            sum,
-        )
+            client: clientId, region: selectedRegion, city: selectedCity, address: address, phone: client.client_phone,
+        }, cart, sum,)
 
         if (result.success) {
             await dispatch(clearCartThunk(clientId));
@@ -168,6 +153,7 @@ export default function PreorderPage() {
     }
 
     return (
+
         <>
             <MainLayout>
                 <div className="flex flex-col w-full my-10 items-center">
@@ -200,7 +186,8 @@ export default function PreorderPage() {
                             <div className="w-full">
                                 <label className="form-control w-full max-w-xs">
                                     <div className="label">
-                                        <a className="label-text link link-info" href={'/account/account-addresses'}>Изменить
+                                        <a className="label-text link link-info"
+                                           href={'/account/account-addresses'}>Изменить
                                             актуальный адрес</a>
                                     </div>
                                     <select className={classes.region}
@@ -263,5 +250,6 @@ export default function PreorderPage() {
                 />
             </MainLayout>
         </>
+
     )
 }

@@ -8,9 +8,17 @@ import MainLayout from "@/app/ui/MainLayout";
 import {applyFilterParams, getFilterParams} from "@/app/lib/api/filter";
 import CanvasFilter from "@/app/ui/CanvasFilter";
 import {getMaxPrice} from "@/app/lib/api/prices";
+import {Suspense} from "react";
 
+export default function CatalogLoadingPage() {
+    return (
+        <Suspense fallback={<div>Загрузка...</div>}>
+            <CatalogPage/>
+        </Suspense>
+    );
+};
 
-export default function CatalogPage() {
+function CatalogPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const drawerToggleRef = useRef(null);
@@ -280,6 +288,7 @@ export default function CatalogPage() {
     }
 
     return (
+
         <>
             <MainLayout>
                 {
@@ -322,7 +331,8 @@ export default function CatalogPage() {
                                     {
                                         category || gender ? null
                                             :
-                                            <button className="btn btn-ghost" onClick={handleGoBack}>Очистить фильтры
+                                            <button className="btn btn-ghost" onClick={handleGoBack}>Очистить
+                                                фильтры
                                                 Х</button>
 
                                     }
@@ -339,7 +349,8 @@ export default function CatalogPage() {
                                                             :
                                                             <span>Размеры: {chosenFilters.sizes.length}</span>
                                                     }
-                                                    <div className='text-xl font-thin ml-2' style={{color: 'lightgray'}}>X
+                                                    <div className='text-xl font-thin ml-2'
+                                                         style={{color: 'lightgray'}}>X
                                                     </div>
                                                 </div>
                                             </button>
@@ -357,7 +368,8 @@ export default function CatalogPage() {
                                                             :
                                                             <span>Цвета: {chosenFilters.colors.length}</span>
                                                     }
-                                                    <div className='text-xl font-thin ml-2' style={{color: 'lightgray'}}>X
+                                                    <div className='text-xl font-thin ml-2'
+                                                         style={{color: 'lightgray'}}>X
                                                     </div>
                                                 </div>
                                             </button>
@@ -375,7 +387,8 @@ export default function CatalogPage() {
                                                             :
                                                             <span>Сезоны: {chosenFilters.seasons.length}</span>
                                                     }
-                                                    <div className='text-xl font-thin ml-2' style={{color: 'lightgray'}}>X
+                                                    <div className='text-xl font-thin ml-2'
+                                                         style={{color: 'lightgray'}}>X
                                                     </div>
                                                 </div>
                                             </button>
@@ -393,7 +406,8 @@ export default function CatalogPage() {
                                                             :
                                                             <span>Бренды: {chosenFilters.brands.length}</span>
                                                     }
-                                                    <div className='text-xl font-thin ml-2' style={{color: 'lightgray'}}>X
+                                                    <div className='text-xl font-thin ml-2'
+                                                         style={{color: 'lightgray'}}>X
                                                     </div>
                                                 </div>
                                             </button>
@@ -411,7 +425,8 @@ export default function CatalogPage() {
                                                             :
                                                             <span>Страны: {chosenFilters.countries.length}</span>
                                                     }
-                                                    <div className='text-xl font-thin ml-2' style={{color: 'lightgray'}}>X
+                                                    <div className='text-xl font-thin ml-2'
+                                                         style={{color: 'lightgray'}}>X
                                                     </div>
                                                 </div>
                                             </button>
@@ -480,7 +495,8 @@ export default function CatalogPage() {
                                 <div className="mx-5 mt-2 text-lg p-5 flex flex-col items-center">
                                     <div>Не найдено товаров удовлетворяющих условиям поиска</div>
                                     <button style={{width: 'auto', maxWidth: 'fit-content'}}
-                                            className="btn btn-primary text-white mt-1" onClick={handleGoBack}>Вернуться
+                                            className="btn btn-primary text-white mt-1"
+                                            onClick={handleGoBack}>Вернуться
                                         назад
                                     </button>
                                 </div>
@@ -489,5 +505,6 @@ export default function CatalogPage() {
                 }
             </MainLayout>
         </>
+
     )
 }
