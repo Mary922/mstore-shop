@@ -16,6 +16,3 @@ export const GENDER_NAME = {
 export const BABIES_SIZES = {
     sizes: [50,56,62,68,74,80,86,92,98]
 };
-
-let baseUrl = 'http://localhost:3001/images';
-export let baseUrlStatic = 'http://localhost:3001/static';

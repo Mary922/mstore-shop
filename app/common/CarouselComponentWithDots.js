@@ -1,5 +1,6 @@
 "use client";
 import React, {useRef, useState, useEffect} from 'react';
+import {BASE_URL} from "@/config";
 
 
 const CarouselComponentWithDots = ({paths, staticPaths, imageClassName, containerClassName, interval}) => {
@@ -9,10 +10,10 @@ const CarouselComponentWithDots = ({paths, staticPaths, imageClassName, containe
 
     let baseUrl = '';
     if (paths) {
-        baseUrl = 'http://localhost:3001/images';
+        baseUrl = `${BASE_URL}/images`;
     }
     if (staticPaths) {
-        baseUrl = 'http://localhost:3001/static';
+        baseUrl = `${BASE_URL}/static`;
     }
     const items = paths || staticPaths;
 

@@ -1,5 +1,6 @@
 "use client";
 import React, {useState} from 'react';
+import {BASE_URL} from "@/config";
 
 
 const CarouselComponent = ({paths, staticPaths}) => {
@@ -8,10 +9,10 @@ const CarouselComponent = ({paths, staticPaths}) => {
 
     let baseUrl = '';
     if (paths) {
-        baseUrl = 'http://localhost:3001/images';
+        baseUrl = `${BASE_URL}/images`;
     }
     if (staticPaths) {
-        baseUrl = 'http://localhost:3001/static';
+        baseUrl = `${BASE_URL}/static`;
     }
 
     const handleNextClick = () => {

@@ -16,10 +16,11 @@ import Link from "next/link";
 import {toast, Toaster} from "react-hot-toast";
 import MainLayout from "@/app/ui/MainLayout";
 import OrderButton from "@/app/ui/OrderButton";
+import {BASE_URL} from "@/config";
 
 
 export default function CartPage() {
-    let baseUrl = 'http://localhost:3001/images';
+    let baseUrl = `${BASE_URL}/images`;
     const dispatch = useAppDispatch();
     const router = useRouter();
 

@@ -1,5 +1,3 @@
 
 
-export const logOut = async () => {
-    localStorage.removeItem('client');
-}
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL

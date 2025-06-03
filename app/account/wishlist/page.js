@@ -4,10 +4,11 @@ import {getProductsInWishlistByIds, getWishlist} from "@/app/lib/api/wishlist";
 import Link from "next/link";
 import {wishlistDeleteThunk} from "@/app/store/slices/wishlistSlice";
 import {useAppDispatch} from "@/app/lib/hooks";
+import {BASE_URL} from "../../../config/config";
 
 export default function Wishlist() {
     const dispatch = useAppDispatch();
-    let baseUrl = 'http://localhost:3001/images';
+    let baseUrl = `${BASE_URL}/images`;
     const [wishlistProductIds, setWishlistProductIds] = useState([]);
     const [products, setProducts] = useState([]);
 

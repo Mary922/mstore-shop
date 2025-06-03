@@ -5,10 +5,11 @@ import {getCategories} from "@/app/lib/api/categories";
 import {useAppSelector} from "@/app/lib/hooks";
 import {getCartQuantity} from "@/app/store/slices/cartSlice";
 import {getProductsByIds, getProductsInSearch} from "@/app/lib/api/products";
+import {BASE_URL} from "@/config";
 
 
 const NavbarHeader = () => {
-    let baseUrl = 'http://localhost:3001/images';
+    let baseUrl = `${BASE_URL}/images`;
     const [products, setProducts] = useState([]);
     const [searchVal, setSearchVal] = useState("");
 
@@ -196,10 +197,10 @@ const NavbarHeader = () => {
 
     return (
         <>
-            <div className="navbar border-nav navbar-bottom">
-                <div className="navbar-start gap-3">
-                    <Link href='/' className="btn btn-ghost btn-circle">
-                        <svg className="w-7 h-7 text-gray-800 dark:text-white" aria-hidden="true"
+            <div className="navbar border-nav navbar-bottom mobile:flex-col mobile:px-0">
+                <div className="navbar-start gap-3 mobile:w-full mobile:gap-1">
+                    <Link href='/' className="btn btn-ghost btn-circle mobile:min-h-0 mobile:h-10">
+                        <svg className="w-7 h-7 text-gray-800 dark:text-white mobile:w-5 mobile:h-5" aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                   d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"/>
@@ -207,51 +208,51 @@ const NavbarHeader = () => {
                     </Link>
 
                     <div className="dropdown">
-                        <div tabIndex={0} className="btn btn-ghost btn-square text-lg font-normal px-7"
+                        <div tabIndex={0} className="btn btn-ghost btn-square text-lg font-normal px-7 mobile:text-sm mobile:px-3"
                         >
                             Мальчики
                         </div>
                         <ul
                             tabIndex={0}
-                            className="bg-base-100 menu dropdown-content rounded-box z-[20] shadow-lg w-[1100px]">
+                            className="bg-base-100 menu dropdown-content rounded-box z-[20] shadow-lg w-[1100px] mobile:w-full">
                             <div
-                                className="grid grid-cols-6 text-sm pl-5 justify-center justify-items-center column-divider">{renderBoysLinks()}</div>
+                                className="grid grid-cols-6 text-sm pl-5 justify-center justify-items-center column-divider mobile:grid-cols-2">{renderBoysLinks()}</div>
                         </ul>
                     </div>
 
 
                     <div className="dropdown">
-                        <div tabIndex={0} className="btn btn-ghost btn-square text-lg font-normal px-7"
+                        <div tabIndex={0} className="btn btn-ghost btn-square text-lg font-normal px-7 mobile:text-sm mobile:px-3"
                         >
                             Девочки
                         </div>
                         <ul
                             tabIndex={0}
-                            className="bg-base-100 menu dropdown-content rounded-box z-[20] shadow-lg w-[1100px]">
+                            className="bg-base-100 menu dropdown-content rounded-box z-[20] shadow-lg w-[1100px] mobile:w-full">
                             <div
-                                className="grid grid-cols-6 text-sm pl-5 justify-center justify-items-center column-divider">{renderGirlsLinks()}</div>
+                                className="grid grid-cols-6 text-sm pl-5 justify-center justify-items-center column-divider mobile:grid-cols-2">{renderGirlsLinks()}</div>
                         </ul>
                     </div>
-                    <Link href='/footer/contacts' className="btn btn-ghost btn-square mr-8 w-auto">
-                        <div className='font-normal text-lg px-2'>Магазины</div>
+                    <Link href='/footer/contacts' className="btn btn-ghost btn-square mr-8 w-auto mobile:mr-0">
+                        <div className='font-normal text-lg px-2 mobile:text-sm'>Магазины</div>
                     </Link>
                 </div>
 
 
-                <div className="navbar-end mr-8">
+                <div className="navbar-end mr-8 mobile:w-full mobile:flex mobile:justify-start mobile:items-center">
                     <input type="text" placeholder="Поиск"
-                           className="input input-bordered w-24 md:w-auto bg-white input-md mr-5"
+                           className="input input-bordered w-24 md:w-auto bg-white input-md mr-5 mobile:w-full mobile:mx-8 mobile:input-sm"
                            onChange={handleSearch}
                            onKeyDown={handleKeyDown}
                     />
 
 
-                    <div className="dropdown dropdown-end mr-2">
+                    <div className="dropdown dropdown-end mr-2 mobile:mr-0 mobile:ml-28">
                         <div tabIndex={0} role="button" className="cursor-pointer">
                             <div className="indicator">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-auto w-10"
+                                    className="h-auto w-10 mobile:w-8"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor">
@@ -269,7 +270,7 @@ const NavbarHeader = () => {
                                 </span>
 
                                 <div
-                                    className="card card-compact dropdown-content bg-white rounded-box w-96 z-[2] shadow relative -mt-5">
+                                    className="card card-compact dropdown-content bg-white rounded-box w-96 z-[2] shadow relative -mt-5 mobile:w-72 mobile:-right-10">
                                     <div className="card-body max-h-80 shadow-lg bg-neutral-content rounded-md">
                                         {
                                             cartList && cartList.length > 0 ?
@@ -302,7 +303,7 @@ const NavbarHeader = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="text-primary-content flex flex-col ml-3"><span>Сумма</span><span> {total} Р</span>
+                    <div className="text-primary-content flex flex-col ml-3 mobile:hidden"><span>Сумма</span><span> {total} Р</span>
                     </div>
                 </div>
             </div>

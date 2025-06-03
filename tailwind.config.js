@@ -1,15 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-// const {green} = require("next/dist/lib/picocolors");
-// import daisyui from 'daisyui'
-// const plugin = require('daisyui');
-// const config = require("@/postcss.config.mjs");
-// const config = require("tailwindcss/config");
 
-// const flowbite = require("flowbite-react/tailwind");
 
 module.exports = {
     darkMode: ["class"],
-    // lightMode: ["class"],
     corePlugins: {
         preflight: false,
     },
@@ -18,12 +11,14 @@ module.exports = {
         "./pages/**/*.{js,ts,jsx,tsx,mdx}",
         "./components/**/*.{js,ts,jsx,tsx,mdx}",
         "./app/**/*.{js,ts,jsx,tsx,mdx}",
-
-        // "./src/**/*.{html,js}",
-        // "./node_modules/flowbite/**/*.js"
-        // flowbite.content(),
     ],
     theme: {
+        screens: {
+            'mobile': '360px',
+            'tablet': '640px',
+            'laptop': '1024px',
+            'desktop': '1280px',
+        },
         extend: {
             colors: {
                 'dark-green': '#1A4D2E',
