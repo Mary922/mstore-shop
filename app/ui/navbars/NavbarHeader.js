@@ -57,7 +57,7 @@ const NavbarHeader = () => {
                 total += item.product_count * product.price;
 
                 return (
-                    <div key={item.id}>
+                    <div key={item.id} className='prods-list-card'>
                         <div className={'flex flex-row'}>
                             {
                                 product?.Images?.[0]?.image_path
@@ -65,7 +65,7 @@ const NavbarHeader = () => {
                                            className={'w-32 h-36'}/>
                                     : 'no image'
                             }
-                            <div className={'flex flex-col text-md ml-3'}>
+                            <div className={'flex flex-col text-md ml-3 prods-list-block'}>
                                 <div className='font-bold'>{product.product_name}</div>
                                 <div className='font-light'><span
                                     className="mr-1">Количество:</span> {item.product_count}</div>
@@ -197,10 +197,10 @@ const NavbarHeader = () => {
 
     return (
         <>
-            <div className="navbar border-nav navbar-bottom mobile:flex-col mobile:px-0">
-                <div className="navbar-start gap-3 mobile:w-full mobile:gap-1">
-                    <Link href='/' className="btn btn-ghost btn-circle mobile:min-h-0 mobile:h-10">
-                        <svg className="w-7 h-7 text-gray-800 dark:text-white mobile:w-5 mobile:h-5" aria-hidden="true"
+            <div className="navbar border-nav navbar-bottom nav-head">
+                <div className="navbar-start gap-3 nav-head-links">
+                    <Link href='/' className="btn btn-ghost btn-circle home-link">
+                        <svg className="w-7 h-7 text-gray-800 dark:text-white" aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                   d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"/>
@@ -208,51 +208,51 @@ const NavbarHeader = () => {
                     </Link>
 
                     <div className="dropdown">
-                        <div tabIndex={0} className="btn btn-ghost btn-square text-lg font-normal px-7 mobile:text-sm mobile:px-3"
+                        <div tabIndex={0} className="btn btn-ghost btn-square text-lg font-normal px-7 nav-link"
                         >
                             Мальчики
                         </div>
                         <ul
                             tabIndex={0}
-                            className="bg-base-100 menu dropdown-content rounded-box z-[20] shadow-lg w-[1100px] mobile:w-full">
+                            className="bg-base-100 menu dropdown-content rounded-box z-[20] shadow-lg w-[1100px]">
                             <div
-                                className="grid grid-cols-6 text-sm pl-5 justify-center justify-items-center column-divider mobile:grid-cols-2">{renderBoysLinks()}</div>
+                                className="grid grid-cols-6 text-sm pl-5 justify-center justify-items-center column-divider">{renderBoysLinks()}</div>
                         </ul>
                     </div>
 
 
                     <div className="dropdown">
-                        <div tabIndex={0} className="btn btn-ghost btn-square text-lg font-normal px-7 mobile:text-sm mobile:px-3"
+                        <div tabIndex={0} className="btn btn-ghost btn-square text-lg font-normal px-7 nav-link"
                         >
                             Девочки
                         </div>
                         <ul
                             tabIndex={0}
-                            className="bg-base-100 menu dropdown-content rounded-box z-[20] shadow-lg w-[1100px] mobile:w-full">
+                            className="bg-base-100 menu dropdown-content rounded-box z-[20] shadow-lg w-[1100px]">
                             <div
-                                className="grid grid-cols-6 text-sm pl-5 justify-center justify-items-center column-divider mobile:grid-cols-2">{renderGirlsLinks()}</div>
+                                className="grid grid-cols-6 text-sm pl-5 justify-center justify-items-center column-divider">{renderGirlsLinks()}
+                            </div>
                         </ul>
                     </div>
-                    <Link href='/footer/contacts' className="btn btn-ghost btn-square mr-8 w-auto mobile:mr-0">
-                        <div className='font-normal text-lg px-2 mobile:text-sm'>Магазины</div>
+                    <Link href='/footer/contacts' className="btn btn-ghost btn-square mr-8 w-auto">
+                        <div className='font-normal text-lg px-2 nav-link'>Магазины</div>
                     </Link>
                 </div>
 
 
-                <div className="navbar-end mr-8 mobile:w-full mobile:flex mobile:justify-start mobile:items-center">
+                <div className="navbar-end mr-8 nav-end">
                     <input type="text" placeholder="Поиск"
-                           className="input input-bordered w-24 md:w-auto bg-white input-md mr-5 mobile:w-full mobile:mx-8 mobile:input-sm"
+                           className="input input-bordered w-24 md:w-auto bg-white input-md mr-5 nav-search"
                            onChange={handleSearch}
                            onKeyDown={handleKeyDown}
                     />
 
-
-                    <div className="dropdown dropdown-end mr-2 mobile:mr-0 mobile:ml-28">
+                    <div className="dropdown dropdown-end mr-2 nav-cart">
                         <div tabIndex={0} role="button" className="cursor-pointer">
                             <div className="indicator">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-auto w-10 mobile:w-8"
+                                    className="h-auto w-10"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor">
@@ -270,12 +270,12 @@ const NavbarHeader = () => {
                                 </span>
 
                                 <div
-                                    className="card card-compact dropdown-content bg-white rounded-box w-96 z-[2] shadow relative -mt-5 mobile:w-72 mobile:-right-10">
-                                    <div className="card-body max-h-80 shadow-lg bg-neutral-content rounded-md">
+                                    className="card card-compact dropdown-content bg-white rounded-box w-96 z-[2] shadow relative -mt-5 card-nav">
+                                    <div className="card-body max-h-80 shadow-lg bg-neutral-content rounded-md card-cart">
                                         {
                                             cartList && cartList.length > 0 ?
                                                 <>
-                                                    <div className="flex-1 overflow-y-auto">{productsListInCart}</div>
+                                                    <div className="flex-1 overflow-y-auto card-cart-prods">{productsListInCart}</div>
                                                     <a href="/cart"
                                                        className="btn btn-primary btn-md px-0 mx-0"
                                                        onClick={e => handleButtonClick(e)}>
@@ -303,7 +303,7 @@ const NavbarHeader = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="text-primary-content flex flex-col ml-3 mobile:hidden"><span>Сумма</span><span> {total} Р</span>
+                    <div className="text-primary-content flex flex-col ml-3 nav-sum"><span>Сумма</span><span> {total} Р</span>
                     </div>
                 </div>
             </div>

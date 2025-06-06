@@ -6,15 +6,15 @@ export default function DeliveryPage() {
     return (
         <>
             <MainLayout>
-                <div className='p-5 mx-60 leading-relaxed'>
-                    <h2>
+                <div className='p-5 mx-60 leading-relaxed mobile:p-2 mobile:mx-2'>
+                    <h2 className='mobile:text-lg'>
                         Заказ
                     </h2>
                     <p>
                         Вы можете оформить заказ по интернету, а также получить консультацию наших менеджеров, позвонив
                         по указанным телефонам.
                     </p>
-                    <h2>
+                    <h2 className='mobile:text-lg'>
                         Доставка по Москве
                     </h2>
                     <p>
@@ -26,13 +26,13 @@ export default function DeliveryPage() {
                         Точную стоимость и сроки доставки вы можете рассчитать при оформлении заказа в корзине или в
                         карточке товара.
                     </p>
-                    <h2>
+                    <h2 className='mobile:text-lg'>
                         Доставка по Регионам
                     </h2>
                     <p>
                         Мы осуществляем отправку товаров в любую точку России.
                     </p>
-                    <h3>
+                    <h3 className='mobile:text-lg'>
                         Доставка заказов осуществляется:
                     </h3>
                     <p>
@@ -41,7 +41,7 @@ export default function DeliveryPage() {
                         – Почтой России (ценные отправления и отправления 1 класса)
                         – ЕМС
                     </p>
-                    <h3>
+                    <h3 className='mobile:text-lg'>
                         Доставка Почтой России и ЕМС осуществляется только по полной предоплате.
                     </h3>
                     <p>
@@ -52,7 +52,7 @@ export default function DeliveryPage() {
                         Начните вводить ваш город для подбора оптимального способа доставки и расчета срока и тарифа.
                         По всем вопросам доставки в регионы, Вы можете обратиться по адресу: region@manyasha-store.ru
                     </p>
-                    <h2>
+                    <h2 className='mobile:text-lg'>
                         Бесплатная доставка.
                     </h2>
                     <p>

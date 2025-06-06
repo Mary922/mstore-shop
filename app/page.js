@@ -91,17 +91,16 @@ export default function Home() {
             const result = await createNewSubscription({
                 email: email,
             });
-            if (result.success) {
-                setFeedbackMessage(result.message);
+            if (result?.success) {
+                setFeedbackMessage(result?.message);
                 setTimeout(() => {
-                    setFeedbackMessage('')
                 }, 3000)
                 setEmail('');
             } else {
-                setFeedbackMessage(result.message);
+                setFeedbackMessage("Пожалуйста, укажите корректный email");
                 setTimeout(() => {
                     setFeedbackMessage('')
-                }, 3000)
+                }, 2000)
                 setEmail('');
             }
         }
@@ -110,22 +109,22 @@ export default function Home() {
     return (
         <>
             <MainLayout>
-                <div className='flex flex-col'>
+                <div className='flex flex-col main-container'>
                     <div>
-                        <div className="w-full mobile:w-screen">
+                        <div className="w-full container-carousel">
                             {
                                 imagePaths.length ?
                                     <CarouselComponentWithDots
                                         staticPaths={imagePaths}
                                         imageClassName={'object-cover w-full h-full'}
-                                        containerClassName={'w-full h-[600px] mobile:h-[200px]'}
+                                        containerClassName={'w-full h-[80vh] mx-auto'}
                                         interval={5000}
                                     /> : null
 
                             }
                         </div>
                     </div>
-                    <div className="relative w-full flex flex-row items-center justify-center gap-8 p-3 md:p-3 mobile:w-screen mobile:gap-2 mobile:px-0">
+                    <div className="relative w-full flex flex-row items-center justify-center gap-8 p-3 main-links">
                         <div className="flex-1 max-w-[30%] relative group overflow-hidden rounded-lg">
                             {boys.length ?
                                 <img
@@ -137,11 +136,13 @@ export default function Home() {
                             <Link
                                 href={`/catalog?gender=${GENDER.MALE}`}
                                 className="no-underline absolute inset-0 flex items-center justify-center bg-black/30
-                            transition-all duration-300 opacity-0 group-hover:opacity-100"
+                            transition-all duration-300 opacity-0 hover:opacity-100
+                            "
                             >
                                 <button
-                                    className="btn btn-ghost glass text-white font-bold text-lg px-6 py-3 shadow-lg hover:scale-105 transition-transform">
-                                    Boys Collection
+                                    className="btn btn-ghost glass text-white font-bold text-lg px-6 py-3 shadow-lg hover:scale-105 transition-transform
+                                    ">
+                                    Мальчики
                                 </button>
                             </Link>
                         </div>
@@ -171,33 +172,42 @@ export default function Home() {
                             >
                                 <button
                                     className="btn btn-ghost glass text-white font-bold text-lg px-6 py-3 shadow-lg hover:scale-105 transition-transform">
-                                    Girls Collection
+                                    Девочки
                                 </button>
                             </a>
                         </div>
                     </div>
-                    <div className='grid grid-cols-[500px_1fr] bg-emerald-500 text-white p-2 mobile:text-sm mobile:grid-cols-1 mobile:py-1'>
+                    <div className='grid grid-cols-[500px_1fr] bg-emerald-500 text-white p-3 main-subscribe '>
                         <div className='flex flex-col items-center justify-center'>
-                            <h1 className='mb-0 mt-1 mobile:text-lg mobile:pt-0'>Скидки, акции и новинки</h1>
+                            <h1 className='mb-0 mt-1 sm:text-lg sm:pt-0'>Скидки, акции и новинки</h1>
                             <p className='mt-1'>Подписывайтесь на Email-рассылку</p>
                         </div>
-                        <div className='flex flex-row items-center justify-center gap-2 mobile:flex-row mobile:px-12 mobile:gap-3 mobile:mb-2 mobile:h-auto mobile:items-stretch'>
-                            <div className='flex flex-col mobile:w-full'>
-                                <div className='h-[calc(48px+24px)] mobile:h-auto'>
-                                    <input
-                                        className={`input w-96 rounded-none border-none mobile:input-sm mobile:w-auto min-h-0 uniform-height ${error ? 'input-error' : ''}`}
-                                        onChange={handleInputChange}
-                                        onBlur={checkFilledInput}
-                                        value={email}
-                                        placeholder={'Email'}/>
-                                    <div className={`relative ${error ? 'h-6' : 'h-0'}`}>
+                        <div className='flex flex-row items-center justify-center gap-2 main-sub-block'>
+                            <div className='flex flex-col'>
+                                <div className={'input-and-button'}>
+                                    <div className={'flex flex-row items-center justify-center'}>
+                                        <input
+                                            className={`input w-96 rounded-none border-none min-h-0 uniform-height ${error ? 'input-error' : ''}`}
+                                            onChange={handleInputChange}
+                                            onBlur={checkFilledInput}
+                                            value={email}
+                                            placeholder={'Email'}/>
+                                        <div className=' my-0 sm:py-0 sm:h-auto'>
+                                            <button
+                                                className='btn btn-neutral min-h-0 border-l-0 rounded-none uniform-height ml-2'
+                                                onClick={createSubscription}
+                                            >Подписаться
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className={`relative h-0`}>
                                         {error && (
                                             <div className="absolute top-0 left-0 label">
                                                 <span className="label-text-alt text-error">{error}</span>
                                             </div>
                                         )}
                                     </div>
-                                    <div className={`relative ${error ? 'h-6' : 'h-0'}`}>
+                                    <div className={`relative h-0}`}>
                                         {feedbackMessage && (
                                             <div
                                                 className="absolute top-0 left-0 label">
@@ -207,12 +217,7 @@ export default function Home() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='w-full h-[calc(48px+24px)] my-0 mobile:py-0 mobile:h-auto'>
-                                <button className='btn btn-neutral min-h-0 border-l-0 rounded-none uniform-height mobile:btn-sm mobile:rounded-lg'
-                                        onClick={createSubscription}
-                                >Подписаться
-                                </button>
-                            </div>
+
                         </div>
                     </div>
                 </div>

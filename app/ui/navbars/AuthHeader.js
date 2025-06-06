@@ -59,14 +59,13 @@ const AuthHeader = () => {
 
     return (
         <>
-            <div className="navbar w-full p-2.5 navbar-top mobile:px-0">
+            <div className="navbar w-full p-2.5 navbar-top">
                 <div className="navbar-start">
-
                 </div>
-                <div className='navbar-center'>
+                <div className='navbar-center nav-logo'>
                     {imageLogoPath ?
                         <img
-                            className="w-40 h-auto mobile:w-28"
+                            className="w-40 h-auto "
                             src={`${baseUrl}/${imageLogoPath}`}
                             alt=""
                         />
@@ -98,8 +97,8 @@ const AuthHeader = () => {
                 </div>
             </div>
             <NavbarHeader/>
-            <div className='flex flex-row items-center bg-emerald-500 text-black h-10 pl-5 py-1 w-full navbar-info mobile:w-screen mobile:px-0'>
-                <div className='text-neutral-content mobile:pl-4'>Бесплатная доставка от 2000 ₽</div>
+            <div className='flex flex-row items-center bg-emerald-500 text-black h-10 pl-5 py-1 w-full navbar-info'>
+                <div className='text-neutral-content'>Бесплатная доставка от 2000 ₽</div>
             </div>
         </>
 

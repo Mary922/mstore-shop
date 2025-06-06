@@ -280,7 +280,7 @@ function CatalogPage() {
                                        text={product.product_name}
                                        images={product.Images}
                                        isOpen={activeProductId === product.product_id}
-                                       onClick={() => toggleSizeDropdown(product.product_id)}
+                                       onClickBtn={() => toggleSizeDropdown(product.product_id)}
         />);
     })
     const handleGoBack = () => {
@@ -296,9 +296,8 @@ function CatalogPage() {
                         ?
                         <div className='flex flex-col w-full bg-gray-100'>
                             <div className="mx-5 mt-2">
-                                <div className="drawer z-10 flex">
                                     <label htmlFor="my-drawer">
-                                        <svg className="w-full h-full text-gray-800 dark:text-white cursor-pointer"
+                                        <svg className="w-10 h-10 pl-1 text-gray-800 dark:text-white cursor-pointer filter-icon"
                                              aria-hidden="true"
                                              xmlns="http://www.w3.org/2000/svg" width="40" height="24" fill="none"
                                              viewBox="0 0 24 24">
@@ -306,13 +305,14 @@ function CatalogPage() {
                                                   d="M18.796 4H5.204a1 1 0 0 0-.753 1.659l5.302 6.058a1 1 0 0 1 .247.659v4.874a.5.5 0 0 0 .2.4l3 2.25a.5.5 0 0 0 .8-.4v-7.124a1 1 0 0 1 .247-.659l5.302-6.059c.566-.646.106-1.658-.753-1.658Z"/>
                                         </svg>
                                     </label>
+                                <div className="drawer z-10 flex filter-block pl-2 ">
 
                                     <input ref={drawerToggleRef} id="my-drawer" type="checkbox"
                                            className="drawer-toggle"/>
                                     <div className="drawer-side">
                                         <label htmlFor="my-drawer" aria-label="close sidebar"
                                                className="drawer-overlay"></label>
-                                        <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                                        <div className="menu bg-base-200 text-base-content min-h-full w-80 p-4 drawer-block">
                                             <CanvasFilter drawerToggleRef={drawerToggleRef} category={category}
                                                           gender={gender}
                                                           checkedOptionsColors={checkedOptionsColors}
@@ -487,11 +487,11 @@ function CatalogPage() {
                                 </div>
 
                             </div>
-                            <div className="grid grid-cols-4 mb-10 gap-5 p-10">{productCards}</div>
+                            <div className="grid grid-cols-4 mb-10 gap-5 p-10 prod_cards">{productCards}</div>
                         </div>
                         :
                         <>
-                            <div className='flex flex-col w-full bg-gray-100 items-center my-10'>
+                            <div className='flex flex-col w-full bg-gray-100 items-center my-10 filter-not-found'>
                                 <div className="mx-5 mt-2 text-lg p-5 flex flex-col items-center">
                                     <div>Не найдено товаров удовлетворяющих условиям поиска</div>
                                     <button style={{width: 'auto', maxWidth: 'fit-content'}}

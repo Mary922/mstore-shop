@@ -105,7 +105,7 @@ export default function ProductPage() {
     return (
         <>
             <MainLayout>
-                <div className="grid grid-cols-[400px_1fr] px-5 gap-20 py-10 w-full">
+                <div className="grid grid-cols-[400px_1fr] px-5 gap-20 py-10 w-full prod-one">
                     <div className="flex w-full h-full mx-auto">
                         {
                             images && images.length > 0
@@ -117,7 +117,7 @@ export default function ProductPage() {
                                 ) : null
                         }
                     </div>
-                    <div className="px-4 text-xl ">
+                    <div className="px-4 text-xl prod-one-block">
                         <div className='font-bold'>{currentProduct.product_name}</div>
                         <div><span className='font-bold'>Цена: </span>{currentProduct.price} ₽</div>
                         <div><span className='font-bold'>Цвет: </span> {colors}</div>
@@ -138,8 +138,7 @@ export default function ProductPage() {
                                 : null
 
                         }
-
-                        <div className='flex flex-row'><span>Размер</span>
+                        <div className='flex flex-row prod-one-size'><span className='font-bold'>Размер</span>
                             <div className='flex flex-row gap-2 cursor-pointer'>{sizes}</div>
                         </div>
                         <div className='flex flex-row items-center'>
@@ -151,7 +150,7 @@ export default function ProductPage() {
                                 <button
                                     className="h-10 mt-1 flex justify-center items-center cursor-pointer rounded-md
                                 bg-neutral px-4 py-3 text-center text-sm uppercase text-white
-                                transition duration-200 ease-in-out hover:bg-gray-600"
+                                transition duration-200 ease-in-out hover:bg-gray-600 prod-one-btn mx-12"
                                     onClick={
                                         async () => {
                                             if (!chosenSize) {

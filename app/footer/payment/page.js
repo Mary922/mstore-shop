@@ -6,21 +6,21 @@ export default function PaymentPage() {
     return (
         <>
             <MainLayout>
-                <div className='p-5 mx-60 leading-relaxed'>
-                    <h1>
+                <div className='p-5 mx-60 leading-relaxed mobile:p-2 mobile:mx-2'>
+                    <h1 className='mobile:text-lg'>
                         Оплата
                     </h1>
                     <p>
                         Понравившиеся вещи Вы можете оплатить перечисленными ниже способами:
                     </p>
-                    <h2>
+                    <h2 className='mobile:text-lg'>
                         Наличный расчет
                     </h2>
                     <p>
                         Оплата заказа наличными после примерки возможна в пунктах самовывоза и курьерам. Кроме заказов
                         отправленных Почтой России.
                     </p>
-                    <h2>
+                    <h2 className='mobile:text-lg'>
                         Безналичный расчет
                     </h2>
                     <p>
@@ -55,7 +55,6 @@ export default function PaymentPage() {
                         Данные вашей кредитной карты передаются только в зашифрованном виде и не сохраняются на нашем
                         Web-сервере.
                     </p>
-
                 </div>
             </MainLayout>
         </>

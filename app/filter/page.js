@@ -58,14 +58,13 @@ export default function FilterPage() {
                                 </div>
 
                             </div>
-
-                            <div className="grid grid-cols-4 mb-10 gap-5 p-10">{filteredProducts}</div>
+                            <div className="grid grid-cols-4 mb-10 gap-5 p-10 search-block">{filteredProducts}</div>
                         </div>
                         <div>
                         </div>
                     </>
                     :
-                    <div className='flex flex-col w-full bg-gray-100 items-center my-10'>
+                    <div className='flex flex-col w-full bg-gray-100 items-center my-10 search-not-found'>
                         <div className="mx-5 mt-2 text-lg p-5 flex flex-col items-center">
                             <div>По запросу ничего не найдено</div>
                             <div>Попробуйте задать другие условия поиска</div>

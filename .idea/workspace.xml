@@ -4,22 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="code refactoring 3">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="styles for mobile devices/home page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/wishlist/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/wishlist/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/cart/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cart/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/CarouselComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/CarouselComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/CarouselComponentWithDots.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/CarouselComponentWithDots.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/catalog/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/catalog/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/filter/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/filter/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/footer/about-us/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/about-us/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/footer/delivery/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/delivery/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/footer/exchange-return/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/exchange-return/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/footer/help/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/help/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/footer/offer/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/offer/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/footer/payment/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/payment/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AppFooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AppFooter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/MainLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/MainLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/product/[productId]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/product/[productId]/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/ProductCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/ProductCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ui/navbars/NavbarHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/NavbarHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +135,7 @@
       <workItem from="1746528989347" duration="127000" />
       <workItem from="1746531782255" duration="94180000" />
       <workItem from="1748265780272" duration="40222000" />
+      <workItem from="1748958052835" duration="45252000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -334,7 +337,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748876502447</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="styles for mobile devices/home page">
+      <option name="closed" value="true" />
+      <created>1748958149966</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1748958149966</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,6 +371,7 @@
     <MESSAGE value="code refactoring" />
     <MESSAGE value="code refactoring 2" />
     <MESSAGE value="code refactoring 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="code refactoring 3" />
+    <MESSAGE value="styles for mobile devices/home page" />
+    <option name="LAST_COMMIT_MESSAGE" value="styles for mobile devices/home page" />
   </component>
 </project>

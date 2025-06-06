@@ -6,9 +6,9 @@ export default function OfferPage() {
     return (
         <>
             <MainLayout>
-                <div className="p-5 mx-60 leading-relaxed">
+                <div className="p-5 mx-60 leading-relaxed mobile:p-2 mobile:mx-2">
                     <section>
-                        <h2>
+                        <h2 className='mobile:text-lg'>
                             Предмет соглашения (Пользовательское соглашение)
                         </h2>
                         <div>Предметом настоящего Соглашения является предоставление возможности Пользователю
@@ -24,7 +24,7 @@ export default function OfferPage() {
                     </section>
 
                     <section>
-                        <h2>
+                        <h2 className='mobile:text-lg'>
                             Регистрация на сайт
                         </h2>
                         <div>
@@ -65,7 +65,7 @@ export default function OfferPage() {
                     </section>
 
                     <section>
-                        <h2>
+                        <h2 className='mobile:text-lg'>
                             Товар и порядок совершения покупки
                         </h2>
                         <div>
@@ -123,7 +123,7 @@ export default function OfferPage() {
                     </section>
 
                     <section>
-                        <h2>
+                        <h2 className='mobile:text-lg'>
                             Доставка заказа
                         </h2>
                         <div>
@@ -244,7 +244,7 @@ export default function OfferPage() {
                     </section>
 
                     <section>
-                        <h2>
+                        <h2 className='mobile:text-lg'>
                             Оплата товара
                         </h2>
 
@@ -368,7 +368,7 @@ export default function OfferPage() {
                     </section>
 
                     <section>
-                        <h2>
+                        <h2 className='mobile:text-lg'>
                             Возврат Товара надлежащего качества
                         </h2>
                         <div>

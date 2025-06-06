@@ -139,12 +139,12 @@ export default function CartPage() {
                 total += item.product_count * product.price;
 
                 return (
-                    <div key={item.id} className='flex flex-row mb-2'>
+                    <div key={item.id} className='flex flex-row mb-2 cart-list-all'>
                         <div>
                             <img className={'w-36 h-auto p-2'} src={`${baseUrl}/${product.Images[0].image_path}`}/>
                         </div>
 
-                        <div className={'flex flex-col ml-5 text-base w-full p-1 justify-around'}>
+                        <div className={'flex flex-col ml-5 text-base w-full p-1 justify-around cart-prod-info'}>
                             <div className='flex justify-between'>
                                 <div className='font-bold mb-5'>{product.product_name}</div>
                                 <div className='cursor-pointer font-bold'
@@ -163,7 +163,7 @@ export default function CartPage() {
                             <div><span className='text-gray-500 mr-2'>Цена</span> {product.price}</div>
                             <div><span className='text-gray-500 mr-2'>Размер</span> {item.product_size}</div>
 
-                            <div className="join border border-base-300 rounded-full flex items-center justify-center">
+                            <div className="join border border-base-300 rounded-full flex items-center justify-center cart-plus-minus">
                                 <button
                                     className="join-item btn btn-ghost text-xl w-12 h-12 min-h-0"
                                     onClick={() => decreaseCount(product.product_id, item.product_size)
@@ -206,14 +206,14 @@ export default function CartPage() {
     return (
         <>
             <MainLayout>
-                <div className="flex gap-20 w-full">
+                <div className="w-full max-w-full overflow-x-hidden px-2">
                     <div
-                        className="p-4 w-[1400px]"
+                        className="p-4 max-w-full w-full cart-main"
                     >
                         {
                             cart && cart.length > 0 ?
                                 <>
-                                    <div className='w-full mr-16'>
+                                    <div className='w-full'>
                                         <div className="flex flex-row gap-3 h-12 mb-3">
                                             <div
                                                 className='h-8 card p-2 mb-10 shadow-lg text-neutral w-full flex  items-center justify-center bg-neutral-content'>

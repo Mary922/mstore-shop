@@ -7,8 +7,8 @@ export default function AboutUsPage() {
     return (
         <>
             <MainLayout>
-                <div className='mx-60 p-5 leading-relaxed'>
-                    <h1>Manyasha Store – лучшее для самых любимых!</h1>
+                <div className='mx-60 p-5 leading-relaxed mobile:p-2 mobile:mx-2'>
+                    <h1 className='mobile:text-lg'>Manyasha Store – лучшее для самых любимых!</h1>
                     <div>Одевайте детей красиво с Manyasha Store!
 
                         Одежда для малышей от Manyasha Store — лучшее с первого дня жизни! Красота, комфорт и любовь к

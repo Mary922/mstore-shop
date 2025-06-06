@@ -8,7 +8,7 @@ import {authTemp} from "@/app/lib/api/auth";
 
 const ReduxLoader = () => {
     const dispatch = useAppDispatch();
-    const cartList = useAppSelector((state) => state.cart.cart);
+    // const cartList = useAppSelector((state) => state.cart.cart);
 
     let tempClient;
     let client;
@@ -46,6 +46,7 @@ const ReduxLoader = () => {
                     localStorage.setItem('temp-client', result?.data?.accessToken);
                 }
                 if (client) {
+                    console.log('im constant')
                     const parsedClient = JSON.parse(client);
                     const token = parsedClient.accessToken;
 
@@ -56,6 +57,8 @@ const ReduxLoader = () => {
                         await dispatch(getCartThunk(clientId));
                         await dispatch(wishlistGetThunk());
                     }
+                } else if (tempClient) {
+                    dispatch(getCartThunk(tempClient));
                 }
             } catch (error) {
                 if (error.response?.status === 401) {
