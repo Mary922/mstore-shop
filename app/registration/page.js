@@ -105,8 +105,9 @@ function RegistrationPage() {
         if (!/^[a-zA-Zа-яё\s\-]+$/i.test(values.surname)) {
             errors.surname = 'Фамилия должна содержать только русские буквы, пробелы и дефисы.';
         }
-        if (values.phone.length < 10) {
-            errors.phone = 'Номер телефона слишком короткий.';
+        const phoneDigits = values.phone.replace(/\D/g, '');
+        if (phoneDigits.length < 11) {
+            errors.phone = 'Номер телефона должен содержать 11 цифр.';
         }
         if (!values.email || !validator.isEmail(values.email)) {
             errors.email = 'Некорректный адрес электронной почты.';
@@ -114,15 +115,27 @@ function RegistrationPage() {
         if (!values.password || values.password.trim().length < 8) {
             errors.password = 'Пароль должен содержать минимум 8 символов.';
         }
-        const today = moment();
-        const birthDay = moment(values.birthday);
+        const today = moment().format('YYYY-MM-DD');
+        const birthDay = moment(values.birthday,'YYYY-MM-DD',true);
         if (!values.birthday) {
             errors.birthday = 'Укажите дату рождения.';
-        } else if (birthDay.isAfter(today)) {
-            errors.birthday = 'Дата рождения не может быть больше текущей даты.';
+        }
+        else if (!birthDay.isValid()) {
+            errors.birthday = 'Некорректный формат даты.';
+        }
+        else if (birthDay.isSameOrAfter(today,'day')) {
+            errors.birthday = 'Дата рождения должна быть раньше сегодняшнего дня.';
         }
         return errors;
     }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        formik.handleChange(e);
+        setErrorForm(prev => ({
+            ...prev,
+            [name]: false
+        }));
+    };
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -138,14 +151,25 @@ function RegistrationPage() {
     })
 
     const registerClient = async () => {
-        const formikErrors = formik.errors;
+        await formik.validateForm();
 
-        if (Object.keys(formikErrors).length > 0) {
-            if (formikErrors.name || formikErrors.surname || formikErrors.phone || formikErrors.email || formikErrors.password || formikErrors.birthday) {
-                toast.error(formikErrors.name || formikErrors.surname || formikErrors.phone || formikErrors.email || formikErrors.password || formikErrors.birthday)
-            }
-            return;
+        const errors = validate(formik.values);
+        if (Object.keys(errors).length > 0) {
+            setErrorForm({
+                name: !!errors.name,
+                surname: !!errors.surname,
+                phone: !!errors.phone,
+                email: !!errors.email,
+                password: !!errors.password,
+                birthday: !!errors.birthday,
+            });
+
+        const firstError = Object.values(errors).find(error => error);
+        if (firstError) {
+            toast.error(firstError);
         }
+        return;
+    }
 
         try {
             if (tempClient) {
@@ -160,13 +184,15 @@ function RegistrationPage() {
                         tempClientToken: tempClient,
                     });
 
-                if (result.success === true) {
+                if (result?.success === true) {
                     setValidationPassword(true);
                 } else {
-                    toast.error(result.message);
+                    console.log('imhere');
+                    toast.error('Пользователь с таким email уже существует.');
                 }
             } else {
-                toast.error('Вы уже зарегистрированы');
+                console.log('its error');
+
             }
 
         } catch (error) {
@@ -186,28 +212,34 @@ function RegistrationPage() {
                 birthday: formik.values.birthday,
                 tempClientToken: tempClient,
             })
-            if (result.success === true) {
+            if (result?.success === true) {
                 setValidationPassword(false);
                 toast('Вы успешно зарегистрированы!', {
                     icon: '👏',
                 });
+                setValidationPasswordValue('');
                 setTimeout(() => {
                     router.push('/');
                 }, 2000)
 
                 const authMode = await Auth({email: formik.values.email, password: formik.values.password});
 
-                if (authMode.success) {
+                if (authMode?.success) {
                     setValidationPassword(true);
                 }
-                if (authMode.success) {
+                if (authMode?.success) {
                     localStorage.removeItem('temp-client');
                     localStorage.setItem('client', JSON.stringify(authMode.data));
                 }
-            } else if (result.success === false && result.status === 403) {
+            } else if (result?.success === false && result?.status === 403) {
+                toast.error('Пароль действует 5 минут. Запросите пароль еще раз.');
                 setValidationPassword(false);
                 setValidationPasswordValue('');
                 setRepeatRequestPassword(true);
+            } else {
+                toast.error('Неправильный пароль.');
+                setValidationPassword(false);
+                setValidationPasswordValue('');
             }
         } catch (error) {
             console.log(error);
@@ -226,7 +258,7 @@ function RegistrationPage() {
         try {
             const result = await resetPasswordRequest(emailForgot);
 
-            if (result.success) {
+            if (result?.success) {
                 setForgotPassword(false);
                 setEmailForgot('');
                 toast.success('Проверьте почту для восстановления пароля');
@@ -239,8 +271,8 @@ function RegistrationPage() {
     return (
         <>
             <MainLayout>
-                    <div className="container mx-auto my-10 text-lg">
-                        <div className="flex flex-row justify-center gap-4">
+                    <div className="container mx-auto my-10 text-lg auth">
+                        <div className="flex flex-row justify-center gap-4 auth-block">
                             <div className="w-full shadow-xl">
                                 <div className="p-10">
                                     <h2>ВХОД</h2>
@@ -316,7 +348,7 @@ function RegistrationPage() {
 
                                                     </div>
                                                 </div>
-                                                <div className='flex flex-row w-full gap-2 items-center justify-center'>
+                                                <div className='flex flex-row w-full gap-2 items-center justify-center forgot-password'>
                                                     <input className='input input-bordered input-sm flex-1 min-w-0'
                                                            value={emailForgot}
                                                            onChange={(e) => setEmailForgot(e.target.value)}
@@ -353,7 +385,7 @@ function RegistrationPage() {
                                                        type="text"
                                                        name="name"
                                                        value={formik.values.name}
-                                                       onChange={formik.handleChange}
+                                                       onChange={handleChange}
                                                        onBlur={formik.handleBlur}
                                                        className={classes.name}
                                                        placeholder="Имя" required
@@ -374,7 +406,7 @@ function RegistrationPage() {
                                                        type="text"
                                                        name="surname"
                                                        value={formik.values.surname}
-                                                       onChange={formik.handleChange}
+                                                       onChange={handleChange}
                                                        onBlur={formik.handleBlur}
                                                        className={classes.surname}
                                                        placeholder="Фамилия" required
@@ -400,6 +432,10 @@ function RegistrationPage() {
                                                     className={classes.phone}
                                                     onValueChange={values => {
                                                         formik.setFieldValue('phone', values.value);
+                                                        setErrorForm(prevState => ({
+                                                            ...prevState,
+                                                            phone: false
+                                                        }))
                                                     }}
                                                 />
                                             </label>
@@ -470,29 +506,33 @@ function RegistrationPage() {
                                                         setTouched: formik.setTouched
                                                     }}/>
                                             </label>
-                                            <button
-                                                className='h-10 mt-3 flex justify-center items-center cursor-pointer rounded-md
+                                            {
+                                                !validationPassword ?
+                                                    <button
+                                                        className='h-10 mt-3 flex justify-center items-center cursor-pointer rounded-md
                                 bg-primary px-4 py-3 text-center text-sm font-semibold uppercase text-white
                                 transition duration-200 ease-in-out hover:bg-gray-900' onClick={registerClient}>
-                                                Регистрация
-                                            </button>
+                                                        Регистрация
+                                                    </button> : ''
+                                            }
+
                                             {
                                                 validationPassword ?
                                                     <>
                                                         <div>Код подтверждения:</div>
                                                         <input
                                                             type='text'
-                                                            className='input input-bordered'
+                                                            className='input input-bordered input-sm mb-1'
                                                             value={validationPasswordValue}
                                                             onChange={(event) => setValidationPasswordValue(event.target.value)}/>
                                                         <button className='btn btn-primary text-white text-lg'
-                                                                onClick={checkValidationPassword}>ok
+                                                                onClick={checkValidationPassword}>Подтвердить
                                                         </button>
                                                     </>
                                                     : null
                                             }
                                             {
-                                                repeatRequestPassword ? <div onClick={async () => {
+                                                repeatRequestPassword ? <div className='cursor-pointer' onClick={async () => {
                                                     setValidationPassword(true);
                                                     setRepeatRequestPassword(false);
                                                     await registerClient();

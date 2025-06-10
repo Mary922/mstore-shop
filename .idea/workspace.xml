@@ -4,24 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="styles for mobile devices/home page">
+    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="styles for mobile devices/2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/cart/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cart/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/account/account-addresses/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-addresses/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/account/account-info/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-info/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/account/account-navibar.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-navibar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/account/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/account/my-account/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/my-account/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/account/orders/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/orders/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/account/wishlist/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/wishlist/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/catalog/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/catalog/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/filter/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/filter/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/about-us/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/about-us/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/delivery/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/delivery/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/exchange-return/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/exchange-return/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/help/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/help/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/offer/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/offer/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/footer/payment/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/footer/payment/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/common/CarouselComponentWithDots.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/CarouselComponentWithDots.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/common/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/Pagination.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/product/[productId]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/product/[productId]/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/registration/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/registration/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/AccountForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AccountForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/AddressForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AddressForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/AuthorizationForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AuthorizationForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ui/ProductCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/ProductCard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/modals/ConfirmModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/modals/ConfirmModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/navbars/NavbarHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/NavbarHeader.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +138,7 @@
       <workItem from="1746528989347" duration="127000" />
       <workItem from="1746531782255" duration="94180000" />
       <workItem from="1748265780272" duration="40222000" />
-      <workItem from="1748958052835" duration="45252000" />
+      <workItem from="1748958052835" duration="69304000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -345,7 +348,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748958149966</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="styles for mobile devices/2">
+      <option name="closed" value="true" />
+      <created>1749233028605</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1749233028605</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,6 +383,7 @@
     <MESSAGE value="code refactoring 2" />
     <MESSAGE value="code refactoring 3" />
     <MESSAGE value="styles for mobile devices/home page" />
-    <option name="LAST_COMMIT_MESSAGE" value="styles for mobile devices/home page" />
+    <MESSAGE value="styles for mobile devices/2" />
+    <option name="LAST_COMMIT_MESSAGE" value="styles for mobile devices/2" />
   </component>
 </project>

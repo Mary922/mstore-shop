@@ -49,7 +49,7 @@ const CarouselComponentWithDots = ({paths, staticPaths, imageClassName, containe
                     )}
                 </div>
 
-                <div className="absolute bottom-12 left-0 right-0 z-10">
+                <div className="absolute bottom-12 left-0 right-0 z-10 carousel-dots">
                     <div className="flex justify-center gap-3">
                         {items.map((_, index) => (
                             <button

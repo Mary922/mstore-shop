@@ -8,8 +8,8 @@ import {resetPasswordRequest} from "@/app/lib/api/forgotPassword";
 const AuthorizationForm = ({clientId, tempClient}) => {
 
     const [error, setError] = useState(null);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('mary_k_92@mail.ru');
+    const [password, setPassword] = useState('fsdnlkmslkdfDSF3');
     const [forgotPassword, setForgotPassword] = useState(false);
     const [emailForgot, setEmailForgot] = useState('');
 
@@ -64,7 +64,7 @@ const AuthorizationForm = ({clientId, tempClient}) => {
         } else {
             const result = await resetPasswordRequest(emailForgot);
 
-            if (result.success) {
+            if (result?.success) {
                 setForgotPassword(false);
                 setEmailForgot('');
             }
@@ -75,7 +75,7 @@ const AuthorizationForm = ({clientId, tempClient}) => {
         <>
             <ul
                 tabIndex={0}
-                className="menu dropdown-content mt-7 mr-20 rounded-box w-96 z-[100] shadow p-2.5 bg-neutral-content">
+                className="menu dropdown-content mt-7 mr-20 rounded-box w-96 z-[100] shadow p-2.5 bg-neutral-content dropdown-auth">
                 <div className="flex flex-row justify-between">
                     <li><a className="link link-hover text-base text-neutral" href={'/registration'}>Создать аккаунт</a>
                     </li>
@@ -134,7 +134,7 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                 <button
                     className="btn h-10 mt-3 flex justify-center items-center cursor-pointer rounded-md
                                 bg-primary px-4 py-3 text-center text-sm font-semibold uppercase text-white
-                                transition duration-200 ease-in-out hover:bg-gray-900" onClick={checkClient}>
+                                transition duration-200 ease-in-out hover:bg-gray-900 dropdown-btn-auth" onClick={checkClient}>
                     Авторизоваться
                 </button>
                 {

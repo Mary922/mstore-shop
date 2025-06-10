@@ -37,7 +37,7 @@ export default function MyAccountPage() {
 
     return (
         <>
-            <div className='flex flex-col text-xl'>
+            <div className='flex flex-col text-xl account-main'>
                 <div>Добро пожаловать, <span className='font-bold'>{authLabel}</span> (не <span
                     className='font-bold'>{authLabel}?</span> <a href={'/home'}
                                                                  className='cursor-pointer link-hover text-info text-lg'
@@ -47,7 +47,7 @@ export default function MyAccountPage() {
                     также изменить пароль и основную информацию.
                 </div>
 
-                <div className="grid grid-cols-3 gap-5 mt-5">
+                <div className="grid grid-cols-3 gap-5 mt-5 account-main-links">
                     <Link href="/account/orders" className="no-underline text-inherit">
                         <div className="w-auto h-48 border-solid flex flex-col items-center justify-center
                     font-bold hover:bg-gray-200 hover:font-light cursor-pointer transition-colors duration-200 ease-in-out border-gray-200 border-2">

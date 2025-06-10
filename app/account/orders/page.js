@@ -60,7 +60,7 @@ export default function OrdersPage() {
         <>
             {
                 orders && orders.length > 0 ?
-                    <div className="w-full flex flex-col items-center justify-between ">
+                    <div className="w-full flex flex-col items-center justify-between account-main-orders">
                         <table className="table">
                             <thead>
                             <tr>
@@ -73,7 +73,7 @@ export default function OrdersPage() {
                             </tbody>
                         </table>
 
-                        <div className='w-full flex justify-center mt-4'>
+                        <div className='w-full flex justify-center mt-4 orders-pag'>
                             <PagData
                                 data={orders}
                                 itemsPerPage={ITEMS_PER_PAGE}
@@ -82,7 +82,7 @@ export default function OrdersPage() {
                             /></div>
                     </div>
                     :
-                    <div className="flex flex-col items-center justify-center w-full">
+                    <div className="flex flex-col items-center justify-center w-full main-orders-not-exist">
                         <h1>У вас пока нет заказов</h1>
                         <div>Чтобы добавить товары перейдите в каталог
                         </div>

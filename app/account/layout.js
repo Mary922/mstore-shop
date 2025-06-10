@@ -7,7 +7,7 @@ export default function Layout({children}) {
             <MainLayout>
 
                 <AccountNavBar/>
-                <main className="flex gap-10 p-5 bg-base-100 w-full">
+                <main className="flex gap-10 p-5 bg-base-100 w-full account-main">
                     {children}
                 </main>
             </MainLayout>

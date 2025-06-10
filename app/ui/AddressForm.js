@@ -148,7 +148,7 @@ const AddressForm = ({setAddressIsAdded, id}) => {
     return (
         <>
             <form onSubmit={formik.handleSubmit}>
-                <div className="card bg-base-200 w-full items-center px-5 gap-3">
+                <div className="card bg-base-200 w-full items-center px-5 gap-3 account-main-address-form">
                     <div className="card-body w-full">
                         <div className="w-full">
                             <label className="form-control w-full max-w-xs">

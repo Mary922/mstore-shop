@@ -124,7 +124,7 @@ const ProductCard = ({id, text, images, price, isOpen, onClickBtn}) => {
     return (
         <>
             <div className="card shadow-xl z-0 group relative card-shadow prod-card">
-                <div className="cursor-pointer" onClick={(event) => {
+                <div className="cursor-pointer card-image-block" onClick={(event) => {
                     event.stopPropagation();
                 }}>
                     {
@@ -132,16 +132,15 @@ const ProductCard = ({id, text, images, price, isOpen, onClickBtn}) => {
                             ?
                             <>
                                 <Link href={`/product/${id}`}>
-                                    <div><CarouselComponentWithDots paths={imagePathsInCarousel}
+                                    <div className='carousel-with-dots'><CarouselComponentWithDots paths={imagePathsInCarousel}
                                     /></div>
                                 </Link>
                             </>
                             : null
                     }
                 </div>
-
                 <div
-                    className="absolute -top-2 right-12 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                    className="absolute -top-2 right-12 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10 prod-heart">
                     <h1>
                         <i className={classes.heart} onClick={async (event) => {
                             event.stopPropagation();

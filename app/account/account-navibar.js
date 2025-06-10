@@ -16,7 +16,7 @@ export default function AccountNavBar() {
 
     return (
         <>
-            <div className="navbar flex flex-col w-96">
+            <div className="navbar flex flex-col w-96 account-navbar">
                 <a href={'/account/my-account'} className="text-xl link-hover text-neutral pt-5">Мой кабинет</a>
                 <div className="divider my-2 border-2 border-black border-opacity-30"></div>
                 <div className="navbar-center">
@@ -35,7 +35,7 @@ export default function AccountNavBar() {
                                className={`link-hover text-lg ${pathname === '/account/wishlist' ? 'active text-primary' : 'text-neutral'}`}
                         >
                             Избранное</a></li>
-                        <li><a href={'/home'} onClick={logOut} className='link-hover text-info text-lg'>Выйти</a></li>
+                        <li><a href={'/'} onClick={logOut} className='link-hover text-info text-lg'>Выйти</a></li>
                     </ul>
                 </div>
             </div>

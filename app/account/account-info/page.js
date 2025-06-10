@@ -83,7 +83,7 @@ export default function AccountInfoPage() {
 
     return (
         <>
-            <div className='flex flex-row w-96 gap-4'>
+            <div className='flex flex-row w-96 gap-4 account-main-info'>
                 <div className="flex flex-col gap-4 w-full">
                     <label className="flex items-center gap-2">
                         <div className="w-5">

@@ -72,14 +72,14 @@ const AuthHeader = () => {
                         : null}
                 </div>
 
-                <div className="navbar-end">
-                    <div className='text-lg mr-1'>{authLabel}</div>
+                <div className="navbar-end navbar-end-auth mr-6">
+                    <div className='text-lg mr-1 auth-label'>{authLabel}</div>
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0}
                              role="button"
-                             className="flex flex-row btn-circle avatar cursor-pointer mr-5 mobile:mr-0"
+                             className="flex flex-row btn-circle avatar cursor-pointer mr-5"
                         >
-                            <div className="w-12 rounded-full mobile:w-8">
+                            <div className="w-12 rounded-full">
                                 <svg className="w-full h-full text-gray-800 dark:text-white" aria-hidden="true"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                      viewBox="0 0 24 24">

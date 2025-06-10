@@ -48,7 +48,7 @@ export default function AccountAddressesPage() {
     let addressesList = [];
     addresses.map((address) => {
         addressesList.push(
-            <div className="card bg-base-100" key={address.address_id}>
+            <div className="card bg-base-100 bg-gray-100" key={address.address_id}>
                 <div className="card-body flex flex-col p-2 justify-between">
                     <div className='flex flex-col'>
                         <div className='flex flex-row items-center'>
@@ -99,13 +99,13 @@ export default function AccountAddressesPage() {
                     {
                         addressIsAdded ?
                             <>
-                                <div className='flex flex-row w-full'>
+                                <div className='flex flex-row w-full addresses'>
                                     <AddressForm setAddressIsAdded={setAddressIsAdded} id={clientId}/>
                                     <button onClick={
                                         async () => {
                                             setAddressIsAdded(false);
                                         }}
-                                            className='cursor-pointer btn btn-ghost ml-10 flex items-center text-lg'>Закрыть
+                                            className='cursor-pointer btn btn-ghost ml-10 flex items-center text-lg close-btn'>Закрыть
                                     </button>
                                 </div>
                             </>
@@ -113,7 +113,7 @@ export default function AccountAddressesPage() {
                     }
 
                 </div>
-                <div className='grid grid-cols-3 gap-3'>
+                <div className='grid grid-cols-3 gap-3 account-main-addresses'>
                     {addressesList}
                 </div>
             </div>

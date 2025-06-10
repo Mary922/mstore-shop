@@ -14,23 +14,23 @@ const AccountForm = () => {
     }
     return (
         <>
-            <button className="btn btn-ghost btn-circle">
-                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                     viewBox="0 0 24 24">
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                </svg>
-            </button>
+            {/*<button className="btn btn-ghost btn-circle">*/}
+            {/*    <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"*/}
+            {/*         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"*/}
+            {/*         viewBox="0 0 24 24">*/}
+            {/*        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"*/}
+            {/*              strokeWidth="2"*/}
+            {/*              d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>*/}
+            {/*    </svg>*/}
+            {/*</button>*/}
             <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-neutral-content rounded-box z-[5] -mt-4 mr-2 w-52 p-2 shadow-lg">
-                <li className='flex flex-row items-center'>
-                    <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                className="menu menu-sm dropdown-content bg-neutral-content rounded-box z-[5] w-52 p-2 shadow-lg dropdown-account">
+                <li className='flex flex-row items-center '>
+                    <svg className="w-6 h-6 text-gray-800 dark:text-white " aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                          viewBox="0 0 24 24">
-                        <path fillRule="evenodd"
+                        <path fill="evenodd"
                               d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm10 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-8-5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm1.942 4a3 3 0 0 0-2.847 2.051l-.044.133-.004.012c-.042.126-.055.167-.042.195.006.013.02.023.038.039.032.025.08.064.146.155A1 1 0 0 0 6 17h6a1 1 0 0 0 .811-.415.713.713 0 0 1 .146-.155c.019-.016.031-.026.038-.04.014-.027 0-.068-.042-.194l-.004-.012-.044-.133A3 3 0 0 0 10.059 14H7.942Z"
                               clipRule="evenodd"/>
                     </svg>

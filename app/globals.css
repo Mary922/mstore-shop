@@ -241,7 +241,11 @@ body {
 
 @media only screen and (max-width: 640px) {
     .prod_cards.grid.grid-cols-4 {
-        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin: 0;
+        padding: 0;
+        gap: 0.5rem;
+        margin-bottom: 20px;
     }
 }
 
@@ -255,6 +259,7 @@ body {
     .navbar-top {
         margin: 0;
         padding: 0;
+        display: flex;
     }
     .nav-logo{
         margin: 10px;
@@ -328,6 +333,12 @@ body {
         flex-direction: column;
         gap: 1px;
     }
+    .prod-one .carousel-dots{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 50px;
+    }
     .prod-one-block{
         display:  flex;
         flex-direction: column;
@@ -350,7 +361,6 @@ body {
             display: grid;
             grid-template-rows: 4fr;
         }
-
     }
 }
 @media (max-width: 640px) {
@@ -375,6 +385,12 @@ body {
         width: 100vw !important;
         max-width: 100% !important;
         overflow-x: hidden !important;
+    }
+    .main-container .container-carousel .carousel-dots{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 20px;
     }
 
     .main-container {
@@ -556,11 +572,36 @@ body {
         font-weight: 500;
         margin: 0;
     }
+    .card-image-block {
+        width:  100%;
+        padding: 0;
+        margin: 0;
+    }
+    .card-image-block img,
+    .card-image-block .carousel-container,
+    .card-image-block .carousel-slide {
+        width: 100% !important;
+        height: auto;
+        object-fit: cover;
+    }
+    .prod-heart{
+        top: -15px;
+        right: 22px;
+    }
+    .carousel-with-dots{
+        height: 220px;
+    }
+    .carousel-dots{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 200px;
+    }
 }
 @media (max-width: 640px) {
     .filter-icon{
         width: 30px;
-        padding-left: 1rem;
+        padding-left: 0;
     }
     .filter-block{
         display: grid;
@@ -585,8 +626,6 @@ body {
     }
 }
 @media (max-width: 640px) {
-    .cart-block{
-    }
     .cart-main{
         padding: 0;
     }
@@ -603,7 +642,6 @@ body {
         width: 80%;
         align-items:  center;
         justify-content: center;
-        /*background-color: blue;*/
         margin: 0;
         padding: 0;
     }
@@ -624,4 +662,175 @@ body {
         width: 1400px;
     }
 }
+@media (max-width: 640px) {
+    .modal-box {
+        margin: 0 16px;
+        width: 100%;
+        border-radius: 1rem;
+    }
 
+    .modal {
+        display: flex;
+        width: auto;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+}
+@media (max-width: 640px) {
+    .dropdown-auth{
+        width:  100%;
+        padding: 1rem;
+        top: 35px;
+            hr {
+                display: none;
+            }
+            a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            svg {
+               /*display: none;*/
+            }
+        .dropdown-btn-auth{
+            width: 100%;
+        }
+    }
+}
+@media (max-width: 640px) {
+    .auth {
+        margin-top: 0;
+    }
+    .auth-block {
+        display: flex;
+        flex-direction: column;
+    }
+    .forgot-password{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+            input,button {
+                width: 100%;
+            }
+    }
+}
+@media (max-width: 640px) {
+    .navbar-end-auth .auth-label{
+        display:  none;
+    }
+    .navbar-end-auth{
+        margin: 0;
+        padding: 0;
+    }
+    .navbar-end-auth .dropdown-end .btn-circle {
+        display: flex;
+        margin-right: 10px;
+    }
+}
+@media (max-width: 640px) {
+    .dropdown-account {
+        width: auto;
+        top: 50px;
+        margin-right: -10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+    .account-navbar{
+        width: auto;
+            a {
+                font-size: 12px;
+            }
+    }
+    .account-main{
+        font-size: 12px;
+    }
+    .account-main-links{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+            svg {
+                width: 50%;
+
+            }
+            div {
+                height: auto;
+            }
+    }
+    .account-main-info{
+        width: 220px;
+    }
+    .account-main-orders{
+        width: 220px;
+
+    }
+    .account-main-orders .orders-pag {
+        width: 250px;
+        overflow: hidden;
+    }
+    .pagination-text{
+        font-size: 12px;
+    }
+    .pagination-button {
+        padding: 0.5rem;
+    }
+    .account-main-addresses{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .account-main-address-form{
+        width: 240px;
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+        margin-bottom:  0.5rem;
+        padding-bottom: 0;
+        padding-top: 0;
+            input {
+                width: auto;
+            }
+    }
+    .addresses{
+        display: flex;
+        flex-direction: column;
+
+    }
+    .addresses .close-btn {
+        position: absolute;
+        right: 0px;
+        font-weight: normal;
+        font-size: 1rem;
+        color: grey;
+    }
+    .account-main-wish-prods{
+        display: flex;
+        flex-direction: column;
+    }
+    .wish-prod div {
+        margin: 0;
+        padding: 0;
+    }
+    .wish-prod .wish-price {
+        margin: 0;
+    }
+    .wish-prod button {
+        margin-bottom: 10px;
+    }
+    .wish-prod img {
+        width: 150px;
+        height: auto;
+        padding: 0;
+        background-color: chartreuse;
+    }
+    .main-orders-not-exist {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+    }
+}
+@media (min-width: 1024px) {
+    .dropdown-account {
+        top: 70px;
+        margin-right: -15px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+}

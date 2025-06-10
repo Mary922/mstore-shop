@@ -46,7 +46,6 @@ const ReduxLoader = () => {
                     localStorage.setItem('temp-client', result?.data?.accessToken);
                 }
                 if (client) {
-                    console.log('im constant')
                     const parsedClient = JSON.parse(client);
                     const token = parsedClient.accessToken;
 
