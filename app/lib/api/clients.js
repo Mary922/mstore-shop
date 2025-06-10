@@ -1,17 +1,17 @@
 import {Request} from "./request";
+import {BASE_URL} from "@/config";
 
 
-let baseURL = 'http://127.0.0.1:3001';
 
 export const getClient = (id) => {
-    let result = Request.post(`${baseURL}/client`, {
+    let result = Request.post(`${BASE_URL}/client`, {
         clientId: id,
     });
     return result;
 }
 
 export const updateClient = (data) => {
-    let result = Request.post(`${baseURL}/client/update`, {
+    let result = Request.post(`${BASE_URL}/client/update`, {
         client: data,
     });
     return result;

@@ -1,9 +1,10 @@
 import {Request} from "./request";
+import {BASE_URL} from "@/config";
 
-let baseURL = 'http://127.0.0.1:3001';
+
 
 export const makeOrder = (orderInfo, cart, orderSum) => {
-    let result = Request.post(`${baseURL}/order/create`, {
+    let result = Request.post(`${BASE_URL}/order/create`, {
         order: orderInfo,
         cart: cart,
         orderSum: orderSum
@@ -12,7 +13,7 @@ export const makeOrder = (orderInfo, cart, orderSum) => {
 }
 
 export const getOrders = (clientId, limit, offset) => {
-    let result = Request.post(`${baseURL}/orders/get`, {
+    let result = Request.post(`${BASE_URL}/orders/get`, {
         clientId: clientId,
         limit: limit,
         offset: offset
@@ -21,7 +22,7 @@ export const getOrders = (clientId, limit, offset) => {
 }
 
 export const getOrderById = (orderId) => {
-    let result = Request.post(`${baseURL}/order/get`, {
+    let result = Request.post(`${BASE_URL}/order/get`, {
         orderId: orderId,
     });
     return result;

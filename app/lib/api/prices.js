@@ -1,8 +1,8 @@
 import {Request} from "./request";
+import {BASE_URL} from "@/config";
 
-let baseURL = 'http://127.0.0.1:3001';
 
 export const getMaxPrice = () => {
-    let result = Request.get(`${baseURL}/prices/max`);
+    let result = Request.get(`${BASE_URL}/prices/max`);
     return result;
 }

@@ -1,9 +1,10 @@
 import {Request} from "./request";
+import {BASE_URL} from "@/config";
 
-let baseURL = 'http://127.0.0.1:3001';
+
 
 export const Auth = async (data) => {
-    let result = await Request.post(`${baseURL}/auth`, data)
+    let result = await Request.post(`${BASE_URL}/auth`, data)
     console.log('auth result request', result);
     return result;
 }
@@ -33,12 +34,12 @@ export const authHeader = () => {
 }
 
 export const authTemp = async () => {
-    let result = await Request.post(`${baseURL}/auth-temp`)
+    let result = await Request.post(`${BASE_URL}/auth-temp`)
     return result;
 }
 
 export const CheckValidationPassword = async (data) => {
-    let result = await Request.post(`${baseURL}/auth-password/check`, data)
+    let result = await Request.post(`${BASE_URL}/auth-password/check`, data)
     return result;
 }
 

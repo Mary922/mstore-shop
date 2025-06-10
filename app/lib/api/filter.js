@@ -1,10 +1,9 @@
 import {Request} from "./request";
+import {BASE_URL} from "@/config";
 
-
-let baseURL = 'http://127.0.0.1:3001';
 
 export const getFilterParams = () => {
-    let result = Request.get(`${baseURL}/filter/get`);
+    let result = Request.get(`${BASE_URL}/filter/get`);
     return result;
 }
 
@@ -42,7 +41,7 @@ export const applyFilterParams = (category, gender, minRangeValue, maxRangeValue
         params.append('maxRangeValue', maxRangeValue);
     }
 
-    let result = Request.get(`${baseURL}/filter/products?${params.toString()}`);
+    let result = Request.get(`${BASE_URL}/filter/products?${params.toString()}`);
     return result;
 }
 

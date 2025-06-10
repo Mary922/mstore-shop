@@ -1,16 +1,17 @@
 import {Request} from "./request";
+import {BASE_URL} from "@/config";
 
-let baseURL = 'http://127.0.0.1:3001';
+
 
 export const getCart = (cart) => {
-    let result = Request.post(`${baseURL}/cart`, {
+    let result = Request.post(`${BASE_URL}/cart`, {
         cart: cart
     })
     return result;
 }
 
 export const getCartPreOrder = (cart, sum) => {
-    let result = Request.post(`${baseURL}/preorder`, {
+    let result = Request.post(`${BASE_URL}/preorder`, {
         cart: cart,
         sum: sum
     })
@@ -18,7 +19,7 @@ export const getCartPreOrder = (cart, sum) => {
 }
 
 export const addProductToCart = (data) => {
-    let result = Request.post(`${baseURL}/cart/add`, {
+    let result = Request.post(`${BASE_URL}/cart/add`, {
         cart: data
     })
     return result;
@@ -26,7 +27,7 @@ export const addProductToCart = (data) => {
 
 
 export const getCurrentCart = (clientId) => {
-    let result = Request.post(`${baseURL}/cart/get`, {
+    let result = Request.post(`${BASE_URL}/cart/get`, {
         clientId: clientId,
     });
     return result;
@@ -36,7 +37,7 @@ export const deleteProduct = (productId, sizeId) => {
     console.log('req', productId, sizeId);
 
 
-    let result = Request.post(`${baseURL}/cart/delete`, {
+    let result = Request.post(`${BASE_URL}/cart/delete`, {
         productId: productId,
         sizeId: sizeId
     });
@@ -44,20 +45,20 @@ export const deleteProduct = (productId, sizeId) => {
 }
 
 export const increaseCountInCart = (data) => {
-    let result = Request.post(`${baseURL}/cart/increase`, {
+    let result = Request.post(`${BASE_URL}/cart/increase`, {
         data: data
     });
     return result;
 }
 export const decreaseCountInCart = (data) => {
-    let result = Request.post(`${baseURL}/cart/decrease`, {
+    let result = Request.post(`${BASE_URL}/cart/decrease`, {
         data: data
     });
     return result;
 }
 
 export const clearCart = (clientId) => {
-    let result = Request.post(`${baseURL}/cart/clear`, {
+    let result = Request.post(`${BASE_URL}/cart/clear`, {
         clientId: clientId,
     });
     return result;

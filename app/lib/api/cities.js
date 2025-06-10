@@ -1,10 +1,9 @@
 import {Request} from "./request";
+import {BASE_URL} from "@/config";
 
-
-let baseURL = 'http://127.0.0.1:3001';
 
 export const getCities = (regionId) => {
-    let result = Request.post(`${baseURL}/cities`, {
+    let result = Request.post(`${BASE_URL}/cities`, {
         regionId: regionId,
     });
     return result;

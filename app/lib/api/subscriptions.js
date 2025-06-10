@@ -1,8 +1,8 @@
 import {Request} from "./request";
+import {BASE_URL} from "@/config";
 
-let baseURL = 'http://127.0.0.1:3001';
 
 export const createNewSubscription = (data) => {
-    let result = Request.post(`${baseURL}/subscription`, data);
+    let result = Request.post(`${BASE_URL}/subscription`, data);
     return result;
 }

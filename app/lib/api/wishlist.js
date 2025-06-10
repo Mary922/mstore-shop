@@ -1,14 +1,14 @@
 import {Request} from "./request";
+import {BASE_URL} from "@/config";
 
-let baseURL = 'http://127.0.0.1:3001';
 
 export const getWishlist = (data) => {
-    let result = Request.get(`${baseURL}/wishlist/get`);
+    let result = Request.get(`${BASE_URL}/wishlist/get`);
     return result;
 }
 
 export const getProductsInWishlistByIds = (data) => {
-    let result = Request.post(`${baseURL}/wishlist/getProducts`, {
+    let result = Request.post(`${BASE_URL}/wishlist/getProducts`, {
         ids: data
     });
     return result;
@@ -16,14 +16,14 @@ export const getProductsInWishlistByIds = (data) => {
 
 
 export const updateWishlist = (data) => {
-    let result = Request.post(`${baseURL}/wishlist/update`, {
+    let result = Request.post(`${BASE_URL}/wishlist/update`, {
         wishlist: data,
     });
     return result;
 }
 
 export const deleteWishlistProduct = (data) => {
-    let result = Request.post(`${baseURL}/wishlist/delete`, {
+    let result = Request.post(`${BASE_URL}/wishlist/delete`, {
         wishlist: data,
     });
     return result;

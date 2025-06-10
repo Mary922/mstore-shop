@@ -1,9 +1,10 @@
 import {Request} from "./request";
+import {BASE_URL} from "@/config";
 
-let baseURL = 'http://127.0.0.1:3001';
+
 
 export const getDivisionInfo = () => {
-    let result = Request.get(`${baseURL}/division/get`);
+    let result = Request.get(`${BASE_URL}/division/get`);
     return result;
 }
 

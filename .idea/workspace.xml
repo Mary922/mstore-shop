@@ -4,27 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="styles for mobile devices/2">
+    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="config log">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/account-addresses/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-addresses/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/account-info/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-info/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/account-navibar.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/account-navibar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/my-account/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/my-account/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/orders/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/orders/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/account/wishlist/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/account/wishlist/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/catalog/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/catalog/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/CarouselComponentWithDots.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/CarouselComponentWithDots.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/Pagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/Pagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/registration/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/registration/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AccountForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AccountForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AddressForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AddressForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AuthorizationForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AuthorizationForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/ProductCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/ProductCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/modals/ConfirmModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/modals/ConfirmModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/addresses.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/addresses.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/categories.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/categories.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/cities.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/cities.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/clients.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/clients.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/divisions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/divisions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/forgotPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/forgotPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/images.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/orders.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/orders.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/prices.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/prices.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/productCategories.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/productCategories.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/regions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/regions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/registration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/subscriptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/api/wishlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/api/wishlist.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +137,7 @@
       <workItem from="1746528989347" duration="127000" />
       <workItem from="1746531782255" duration="94180000" />
       <workItem from="1748265780272" duration="40222000" />
-      <workItem from="1748958052835" duration="69304000" />
+      <workItem from="1748958052835" duration="73078000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -356,7 +355,23 @@
       <option name="project" value="LOCAL" />
       <updated>1749233028605</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="styles for mobile devices/3">
+      <option name="closed" value="true" />
+      <created>1749556879322</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1749556879322</updated>
+    </task>
+    <task id="LOCAL-00029" summary="config log">
+      <option name="closed" value="true" />
+      <created>1749565775292</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1749565775292</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -384,6 +399,8 @@
     <MESSAGE value="code refactoring 3" />
     <MESSAGE value="styles for mobile devices/home page" />
     <MESSAGE value="styles for mobile devices/2" />
-    <option name="LAST_COMMIT_MESSAGE" value="styles for mobile devices/2" />
+    <MESSAGE value="styles for mobile devices/3" />
+    <MESSAGE value="config log" />
+    <option name="LAST_COMMIT_MESSAGE" value="config log" />
   </component>
 </project>

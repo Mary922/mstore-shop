@@ -1,16 +1,16 @@
 import {Request} from "./request";
+import {BASE_URL} from "@/config";
 
-let baseURL = 'http://127.0.0.1:3001';
 
 export const resetPasswordRequest = (email) => {
-    let result = Request.post(`${baseURL}/forgotPassword`, {
+    let result = Request.post(`${BASE_URL}/forgotPassword`, {
         email: email
     });
     return result;
 }
 
 export const changeForgottenPasswordRequest = (token, password) => {
-    let result = Request.post(`${baseURL}/changeForgottenPassword`, {
+    let result = Request.post(`${BASE_URL}/changeForgottenPassword`, {
         token: token,
         password: password
     });
@@ -18,7 +18,7 @@ export const changeForgottenPasswordRequest = (token, password) => {
 }
 
 export const checkTokenNotExpired = (token) => {
-    let result = Request.post(`${baseURL}/checkTokenNotExpired`, {
+    let result = Request.post(`${BASE_URL}/checkTokenNotExpired`, {
         token: token,
     });
     return result;
