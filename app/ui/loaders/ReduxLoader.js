@@ -57,7 +57,11 @@ const ReduxLoader = () => {
                         await dispatch(wishlistGetThunk());
                     }
                 } else if (tempClient) {
-                    dispatch(getCartThunk(tempClient));
+                    if (!isTokenValid(tempClient)) {
+                        const result = await authTemp();
+                        localStorage.setItem('temp-client', result?.data?.accessToken);
+                    }
+                    await dispatch(getCartThunk(tempClient));
                 }
             } catch (error) {
                 if (error.response?.status === 401) {

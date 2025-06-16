@@ -153,11 +153,10 @@ function PreorderPage() {
     }
 
     return (
-
         <>
             <MainLayout>
                 <div className="flex flex-col w-full my-10 items-center">
-                    <div className="card bg-neutral-200 w-[500px] items-center p-5 shadow-lg py-0">
+                    <div className="card bg-neutral-200 items-center p-5 shadow-lg py-0 preorder-block">
                         <div className="card-body w-full">
                             <div className="w-full">
                                 <label className="form-control w-full">
