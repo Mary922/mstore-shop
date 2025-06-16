@@ -1,7 +1,7 @@
 "use client"
 import {useRouter} from "next/navigation";
 import {useAppDispatch, useAppSelector} from "@/app/lib/hooks";
-import React, {useEffect, useState} from "react";
+import React, {Suspense, useEffect, useState} from "react";
 import {
     decreaseCartThunk,
     getCartThunk,
@@ -17,9 +17,20 @@ import {toast, Toaster} from "react-hot-toast";
 import MainLayout from "@/app/ui/MainLayout";
 import OrderButton from "@/app/ui/OrderButton";
 import {BASE_URL} from "@/config";
+import SpinnerComponent from "@/app/common/SpinnerComponent";
 
 
-export default function CartPage() {
+export default function CartLoadingPage() {
+    return (
+        <Suspense fallback={<SpinnerComponent/>}>
+            <CartPage/>
+        </Suspense>
+    );
+};
+
+
+function CartPage() {
+    const [isLoading, setIsLoading] = useState(true);
     let baseUrl = `${BASE_URL}/images`;
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -52,13 +63,18 @@ export default function CartPage() {
         }
     }
     useEffect(() => {
-        if (cart && cart.length > 0 && products.length == 0) {
             (async () => {
-                let ids = getIdsFromCart();
-                const productsList = await getProductsByIds(ids);
-                setProducts(productsList?.data);
+                setIsLoading(true);
+                try {
+                    if (cart && cart.length > 0 && products.length == 0) {
+                    let ids = getIdsFromCart();
+                    const productsList = await getProductsByIds(ids);
+                    setProducts(productsList?.data);
+                }
+                } finally {
+                    setIsLoading(false);
+                }
             })();
-        }
     }, [cart]);
 
 
@@ -201,7 +217,9 @@ export default function CartPage() {
             return null;
         })
     }
-
+    if (isLoading) {
+        return <SpinnerComponent/>
+    }
 
     return (
         <>

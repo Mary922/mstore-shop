@@ -9,16 +9,18 @@ import {applyFilterParams, getFilterParams} from "@/app/lib/api/filter";
 import CanvasFilter from "@/app/ui/CanvasFilter";
 import {getMaxPrice} from "@/app/lib/api/prices";
 import {Suspense} from "react";
+import SpinnerComponent from "@/app/common/SpinnerComponent";
 
 export default function CatalogLoadingPage() {
     return (
-        <Suspense fallback={<div>Загрузка...</div>}>
+        <Suspense fallback={<SpinnerComponent/>}>
             <CatalogPage/>
         </Suspense>
     );
 };
 
 function CatalogPage() {
+    const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
     const searchParams = useSearchParams();
     const drawerToggleRef = useRef(null);
@@ -152,67 +154,77 @@ function CatalogPage() {
 
 
     const clearFilter = (type) => {
-        switch (type) {
-            case 'color':
-                setColors([]);
-                updateQueryParameter('colors', '');
-                break;
-            case 'size':
-                setSizes([]);
-                updateQueryParameter('sizes', '');
-                break;
-            case 'brand':
-                setBrands([]);
-                updateQueryParameter('brands', '');
-                break;
-            case 'country':
-                setCountries([]);
-                updateQueryParameter('countries', '');
-                break;
-            case 'season':
-                setSeasons([]);
-                updateQueryParameter('seasons', '');
-                break;
-            case 'minPrice':
-                setMinPrice(0);
-                updateQueryParameter('minPrice', '');
-                break;
-            case 'maxPrice':
-                setMaxPrice(null);
-                updateQueryParameter('maxPrice', '');
-                break;
-            default:
-                break;
+        setIsLoading(true);
+        try {
+            switch (type) {
+                case 'color':
+                    setColors([]);
+                    updateQueryParameter('colors', '');
+                    break;
+                case 'size':
+                    setSizes([]);
+                    updateQueryParameter('sizes', '');
+                    break;
+                case 'brand':
+                    setBrands([]);
+                    updateQueryParameter('brands', '');
+                    break;
+                case 'country':
+                    setCountries([]);
+                    updateQueryParameter('countries', '');
+                    break;
+                case 'season':
+                    setSeasons([]);
+                    updateQueryParameter('seasons', '');
+                    break;
+                case 'minPrice':
+                    setMinPrice(0);
+                    updateQueryParameter('minPrice', '');
+                    break;
+                case 'maxPrice':
+                    setMaxPrice(null);
+                    updateQueryParameter('maxPrice', '');
+                    break;
+                default:
+                    break;
+            }
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const clearAllFilters = async () => {
-        setColors([]);
-        setSizes([]);
-        setBrands([]);
-        setCountries([]);
-        setSeasons([]);
-        setMinPrice(null);
-        setMaxPrice(null);
+        setIsLoading(true);
+        try {
+            setColors([]);
+            setSizes([]);
+            setBrands([]);
+            setCountries([]);
+            setSeasons([]);
+            setMinPrice(null);
+            setMaxPrice(null);
 
-        setCheckedOptionsColors([]);
-        setCheckedOptionsSeasons([]);
-        setCheckedOptionsSizes([]);
-        setCheckedOptionsBrands([]);
-        setCheckedOptionsCountries([]);
+            setCheckedOptionsColors([]);
+            setCheckedOptionsSeasons([]);
+            setCheckedOptionsSizes([]);
+            setCheckedOptionsBrands([]);
+            setCheckedOptionsCountries([]);
 
-        const nextParams = await new URLSearchParams(searchParams.toString());
-        [
-            'colors',
-            'sizes',
-            'brands',
-            'countries',
-            'seasons',
-            'minPrice',
-            'maxPrice'
-        ].forEach(paramKey => nextParams.delete(paramKey));
+            const nextParams = await new URLSearchParams(searchParams.toString());
+            [
+                'colors',
+                'sizes',
+                'brands',
+                'countries',
+                'seasons',
+                'minPrice',
+                'maxPrice'
+            ].forEach(paramKey => nextParams.delete(paramKey));
 
-        router.push(`?${nextParams}`, undefined, {scroll: false});
+            router.push(`?${nextParams}`, undefined, {scroll: false});
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     const toggleSizeDropdown = (id) => {
@@ -225,49 +237,55 @@ function CatalogPage() {
 
     useEffect(() => {
         (async () => {
-            const categoryFilterParam = searchParams.get('category');
-            setCategory(categoryFilterParam);
+            setIsLoading(true);
+            try {
+                const categoryFilterParam = searchParams.get('category');
+                setCategory(categoryFilterParam);
 
-            const genderFilterParam = searchParams.get('gender');
-            setGender(genderFilterParam);
+                const genderFilterParam = searchParams.get('gender');
+                setGender(genderFilterParam);
 
-            const sizesFilterParam = JSON.parse(searchParams.get('sizes'));
-            setSizes(sizesFilterParam || []);
+                const sizesFilterParam = JSON.parse(searchParams.get('sizes'));
+                setSizes(sizesFilterParam || []);
 
-            const colorsFilterParam = JSON.parse(searchParams.get('colors'));
-            setColors(colorsFilterParam || []);
+                const colorsFilterParam = JSON.parse(searchParams.get('colors'));
+                setColors(colorsFilterParam || []);
 
-            const seasonsFilterParam = JSON.parse(searchParams.get('seasons'));
-            setSeasons(seasonsFilterParam || []);
+                const seasonsFilterParam = JSON.parse(searchParams.get('seasons'));
+                setSeasons(seasonsFilterParam || []);
 
-            const brandsFilterParam = JSON.parse(searchParams.get('brands'));
-            setBrands(brandsFilterParam || []);
+                const brandsFilterParam = JSON.parse(searchParams.get('brands'));
+                setBrands(brandsFilterParam || []);
 
-            const countriesFilterParam = JSON.parse(searchParams.get('countries'));
-            setCountries(countriesFilterParam || []);
+                const countriesFilterParam = JSON.parse(searchParams.get('countries'));
+                setCountries(countriesFilterParam || []);
 
-            const minPriceFilterParam = searchParams.get('minPrice');
-            setMinPrice(minPriceFilterParam);
+                const minPriceFilterParam = searchParams.get('minPrice');
+                setMinPrice(minPriceFilterParam);
 
-            const maxPriceFilterParam = searchParams.get('maxPrice');
-            setMaxPrice(maxPriceFilterParam);
+                const maxPriceFilterParam = searchParams.get('maxPrice');
+                setMaxPrice(maxPriceFilterParam);
 
-            const result = await applyFilterParams(
-                categoryFilterParam,
-                genderFilterParam,
-                minPriceFilterParam,
-                maxPriceFilterParam,
-                sizesFilterParam,
-                colorsFilterParam,
-                seasonsFilterParam,
-                brandsFilterParam,
-                countriesFilterParam,
-            )
+                const result = await applyFilterParams(
+                    categoryFilterParam,
+                    genderFilterParam,
+                    minPriceFilterParam,
+                    maxPriceFilterParam,
+                    sizesFilterParam,
+                    colorsFilterParam,
+                    seasonsFilterParam,
+                    brandsFilterParam,
+                    countriesFilterParam,
+                )
 
-            if (result?.data) {
-                setProducts(result.data);
+                if (result?.data) {
+                    setProducts(result.data);
+                }
+            } catch (error) {
+                console.error('Error loading products:', error);
+            } finally {
+                setIsLoading(false);
             }
-
         })();
     }, [productsList, searchParams]);
 
@@ -285,6 +303,10 @@ function CatalogPage() {
     })
     const handleGoBack = () => {
         router.back();
+    }
+
+    if (isLoading) {
+        return <SpinnerComponent/>
     }
 
     return (
