@@ -30,13 +30,14 @@ export default function CartLoadingPage() {
 
 
 function CartPage() {
-    const [isLoading, setIsLoading] = useState(true);
     let baseUrl = `${BASE_URL}/images`;
     const dispatch = useAppDispatch();
     const router = useRouter();
 
     const [confirmModalIsOpen, setConfirmModalIsOpen] = useState(false);
     const [products, setProducts] = useState([]);
+    const cart = useAppSelector(state => state.cart.cart);
+    const isCartLoading = useAppSelector(state => state.cart.isCartLoading);
 
     let tempClient = '';
     let client;
@@ -51,8 +52,6 @@ function CartPage() {
         clientId = JSON.parse(localStorage.getItem("client")).id;
     }
 
-    const cart = useAppSelector(state => state.cart.cart);
-
     const getIdsFromCart = () => {
         const idsList = [];
         if (cart && cart.length > 0) {
@@ -63,18 +62,13 @@ function CartPage() {
         }
     }
     useEffect(() => {
+        if (cart && cart.length > 0 && products.length == 0) {
             (async () => {
-                setIsLoading(true);
-                try {
-                    if (cart && cart.length > 0 && products.length == 0) {
-                    let ids = getIdsFromCart();
-                    const productsList = await getProductsByIds(ids);
-                    setProducts(productsList?.data);
-                }
-                } finally {
-                    setIsLoading(false);
-                }
+                let ids = getIdsFromCart();
+                const productsList = await getProductsByIds(ids);
+                setProducts(productsList?.data);
             })();
+        }
     }, [cart]);
 
 
@@ -146,6 +140,7 @@ function CartPage() {
     }
 
 
+
     let total = 0;
     let productsListInCart = [];
     if (cart && cart.length > 0 && products.length > 0) {
@@ -179,7 +174,8 @@ function CartPage() {
                             <div><span className='text-gray-500 mr-2'>Цена</span> {product.price}</div>
                             <div><span className='text-gray-500 mr-2'>Размер</span> {item.product_size}</div>
 
-                            <div className="join border border-base-300 rounded-full flex items-center justify-center cart-plus-minus">
+                            <div
+                                className="join border border-base-300 rounded-full flex items-center justify-center cart-plus-minus">
                                 <button
                                     className="join-item btn btn-ghost text-xl w-12 h-12 min-h-0"
                                     onClick={() => decreaseCount(product.product_id, item.product_size)
@@ -212,14 +208,13 @@ function CartPage() {
                         </div>
                     </div>
                 )
-
             }
             return null;
         })
     }
-    if (isLoading) {
-        return <SpinnerComponent/>
-    }
+
+
+
 
     return (
         <>
@@ -277,16 +272,19 @@ function CartPage() {
 
                                 </>
                                 :
-                                <>
-                                    <div className="flex flex-col items-center justify-center w-full">
-                                        <h1>Корзина пуста</h1>
-                                        <div>В корзину ничего не добавлено. Чтобы добавить товары перейдите в каталог
+                                isCartLoading ? <SpinnerComponent/> :
+                                    <>
+                                        <div className="flex flex-col items-center justify-center w-full">
+                                            <h1>Корзина пуста</h1>
+                                            <div>В корзину ничего не добавлено. Чтобы добавить товары перейдите в
+                                                каталог
+                                            </div>
+                                            <Link href={'/'}>
+                                                <button className="btn btn-primary my-5 text-white">Начать покупки
+                                                </button>
+                                            </Link>
                                         </div>
-                                        <Link href={'/'}>
-                                            <button className="btn btn-primary my-5 text-white">Начать покупки</button>
-                                        </Link>
-                                    </div>
-                                </>
+                                    </>
                         }
                     </div>
                 </div>

@@ -304,10 +304,10 @@ function CatalogPage() {
     const handleGoBack = () => {
         router.back();
     }
-
-    if (isLoading) {
-        return <SpinnerComponent/>
-    }
+    //
+    // if (isLoading) {
+    //     return <SpinnerComponent/>
+    // }
 
     return (
 
@@ -512,6 +512,7 @@ function CatalogPage() {
                             <div className="grid grid-cols-4 mb-10 gap-5 p-10 prod_cards">{productCards}</div>
                         </div>
                         :
+                        isLoading ?  <SpinnerComponent/> :
                         <>
                             <div className='flex flex-col w-full bg-gray-100 items-center my-10 filter-not-found'>
                                 <div className="mx-5 mt-2 text-lg p-5 flex flex-col items-center">

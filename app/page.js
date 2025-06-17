@@ -10,7 +10,7 @@ import {BASE_URL} from "@/config";
 
 
 export default function Home() {
-    const baseUrl = `${BASE_URL}/static`;
+    const baseUrl = `${BASE_URL}/images/static`;
     const [email, setEmail] = useState("");
     const [feedbackMessage, setFeedbackMessage] = useState("");
     const [error, setError] = useState('');
@@ -109,7 +109,7 @@ export default function Home() {
     return (
         <>
             <MainLayout>
-                <div className='flex flex-col main-container'>
+                <div className='flex flex-col w-full main-container'>
                     <div>
                         <div className="w-full container-carousel">
                             {

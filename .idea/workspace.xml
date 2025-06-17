@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="api change base url">
+    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="adding preloaders">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/preorder/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/preorder/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/ProductCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/ProductCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/loaders/ReduxLoader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/modals/ConfirmModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/modals/ConfirmModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cart/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cart/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/catalog/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/catalog/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/common/CarouselComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/CarouselComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/common/CarouselComponentWithDots.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/CarouselComponentWithDots.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/store/slices/cartSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/slices/cartSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/AppFooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AppFooter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +127,7 @@
       <workItem from="1746528989347" duration="127000" />
       <workItem from="1746531782255" duration="94180000" />
       <workItem from="1748265780272" duration="40222000" />
-      <workItem from="1748958052835" duration="84409000" />
+      <workItem from="1748958052835" duration="96604000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -367,14 +369,29 @@
       <option name="project" value="LOCAL" />
       <updated>1749566350398</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="mobile styles refactoring">
+      <option name="closed" value="true" />
+      <created>1750088711691</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1750088711691</updated>
+    </task>
+    <task id="LOCAL-00032" summary="adding preloaders">
+      <option name="closed" value="true" />
+      <created>1750094152048</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1750094152048</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="initial" />
     <MESSAGE value="set daisy &amp; registration page" />
     <MESSAGE value="wip navbars &amp; auth" />
     <MESSAGE value="account,pagination" />
@@ -398,6 +415,8 @@
     <MESSAGE value="styles for mobile devices/3" />
     <MESSAGE value="config log" />
     <MESSAGE value="api change base url" />
-    <option name="LAST_COMMIT_MESSAGE" value="api change base url" />
+    <MESSAGE value="mobile styles refactoring" />
+    <MESSAGE value="adding preloaders" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding preloaders" />
   </component>
 </project>

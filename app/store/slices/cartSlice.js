@@ -60,6 +60,7 @@ const initialState = {
     cart: [],
     quantityInCart: 0,
     cartSum: 0,
+    isCartLoading: true,
 }
 export const cartSlice = createSlice({
     name: "cart",
@@ -68,15 +69,18 @@ export const cartSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getCartThunk.pending, (state, action) => {
+            state.isCartLoading = true;
             state.isLoading = true;
             state.isLoaded = false;
         });
         builder.addCase(getCartThunk.fulfilled, (state, action) => {
+            state.isCartLoading = false;
             state.isLoading = false;
             state.isLoaded = true;
             state.cart = action.payload;
         });
         builder.addCase(getCartThunk.rejected, (state, action) => {
+            state.isCartLoading = false;
             state.isLoading = false;
             state.error = action.payload;
         });

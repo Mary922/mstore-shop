@@ -11,7 +11,7 @@ import AccountForm from "@/app/ui/AccountForm";
 import {BASE_URL} from "@/config";
 
 const AuthHeader = () => {
-    const baseUrl = `${BASE_URL}/static`;
+    const baseUrl = `${BASE_URL}/images/static`;
 
     const [authLabel, setAuthLabel] = useState('');
     const [imageLogoPath, setImageLogoPath] = useState('');

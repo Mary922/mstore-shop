@@ -12,7 +12,7 @@ const CarouselComponent = ({paths, staticPaths}) => {
         baseUrl = `${BASE_URL}/images`;
     }
     if (staticPaths) {
-        baseUrl = `${BASE_URL}/static`;
+        baseUrl = `${BASE_URL}/images/static`;
     }
 
     const handleNextClick = () => {

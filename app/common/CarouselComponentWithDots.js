@@ -13,7 +13,7 @@ const CarouselComponentWithDots = ({paths, staticPaths, imageClassName, containe
         baseUrl = `${BASE_URL}/images`;
     }
     if (staticPaths) {
-        baseUrl = `${BASE_URL}/static`;
+        baseUrl = `${BASE_URL}/images/static`;
     }
     const items = paths || staticPaths;
 

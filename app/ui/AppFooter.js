@@ -9,7 +9,7 @@ const AppFooter = () => {
     const [favicon, setFavicon] = useState([]);
     const [phone, setPhone] = useState("");
 
-    let baseUrl = `${BASE_URL}/static`;
+    let baseUrl = `${BASE_URL}/images/static`;
     const type = 'web';
     const field = 'footer';
     const faviconLogo = 'favicon';
