@@ -9,8 +9,11 @@ import AuthorizationForm from "@/app/ui/AuthorizationForm";
 import NavbarHeader from "./NavbarHeader";
 import AccountForm from "@/app/ui/AccountForm";
 import {BASE_URL} from "@/config";
+import {router} from "next/client";
+import {useRouter} from "next/navigation";
 
 const AuthHeader = () => {
+    const router = useRouter();
     const baseUrl = `${BASE_URL}/images/static`;
 
     const [authLabel, setAuthLabel] = useState('');
@@ -57,6 +60,10 @@ const AuthHeader = () => {
         })()
     }, [])
 
+    const redirectToHome = () => {
+        router.push('/');
+    }
+
     return (
         <>
             <div className="navbar w-full p-2.5 navbar-top">
@@ -65,8 +72,9 @@ const AuthHeader = () => {
                 <div className='navbar-center nav-logo'>
                     {imageLogoPath ?
                         <img
-                            className="w-40 h-auto "
+                            className="w-40 h-auto cursor-pointer"
                             src={`${baseUrl}/${imageLogoPath}`}
+                            onClick={redirectToHome}
                             alt=""
                         />
                         : null}
