@@ -39,7 +39,7 @@ function RegistrationPage() {
     const [repeatRequestPassword, setRepeatRequestPassword] = useState(false);
 
     const [forgotPassword, setForgotPassword] = useState(false);
-    const [emailForgot, setEmailForgot] = useState('mary_k_92@mail.ru');
+    const [emailForgot, setEmailForgot] = useState('');
 
     const [errorForm, setErrorForm] = useState({
         name: false,

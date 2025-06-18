@@ -8,8 +8,8 @@ import {resetPasswordRequest} from "@/app/lib/api/forgotPassword";
 const AuthorizationForm = ({clientId, tempClient}) => {
 
     const [error, setError] = useState(null);
-    const [email, setEmail] = useState('mary_k_92@mail.ru');
-    const [password, setPassword] = useState('fsdnlkmslkdfDSF3');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [forgotPassword, setForgotPassword] = useState(false);
     const [emailForgot, setEmailForgot] = useState('');
 
