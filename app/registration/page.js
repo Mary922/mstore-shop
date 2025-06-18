@@ -252,7 +252,6 @@ function RegistrationPage() {
         }
         const isValidEmail = validator.isEmail('emailForgot');
         if (!isValidEmail) {
-            toast.error('Некорректный адрес электронной почты.');
             return false;
         }
         try {
