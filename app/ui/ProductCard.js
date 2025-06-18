@@ -65,7 +65,11 @@ const ProductCard = ({id, text, images, price, isOpen, onClickBtn}) => {
                 }
             }
             sizes.push(<div className={`${sizeClass}`} key={i}
-                            onClick={() => setChosenSize(sortedSizes[i].size_name)}>
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                setChosenSize(sortedSizes[i].size_name);
+                            }}>
                 {sortedSizes[i].size_name}
             </div>);
         }
@@ -125,15 +129,15 @@ const ProductCard = ({id, text, images, price, isOpen, onClickBtn}) => {
         <>
             <div className="card shadow-xl z-0 group relative card-shadow prod-card">
                 <div className="cursor-pointer card-image-block" onClick={(event) => {
-                    event.stopPropagation();
                 }}>
                     {
                         images && images.length > 0
                             ?
                             <>
                                 <Link href={`/product/${id}`}>
-                                    <div className='carousel-with-dots'><CarouselComponentWithDots paths={imagePathsInCarousel}
-                                    /></div>
+                                    <div className='carousel-with-dots'>
+                                        <CarouselComponentWithDots paths={imagePathsInCarousel}/>
+                                    </div>
                                 </Link>
                             </>
                             : null
@@ -148,7 +152,7 @@ const ProductCard = ({id, text, images, price, isOpen, onClickBtn}) => {
                         }}></i>
                     </h1>
                 </div>
-                <div className="flex flex-col pb-12">
+                <div className="flex flex-col pb-12 card-text-block">
                     <div className="flex flex-col">
                         <div className="flex flex-col items-center p-2.5 text-lg">
                             <div className='text-center'>{text}</div>
@@ -161,22 +165,13 @@ const ProductCard = ({id, text, images, price, isOpen, onClickBtn}) => {
                         </div>
                     )
                     }
-
-              {/*      <div className="absolute bottom-0 left-0 right-0 p-2 opacity-0 group-hover:opacity-100*/}
-              {/*  transition-all duration-300 transform translate-y-2 group-hover:translate-y-0*/}
-              {/*  ">*/}
-              {/*          <button*/}
-              {/*              className="btn w-full bg-white/20 hover:bg-white/30 text-neutral*/}
-              {/*backdrop-blur-md border border-white/20 hover:border-white/30*/}
-              {/*shadow-sm hover:shadow-md*/}
-              {/*transition-all duration-200 ease-in-out*/}
-              {/*hover:scale-[1.02] active:scale-100 add-btn"*/}
-
                     <div className={`button-container ${isOpen ? 'visible' : ''}`}>
                         <button className='btn add-to-cart-btn'
                             onClick={async (event) => {
+
+                                event.preventDefault();
                                 await onClickBtn();
-                                event.stopPropagation();
+
                                 if (chosenSize && client) {
                                     await dispatch(createCartThunk({
                                         clientId: clientId,

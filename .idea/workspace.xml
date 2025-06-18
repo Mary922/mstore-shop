@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="adding preloaders">
+    <list default="true" id="903c0fbf-9181-47d1-9e11-6e6d1b568983" name="Changes" comment="logo redirect">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/cart/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cart/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/catalog/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/catalog/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/common/CarouselComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/CarouselComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/common/CarouselComponentWithDots.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/common/CarouselComponentWithDots.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/store/slices/cartSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/slices/cartSlice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/AppFooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/AppFooter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/navbars/AuthHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ui/ProductCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/ui/ProductCard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +122,7 @@
       <workItem from="1746528989347" duration="127000" />
       <workItem from="1746531782255" duration="94180000" />
       <workItem from="1748265780272" duration="40222000" />
-      <workItem from="1748958052835" duration="96604000" />
+      <workItem from="1748958052835" duration="110516000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -385,15 +380,29 @@
       <option name="project" value="LOCAL" />
       <updated>1750094152048</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="preloaders &amp;&amp; url">
+      <option name="closed" value="true" />
+      <created>1750151745171</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1750151745171</updated>
+    </task>
+    <task id="LOCAL-00034" summary="logo redirect">
+      <option name="closed" value="true" />
+      <created>1750161387399</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1750161387399</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="set daisy &amp; registration page" />
-    <MESSAGE value="wip navbars &amp; auth" />
     <MESSAGE value="account,pagination" />
     <MESSAGE value="footer" />
     <MESSAGE value="filter &amp; canvas" />
@@ -417,6 +426,8 @@
     <MESSAGE value="api change base url" />
     <MESSAGE value="mobile styles refactoring" />
     <MESSAGE value="adding preloaders" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding preloaders" />
+    <MESSAGE value="preloaders &amp;&amp; url" />
+    <MESSAGE value="logo redirect" />
+    <option name="LAST_COMMIT_MESSAGE" value="logo redirect" />
   </component>
 </project>

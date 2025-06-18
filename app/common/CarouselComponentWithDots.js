@@ -32,7 +32,7 @@ const CarouselComponentWithDots = ({paths, staticPaths, imageClassName, containe
 
     return (
         <>
-            <div className={`relative w-full ${containerClassName || 'h-[400px]'}`}>
+            <div className={` carousel-container-dots relative w-full ${containerClassName || 'h-[400px]'}`}>
                 <div className="absolute left-1/2 transform -translate-x-1/2 w-4/5 h-full" key={currentIndex}>
                     {paths ? (
                         <img
