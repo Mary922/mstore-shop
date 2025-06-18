@@ -173,7 +173,6 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                 }
 
             </ul>
-
         </>
     )
 }

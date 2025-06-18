@@ -376,7 +376,7 @@ body {
 
 @media (max-width: 640px) {
     .dropdown ul {
-        width: 200px;
+        width: 300px;
     }
 
     .dropdown div {
