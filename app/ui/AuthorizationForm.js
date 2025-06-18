@@ -111,7 +111,7 @@ const AuthorizationForm = ({clientId, tempClient}) => {
                     </label>
                 </div>
 
-                <div className="flex flex-col mb-2.5 p-2.5">
+                <div className="flex flex-col mb-2.5 p-2.5 max-w-full">
                     <label className="flex items-center bg-white gap-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

@@ -376,7 +376,7 @@ body {
 
 @media (max-width: 640px) {
     .dropdown ul {
-        width: 300px;
+        width: 200px;
     }
 
     .dropdown div {
@@ -750,6 +750,10 @@ body {
 
         .dropdown-btn-auth {
             width: 100%;
+        }
+        input {
+            width: 120px;
+            overflow: hidden;
         }
     }
 }
